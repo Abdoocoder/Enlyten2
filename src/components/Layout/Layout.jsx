@@ -98,9 +98,13 @@ const Layout = ({ children }) => {
           </div>
           <div className="footer-links">
             <div className="footer-group">
+              <span className="footer-label">{t('footer.address')}</span>
+              <span className="footer-text">{t('footer.location')}</span>
+            </div>
+            <div className="footer-group">
               <span className="footer-label">{t('footer.social')}</span>
               <a href="#" className="footer-link">Instagram</a>
-              <a href="#" className="footer-link">Facebook</a>
+              <a href="https://www.facebook.com/p/Enlyten2-laser-center-100044632491039/?locale=ar_AR" target="_blank" rel="noopener noreferrer" className="footer-link">Facebook</a>
             </div>
           </div>
         </div>

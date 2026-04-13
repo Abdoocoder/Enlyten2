@@ -165,6 +165,14 @@
   transition: var(--transition-smooth);
 }
 
+.footer-text {
+  display: block;
+  font-family: var(--font-body);
+  font-size: 0.875rem;
+  color: var(--on-surface-variant);
+  margin-bottom: var(--spacing-sm);
+}
+
 .footer-link:hover {
   color: var(--primary);
 }
