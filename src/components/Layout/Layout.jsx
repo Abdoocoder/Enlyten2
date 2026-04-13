@@ -35,7 +35,7 @@ const Layout = ({ children }) => {
       <header className="header">
         <div className="header-container">
           <Link to="/" className="logo">
-            Enlyten<span className="logo-accent">2</span>
+            <img src="/logo.jpg" alt="Enlyten2 Laser Center" className="logo-img" />
           </Link>
           <nav className="nav">
             <Link to="/services" className="nav-link">{t('nav.treatments')}</Link>
@@ -92,7 +92,7 @@ const Layout = ({ children }) => {
         <div className="footer-container">
           <div className="footer-brand">
             <Link to="/" className="logo">
-              Enlyten<span className="logo-accent">2</span>
+              <img src="/logo.jpg" alt="Enlyten2 Laser Center" className="logo-img" />
             </Link>
             <p className="footer-tagline">{t('footer.tagline')}</p>
           </div>
