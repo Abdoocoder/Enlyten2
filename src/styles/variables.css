@@ -1,0 +1,56 @@
+@import url('https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700&family=Noto+Serif:wght@400;500;600;700&family=Cairo:wght@400;500;600;700&display=swap');
+
+:root {
+  /* ... existing colors ... */
+  --primary: #735c00;
+  --primary-container: #d4af37; /* Signature Gold */
+  --on-primary-container: #241a00;
+  
+  --secondary-container: #f2dde1; /* Soft Pink / Skin Tone */
+  --on-secondary-container: #706064;
+  
+  --background: #faf9f6;
+  --surface: #faf9f6;
+  --surface-container-low: #f4f3f1;
+  --surface-container-lowest: #ffffff;
+  --surface-container-highest: #e3e2e0;
+  
+  --on-surface: #1a1c1a;
+  --on-surface-variant: #4d4635;
+  
+  --outline: #7f7663;
+  --outline-variant: #d0c5af;
+  
+  /* Typography */
+  --font-display-en: 'Noto Serif', serif;
+  --font-body-en: 'Manrope', sans-serif;
+  --font-display-ar: 'Cairo', sans-serif;
+  --font-body-ar: 'Cairo', sans-serif;
+
+  --font-display: var(--font-display-en);
+  --font-body: var(--font-body-en);
+  
+  /* Spacing */
+  --spacing-xs: 4px;
+  --spacing-sm: 8px;
+  --spacing-md: 16px;
+  --spacing-lg: 24px;
+  --spacing-xl: 32px;
+  --spacing-xxl: 48px;
+  --spacing-huge: 64px;
+  
+  /* Transitions */
+  --transition-smooth: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  
+  /* Roundness */
+  --radius-sm: 4px;
+  --radius-md: 8px;
+  --radius-lg: 12px;
+  --radius-xl: 24px;
+  --radius-full: 9999px;
+  
+  /* Effects */
+  --glass-bg: rgba(250, 249, 246, 0.8);
+  --glass-blur: blur(20px);
+  --ambient-shadow: 0 10px 32px rgba(115, 92, 0, 0.06);
+}

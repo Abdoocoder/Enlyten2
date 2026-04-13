@@ -1,0 +1,100 @@
+.notifications-page {
+  padding-top: var(--spacing-xxl);
+}
+
+.notifications-header {
+  margin-bottom: var(--spacing-xl);
+}
+
+.notifications-list {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-lg);
+}
+
+.notification-item {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-lg);
+}
+
+.notification-content {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+}
+
+.notification-main {
+  display: flex;
+  gap: var(--spacing-lg);
+  flex: 1;
+}
+
+.type-icon {
+  width: 48px;
+  height: 48px;
+  border-radius: 50%;
+  background-color: var(--surface-container-highest);
+  flex-shrink: 0;
+  position: relative;
+}
+
+.type-icon.appointment::after {
+  content: '📅';
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+.type-icon.offer::after {
+  content: '✨';
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+.notification-text h3 {
+  margin-bottom: var(--spacing-xs);
+  color: var(--primary);
+}
+
+.notification-meta {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: var(--spacing-sm);
+  min-width: 100px;
+}
+
+.time-stamp {
+  color: var(--outline);
+}
+
+.unread-dot {
+  width: 10px;
+  height: 10px;
+  background-color: var(--primary-container);
+  border-radius: 50%;
+}
+
+.notification-actions {
+  display: flex;
+  justify-content: flex-end;
+  gap: var(--spacing-md);
+  padding-top: var(--spacing-md);
+  border-top: 1px solid rgba(208, 197, 175, 0.1);
+}
+
+/* Mobile */
+@media (max-width: 968px) {
+  .notification-content {
+    flex-direction: column;
+    gap: var(--spacing-md);
+  }
+  
+  .notification-meta {
+    align-items: flex-start;
+  }
+}

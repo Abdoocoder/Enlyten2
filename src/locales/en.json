@@ -1,0 +1,43 @@
+{
+  "nav": {
+    "treatments": "Treatments",
+    "gallery": "Gallery",
+    "contact": "Contact",
+    "book": "Book an Appointment",
+    "signIn": "Sign In",
+    "dashboard": "Dashboard",
+    "profile": "Profile",
+    "logout": "Logout"
+  },
+  "home": {
+    "hero": {
+      "title": "Experience the Art of Radiance",
+      "subtitle": "Premier Laser and Skincare Clinic. We redefine beauty through clinical excellence and luxury care.",
+      "cta": "Discover Treatments",
+      "secondaryCta": "Meet the Team"
+    },
+    "philosophy": {
+      "label": "Our Philosophy",
+      "title": "The Science of Luminous Beauty",
+      "content": "At Enlyten2, we believe skin is the canvas of your confidence. Our philosophy merges state-of-the-art laser technology with a boutique approach to skincare. We don't just treat; we curate.",
+      "precision": {
+        "title": "Precision Tech",
+        "text": "Industry-leading laser systems for unmatched accuracy and safety."
+      },
+      "artisan": {
+        "title": "Artisan Care",
+        "text": "Personalized protocols designed for your unique skin blueprint."
+      }
+    },
+    "treatments": {
+      "title": "Curated Treatments",
+      "subtitle": "Advanced aesthetic solutions tailored to your luminous goals.",
+      "bookNow": "Book Now"
+    }
+  },
+  "footer": {
+    "tagline": "Experience the Art of Radiance",
+    "social": "Social",
+    "rights": "© 2024 Enlyten2 Laser Center. All Rights Reserved."
+  }
+}

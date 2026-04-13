@@ -1,0 +1,82 @@
+@import './variables.css';
+
+:root[dir="rtl"] {
+  --font-display: var(--font-display-ar);
+  --font-body: var(--font-body-ar);
+}
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font-family: var(--font-body);
+  background-color: var(--background);
+  color: var(--on-surface);
+  line-height: 1.5;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  font-family: var(--font-display);
+  font-weight: 500;
+  letter-spacing: -0.02em;
+  color: var(--on-surface);
+}
+
+a {
+  text-decoration: none;
+  color: inherit;
+}
+
+button {
+  cursor: pointer;
+  border: none;
+  background: none;
+  font-family: inherit;
+}
+
+/* Base Grid System */
+.page-container {
+  display: grid;
+  grid-template-columns: repeat(12, 1fr);
+  gap: var(--spacing-md);
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: var(--spacing-xxl) var(--spacing-lg);
+}
+
+.section {
+  grid-column: span 12;
+  margin-bottom: var(--spacing-huge);
+}
+
+/* Flexbox Helpers */
+.flex { display: flex; }
+.flex-col { flex-direction: column; }
+.items-center { align-items: center; }
+.justify-between { justify-content: space-between; }
+.gap-sm { gap: var(--spacing-sm); }
+.gap-md { gap: var(--spacing-md); }
+.gap-lg { gap: var(--spacing-lg); }
+
+/* Typography Scale */
+.display-large { font-size: 3.5rem; line-height: 1.1; }
+.headline-medium { font-size: 2rem; line-height: 1.2; }
+.headline-small { font-size: 1.5rem; line-height: 1.3; }
+.body-large { font-size: 1.125rem; }
+.body-medium { font-size: 1rem; }
+.label-medium { font-size: 0.875rem; font-weight: 600; text-transform: uppercase; letter-spacing: 0.05em; }
+
+/* The "No-Line" Rule: Tonal sectioning */
+.bg-tonal { background-color: var(--surface-container-low); }
+.bg-white { background-color: var(--surface-container-lowest); }
+
+/* Editorial Depth */
+.depth-pop {
+  background-color: var(--surface-container-lowest);
+  box-shadow: var(--ambient-shadow);
+}

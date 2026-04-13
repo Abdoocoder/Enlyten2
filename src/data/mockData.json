@@ -1,0 +1,56 @@
+{
+  "company": {
+    "name": "Enlyten2",
+    "tagline": "Experience the Art of Radiance",
+    "philosophy": "At Enlyten2, we believe skin is the canvas of your confidence. Our philosophy merges state-of-the-art laser technology with a boutique approach to skincare. We don't just treat; we curate."
+  },
+  "treatments": [
+    {
+      "id": "laser-genesis",
+      "name": "Laser Genesis",
+      "description": "Even out skin tone and diminish pigmentation with zero downtime.",
+      "duration": "60 Minutes",
+      "price": 250,
+      "category": "Laser"
+    },
+    {
+      "id": "hydrafacial",
+      "name": "HydraFacial Elite",
+      "description": "Our signature hydra-treatment for instant luminosity.",
+      "duration": "45 Minutes",
+      "price": 180,
+      "category": "Advanced Skin Care"
+    },
+    {
+      "id": "chemical-peel",
+      "name": "Chemical Peel",
+      "description": "Revitalize your skin's cellular structure for a lasting, natural glow.",
+      "duration": "30 Minutes",
+      "price": 120,
+      "category": "Advanced Skin Care"
+    },
+    {
+      "id": "botox",
+      "name": "Botox & Fillers",
+      "description": "Enhance your natural features with expert injectable treatments.",
+      "duration": "30 Minutes",
+      "price": 400,
+      "category": "Injectables"
+    }
+  ],
+  "gallery": [
+    {
+      "treatment": "Laser Toning",
+      "before": "path/to/before1.jpg",
+      "after": "path/to/after1.jpg",
+      "result": "Diminished melasma and improved texture after 3 sessions."
+    }
+  ],
+  "clinics": [
+    {
+      "name": "Central Plaza Clinic",
+      "address": "123 Radiance Blvd, City Center",
+      "phone": "+1 (555) 123-4567"
+    }
+  ]
+}
