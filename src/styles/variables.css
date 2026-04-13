@@ -1,56 +1,93 @@
-@import url('https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700&family=Noto+Serif:wght@400;500;600;700&family=Cairo:wght@400;500;600;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Cairo:wght@300;400;500;600;700&display=swap');
 
 :root {
-  /* ... existing colors ... */
-  --primary: #735c00;
-  --primary-container: #d4af37; /* Signature Gold */
-  --on-primary-container: #241a00;
+  /* Colors - Stark & Binary */
+  --black: #000000;
+  --light-gray: #f5f5f7;
+  --near-black: #1d1d1f;
+  --white: #ffffff;
   
-  --secondary-container: #f2dde1; /* Soft Pink / Skin Tone */
-  --on-secondary-container: #706064;
+  /* Identity - Logo Gradient (The Laser Glow) */
+  --logo-pink: #FF0057;
+  --logo-orange: #FF7A00;
+  --logo-purple: #6A00FF;
+  --laser-gradient: linear-gradient(135deg, var(--logo-pink) 0%, var(--logo-orange) 50%, var(--logo-purple) 100%);
+  --laser-gradient-alt: linear-gradient(135deg, var(--logo-purple) 0%, var(--logo-pink) 100%);
   
-  --background: #faf9f6;
-  --surface: #faf9f6;
-  --surface-container-low: #f4f3f1;
-  --surface-container-lowest: #ffffff;
-  --surface-container-highest: #e3e2e0;
+  /* Primary Theme Roles - Driven by Identity */
+  --primary: var(--logo-pink);
+  --primary-hover: var(--logo-orange);
+  --on-primary: var(--white);
   
-  --on-surface: #1a1c1a;
-  --on-surface-variant: #4d4635;
+  --secondary: #1d1d1f;
+  --on-secondary: var(--white);
   
-  --outline: #7f7663;
-  --outline-variant: #d0c5af;
+  --background: var(--white);
+  --background-alt: var(--light-gray);
+  --background-dark: var(--black);
   
-  /* Typography */
-  --font-display-en: 'Noto Serif', serif;
-  --font-body-en: 'Manrope', sans-serif;
+  --surface: var(--white);
+  --surface-variant: var(--light-gray);
+  
+  --on-surface: var(--near-black);
+  --on-surface-variant: rgba(0, 0, 0, 0.8);
+  --on-surface-disabled: rgba(0, 0, 0, 0.48);
+  
+  --outline: #d2d2d7;
+  --outline-variant: #e5e5e7;
+  
+  /* Interactive Accents - Laser Tints */
+  --link-color: var(--logo-pink);
+  --link-color-dark: var(--logo-orange);
+  
+  /* Typography - SF Pro Logic */
+  --font-display-en: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+  --font-body-en: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
   --font-display-ar: 'Cairo', sans-serif;
   --font-body-ar: 'Cairo', sans-serif;
 
   --font-display: var(--font-display-en);
   --font-body: var(--font-body-en);
   
-  /* Spacing */
+  /* Headline Rules - Machined Precision */
+  --lh-display: 1.07;
+  --lh-section: 1.10;
+  --lh-card: 1.19;
+  --lh-body: 1.47;
+  
+  --ls-display: -0.022em;
+  --ls-body: -0.011em;
+  
+  /* Spacing - Base Unit 8px */
   --spacing-xs: 4px;
   --spacing-sm: 8px;
   --spacing-md: 16px;
   --spacing-lg: 24px;
   --spacing-xl: 32px;
   --spacing-xxl: 48px;
-  --spacing-huge: 64px;
+  --spacing-huge: 80px;
+  --spacing-cinematic: 120px;
   
   /* Transitions */
-  --transition-smooth: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  --transition-apple: all 0.3s cubic-bezier(0.25, 0.1, 0.25, 1);
+  --transition-fast: all 0.15s cubic-bezier(0, 0, 0.5, 1);
   
-  /* Roundness */
-  --radius-sm: 4px;
+  /* Roundness - Apple Standard */
+  --radius-sm: 5px;
   --radius-md: 8px;
   --radius-lg: 12px;
-  --radius-xl: 24px;
-  --radius-full: 9999px;
+  --radius-xl: 18px;
+  --radius-pill: 980px;
+  --radius-circle: 50%;
   
-  /* Effects */
-  --glass-bg: rgba(250, 249, 246, 0.8);
-  --glass-blur: blur(20px);
-  --ambient-shadow: 0 10px 32px rgba(115, 92, 0, 0.06);
+  /* Layout */
+  --max-width: 980px;
+  
+  /* Effects - Subtle & Functional */
+  --glass-bg: rgba(0, 0, 0, 0.82);
+  --glass-blur: blur(20px) saturate(180%);
+  --shadow-card: 0 10px 30px rgba(0, 0, 0, 0.12);
+  --shadow-laser: 0 10px 32px rgba(255, 0, 87, 0.1);
+  --laser-glow: 0 0 20px rgba(255, 0, 87, 0.3);
 }
+

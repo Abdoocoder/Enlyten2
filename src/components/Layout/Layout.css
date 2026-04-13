@@ -1,16 +1,21 @@
 .header {
   position: sticky;
   top: 0;
-  z-index: 100;
+  z-index: 1000;
   background-color: var(--glass-bg);
   backdrop-filter: var(--glass-blur);
-  border-bottom: 1px solid rgba(208, 197, 175, 0.1);
+  -webkit-backdrop-filter: var(--glass-blur);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+  height: 48px;
+  display: flex;
+  align-items: center;
 }
 
 .header-container {
-  max-width: 1200px;
+  width: 100%;
+  max-width: var(--max-width);
   margin: 0 auto;
-  padding: var(--spacing-md) var(--spacing-lg);
+  padding: 0 var(--spacing-lg);
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -22,7 +27,7 @@
 }
 
 .logo-img {
-  height: 48px;
+  height: 32px; /* Apple headers are compact */
   width: auto;
   object-fit: contain;
 }
@@ -34,14 +39,16 @@
 
 .nav-link {
   font-family: var(--font-body);
-  font-size: 0.875rem;
-  font-weight: 500;
-  color: var(--on-surface-variant);
-  transition: var(--transition-smooth);
+  font-size: 0.75rem; /* 12px */
+  font-weight: 400;
+  color: var(--white);
+  transition: var(--transition-fast);
+  opacity: 0.8;
 }
 
 .nav-link:hover {
-  color: var(--primary);
+  opacity: 1;
+  text-decoration: none;
 }
 
 .header-actions {
@@ -50,36 +57,31 @@
   gap: var(--spacing-md);
 }
 
-.user-menu-container {
-  position: relative;
-}
-
 .user-avatar {
-  width: 40px;
-  height: 40px;
+  width: 28px;
+  height: 28px;
   border-radius: 50%;
-  background-color: var(--primary-container);
-  color: var(--on-primary-container);
+  background-color: rgba(255, 255, 255, 0.1);
+  color: var(--white);
   border: none;
-  font-weight: 600;
+  font-weight: 400;
+  font-size: 0.75rem;
   cursor: pointer;
-  transition: var(--transition-smooth);
-  font-family: var(--font-body);
-}
-
-.user-avatar:hover {
-  box-shadow: 0 2px 8px rgba(115, 92, 0, 0.15);
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
 .user-menu {
   position: absolute;
   top: 100%;
   right: 0;
-  background-color: var(--surface-container-highest);
-  border: 1px solid var(--outline-variant);
-  border-radius: var(--radius-md);
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
-  min-width: 180px;
+  background-color: var(--glass-bg);
+  backdrop-filter: var(--glass-blur);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-card);
+  min-width: 200px;
   margin-top: var(--spacing-sm);
   z-index: 1000;
   overflow: hidden;
@@ -88,100 +90,83 @@
 .user-menu-item {
   display: block;
   width: 100%;
-  padding: var(--spacing-md) var(--spacing-lg);
+  padding: 12px 16px;
   text-align: left;
   background: none;
   border: none;
-  border-bottom: 1px solid var(--outline-variant);
-  color: var(--on-surface);
+  color: var(--white);
   font-family: var(--font-body);
-  font-size: 0.875rem;
+  font-size: 0.8125rem; /* 13px */
   cursor: pointer;
-  transition: var(--transition-smooth);
+  transition: var(--transition-fast);
   text-decoration: none;
 }
 
 .user-menu-item:hover {
-  background-color: var(--surface-container-low);
-  color: var(--primary);
-}
-
-.user-menu-item:last-child {
-  border-bottom: none;
+  background-color: rgba(255, 255, 255, 0.1);
 }
 
 .logout-btn {
-  color: #c2185b;
+  color: #ff3b30; /* Apple Red */
 }
 
-.logout-btn:hover {
-  background-color: #fce4ec;
-}
-
+/* Footer - High Trust Monochrome */
 .footer {
-  background-color: var(--surface-container-low);
-  padding: var(--spacing-huge) var(--spacing-lg) var(--spacing-xl);
-  margin-top: var(--spacing-huge);
+  background-color: var(--background-alt);
+  padding: var(--spacing-cinematic) var(--spacing-lg) var(--spacing-huge);
+  color: var(--on-surface-variant);
+  border-top: 1px solid var(--outline-variant);
 }
 
 .footer-container {
-  max-width: 1200px;
+  max-width: var(--max-width);
   margin: 0 auto;
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-  gap: var(--spacing-xxl);
+  grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+  gap: var(--spacing-xl);
 }
 
-.footer-brand .logo {
-  font-size: 2rem;
-  margin-bottom: var(--spacing-sm);
-  display: block;
-}
-
-.footer-tagline {
-  font-family: var(--font-display);
-  font-style: italic;
-  color: var(--on-surface-variant);
+.footer-brand .logo-img {
+  height: 40px;
+  margin-bottom: var(--spacing-md);
 }
 
 .footer-label {
   display: block;
   font-family: var(--font-body);
   font-size: 0.75rem;
-  font-weight: 700;
-  text-transform: uppercase;
-  letter-spacing: 0.1em;
-  color: var(--outline);
+  font-weight: 600;
+  color: var(--on-surface);
   margin-bottom: var(--spacing-md);
 }
 
 .footer-link {
   display: block;
   font-family: var(--font-body);
-  font-size: 0.875rem;
+  font-size: 0.75rem;
   color: var(--on-surface-variant);
   margin-bottom: var(--spacing-sm);
-  transition: var(--transition-smooth);
-}
-
-.footer-text {
-  display: block;
-  font-family: var(--font-body);
-  font-size: 0.875rem;
-  color: var(--on-surface-variant);
-  margin-bottom: var(--spacing-sm);
+  transition: var(--transition-fast);
 }
 
 .footer-link:hover {
-  color: var(--primary);
+  color: var(--on-surface);
+  text-decoration: underline;
+}
+
+.footer-text {
+  font-family: var(--font-body);
+  font-size: 0.75rem;
+  color: var(--on-surface-disabled);
+  line-height: 1.4;
 }
 
 .footer-bottom {
-  max-width: 1200px;
-  margin: var(--spacing-xxl) auto 0;
-  padding-top: var(--spacing-xl);
-  border-top: 1px solid rgba(208, 197, 175, 0.2);
-  text-align: center;
-  font-size: 0.75rem;
-  color: var(--outline);
+  max-width: var(--max-width);
+  margin: var(--spacing-huge) auto 0;
+  padding-top: var(--spacing-md);
+  border-top: 1px solid var(--outline-variant);
+  font-size: 0.6875rem; /* 11px */
+  color: var(--on-surface-disabled);
 }
+
