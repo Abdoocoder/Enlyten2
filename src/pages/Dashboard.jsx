@@ -23,13 +23,15 @@ const KpiCard = ({ label, value, sub, accent }) => (
 );
 
 const MiniChart = ({ bookings }) => {
+  const { i18n } = useTranslation();
   const days = useMemo(() => {
+    const locale = i18n.language === 'ar' ? 'ar' : undefined;
     const out = [];
     for (let i = 6; i >= 0; i--) {
       const d = new Date();
       d.setDate(d.getDate() - i);
       const key = d.toISOString().slice(0, 10);
-      out.push({ key, label: d.toLocaleDateString(undefined, { weekday: 'short' }), count: 0 });
+      out.push({ key, label: d.toLocaleDateString(locale, { weekday: 'short' }), count: 0 });
     }
     bookings.forEach(b => {
       const day = out.find(d => d.key === b.booking_date);
@@ -171,7 +173,7 @@ const Dashboard = () => {
                             })}
                             {nextAppt.booking_time && ` · ${nextAppt.booking_time}`}
                           </p>
-                          <span className={`status-badge status-${nextAppt.status}`}>{nextAppt.status}</span>
+                          <span className={`status-badge status-${nextAppt.status}`}>{t(`dashboard.status${nextAppt.status.charAt(0).toUpperCase() + nextAppt.status.slice(1)}`, nextAppt.status)}</span>
                         </div>
                       </div>
                       <div className="appt-actions">
@@ -219,7 +221,7 @@ const Dashboard = () => {
                           className="status-badge"
                           style={{ color: STATUS_COLORS[b.status] ?? '#999' }}
                         >
-                          {b.status}
+                          {t(`dashboard.status${b.status.charAt(0).toUpperCase() + b.status.slice(1)}`, b.status)}
                         </span>
                       </div>
                     ))
