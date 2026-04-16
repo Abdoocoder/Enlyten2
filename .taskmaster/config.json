@@ -1,21 +1,21 @@
 {
   "models": {
     "main": {
-      "provider": "anthropic",
-      "modelId": "claude-sonnet-4-20250514",
-      "maxTokens": 64000,
+      "provider": "ollama",
+      "modelId": "qwen3-coder:30b",
+      "maxTokens": 32000,
       "temperature": 0.2
     },
     "research": {
-      "provider": "perplexity",
-      "modelId": "sonar",
+      "provider": "ollama",
+      "modelId": "deepseek-r1:8b",
       "maxTokens": 8700,
       "temperature": 0.1
     },
     "fallback": {
-      "provider": "anthropic",
-      "modelId": "claude-3-7-sonnet-20250219",
-      "maxTokens": 120000,
+      "provider": "ollama",
+      "modelId": "gemma4:latest",
+      "maxTokens": 32000,
       "temperature": 0.2
     }
   },
