@@ -26,7 +26,6 @@
   gap: var(--spacing-xl);
   overflow-x: auto;
   padding: var(--spacing-md) 0;
-  scrollbar-width: none;
   -ms-overflow-style: none;
 }
 
