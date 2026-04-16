@@ -15,14 +15,13 @@ export const AuthProvider = ({ children }) => {
       try {
         setLoading(true);
         const { data: currentUser, error: userError } = await getCurrentUser();
-        
-        if (userError) throw userError;
-        
+
+        // AuthSessionMissingError = no user logged in, not a real error
+        if (userError && userError.name !== 'AuthSessionMissingError') throw userError;
+
         if (currentUser) {
           setUser(currentUser);
-          // Fetch user profile
-          const { data: profileData, error: profileError } = await getProfile(currentUser.id);
-          if (profileError) throw profileError;
+          const { data: profileData } = await getProfile(currentUser.id);
           setProfile(profileData);
         }
       } catch (err) {
