@@ -1,5 +1,5 @@
 import { Link, useNavigate } from 'react-router-dom';
-import { useState } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import './Layout.css';
 import Button from '../UI/Button/Button';
 import LanguageSwitcher from '../UI/LanguageSwitcher/LanguageSwitcher';
@@ -11,7 +11,18 @@ const Layout = ({ children }) => {
   const { isAuthenticated, user, profile, isAdmin } = useAuth();
   const { t } = useTranslation();
   const [showUserMenu, setShowUserMenu] = useState(false);
+  const menuRef = useRef(null);
   const navigate = useNavigate();
+
+  useEffect(() => {
+    const handleClickOutside = (e) => {
+      if (menuRef.current && !menuRef.current.contains(e.target)) {
+        setShowUserMenu(false);
+      }
+    };
+    document.addEventListener('mousedown', handleClickOutside);
+    return () => document.removeEventListener('mousedown', handleClickOutside);
+  }, []);
 
   const handleLogout = async () => {
     try {
@@ -45,7 +56,7 @@ const Layout = ({ children }) => {
           <div className="header-actions">
             <LanguageSwitcher />
             {isAuthenticated ? (
-              <div className="user-menu-container">
+              <div className="user-menu-container" ref={menuRef}>
                 <button 
                   className="user-avatar"
                   onClick={() => setShowUserMenu(!showUserMenu)}

@@ -58,6 +58,10 @@
   gap: var(--spacing-md);
 }
 
+.user-menu-container {
+  position: relative;
+}
+
 .user-avatar {
   width: 28px;
   height: 28px;
