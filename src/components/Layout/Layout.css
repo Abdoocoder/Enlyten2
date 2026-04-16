@@ -9,6 +9,7 @@
   height: 48px;
   display: flex;
   align-items: center;
+  overflow: hidden;
 }
 
 .header-container {
@@ -167,7 +168,50 @@
   margin: var(--spacing-huge) auto 0;
   padding-top: var(--spacing-md);
   border-top: 1px solid var(--outline-variant);
-  font-size: 0.6875rem; /* 11px */
+  font-size: 0.6875rem;
   color: var(--on-surface-disabled);
+}
+
+/* ─── Mobile Header ─── */
+@media (max-width: 768px) {
+  /* Hide nav links on mobile */
+  .nav { display: none; }
+
+  .header-container {
+    padding: 0 var(--spacing-md);
+    gap: var(--spacing-sm);
+  }
+
+  .header-actions {
+    gap: var(--spacing-sm);
+  }
+
+  /* Hide "Sign In" button on mobile, keep only Book */
+  .header-actions > a:last-child { display: none; }
+
+  /* Footer stacked */
+  .footer {
+    padding: var(--spacing-huge) var(--spacing-md);
+  }
+
+  .footer-container {
+    grid-template-columns: 1fr;
+    gap: var(--spacing-lg);
+  }
+}
+
+@media (max-width: 480px) {
+  .logo-img { height: 26px; }
+
+  /* Shrink book button text */
+  .header-actions .btn {
+    font-size: 0.75rem;
+    padding: 5px 10px;
+  }
+
+  .lang-switcher {
+    padding: 4px 8px;
+    font-size: 0.6875rem;
+  }
 }
 
