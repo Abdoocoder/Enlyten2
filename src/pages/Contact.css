@@ -1,67 +1,155 @@
 .contact-page {
-  padding-top: var(--spacing-xxl);
+  background-color: var(--background-dark);
 }
 
-.contact-header {
-  margin-bottom: var(--spacing-xl);
-  text-align: center;
+.contact-hero {
+  min-height: 40vh;
+  justify-content: center;
+}
+
+.hero-subtitle {
+  color: rgba(255, 255, 255, 0.65);
+  margin-top: var(--spacing-lg);
+  max-width: 600px;
+  margin-inline: auto;
+}
+
+.contact-body {
+  align-items: flex-start;
 }
 
 .contact-grid {
   display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: var(--spacing-xxl);
+  grid-template-columns: 1fr 1.4fr;
+  gap: var(--spacing-xl);
+  align-items: start;
 }
 
-.contact-form {
+/* Info Column */
+.contact-info-col {
   display: flex;
   flex-direction: column;
   gap: var(--spacing-md);
 }
 
-.textarea {
-  min-height: 120px;
-  resize: vertical;
+.info-block {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-sm);
 }
 
-.contact-info-side {
+.contact-phone {
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: var(--logo-pink);
+  text-decoration: none;
+  letter-spacing: 0.02em;
+}
+
+.contact-phone:hover {
+  opacity: 0.8;
+}
+
+/* Doctors */
+.doctors-block {
+  gap: var(--spacing-md);
+}
+
+.doctor-item {
+  padding-top: var(--spacing-md);
+  border-top: 1px solid var(--outline-variant);
+}
+
+.doctor-item:first-of-type {
+  padding-top: 0;
+  border-top: none;
+}
+
+.doctor-name {
+  font-weight: 600;
+  color: var(--near-black);
+}
+
+.doctor-specialty {
+  color: var(--on-surface-variant);
+  margin-top: 2px;
+}
+
+.doctor-phones {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  margin-top: var(--spacing-sm);
+}
+
+.doctor-phone {
+  color: var(--logo-pink);
+  font-size: 0.9rem;
+  font-weight: 500;
+  text-decoration: none;
+}
+
+.doctor-phone:hover {
+  opacity: 0.75;
+}
+
+/* Form Column */
+.contact-form-col {
+  position: sticky;
+  top: 80px;
+}
+
+.form-card {
   display: flex;
   flex-direction: column;
   gap: var(--spacing-xl);
 }
 
-.clinic-list {
+.contact-form {
   display: flex;
   flex-direction: column;
   gap: var(--spacing-lg);
-  margin-top: var(--spacing-md);
 }
 
-.clinic-item h4 {
-  color: var(--primary);
-  margin-bottom: 4px;
-}
-
-.review-list {
+.form-group {
   display: flex;
   flex-direction: column;
-  gap: var(--spacing-lg);
-  margin-top: var(--spacing-md);
+  gap: var(--spacing-sm);
 }
 
-.review-stars {
-  color: var(--primary-container);
-  margin-bottom: 4px;
+.form-label {
+  color: var(--on-surface-variant);
 }
 
-.review-item p {
-  font-style: italic;
-  margin-bottom: 4px;
+.form-input {
+  width: 100%;
+  padding: var(--spacing-md);
+  border: 1px solid var(--outline-variant);
+  border-radius: var(--radius-lg);
+  font-family: var(--font-body);
+  font-size: 1rem;
+  color: var(--on-surface);
+  background-color: var(--background-alt);
+  transition: var(--transition-fast);
+  outline: none;
 }
 
-/* Mobile */
-@media (max-width: 968px) {
+.form-input:focus {
+  border-color: var(--logo-pink);
+  background-color: var(--white);
+}
+
+.form-textarea {
+  resize: vertical;
+  min-height: 140px;
+}
+
+@media (max-width: 768px) {
   .contact-grid {
     grid-template-columns: 1fr;
+  }
+
+  .contact-form-col {
+    position: static;
   }
 }

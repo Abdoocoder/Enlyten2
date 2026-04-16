@@ -6,9 +6,18 @@ import Button from '../components/UI/Button/Button';
 import { useServices } from '../hooks/useDatabase';
 import { useAuth } from '../contexts/AuthContext';
 import { useTranslation } from 'react-i18next';
+import mockData from '../data/mockData.json';
 
 const Services = () => {
-  const { services, loading, error } = useServices();
+  const { services: dbServices, loading, error } = useServices();
+  const services = dbServices.length > 0 ? dbServices : mockData.treatments.map(t => ({
+    id: t.id,
+    name: t.name,
+    description: t.description,
+    price: t.price,
+    duration_minutes: t.duration,
+    category: t.category,
+  }));
   const { isAuthenticated } = useAuth();
   const { t } = useTranslation();
   const navigate = useNavigate();

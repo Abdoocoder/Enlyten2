@@ -102,9 +102,12 @@ const Layout = ({ children }) => {
               <span className="footer-text">{t('footer.location')}</span>
             </div>
             <div className="footer-group">
+              <span className="footer-label">{t('footer.phone', 'Phone')}</span>
+              <a href="tel:0770300173" className="footer-link">07 7030 0173</a>
+            </div>
+            <div className="footer-group">
               <span className="footer-label">{t('footer.social')}</span>
-              <a href="#" className="footer-link">Instagram</a>
-              <a href="https://www.facebook.com/p/Enlyten2-laser-center-100044632491039/?locale=ar_AR" target="_blank" rel="noopener noreferrer" className="footer-link">Facebook</a>
+              <a href="https://www.facebook.com/p/Enlyten2-laser-center-100044632491039/" target="_blank" rel="noopener noreferrer" className="footer-link">Facebook</a>
             </div>
           </div>
         </div>
