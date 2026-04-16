@@ -54,6 +54,16 @@
     "social": "تابعونا",
     "rights": "© 2025 مركز Enlyten2 لليزر. جميع الحقوق محفوظة."
   },
+  "categories": {
+    "all": "الكل",
+    "Laser": "ليزر",
+    "Injectables": "الحقن",
+    "Skin Care": "العناية بالبشرة",
+    "Body": "الجسم",
+    "Anti-Aging": "مكافحة الشيخوخة",
+    "Hair": "الشعر",
+    "Clinic": "العيادة"
+  },
   "gallery": {
     "accent": "نتائج حقيقية",
     "title": "شاهد",

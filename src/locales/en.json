@@ -54,6 +54,16 @@
     "social": "Follow Us",
     "rights": "© 2025 Enlyten2 Laser Center. All Rights Reserved."
   },
+  "categories": {
+    "all": "All",
+    "Laser": "Laser",
+    "Injectables": "Injectables",
+    "Skin Care": "Skin Care",
+    "Body": "Body",
+    "Anti-Aging": "Anti-Aging",
+    "Hair": "Hair",
+    "Clinic": "Clinic"
+  },
   "gallery": {
     "accent": "Clinical Results",
     "title": "Witness the",

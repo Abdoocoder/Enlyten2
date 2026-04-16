@@ -25,8 +25,7 @@ const Gallery = () => {
     return gallery.filter(item => item.category === selectedCategory);
   }, [gallery, selectedCategory]);
 
-  const categoryLabel = (cat) =>
-    cat === 'all' ? t('gallery.all') : cat;
+  const categoryLabel = (cat) => t(`categories.${cat}`, cat);
 
   return (
     <div className="gallery-page">
@@ -90,7 +89,7 @@ const Gallery = () => {
                         <span className="label-medium text-muted">{t('gallery.awaiting')}</span>
                       </div>
                     )}
-                    <span className="tile-category-tag">{item.category}</span>
+                    <span className="tile-category-tag">{t(`categories.${item.category}`, item.category)}</span>
                   </div>
                   <div className="gallery-tile-info">
                     <h3 className="card-title">

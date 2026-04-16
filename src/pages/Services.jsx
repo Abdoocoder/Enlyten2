@@ -28,7 +28,7 @@ const ServiceTile = ({ service, onBook }) => {
             </div>
           )
         }
-        <span className="service-category-tag">{service.category}</span>
+        <span className="service-category-tag">{t(`categories.${service.category}`, service.category)}</span>
       </div>
 
       <div className="service-tile-content">
@@ -102,7 +102,7 @@ const Services = () => {
                 className={`category-pill ${selectedCategory === cat ? 'active' : ''}`}
                 onClick={() => setSelectedCategory(cat)}
               >
-                {cat === 'All' ? t('services.all', 'All') : cat}
+                {t(`categories.${cat}`, cat)}
               </button>
             ))}
           </div>
