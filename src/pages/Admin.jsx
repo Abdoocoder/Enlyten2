@@ -1,11 +1,23 @@
-import React from 'react';
+import React, { useEffect } from 'react';
+import { useNavigate } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
 import './Admin.css';
 import Card from '../components/UI/Card/Card';
 import Button from '../components/UI/Button/Button';
+import { useAuth } from '../contexts/AuthContext';
 
 const Admin = () => {
   const { t } = useTranslation();
+  const { isAuthenticated, isAdmin, loading } = useAuth();
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    if (!loading && (!isAuthenticated || !isAdmin)) {
+      navigate('/');
+    }
+  }, [isAuthenticated, isAdmin, loading, navigate]);
+
+  if (loading || !isAdmin) return null;
 
   return (
     <div className="admin-page page-container">

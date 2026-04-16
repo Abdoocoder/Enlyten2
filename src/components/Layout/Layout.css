@@ -108,9 +108,9 @@
   background-color: rgba(255, 255, 255, 0.1);
 }
 
-.logout-btn {
-  color: #ff3b30; /* Apple Red */
-}
+.logout-btn { color: #ff3b30; }
+
+.admin-link { color: var(--logo-purple); font-weight: 600; }
 
 /* Footer - High Trust Monochrome */
 .footer {

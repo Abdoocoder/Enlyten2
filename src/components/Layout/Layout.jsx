@@ -8,7 +8,7 @@ import { useTranslation } from 'react-i18next';
 import { signOut } from '../../lib/supabase';
 
 const Layout = ({ children }) => {
-  const { isAuthenticated, user, profile } = useAuth();
+  const { isAuthenticated, user, profile, isAdmin } = useAuth();
   const { t } = useTranslation();
   const [showUserMenu, setShowUserMenu] = useState(false);
   const navigate = useNavigate();
@@ -61,6 +61,11 @@ const Layout = ({ children }) => {
                     <Link to="/profile" className="user-menu-item" onClick={() => setShowUserMenu(false)}>
                       {t('nav.profile')}
                     </Link>
+                    {isAdmin && (
+                      <Link to="/admin" className="user-menu-item admin-link" onClick={() => setShowUserMenu(false)}>
+                        {t('nav.admin', 'Admin')}
+                      </Link>
+                    )}
                     <button 
                       className="user-menu-item logout-btn"
                       onClick={handleLogout}
