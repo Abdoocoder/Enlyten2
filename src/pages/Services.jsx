@@ -16,12 +16,16 @@ const categoryIcons = {
 };
 
 const ServiceTile = ({ service, onBook }) => {
-  const { t } = useTranslation();
+  const { t, i18n } = useTranslation();
+  const isAr = i18n.language === 'ar';
+  const name = isAr ? (service.name_ar || service.name) : service.name;
+  const desc = isAr ? (service.description_ar || service.description) : service.description;
+
   return (
     <article className="service-tile">
       <div className="service-image-well">
         {service.image_url
-          ? <img src={service.image_url} alt={service.name} className="service-image" />
+          ? <img src={service.image_url} alt={name} className="service-image" />
           : (
             <div className="service-image-placeholder">
               <span className="service-icon">{categoryIcons[service.category] || '◆'}</span>
@@ -32,8 +36,8 @@ const ServiceTile = ({ service, onBook }) => {
       </div>
 
       <div className="service-tile-content">
-        <h3 className="service-name">{service.name}</h3>
-        <p className="service-desc">{service.description}</p>
+        <h3 className="service-name">{name}</h3>
+        <p className="service-desc">{desc}</p>
 
         <div className="service-tile-footer">
           <div className="service-meta">
@@ -59,13 +63,16 @@ const Services = () => {
   const [selectedCategory, setSelectedCategory] = useState('All');
 
   const services = useMemo(() => (
-    dbServices.length > 0 ? dbServices : mockData.treatments.map(t => ({
-      id: t.id,
-      name: t.name,
-      description: t.description,
-      price: t.price,
-      duration_minutes: t.duration,
-      category: t.category,
+    dbServices.length > 0 ? dbServices : mockData.treatments.map(tr => ({
+      id: tr.id,
+      name: tr.name,
+      name_ar: tr.name_ar,
+      description: tr.description,
+      description_ar: tr.description_ar,
+      price: tr.price,
+      duration_minutes: tr.duration,
+      category: tr.category,
+      image_url: tr.image_url,
     }))
   ), [dbServices]);
 
