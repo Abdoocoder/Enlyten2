@@ -1,161 +1,254 @@
-import React, { useEffect, useState } from 'react';
-import { useNavigate, useSearchParams } from 'react-router-dom';
+import React, { useEffect, useState, useCallback, useMemo } from 'react';
+import { useNavigate, useSearchParams, Link } from 'react-router-dom';
 import './Dashboard.css';
-import Card from '../components/UI/Card/Card';
 import Button from '../components/UI/Button/Button';
 import { useAuth } from '../contexts/AuthContext';
 import { useUserBookings } from '../hooks/useDatabase';
 import { cancelBooking } from '../lib/supabase';
 import { useTranslation } from 'react-i18next';
 
+const STATUS_COLORS = {
+  confirmed: '#34c759',
+  pending:   '#ff9500',
+  completed: '#007aff',
+  cancelled: '#ff3b30',
+};
+
+const KpiCard = ({ label, value, sub, accent }) => (
+  <div className="kpi-card apple-card">
+    <span className="label-medium kpi-label">{label}</span>
+    <p className="kpi-value" style={accent ? { color: accent } : {}}>{value}</p>
+    {sub && <span className="body-small text-muted">{sub}</span>}
+  </div>
+);
+
+const MiniChart = ({ bookings }) => {
+  const days = useMemo(() => {
+    const out = [];
+    for (let i = 6; i >= 0; i--) {
+      const d = new Date();
+      d.setDate(d.getDate() - i);
+      const key = d.toISOString().slice(0, 10);
+      out.push({ key, label: d.toLocaleDateString(undefined, { weekday: 'short' }), count: 0 });
+    }
+    bookings.forEach(b => {
+      const day = out.find(d => d.key === b.booking_date);
+      if (day) day.count++;
+    });
+    return out;
+  }, [bookings]);
+
+  const max = Math.max(...days.map(d => d.count), 1);
+
+  return (
+    <div className="mini-chart">
+      <div className="mini-chart-bars">
+        {days.map(d => (
+          <div key={d.key} className="chart-col">
+            <div
+              className="chart-bar"
+              style={{ height: `${(d.count / max) * 100}%` }}
+              title={`${d.count} bookings`}
+            />
+            <span className="chart-label">{d.label}</span>
+          </div>
+        ))}
+      </div>
+    </div>
+  );
+};
+
 const Dashboard = () => {
   const { user, profile, isAuthenticated } = useAuth();
   const { t } = useTranslation();
   const navigate = useNavigate();
   const [searchParams] = useSearchParams();
-  const { bookings, loading, error } = useUserBookings(user?.id);
+  const { bookings, loading } = useUserBookings(user?.id);
   const [successMessage, setSuccessMessage] = useState('');
   const [cancelLoading, setCancelLoading] = useState(null);
 
   useEffect(() => {
-    if (!isAuthenticated) {
-      navigate('/login');
-      return;
-    }
-
+    if (!isAuthenticated) { navigate('/login'); return; }
     if (searchParams.get('booking') === 'success') {
-      setSuccessMessage('Your appointment has been successfully scheduled.');
+      setSuccessMessage(t('dashboard.bookingSuccess', 'Appointment scheduled successfully!'));
       setTimeout(() => setSuccessMessage(''), 5000);
     }
-  }, [isAuthenticated, navigate, searchParams]);
+  }, [isAuthenticated, navigate, searchParams, t]);
 
-  const handleCancelBooking = async (bookingId) => {
-    if (window.confirm('Are you sure you want to cancel this booking?')) {
-      try {
-        setCancelLoading(bookingId);
-        const { error: cancelError } = await cancelBooking(bookingId);
-        if (cancelError) throw cancelError;
-        window.location.reload();
-      } catch (err) {
-        console.error('Cancel booking error:', err);
-      } finally {
-        setCancelLoading(null);
-      }
+  const handleCancel = useCallback(async (bookingId) => {
+    if (!window.confirm(t('dashboard.cancelConfirm', 'Cancel this booking?'))) return;
+    try {
+      setCancelLoading(bookingId);
+      const { error } = await cancelBooking(bookingId);
+      if (error) throw error;
+      window.location.reload();
+    } catch (err) {
+      console.error(err);
+    } finally {
+      setCancelLoading(null);
     }
-  };
+  }, [t]);
 
-  const upcomingBookings = bookings.filter(b => b.status !== 'cancelled' && b.status !== 'completed');
-  const upcomingAppointment = upcomingBookings.length > 0 ? upcomingBookings[0] : null;
-  const pastBookings = bookings.filter(b => b.status === 'completed');
+  const upcoming = useMemo(
+    () => bookings.filter(b => b.status !== 'cancelled' && b.status !== 'completed'),
+    [bookings]
+  );
+  const completed = useMemo(() => bookings.filter(b => b.status === 'completed'), [bookings]);
+  const nextAppt = upcoming[0] ?? null;
+  const firstName = profile?.full_name?.split(' ')[0] || t('dashboard.member', 'Member');
 
   return (
     <div className="dashboard-page">
-      {/* Dashboard Greeting Hero */}
-      <section className="viewport-section section-light dashboard-hero">
-        <div className="content-well">
-          <span className="brand-accent">Client Portal</span>
-          <h1 className="hero-headline">
-             Hello, <span className="laser-text">{profile?.full_name?.split(' ')[0] || 'Member'}</span>
-          </h1>
-          <p className="body-intro">Welcome back to your luminous journey. Manage your treatments and skin health here.</p>
+
+      {/* Greeting Hero */}
+      <section className="viewport-section section-dark dashboard-hero">
+        <div className="content-well dashboard-hero-inner">
+          <div>
+            <span className="label-medium brand-accent">{t('dashboard.portal', 'Client Portal')}</span>
+            <h1 className="hero-headline">
+              {t('dashboard.hello', 'Hello')}, <span className="laser-text">{firstName}</span>
+            </h1>
+            <p className="body-intro hero-muted">{t('dashboard.subtitle', 'Welcome back. Manage your treatments here.')}</p>
+          </div>
+          <Link to="/book">
+            <Button variant="primary" className="btn-pill btn-large">{t('dashboard.newBooking', '+ New Booking')}</Button>
+          </Link>
         </div>
       </section>
 
-      <main className="viewport-section section-white dashboard-main">
+      <main className="viewport-section section-light dashboard-main">
         <div className="content-well">
-          {successMessage && <div className="success-banner animation-fade-in">{successMessage}</div>}
-          
-          <div className="dashboard-grid-v2">
-            
-            {/* Primary Appointment Card */}
-            <div className="appointment-main">
-              <h2 className="section-headline">Up Next</h2>
-              {upcomingAppointment ? (
-                <Card variant="white" className="apple-card appointment-hero-card" padded={false}>
-                  <div className="appointment-hero-content">
-                    <div className="appointment-info">
-                       <span className="label-medium status-tag">{upcomingAppointment.status}</span>
-                       <h3 className="hero-headline small-hero">{upcomingAppointment.services?.name}</h3>
-                       <p className="body-intro">
-                          {new Date(upcomingAppointment.booking_date).toLocaleDateString(undefined, {
-                            weekday: 'long',
-                            month: 'long',
-                            day: 'numeric'
-                          })}
-                       </p>
-                       <p className="body-medium appointment-time">{upcomingAppointment.booking_time}</p>
-                    </div>
-                    
-                    <div className="appointment-actions">
-                       <Button 
-                          variant="outline" 
+
+          {successMessage && (
+            <div className="success-banner">{successMessage}</div>
+          )}
+
+          {/* KPI Row */}
+          <div className="kpi-row">
+            <KpiCard
+              label={t('dashboard.totalVisits', 'Total Visits')}
+              value={bookings.length}
+              sub={t('dashboard.allTime', 'all time')}
+            />
+            <KpiCard
+              label={t('dashboard.upcoming', 'Upcoming')}
+              value={upcoming.length}
+              accent="var(--logo-orange)"
+              sub={t('dashboard.scheduled', 'scheduled')}
+            />
+            <KpiCard
+              label={t('dashboard.completed', 'Completed')}
+              value={completed.length}
+              accent="var(--logo-purple)"
+              sub={t('dashboard.treatments', 'treatments')}
+            />
+          </div>
+
+          {/* Main Grid */}
+          <div className="dashboard-grid">
+
+            {/* Left: Next + History */}
+            <div className="dashboard-col-main">
+
+              {/* Next Appointment */}
+              <div className="dash-section">
+                <h2 className="dash-section-title">{t('dashboard.upNext', 'Up Next')}</h2>
+                {loading ? (
+                  <div className="apple-card skeleton-card" />
+                ) : nextAppt ? (
+                  <div className="apple-card appt-card">
+                    <div className="appt-card-inner">
+                      <div className="appt-info">
+                        <span
+                          className="appt-status-dot"
+                          style={{ background: STATUS_COLORS[nextAppt.status] ?? '#999' }}
+                        />
+                        <div>
+                          <h3 className="appt-name">{nextAppt.services?.name ?? t('dashboard.treatment', 'Treatment')}</h3>
+                          <p className="appt-date body-medium">
+                            {new Date(nextAppt.booking_date).toLocaleDateString(undefined, {
+                              weekday: 'long', month: 'long', day: 'numeric'
+                            })}
+                            {nextAppt.booking_time && ` · ${nextAppt.booking_time}`}
+                          </p>
+                          <span className={`status-badge status-${nextAppt.status}`}>{nextAppt.status}</span>
+                        </div>
+                      </div>
+                      <div className="appt-actions">
+                        <Button
+                          variant="outline"
                           className="btn-pill"
-                          onClick={() => handleCancelBooking(upcomingAppointment.id)}
-                          disabled={cancelLoading === upcomingAppointment.id}
-                       >
-                          {cancelLoading === upcomingAppointment.id ? 'Processing...' : 'Cancel Visit'}
-                       </Button>
-                       <Button variant="primary" className="btn-pill" onClick={() => navigate('/services')}>
-                          Book New
-                       </Button>
+                          onClick={() => handleCancel(nextAppt.id)}
+                          disabled={cancelLoading === nextAppt.id}
+                        >
+                          {cancelLoading === nextAppt.id ? '...' : t('dashboard.cancel', 'Cancel')}
+                        </Button>
+                        <Button variant="primary" className="btn-pill" onClick={() => navigate('/services')}>
+                          {t('dashboard.bookNew', 'Book New')}
+                        </Button>
+                      </div>
                     </div>
                   </div>
-                </Card>
-              ) : (
-                <Card variant="white" className="apple-card empty-appointment" padded={true}>
-                  <h3 className="card-title">No upcoming visits</h3>
-                  <p className="body-medium">Start your next transformation today.</p>
-                  <Button variant="primary" className="btn-pill" onClick={() => navigate('/services')}>
-                    Browse Treatments
-                  </Button>
-                </Card>
-              )}
+                ) : (
+                  <div className="apple-card empty-appt">
+                    <p className="card-title">{t('dashboard.noUpcoming', 'No upcoming visits')}</p>
+                    <p className="body-medium text-muted">{t('dashboard.startJourney', 'Start your next transformation today.')}</p>
+                    <Button variant="primary" className="btn-pill" onClick={() => navigate('/services')}>
+                      {t('dashboard.browse', 'Browse Treatments')}
+                    </Button>
+                  </div>
+                )}
+              </div>
 
-              {/* History Table */}
-              <div className="history-section">
-                <h2 className="section-headline">Recent Activity</h2>
-                <div className="apple-card history-container">
-                    {loading ? (
-                        <p className="body-medium centered">Locating your records...</p>
-                    ) : bookings.length > 0 ? (
-                        <div className="history-list-v2">
-                            {bookings.slice(0, 5).map(booking => (
-                                <div key={booking.id} className="history-row">
-                                    <div className="history-main-info">
-                                        <span className="body-medium font-bold">{booking.services?.name}</span>
-                                        <span className="body-small text-muted">{new Date(booking.booking_date).toLocaleDateString()}</span>
-                                    </div>
-                                    <span className={`label-medium status-dot ${booking.status}`}>
-                                        {booking.status}
-                                    </span>
-                                </div>
-                            ))}
+              {/* Activity History */}
+              <div className="dash-section">
+                <h2 className="dash-section-title">{t('dashboard.recentActivity', 'Recent Activity')}</h2>
+                <div className="apple-card history-card">
+                  {loading ? (
+                    <p className="body-medium text-muted">{t('dashboard.loading', 'Loading...')}</p>
+                  ) : bookings.length > 0 ? (
+                    bookings.slice(0, 6).map(b => (
+                      <div key={b.id} className="history-row">
+                        <div className="history-info">
+                          <span className="body-medium history-name">{b.services?.name ?? '—'}</span>
+                          <span className="body-small text-muted">
+                            {new Date(b.booking_date).toLocaleDateString()}
+                          </span>
                         </div>
-                    ) : (
-                        <p className="body-medium centered">Your journey starts here.</p>
-                    )}
+                        <span
+                          className="status-badge"
+                          style={{ color: STATUS_COLORS[b.status] ?? '#999' }}
+                        >
+                          {b.status}
+                        </span>
+                      </div>
+                    ))
+                  ) : (
+                    <p className="body-medium text-muted">{t('dashboard.noHistory', 'Your journey starts here.')}</p>
+                  )}
                 </div>
               </div>
+
             </div>
 
-            {/* Sidebar Stats */}
-            <aside className="dashboard-sidebar">
-              <h2 className="section-headline">Overview</h2>
-              <div className="stats-stack">
-                <Card variant="white" className="apple-card stat-tile">
-                  <span className="label-medium">Total Visits</span>
-                  <p className="stat-number">{bookings.length}</p>
-                </Card>
-                <Card variant="white" className="apple-card stat-tile">
-                  <span className="label-medium">Completed</span>
-                  <p className="stat-number">{pastBookings.length}</p>
-                </Card>
-                <div className="support-tile apple-card">
-                   <span className="label-medium">Support</span>
-                   <p className="body-small">Need help with your plan? Contact our clinical team.</p>
-                   <button className="pill-link">Get Help</button>
+            {/* Right: Chart + Support */}
+            <aside className="dashboard-col-side">
+
+              <div className="dash-section">
+                <h2 className="dash-section-title">{t('dashboard.activity7d', 'Activity — 7 Days')}</h2>
+                <div className="apple-card chart-card">
+                  <MiniChart bookings={bookings} />
                 </div>
               </div>
+
+              <div className="dash-section">
+                <div className="apple-card support-card">
+                  <span className="label-medium brand-accent">{t('dashboard.support', 'Support')}</span>
+                  <p className="body-medium">{t('dashboard.supportText', 'Need help? Our clinical team is always here.')}</p>
+                  <a href="tel:0770300173" className="pill-link">{t('dashboard.callUs', 'Call Us')}</a>
+                </div>
+              </div>
+
             </aside>
 
           </div>
