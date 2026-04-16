@@ -1,134 +1,143 @@
-import React, { useState, useMemo } from 'react';
+import React, { useState, useMemo, useCallback } from 'react';
 import { useNavigate } from 'react-router-dom';
 import './Services.css';
-import Card from '../components/UI/Card/Card';
-import Button from '../components/UI/Button/Button';
 import { useServices } from '../hooks/useDatabase';
 import { useAuth } from '../contexts/AuthContext';
 import { useTranslation } from 'react-i18next';
 import mockData from '../data/mockData.json';
 
+const categoryIcons = {
+  'Laser': '✦',
+  'Injectables': '◈',
+  'Body': '◎',
+  'Anti-Aging': '◇',
+  'Skin Care': '◉',
+  'Hair': '◐',
+};
+
+const ServiceTile = ({ service, onBook }) => {
+  const { t } = useTranslation();
+  return (
+    <article className="service-tile">
+      <div className="service-image-well">
+        {service.image_url
+          ? <img src={service.image_url} alt={service.name} className="service-image" />
+          : (
+            <div className="service-image-placeholder">
+              <span className="service-icon">{categoryIcons[service.category] || '◆'}</span>
+            </div>
+          )
+        }
+        <span className="service-category-tag">{service.category}</span>
+      </div>
+
+      <div className="service-tile-content">
+        <h3 className="service-name">{service.name}</h3>
+        <p className="service-desc">{service.description}</p>
+
+        <div className="service-tile-footer">
+          <div className="service-meta">
+            {service.duration_minutes && (
+              <span className="meta-item">{service.duration_minutes}</span>
+            )}
+            <span className="price-badge">{service.price} JD</span>
+          </div>
+          <button className="pill-link" onClick={() => onBook(service.id)}>
+            {t('home.treatments.bookNow')}
+          </button>
+        </div>
+      </div>
+    </article>
+  );
+};
+
 const Services = () => {
   const { services: dbServices, loading, error } = useServices();
-  const services = dbServices.length > 0 ? dbServices : mockData.treatments.map(t => ({
-    id: t.id,
-    name: t.name,
-    description: t.description,
-    price: t.price,
-    duration_minutes: t.duration,
-    category: t.category,
-  }));
   const { isAuthenticated } = useAuth();
   const { t } = useTranslation();
   const navigate = useNavigate();
   const [selectedCategory, setSelectedCategory] = useState('All');
+
+  const services = useMemo(() => (
+    dbServices.length > 0 ? dbServices : mockData.treatments.map(t => ({
+      id: t.id,
+      name: t.name,
+      description: t.description,
+      price: t.price,
+      duration_minutes: t.duration,
+      category: t.category,
+    }))
+  ), [dbServices]);
 
   const categories = useMemo(() => {
     const cats = [...new Set(services.map(s => s.category))];
     return ['All', ...cats];
   }, [services]);
 
-  const filteredServices = useMemo(() => {
-    if (selectedCategory === 'All') return services;
-    return services.filter(s => s.category === selectedCategory);
-  }, [services, selectedCategory]);
+  const filteredServices = useMemo(() => (
+    selectedCategory === 'All' ? services : services.filter(s => s.category === selectedCategory)
+  ), [services, selectedCategory]);
 
-  const handleBooking = (serviceId) => {
-    if (!isAuthenticated) {
-      navigate('/login');
-      return;
-    }
+  const handleBooking = useCallback((serviceId) => {
+    if (!isAuthenticated) { navigate('/login'); return; }
     navigate(`/book?serviceId=${serviceId}`);
-  };
+  }, [isAuthenticated, navigate]);
 
   return (
     <div className="services-page">
-      {/* Services Hero - Immersive Header */}
+
       <section className="viewport-section section-dark services-hero">
         <div className="content-well text-center">
-          <h1 className="hero-headline">{t('nav.treatments')}</h1>
-          <p className="body-intro hero-subtitle">
-            Luxury meets clinical precision. Explore our curated range of aesthetic treatments.
-          </p>
+          <h1 className="hero-headline">{t('services.title', t('nav.treatments'))}</h1>
+          <p className="body-intro hero-subtitle">{t('services.subtitle', 'Advanced aesthetic solutions — curated for your luminous goals.')}</p>
         </div>
       </section>
 
-      {/* Category Filter - The Apple Strip */}
       <div className="category-strip-container">
         <div className="content-well">
           <div className="category-strip">
             {categories.map(cat => (
-              <button 
+              <button
                 key={cat}
                 className={`category-pill ${selectedCategory === cat ? 'active' : ''}`}
                 onClick={() => setSelectedCategory(cat)}
               >
-                {cat}
+                {cat === 'All' ? t('services.all', 'All') : cat}
               </button>
             ))}
           </div>
         </div>
       </div>
 
-      <main className="viewport-section section-white services-content">
+      <main className="viewport-section section-light services-content">
         <div className="content-well">
           {loading && (
-            <div className="loading-state centered">
+            <div className="centered">
               <div className="laser-spinner"></div>
-              <p className="body-medium">Curating your experience...</p>
+              <p className="body-medium">{t('services.loading', 'Curating your experience...')}</p>
             </div>
           )}
 
-          {error && (
-            <div className="error-state centered">
-              <p className="body-medium error-message">Unable to load services at this time.</p>
-            </div>
-          )}
-
-          {!loading && !error && (
-            <div className="grid-3 services-grid">
+          {!loading && filteredServices.length > 0 && (
+            <div className="services-grid">
               {filteredServices.map(service => (
-                <Card key={service.id} variant="white" className="service-tile" padded={false}>
-                  <div className="service-image-well">
-                    {service.image_url ? (
-                        <img src={service.image_url} alt={service.name} className="service-image" />
-                    ) : (
-                        <div className="service-image-placeholder"></div>
-                    )}
-                    <span className="service-category-tag">{service.category}</span>
-                  </div>
-                  
-                  <div className="service-tile-content">
-                    <h3 className="card-title">{service.name}</h3>
-                    <p className="body-medium service-desc">{service.description}</p>
-                    
-                    <div className="service-tile-footer">
-                      <div className="service-meta">
-                        {service.duration_minutes && (
-                          <span className="meta-item">{service.duration_minutes} min</span>
-                        )}
-                        <span className="price-label">${service.price}</span>
-                      </div>
-                      <button 
-                         className="pill-link"
-                         onClick={() => handleBooking(service.id)}
-                      >
-                        {t('home.treatments.bookNow')}
-                      </button>
-                    </div>
-                  </div>
-                </Card>
+                <ServiceTile
+                  key={service.id}
+                  service={service}
+                  onBook={handleBooking}
+                />
               ))}
             </div>
           )}
 
-          {!loading && filteredServices.length === 0 && !error && (
-            <div className="empty-state centered">
-              <p className="body-medium">No treatments found in this category.</p>
+          {!loading && filteredServices.length === 0 && (
+            <div className="centered">
+              <p className="body-medium">{t('services.empty', 'No treatments found in this category.')}</p>
             </div>
           )}
         </div>
       </main>
+
     </div>
   );
 };
