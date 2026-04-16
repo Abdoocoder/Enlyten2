@@ -211,6 +211,65 @@
             "details": "Conduct cross-browser and cross-device testing to ensure the responsive grid layout functions correctly on mobile, tablet, and desktop screens. Validate that the two-up to three-up transition occurs at appropriate breakpoints and that all elements display correctly.",
             "status": "pending",
             "testStrategy": null
+          },
+          {
+            "id": 14,
+            "title": "Create Services tile component with Apple-style design",
+            "description": "Develop a reusable tile component for services with Apple-inspired styling including image background, title, description, price badge, and CTA",
+            "dependencies": [],
+            "details": "Implement a React component with styled-components or CSS modules that follows Apple's design language with #f5f5f7 background, 28px title font weight 400, 14px description, price badge styling, and pill CTA button",
+            "status": "pending",
+            "testStrategy": null
+          },
+          {
+            "id": 15,
+            "title": "Implement responsive grid layout for service tiles",
+            "description": "Create a responsive grid system that displays 2-up on mobile and 3-up on desktop viewports",
+            "dependencies": [
+              14
+            ],
+            "details": "Use CSS Grid or Flexbox with media queries to create a responsive layout that adjusts from 2 columns on small screens to 3 columns on larger screens, ensuring proper spacing and alignment",
+            "status": "pending",
+            "testStrategy": null
+          },
+          {
+            "id": 16,
+            "title": "Integrate service data into tile components",
+            "description": "Fetch and display service data in the tile components with proper image handling and content formatting",
+            "dependencies": [
+              14,
+              15
+            ],
+            "details": "Create data fetching logic to retrieve service information from API or local data store, map data to tile component props, handle image loading, and ensure proper text formatting for titles, descriptions, and pricing",
+            "status": "pending",
+            "testStrategy": null
+          },
+          {
+            "id": 17,
+            "title": "Add interactive elements to service tiles",
+            "description": "Implement hover effects, click handlers, and CTA functionality for service tiles",
+            "dependencies": [
+              14,
+              15,
+              16
+            ],
+            "details": "Add hover states for visual feedback, implement click handlers for CTAs, ensure proper accessibility attributes, and create smooth transitions between states for a polished user experience",
+            "status": "pending",
+            "testStrategy": null
+          },
+          {
+            "id": 18,
+            "title": "Test and validate responsive service grid",
+            "description": "Conduct comprehensive testing of the responsive grid layout across different viewport sizes",
+            "dependencies": [
+              14,
+              15,
+              16,
+              17
+            ],
+            "details": "Test layout behavior on various screen sizes, validate proper grid alignment, ensure no overlapping elements, check that all interactive elements work correctly, and verify that the design maintains Apple's aesthetic principles at all breakpoints",
+            "status": "pending",
+            "testStrategy": null
           }
         ],
         "updatedAt": "2026-04-16T21:58:07.127Z"

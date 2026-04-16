@@ -117,6 +117,7 @@
     "bio": "Bio",
     "fullNamePlaceholder": "Enter your full name",
     "phonePlaceholder": "+962 7x xxx xxxx",
+    "contactPhonePlaceholder": "07xxxxxxxx",
     "bioPlaceholder": "Tell us about yourself",
     "member": "Member",
     "personalInfo": "Personal Information",
@@ -178,6 +179,21 @@
     "back": "Back",
     "loading": "Loading..."
   },
+  "admin": {
+    "title": "Admin Dashboard",
+    "subtitle": "Clinic Performance & Management",
+    "revenue": "Monthly Revenue",
+    "revenueTrend": "+12% from last month",
+    "patients": "Active Patients",
+    "totalTreatments": "Total Treatments",
+    "recentAppointments": "Recent Appointments",
+    "viewAll": "View All",
+    "colPatient": "Patient",
+    "colTreatment": "Treatment",
+    "colDate": "Date",
+    "colStatus": "Status",
+    "statusConfirmed": "Confirmed"
+  },
   "services": {
     "title": "Treatments",
     "subtitle": "Advanced aesthetic solutions — curated for your luminous goals.",
@@ -200,6 +216,7 @@
     "sendMessage": "Send Message",
     "name": "Full Name",
     "message": "Your Message",
-    "send": "Send"
+    "send": "Send",
+    "phonePlaceholder": "07xxxxxxxx"
   }
 }

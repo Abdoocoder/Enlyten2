@@ -70,7 +70,7 @@ const Contact = () => {
                 </div>
                 <div className="form-group">
                   <label className="form-label label-medium">{t('contact.phone')}</label>
-                  <input className="form-input" type="tel" placeholder="07xxxxxxxx" />
+                  <input className="form-input" type="tel" placeholder={t('contact.phonePlaceholder')} />
                 </div>
                 <div className="form-group">
                   <label className="form-label label-medium">{t('contact.message')}</label>

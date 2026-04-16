@@ -103,11 +103,11 @@ const Layout = ({ children }) => {
             </div>
             <div className="footer-group">
               <span className="footer-label">{t('footer.phone', 'Phone')}</span>
-              <a href="tel:0770300173" className="footer-link">07 7030 0173</a>
+              <a href="tel:0770300173" className="footer-link">{t('footer.phone')}</a>
             </div>
             <div className="footer-group">
               <span className="footer-label">{t('footer.social')}</span>
-              <a href="https://www.facebook.com/p/Enlyten2-laser-center-100044632491039/" target="_blank" rel="noopener noreferrer" className="footer-link">Facebook</a>
+              <a href="https://www.facebook.com/p/Enlyten2-laser-center-100044632491039/" target="_blank" rel="noopener noreferrer" className="footer-link">{t('common.facebook')}</a>
             </div>
           </div>
         </div>

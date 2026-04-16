@@ -178,6 +178,21 @@
     "back": "رجوع",
     "loading": "جاري التحميل..."
   },
+  "admin": {
+    "title": "لوحة تحكم المشرف",
+    "subtitle": "أداء العيادة والإدارة",
+    "revenue": "الإيرادات الشهرية",
+    "revenueTrend": "+12% عن الشهر الماضي",
+    "patients": "المرضى النشطون",
+    "totalTreatments": "إجمالي العلاجات",
+    "recentAppointments": "المواعيد الأخيرة",
+    "viewAll": "عرض الكل",
+    "colPatient": "المريض",
+    "colTreatment": "العلاج",
+    "colDate": "التاريخ",
+    "colStatus": "الحالة",
+    "statusConfirmed": "مؤكد"
+  },
   "services": {
     "title": "العلاجات",
     "subtitle": "حلول تجميلية متقدمة — مصممة لأهدافك المضيئة.",
@@ -200,6 +215,7 @@
     "sendMessage": "أرسل رسالة",
     "name": "الاسم الكامل",
     "message": "رسالتك",
-    "send": "إرسال"
+    "send": "إرسال",
+    "phonePlaceholder": "07xxxxxxxx"
   }
 }

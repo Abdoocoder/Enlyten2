@@ -1,28 +1,31 @@
 import React from 'react';
+import { useTranslation } from 'react-i18next';
 import './Admin.css';
 import Card from '../components/UI/Card/Card';
 import Button from '../components/UI/Button/Button';
 
 const Admin = () => {
+  const { t } = useTranslation();
+
   return (
     <div className="admin-page page-container">
       <header className="admin-header section">
-        <h1 className="headline-medium">Admin Dashboard</h1>
-        <p className="body-large">Clinic Performance & Management</p>
+        <h1 className="headline-medium">{t('admin.title')}</h1>
+        <p className="body-large">{t('admin.subtitle')}</p>
       </header>
 
       <div className="admin-stats section">
         <Card variant="white" className="stat-item">
-          <span className="label-medium">Monthly Revenue</span>
-          <p className="headline-medium">$42,500</p>
-          <span className="trend positive">+12% from last month</span>
+          <span className="label-medium">{t('admin.revenue')}</span>
+          <p className="headline-medium">42,500 JD</p>
+          <span className="trend positive">{t('admin.revenueTrend')}</span>
         </Card>
         <Card variant="white" className="stat-item">
-          <span className="label-medium">Active Patients</span>
+          <span className="label-medium">{t('admin.patients')}</span>
           <p className="headline-medium">1,240</p>
         </Card>
         <Card variant="white" className="stat-item">
-          <span className="label-medium">Total Treatments</span>
+          <span className="label-medium">{t('admin.totalTreatments')}</span>
           <p className="headline-medium">3,890</p>
         </Card>
       </div>
@@ -30,16 +33,16 @@ const Admin = () => {
       <div className="admin-content section">
         <Card variant="white" className="recent-appointments full-width">
           <div className="card-header">
-            <h2 className="headline-small">Recent Appointments</h2>
-            <Button variant="secondary">View All</Button>
+            <h2 className="headline-small">{t('admin.recentAppointments')}</h2>
+            <Button variant="secondary">{t('admin.viewAll')}</Button>
           </div>
           <table className="admin-table">
             <thead>
               <tr>
-                <th className="label-medium">Patient</th>
-                <th className="label-medium">Treatment</th>
-                <th className="label-medium">Date</th>
-                <th className="label-medium">Status</th>
+                <th className="label-medium">{t('admin.colPatient')}</th>
+                <th className="label-medium">{t('admin.colTreatment')}</th>
+                <th className="label-medium">{t('admin.colDate')}</th>
+                <th className="label-medium">{t('admin.colStatus')}</th>
               </tr>
             </thead>
             <tbody>
@@ -48,7 +51,7 @@ const Admin = () => {
                   <td className="body-medium">Alex Johnson</td>
                   <td className="body-medium">Laser Genesis</td>
                   <td className="body-medium">April 14, 11:00 AM</td>
-                  <td><span className="status-badge">Confirmed</span></td>
+                  <td><span className="status-badge">{t('admin.statusConfirmed')}</span></td>
                 </tr>
               ))}
             </tbody>

@@ -7,8 +7,9 @@ import { Link } from 'react-router-dom';
 import mockData from '../data/mockData.json';
 
 const Home = () => {
-  const { t } = useTranslation();
+  const { t, i18n } = useTranslation();
   const { treatments } = mockData;
+  const isAr = i18n.language === 'ar';
 
   const stats = [
     { value: t('home.stats.clients.value'), label: t('home.stats.clients.label') },
@@ -90,10 +91,10 @@ const Home = () => {
                   }
                 </div>
                 <div className="treatment-info-well">
-                  <h3 className="card-title">{treatment.name}</h3>
-                  <p className="body-medium treatment-description">{treatment.description}</p>
+                  <h3 className="card-title">{isAr ? (treatment.name_ar || treatment.name) : treatment.name}</h3>
+                  <p className="body-medium treatment-description">{isAr ? (treatment.description_ar || treatment.description) : treatment.description}</p>
                   <div className="treatment-footer">
-                    <span className="treatment-price">${treatment.price}</span>
+                    <span className="treatment-price">{treatment.price} JD</span>
                     <Link to="/book" className="pill-link">{t('home.treatments.bookNow')}</Link>
                   </div>
                 </div>
