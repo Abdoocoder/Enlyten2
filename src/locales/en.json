@@ -12,7 +12,7 @@
   "home": {
     "hero": {
       "title": "Enlyten2 Laser Center",
-      "subtitle": "Looking forward, Enlyten Medical Technologies is planning to reinforce its position in the marketplace.",
+      "subtitle": "State-of-the-art laser and aesthetic treatments in the heart of Madaba, Jordan — where science meets beauty.",
       "cta": "Discover Treatments",
       "secondaryCta": "Meet the Team"
     },
@@ -33,13 +33,41 @@
       "title": "Curated Treatments",
       "subtitle": "Advanced aesthetic solutions tailored to your luminous goals.",
       "bookNow": "Book Now"
+    },
+    "stats": {
+      "clients": { "value": "500+", "label": "Happy Clients" },
+      "treatments": { "value": "10+", "label": "Treatments Offered" },
+      "years": { "value": "5", "label": "Years of Excellence" },
+      "satisfaction": { "value": "98%", "label": "Satisfaction Rate" }
+    },
+    "cta": {
+      "title": "Experience the Transformation",
+      "button": "Book Your Consultation"
     }
   },
   "footer": {
-    "tagline": "Enlyten Medical Technologies",
+    "tagline": "Live The Life Of Youth And Beauty",
     "address": "Address",
-    "location": "Madaba, Jordan",
-    "social": "Social",
-    "rights": "© 2024 Enlyten2 Laser Center. All Rights Reserved."
+    "location": "Western Road, Al-Muhafaza Street, Madaba, Jordan",
+    "phone": "07 7030 0173",
+    "hours": "Always Open",
+    "social": "Follow Us",
+    "rights": "© 2025 Enlyten2 Laser Center. All Rights Reserved."
+  },
+  "contact": {
+    "title": "Contact Us",
+    "subtitle": "We're always here for you",
+    "phone": "Phone",
+    "phoneValue": "07 7030 0173",
+    "address": "Address",
+    "addressValue": "Western Road, Al-Muhafaza Street, Jordan Kuwait Bank Building, next to Al-Anbatawy Sweets, Madaba, Jordan",
+    "hours": "Working Hours",
+    "hoursValue": "Always Open",
+    "email": "Email",
+    "doctors": "Our Doctors",
+    "sendMessage": "Send Message",
+    "name": "Full Name",
+    "message": "Your Message",
+    "send": "Send"
   }
 }

@@ -1,56 +1,138 @@
 {
   "company": {
-    "name": "Enlyten2",
-    "tagline": "Experience the Art of Radiance",
-    "philosophy": "At Enlyten2, we believe skin is the canvas of your confidence. Our philosophy merges state-of-the-art laser technology with a boutique approach to skincare. We don't just treat; we curate."
+    "name": "Enlyten2 Laser Center",
+    "tagline": "Live The Life Of Youth And Beauty",
+    "philosophy": "At Enlyten2, we believe skin is the canvas of your confidence. Our philosophy merges state-of-the-art laser technology with a boutique approach to skincare. We don't just treat; we curate.",
+    "phone": "07 7030 0173",
+    "email": "info@enlyten2.com",
+    "facebook": "Enlyten2 laser center",
+    "hours": "Always Open",
+    "address": "الطريق الغربي، شارع المحافظة، بعمارة بنك الأردني الكويتي، بجانب حلويات العنبتاوي، مادبا، الأردن",
+    "address_en": "Western Road, Al-Muhafaza Street, Jordan Kuwait Bank Building, next to Al-Anbatawy Sweets, Madaba, Jordan"
   },
+  "doctors": [
+    {
+      "id": "dr-mouawia",
+      "name": "Dr. Mouawia Al-Rawashdeh",
+      "name_ar": "د. معاوية الرواشدة",
+      "specialty": "Laser & Dermatology",
+      "specialty_ar": "الليزر والجلدية"
+    },
+    {
+      "id": "dr-ruba",
+      "name": "Dr. Ruba Hourani",
+      "name_ar": "د. ربى الحوراني",
+      "specialty": "Aesthetic Medicine",
+      "specialty_ar": "الطب التجميلي",
+      "phone1": "0775900520",
+      "phone2": "0770000141"
+    }
+  ],
   "treatments": [
     {
-      "id": "laser-genesis",
-      "name": "Laser Genesis",
-      "description": "Even out skin tone and diminish pigmentation with zero downtime.",
-      "duration": "60 Minutes",
-      "price": 250,
+      "id": "laser-hair-removal",
+      "name": "Laser Hair Removal",
+      "name_ar": "إزالة الشعر بالليزر",
+      "description": "Advanced laser hair removal using ENLYTEN DIODE, ALEX, and EVO technologies — highly effective with minimal pain.",
+      "description_ar": "إزالة الشعر بأحدث تقنيات الليزر بجهاز ENLYTEN DIODE وتقنية ALEX وجهاز EVO بفاعلية عالية وأقل ألم.",
+      "duration": "30–60 Min",
+      "price": 80,
       "category": "Laser"
     },
     {
-      "id": "hydrafacial",
-      "name": "HydraFacial Elite",
-      "description": "Our signature hydra-treatment for instant luminosity.",
-      "duration": "45 Minutes",
-      "price": 180,
-      "category": "Advanced Skin Care"
-    },
-    {
-      "id": "chemical-peel",
-      "name": "Chemical Peel",
-      "description": "Revitalize your skin's cellular structure for a lasting, natural glow.",
-      "duration": "30 Minutes",
-      "price": 120,
-      "category": "Advanced Skin Care"
-    },
-    {
-      "id": "botox",
-      "name": "Botox & Fillers",
-      "description": "Enhance your natural features with expert injectable treatments.",
-      "duration": "30 Minutes",
-      "price": 400,
+      "id": "filler-botox",
+      "name": "Filler & Botox",
+      "name_ar": "حقن الفلير والبوتكس",
+      "description": "Expert filler and botox injections to smooth wrinkles, lift eyebrows, and enhance lips and cheeks.",
+      "description_ar": "حقن الفلير والبوتكس لإزالة خطوط التجاعيد، نفخ الخدود، الشفاه، ورفع الحاجب.",
+      "duration": "30 Min",
+      "price": 150,
       "category": "Injectables"
+    },
+    {
+      "id": "plasma-mesotherapy",
+      "name": "Plasma & Mesotherapy",
+      "name_ar": "حقن البلازما والميزوثيرابي",
+      "description": "Latest scientific techniques for skin tightening, anti-aging, freckle removal, and pigmentation treatment.",
+      "description_ar": "أحدث التقنيات العلمية لإزالة التجاعيد وشد البشرة وإزالة الكلف والنمش وتصبغات الجلد دون آثار جانبية.",
+      "duration": "45 Min",
+      "price": 120,
+      "category": "Injectables"
+    },
+    {
+      "id": "cryolipolysis",
+      "name": "Cryolipolysis Body Sculpting",
+      "name_ar": "تكسير الدهون وتشكيل الجسم",
+      "description": "Non-surgical fat reduction and body shaping using the latest Cryo device.",
+      "description_ar": "تكسير الدهون ونحت وتشكيل جميع مناطق الجسم بأحدث جهاز Cryo Lipolysis.",
+      "duration": "60 Min",
+      "price": 200,
+      "category": "Body"
+    },
+    {
+      "id": "hifu-ulthera",
+      "name": "HIFU / Ulthera Face Lift",
+      "name_ar": "شد الوجه والرقبة بجهاز ULTHERA",
+      "description": "Non-surgical face and neck lifting using ULTHERA (HIFU) — visible results in a single session.",
+      "description_ar": "شد البشرة وإزالة التجاعيد للوجه والجسم من خلال جهاز ULTHERA (HIFU) بجلسة واحدة فقط.",
+      "duration": "60 Min",
+      "price": 350,
+      "category": "Anti-Aging"
+    },
+    {
+      "id": "skin-care",
+      "name": "Advanced Skin Care",
+      "name_ar": "العناية بالبشرة",
+      "description": "Deep cleansing, whitening, dark spot removal, and acne scar treatment. Includes Hydra, Peeling, Scrub & Aqua Glo.",
+      "description_ar": "تنظيف البشرة وإزالة الرؤوس السوداء والبيضاء، تبييض وتفتيح المناطق الداكنة، علاج آثار حب الشباب. Hydra · Peeling · Scrub · Aqua Glo.",
+      "duration": "45 Min",
+      "price": 90,
+      "category": "Skin Care"
+    },
+    {
+      "id": "prp-hair",
+      "name": "PRP Hair Treatment",
+      "name_ar": "حقن البلازما لإعادة نمو الشعر",
+      "description": "Platelet-rich plasma injections to restore hair growth and prevent hair loss — for men and women.",
+      "description_ar": "حقن البلازما لإعادة نمو الشعر ومنع تساقطه للرجال والنساء.",
+      "duration": "45 Min",
+      "price": 130,
+      "category": "Hair"
+    },
+    {
+      "id": "carbon-peeling",
+      "name": "Carbon Laser Peel",
+      "name_ar": "التقشير الكربوني",
+      "description": "Deep carbon peeling to brighten skin tone, minimize pores, and restore youthful radiance.",
+      "description_ar": "التقشير الكربوني لتفتيح البشرة، تضييق المسام، وإعادة الإشراق والشباب للبشرة.",
+      "duration": "30 Min",
+      "price": 100,
+      "category": "Laser"
     }
   ],
   "gallery": [
     {
-      "treatment": "Laser Toning",
-      "before": "path/to/before1.jpg",
-      "after": "path/to/after1.jpg",
-      "result": "Diminished melasma and improved texture after 3 sessions."
+      "treatment": "Laser Hair Removal",
+      "before": "/path/before-laser.jpg",
+      "after": "/path/after-laser.jpg",
+      "result": "Smooth, hair-free skin after 3 sessions using ENLYTEN DIODE technology."
+    },
+    {
+      "treatment": "Carbon Peeling",
+      "before": "/path/before-carbon.jpg",
+      "after": "/path/after-carbon.jpg",
+      "result": "Visibly brighter and tighter skin after one session."
     }
   ],
   "clinics": [
     {
-      "name": "Central Plaza Clinic",
-      "address": "123 Radiance Blvd, City Center",
-      "phone": "+1 (555) 123-4567"
+      "name": "Enlyten2 Laser Center",
+      "name_ar": "مركز إنلايتن 2 ليزر",
+      "address": "Western Road, Al-Muhafaza Street, Jordan Kuwait Bank Building, Madaba, Jordan",
+      "address_ar": "الطريق الغربي، شارع المحافظة، بعمارة بنك الأردني الكويتي، بجانب حلويات العنبتاوي، مادبا",
+      "phone": "07 7030 0173",
+      "hours": "Always Open",
+      "hours_ar": "مفتوح دائماً"
     }
   ]
 }
