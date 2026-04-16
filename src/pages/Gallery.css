@@ -71,8 +71,8 @@
   letter-spacing: 0.05em;
   color: var(--logo-pink);
   z-index: 2;
-  backdrop-filter: blur(4px);
   -webkit-backdrop-filter: blur(4px);
+  backdrop-filter: blur(4px);
 }
 
 .gallery-tile-info {
@@ -106,7 +106,7 @@
   }
   
   .gallery-hero-v2 {
-    min-height: auto;
+    min-height: 0;
     padding: var(--spacing-huge) 0;
   }
 }
