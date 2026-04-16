@@ -1,0 +1,134 @@
+{
+  "master": {
+    "tasks": [
+      {
+        "id": 1,
+        "title": "Sync CLAUDE.md with Laser Glow design system",
+        "description": "Update CLAUDE.md to reflect the current 'Laser Glow + Apple-inspired' design system. Remove all Luminous Canvas (gold/ivory) references and document the correct CSS tokens, typography rules, and section rhythm (black ↔ light-gray alternation).",
+        "status": "done",
+        "priority": "high",
+        "dependencies": [],
+        "subtasks": [
+          { "id": "1.1", "title": "Update color token documentation", "status": "done" },
+          { "id": "1.2", "title": "Update typography documentation to Inter + Cairo", "status": "done" },
+          { "id": "1.3", "title": "Document Apple section-rhythm utility classes", "status": "done" }
+        ]
+      },
+      {
+        "id": 2,
+        "title": "Cinematic Home Page overhaul",
+        "description": "Redesign the Home page using the cinematic Apple-inspired section rhythm: alternating full-bleed black (section-dark) and light-gray (section-light) sections. Hero: black bg, 56px headline, laser-gradient glow on brand name, two pill CTAs. Philosophy: light-gray, stats grid. Treatments: black section, card grid. CTA strip: light-gray.",
+        "status": "in-progress",
+        "priority": "high",
+        "dependencies": [1],
+        "subtasks": [
+          { "id": "2.1", "title": "Rewrite Home.jsx with cinematic section structure", "status": "in-progress" },
+          { "id": "2.2", "title": "Rewrite Home.css for full-bleed sections and Apple rhythm", "status": "in-progress" },
+          { "id": "2.3", "title": "Generate premium hero clinic image asset", "status": "pending" },
+          { "id": "2.4", "title": "Test in EN (LTR) and AR (RTL)", "status": "pending" }
+        ]
+      },
+      {
+        "id": 3,
+        "title": "Services page — Apple product-grid layout",
+        "description": "Redesign the Services page as an Apple-style product catalogue. Each service is a tile: image on #f5f5f7, service name as card-title (28px, weight 400), description at 14px, price badge, and pill CTA. Two-up → three-up grid depending on viewport.",
+        "status": "pending",
+        "priority": "high",
+        "dependencies": [2],
+        "subtasks": [
+          { "id": "3.1", "title": "Rewrite Services.jsx with tile-based layout", "status": "pending" },
+          { "id": "3.2", "title": "Rewrite Services.css", "status": "pending" },
+          { "id": "3.3", "title": "Add category filter strip", "status": "pending" }
+        ]
+      },
+      {
+        "id": 4,
+        "title": "Booking flow — high-trust minimal UI",
+        "description": "Polish the Booking page to feel premium and trustworthy. Form fields with laser-glow focus states, step indicator, confirmation animation. Ensure RLS-safe Supabase insert pattern.",
+        "status": "pending",
+        "priority": "high",
+        "dependencies": [3],
+        "subtasks": [
+          { "id": "4.1", "title": "Add step indicator (1. Select Service → 2. Date/Time → 3. Confirm)", "status": "pending" },
+          { "id": "4.2", "title": "Style form inputs with laser-glow focus ring", "status": "pending" },
+          { "id": "4.3", "title": "Add success animation on booking submit", "status": "pending" }
+        ]
+      },
+      {
+        "id": 5,
+        "title": "Gallery — cinematic before/after showcase",
+        "description": "Redesign the Gallery page with masonry or publication-style layout. Before/after slider on image pairs. Dark section backgrounds, no borders on cards.",
+        "status": "pending",
+        "priority": "medium",
+        "dependencies": [2],
+        "subtasks": [
+          { "id": "5.1", "title": "Implement before/after slider component", "status": "pending" },
+          { "id": "5.2", "title": "Masonry layout for gallery grid", "status": "pending" }
+        ]
+      },
+      {
+        "id": 6,
+        "title": "Auth page — glassmorphism treatment",
+        "description": "Polish Auth (sign in / sign up) to use a full-bleed background image with a glassmorphism card overlay. Laser-glow accents on active input fields. Smooth tab transition animation.",
+        "status": "pending",
+        "priority": "medium",
+        "dependencies": [2],
+        "subtasks": [
+          { "id": "6.1", "title": "Full-bleed background with blur overlay", "status": "pending" },
+          { "id": "6.2", "title": "Glassmorphism card for the form", "status": "pending" },
+          { "id": "6.3", "title": "Laser-glow input focus animation", "status": "pending" }
+        ]
+      },
+      {
+        "id": 7,
+        "title": "Mobile responsiveness audit",
+        "description": "Audit all pages at 375px, 428px (mobile), 768px (tablet). Fix collapsing grid, nav hamburger menu, hero headline scaling (56px → 40px → 28px).",
+        "status": "pending",
+        "priority": "high",
+        "dependencies": [2, 3, 4, 5, 6],
+        "subtasks": [
+          { "id": "7.1", "title": "Implement mobile hamburger nav", "status": "pending" },
+          { "id": "7.2", "title": "Hero headline responsive scaling", "status": "pending" },
+          { "id": "7.3", "title": "Touch target audit (min 44×44px)", "status": "pending" }
+        ]
+      },
+      {
+        "id": 8,
+        "title": "RTL Arabic layout verification",
+        "description": "Switch to Arabic and verify all pages render correctly: text direction, icon mirroring, logical CSS properties (margin-inline-start vs margin-left), Cairo font loading.",
+        "status": "pending",
+        "priority": "high",
+        "dependencies": [7],
+        "subtasks": [
+          { "id": "8.1", "title": "Fix any component that relies on left/right instead of logical properties", "status": "pending" },
+          { "id": "8.2", "title": "Verify Cairo font renders correctly at all type scales", "status": "pending" }
+        ]
+      },
+      {
+        "id": 9,
+        "title": "Performance & SEO polish",
+        "description": "Add proper meta tags to all pages, lazy-load below-fold images, ensure build produces zero warnings (chunk size, missing keys). Add Open Graph tags.",
+        "status": "pending",
+        "priority": "medium",
+        "dependencies": [7],
+        "subtasks": [
+          { "id": "9.1", "title": "Add <title> and meta description to all pages via react-helmet or document.title", "status": "pending" },
+          { "id": "9.2", "title": "Lazy-load gallery and treatment images", "status": "pending" },
+          { "id": "9.3", "title": "Code-split large routes with dynamic import()", "status": "pending" }
+        ]
+      },
+      {
+        "id": 10,
+        "title": "Admin panel — data management UI",
+        "description": "Upgrade Admin.jsx to properly manage services (create/edit/delete) and bookings (update status). Data table with search/filter, confirmation dialogs.",
+        "status": "pending",
+        "priority": "low",
+        "dependencies": [4],
+        "subtasks": [
+          { "id": "10.1", "title": "Services CRUD table", "status": "pending" },
+          { "id": "10.2", "title": "Bookings management with status toggle", "status": "pending" }
+        ]
+      }
+    ]
+  }
+}

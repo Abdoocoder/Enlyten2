@@ -1,99 +1,141 @@
+/* Experience Layout V2 */
 .experience-page {
-  overflow-x: hidden;
+  background-color: var(--black);
 }
 
-.experience-hero {
+/* Split Hero */
+.experience-hero-v2 {
+  padding: 0 !important;
+  min-height: 100vh;
+}
+
+.experience-hero-grid {
   display: grid;
-  grid-template-columns: 1fr 1fr;
-  min-height: 90vh;
-  align-items: center;
+  grid-template-columns: 1.2fr 1fr;
+  min-height: 100vh;
 }
 
-.experience-image-side {
-  height: 100%;
+.experience-image-well {
+  position: relative;
+  height: 100vh;
+  overflow: hidden;
 }
 
-.experience-image-side img {
+.full-bleed-img {
   width: 100%;
   height: 100%;
   object-fit: cover;
 }
 
-.experience-content-side {
-  padding: var(--spacing-xxl);
+.img-gloss {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: linear-gradient(90deg, rgba(0,0,0,0.4) 0%, rgba(0,0,0,0) 50%);
+  pointer-events: none;
+}
+
+.experience-text-well {
+  display: flex;
+  align-items: center;
+  padding: var(--spacing-huge) var(--spacing-xxl);
+  background-color: var(--black);
+}
+
+.text-dim {
+  color: rgba(255, 255, 255, 0.6);
+  margin: var(--spacing-xl) 0;
+}
+
+.experience-cta-group {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-xl);
+  margin-top: var(--spacing-xl);
+}
+
+/* Protocol Narrative */
+.the-protocol {
+  padding: var(--spacing-section) 0;
+}
+
+.protocol-timeline {
   display: flex;
   flex-direction: column;
-  justify-content: center;
-  background-color: var(--surface-container-low);
+  gap: var(--spacing-huge);
+  max-width: 800px;
+  margin: var(--spacing-huge) auto 0;
 }
 
-.luxury-label {
-  color: var(--primary);
-  margin-bottom: var(--spacing-md);
-  letter-spacing: 0.2em;
+.protocol-step {
+  display: grid;
+  grid-template-columns: 120px 1fr;
+  text-align: left;
+  align-items: center;
+  gap: var(--spacing-xl);
 }
 
-.experience-content-side p {
-  margin: var(--spacing-xl) 0;
-  max-width: 500px;
+.protocol-num {
+  font-family: var(--font-display);
+  font-size: 5rem;
+  font-weight: 600;
+  color: var(--logo-pink);
+  opacity: 0.15;
+  line-height: 1;
 }
 
-.experience-actions {
-  display: flex;
-  gap: var(--spacing-md);
+.protocol-info h3 {
+  margin-bottom: var(--spacing-xs);
 }
 
-.experience-philosophy {
-    padding-top: var(--spacing-huge);
-    padding-bottom: var(--spacing-huge);
+/* Philosophy Banner */
+.philosophy-banner {
+  padding: var(--spacing-cinematic) 0;
+  background-color: var(--background-alt);
+}
+
+.max-width-small {
+  max-width: 700px;
+  margin: 0 auto;
+}
+
+/* Animations */
+.animation-fade-in {
+  animation: reveal 1.2s cubic-bezier(0.2, 0.8, 0.2, 1) forwards;
+}
+
+@keyframes reveal {
+  from { opacity: 0; transform: scale(1.05); }
+  to { opacity: 1; transform: scale(1); }
+}
+
+@media (max-width: 1024px) {
+  .experience-hero-grid {
+    grid-template-columns: 1fr;
+  }
+  
+  .experience-image-well {
+    height: 60vh;
+  }
+  
+  .experience-hero-v2 {
+    min-height: auto;
+  }
+  
+  .experience-text-well {
+    padding: var(--spacing-huge) var(--spacing-lg);
+  }
+}
+
+@media (max-width: 768px) {
+  .protocol-step {
+    grid-template-columns: 1fr;
     text-align: center;
-}
-
-.philosophy-steps {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: var(--spacing-xxl);
-    margin-top: var(--spacing-huge);
-}
-
-.step {
-    padding: var(--spacing-xl);
-    position: relative;
-}
-
-.step-num {
-    font-family: var(--font-display);
-    font-size: 4rem;
-    color: var(--primary-container);
-    opacity: 0.2;
-    position: absolute;
-    top: 0;
-    left: 50%;
-    transform: translateX(-50%);
-    z-index: 1;
-}
-
-.step h4, .step p {
-    position: relative;
-    z-index: 2;
-}
-
-.step h4 {
-    margin-bottom: var(--spacing-md);
-    margin-top: var(--spacing-xl);
-}
-
-/* Mobile */
-@media (max-width: 968px) {
-    .experience-hero {
-        grid-template-columns: 1fr;
-    }
-    
-    .experience-image-side {
-        height: 400px;
-    }
-    
-    .philosophy-steps {
-        grid-template-columns: 1fr;
-    }
+  }
+  
+  .protocol-num {
+    font-size: 3rem;
+  }
 }

@@ -1,18 +1,28 @@
-import React from 'react';
+import React, { useState, useMemo } from 'react';
 import { useNavigate } from 'react-router-dom';
 import './Services.css';
 import Card from '../components/UI/Card/Card';
 import Button from '../components/UI/Button/Button';
 import { useServices } from '../hooks/useDatabase';
 import { useAuth } from '../contexts/AuthContext';
+import { useTranslation } from 'react-i18next';
 
 const Services = () => {
   const { services, loading, error } = useServices();
   const { isAuthenticated } = useAuth();
+  const { t } = useTranslation();
   const navigate = useNavigate();
+  const [selectedCategory, setSelectedCategory] = useState('All');
 
-  // Group services by category
-  const categories = [...new Set(services.map(s => s.category))];
+  const categories = useMemo(() => {
+    const cats = [...new Set(services.map(s => s.category))];
+    return ['All', ...cats];
+  }, [services]);
+
+  const filteredServices = useMemo(() => {
+    if (selectedCategory === 'All') return services;
+    return services.filter(s => s.category === selectedCategory);
+  }, [services, selectedCategory]);
 
   const handleBooking = (serviceId) => {
     if (!isAuthenticated) {
@@ -24,71 +34,92 @@ const Services = () => {
 
   return (
     <div className="services-page">
-      <section className="services-hero">
-        <div className="section-container">
-          <h1 className="display-large">Our Services</h1>
-          <p className="body-large">Precision meets luxury. Discover our curated range of aesthetic transformations designed for your unique skin.</p>
+      {/* Services Hero - Immersive Header */}
+      <section className="viewport-section section-dark services-hero">
+        <div className="content-well text-center">
+          <h1 className="hero-headline">{t('nav.treatments')}</h1>
+          <p className="body-intro hero-subtitle">
+            Luxury meets clinical precision. Explore our curated range of aesthetic treatments.
+          </p>
         </div>
       </section>
 
-      {loading && (
-        <section className="loading-section">
-          <div className="section-container">
-            <p className="body-medium">Loading services...</p>
+      {/* Category Filter - The Apple Strip */}
+      <div className="category-strip-container">
+        <div className="content-well">
+          <div className="category-strip">
+            {categories.map(cat => (
+              <button 
+                key={cat}
+                className={`category-pill ${selectedCategory === cat ? 'active' : ''}`}
+                onClick={() => setSelectedCategory(cat)}
+              >
+                {cat}
+              </button>
+            ))}
           </div>
-        </section>
-      )}
+        </div>
+      </div>
 
-      {error && (
-        <section className="error-section">
-          <div className="section-container">
-            <p className="body-medium error-message">Error loading services: {error}</p>
-          </div>
-        </section>
-      )}
-
-      {!loading && categories.length > 0 && categories.map(category => (
-        <section key={category} className="service-category">
-          <div className="section-container">
-            <h2 className="headline-medium category-title">{category}</h2>
-            <div className="services-grid">
-              {services
-                .filter(s => s.category === category)
-                .map(service => (
-                  <Card key={service.id} variant="white" className="service-card">
-                    {service.image_url && (
-                      <img src={service.image_url} alt={service.name} className="service-image" />
-                    )}
-                    <div className="service-content">
-                      <h3 className="headline-small">{service.name}</h3>
-                      <p className="body-medium">{service.description}</p>
-                      <div className="service-details">
-                        {service.duration_minutes && (
-                          <span className="detail-item">{service.duration_minutes} mins</span>
-                        )}
-                        <span className="detail-item">${service.price}</span>
-                      </div>
-                    </div>
-                    <Button 
-                      variant="primary"
-                      onClick={() => handleBooking(service.id)}
-                    >
-                      Book Appointment
-                    </Button>
-                  </Card>
-                ))}
+      <main className="viewport-section section-white services-content">
+        <div className="content-well">
+          {loading && (
+            <div className="loading-state centered">
+              <div className="laser-spinner"></div>
+              <p className="body-medium">Curating your experience...</p>
             </div>
-          </div>
-        </section>
-      ))}
+          )}
 
-      {!loading && services.length === 0 && !error && (
-        <section className="empty-section">
-          <div className="section-container">
-            <p className="body-medium">No services available at the moment.</p>
-          </div>
-        </section>
-      )}
+          {error && (
+            <div className="error-state centered">
+              <p className="body-medium error-message">Unable to load services at this time.</p>
+            </div>
+          )}
+
+          {!loading && !error && (
+            <div className="grid-3 services-grid">
+              {filteredServices.map(service => (
+                <Card key={service.id} variant="white" className="service-tile" padded={false}>
+                  <div className="service-image-well">
+                    {service.image_url ? (
+                        <img src={service.image_url} alt={service.name} className="service-image" />
+                    ) : (
+                        <div className="service-image-placeholder"></div>
+                    )}
+                    <span className="service-category-tag">{service.category}</span>
+                  </div>
+                  
+                  <div className="service-tile-content">
+                    <h3 className="card-title">{service.name}</h3>
+                    <p className="body-medium service-desc">{service.description}</p>
+                    
+                    <div className="service-tile-footer">
+                      <div className="service-meta">
+                        {service.duration_minutes && (
+                          <span className="meta-item">{service.duration_minutes} min</span>
+                        )}
+                        <span className="price-label">${service.price}</span>
+                      </div>
+                      <button 
+                         className="pill-link"
+                         onClick={() => handleBooking(service.id)}
+                      >
+                        {t('home.treatments.bookNow')}
+                      </button>
+                    </div>
+                  </div>
+                </Card>
+              ))}
+            </div>
+          )}
+
+          {!loading && filteredServices.length === 0 && !error && (
+            <div className="empty-state centered">
+              <p className="body-medium">No treatments found in this category.</p>
+            </div>
+          )}
+        </div>
+      </main>
     </div>
   );
 };

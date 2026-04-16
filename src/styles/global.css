@@ -96,25 +96,59 @@ button {
 
 /* Cinematic Typography */
 .hero-headline {
-  font-size: 3.5rem; /* 56px */
+  font-size: clamp(2.5rem, 6vw, 3.5rem); /* 40–56px responsive */
   font-weight: 600;
+  letter-spacing: var(--ls-display);
+  line-height: var(--lh-display);
   margin-bottom: var(--spacing-sm);
 }
 
 .section-headline {
-  font-size: 2.5rem; /* 40px */
+  font-size: clamp(2rem, 4vw, 2.5rem); /* 32–40px responsive */
+  font-weight: 600;
+  letter-spacing: var(--ls-display);
+  line-height: var(--lh-section);
   margin-bottom: var(--spacing-md);
 }
 
 .card-title {
   font-size: 1.75rem; /* 28px */
-  font-weight: 400;
+  font-weight: 600;
+  letter-spacing: var(--ls-display);
+  margin-bottom: var(--spacing-sm);
 }
 
 .body-intro {
   font-size: 1.3125rem; /* 21px */
   font-weight: 400;
   line-height: var(--lh-card);
+}
+
+.body-medium {
+  font-size: 1rem; /* 16px */
+  line-height: var(--lh-body);
+}
+
+.body-small {
+  font-size: 0.875rem; /* 14px */
+  line-height: var(--lh-body);
+}
+
+.label-medium {
+  font-size: 0.75rem; /* 12px */
+  font-weight: 600;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--on-surface-disabled);
+  display: block;
+}
+
+.text-muted {
+  color: var(--on-surface-disabled);
+}
+
+.text-center {
+  text-align: center;
 }
 
 /* Components - The Apple Chrome */
@@ -138,10 +172,21 @@ button {
 
 .pill-link {
   color: var(--link-color);
-  font-size: 1.0625rem;
+  font-size: 1rem;
+  font-weight: 500;
   display: inline-flex;
   align-items: center;
   gap: 4px;
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 0;
+  transition: var(--transition-fast);
+}
+
+.pill-link:hover {
+  opacity: 0.7;
+  text-decoration: none;
 }
 
 .section-dark .pill-link {
@@ -154,6 +199,18 @@ button {
   line-height: 1;
 }
 
+/* Pill button modifier — applies on top of existing Button variant */
+.btn-pill {
+  border-radius: var(--radius-pill) !important;
+  padding-left: 24px !important;
+  padding-right: 24px !important;
+}
+
+.btn-large {
+  padding: 14px 28px !important;
+  font-size: 1.125rem !important;
+}
+
 /* Navigation - Translucent Glass */
 .nav-glass {
   position: sticky;
@@ -162,8 +219,8 @@ button {
   width: 100%;
   height: 48px;
   background-color: var(--glass-bg);
-  backdrop-filter: var(--glass-blur);
   -webkit-backdrop-filter: var(--glass-blur);
+  backdrop-filter: var(--glass-blur);
   display: flex;
   align-items: center;
   border-bottom: 1px solid rgba(255, 255, 255, 0.1);
@@ -171,13 +228,36 @@ button {
 
 /* Depth & Elevation */
 .apple-card {
-  background-color: var(--surface-variant);
+  background-color: var(--white);
   border-radius: var(--radius-lg);
   padding: var(--spacing-xl);
+  border: 1px solid var(--outline-variant);
   transition: var(--transition-apple);
 }
 
 .apple-card:hover {
   box-shadow: var(--shadow-card);
+  transform: translateY(-2px);
+}
+
+/* Gradient text — Laser Glow identity */
+.laser-text {
+  background: var(--laser-gradient);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  display: inline-block;
+  filter: drop-shadow(var(--laser-glow));
+}
+
+/* Eyebrow / overline label */
+.brand-accent {
+  color: var(--logo-pink);
+  font-size: 0.75rem;
+  font-weight: 600;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  display: block;
+  margin-bottom: var(--spacing-sm);
 }
 

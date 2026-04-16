@@ -1,224 +1,220 @@
-.booking-page {
+.booking-hero {
+  min-height: 30vh;
+  justify-content: center;
+  text-align: center;
+  background-color: var(--black);
+}
+
+.step-indicator {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--spacing-md);
+  margin-top: var(--spacing-xl);
+}
+
+.step {
+  font-size: 0.75rem;
+  font-weight: 500;
+  color: rgba(255, 255, 255, 0.4);
+  transition: var(--transition-fast);
+}
+
+.step.active {
+  color: var(--white);
+}
+
+.step-line {
+  width: 40px;
+  height: 1px;
+  background-color: rgba(255, 255, 255, 0.1);
+}
+
+.max-width-small {
+  max-width: 600px;
+  margin: 0 auto;
+}
+
+.booking-step-content {
   padding-bottom: var(--spacing-huge);
 }
 
-.booking-layout {
-  align-items: start;
+.text-center {
+  text-align: center;
+  margin-bottom: var(--spacing-huge);
 }
 
-.booking-subtitle {
-  margin-bottom: var(--spacing-xxl);
-  color: var(--on-surface-variant);
-}
-
-.section-left {
-  grid-column: 1 / span 7;
-}
-
-.section-right {
-  grid-column: 8 / span 5;
-  position: sticky;
-  top: 100px;
-}
-
-/* Form Styles */
-.booking-form {
-  border-radius: var(--radius-xl);
-}
-
-.form-section-title {
-  margin-bottom: var(--spacing-md);
-  margin-top: var(--spacing-xl);
-  color: var(--primary);
-  border-bottom: 1px solid rgba(208, 197, 175, 0.2);
-  padding-bottom: var(--spacing-sm);
-}
-
-.form-section-title:first-of-type {
-  margin-top: 0;
-}
-
-.form-grid {
-  display: grid;
-  grid-template-columns: repeat(2, 1fr);
-  gap: var(--spacing-md);
-}
-
-/* Treatment Selection */
-.treatment-selection {
+/* Step 1: Treatment Tiles */
+.treatment-tiles {
   display: flex;
   flex-direction: column;
-  gap: var(--spacing-sm);
+  gap: var(--spacing-md);
+  margin-bottom: var(--spacing-huge);
 }
 
-.treatment-option {
+.treatment-tile {
+  background-color: var(--white);
+  border: 1px solid var(--outline-variant);
+  border-radius: var(--radius-lg);
+  padding: var(--spacing-lg);
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: var(--spacing-md);
-  background-color: var(--surface-container-highest);
-  border-radius: var(--radius-md);
   cursor: pointer;
-  transition: var(--transition-smooth);
-  border: 1px solid transparent;
+  transition: var(--transition-apple);
 }
 
-.treatment-option:hover {
-  background-color: var(--surface-container-lowest);
+.treatment-tile:hover {
+  border-color: var(--logo-pink);
+  transform: translateY(-2px);
 }
 
-.treatment-option.selected {
-  background-color: var(--surface-container-lowest);
-  border-color: var(--primary-container);
-  box-shadow: 0 4px 12px rgba(115, 92, 0, 0.08);
+.treatment-tile.selected {
+  border-color: var(--logo-pink);
+  background-color: rgba(255, 0, 87, 0.02);
+  box-shadow: var(--shadow-laser);
 }
 
-.text-muted {
-  color: var(--on-surface-variant);
-}
-
-.radio-circle {
+.tile-check {
   width: 20px;
   height: 20px;
   border-radius: 50%;
   border: 2px solid var(--outline-variant);
-  transition: var(--transition-smooth);
+  position: relative;
 }
 
-.treatment-option.selected .radio-circle {
-  border-color: var(--primary-container);
-  border-width: 6px;
+.treatment-tile.selected .tile-check {
+  border-color: var(--logo-pink);
+  background-color: var(--logo-pink);
 }
 
-/* Availability */
-.availability-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(120px, 1fr));
-  gap: var(--spacing-sm);
+.treatment-tile.selected .tile-check::after {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background-color: var(--white);
 }
 
-.time-slot {
-  padding: var(--spacing-sm) var(--spacing-md);
-  background-color: transparent;
-  border: 1px solid var(--outline-variant);
-  border-radius: var(--radius-sm);
-  color: var(--on-surface-variant);
-  font-family: var(--font-body);
-  font-weight: 500;
-  transition: var(--transition-smooth);
-  cursor: pointer;
-}
-
-.time-slot:hover {
-  border-color: var(--primary);
-  color: var(--primary);
-}
-
-.time-slot.selected {
-  background-color: var(--primary-container);
-  border-color: var(--primary);
-  color: var(--on-primary-container);
-}
-
-.time-slot:disabled {
-  opacity: 0.5;
-  cursor: not-allowed;
-}
-
-.notes-input {
-  width: 100%;
-  padding: var(--spacing-md);
-  border: 1px solid var(--outline-variant);
-  border-radius: var(--radius-md);
-  font-family: var(--font-body);
-  font-size: 14px;
-  color: var(--on-surface);
-  resize: vertical;
-}
-
-.notes-input:focus {
-  outline: none;
-  border-color: var(--primary);
-  box-shadow: 0 0 0 3px rgba(115, 92, 0, 0.1);
-}
-
-.selected-service-details {
-  margin: var(--spacing-md) 0;
-  border-left: 3px solid var(--primary);
-  padding-left: var(--spacing-md) !important;
-}
-
-.error-message {
-  background-color: #fce4ec;
-  color: #c2185b;
-  padding: var(--spacing-md);
-  border-radius: 4px;
-  margin-bottom: var(--spacing-md);
-  font-size: 14px;
-  border-left: 4px solid #c2185b;
-}
-
-.form-actions {
-  margin-top: var(--spacing-xxl);
+/* Step 2: Schedule */
+.schedule-grid {
   display: flex;
-  justify-content: flex-end;
+  flex-direction: column;
+  gap: var(--spacing-xxl);
+  margin-bottom: var(--spacing-huge);
 }
 
-/* Right Section */
-.booking-image-wrapper {
-  border-radius: var(--radius-xl);
-  overflow: hidden;
-  margin-bottom: var(--spacing-xl);
-  height: 400px;
-}
-
-.booking-image {
+.apple-date-input {
   width: 100%;
-  height: 100%;
-  object-fit: cover;
-}
-
-.booking-philosophy-card {
-  border-top: 4px solid var(--primary-container);
-}
-
-.booking-philosophy-card h3 {
-  margin-bottom: var(--spacing-sm);
-}
-
-.booking-philosophy-card p {
-  color: var(--on-surface-variant);
-}
-
-.exclusive-perk {
-  margin-top: var(--spacing-lg);
-  padding: var(--spacing-md);
-  background-color: var(--secondary-container);
+  padding: 16px;
+  border: 1px solid var(--outline-variant);
   border-radius: var(--radius-md);
+  font-family: var(--font-body);
+  font-size: 1rem;
+  background-color: var(--white);
+  margin-top: var(--spacing-sm);
 }
 
-.exclusive-perk .label-medium {
-  color: var(--on-secondary-container);
-  margin-bottom: var(--spacing-xs);
-  display: block;
+.time-slots-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: var(--spacing-md);
+  margin-top: var(--spacing-sm);
 }
 
-.exclusive-perk p {
-  color: var(--on-secondary-container);
+.time-pill {
+  padding: 12px;
+  border: 1px solid var(--outline-variant);
+  border-radius: var(--radius-md);
+  background: var(--white);
+  cursor: pointer;
+  transition: var(--transition-fast);
+  font-weight: 500;
 }
 
-/* Mobile */
-@media (max-width: 968px) {
-  .section-left, .section-right {
-    grid-column: span 12;
+.time-pill:hover {
+  border-color: var(--logo-pink);
+}
+
+.time-pill.active {
+  background: var(--laser-gradient);
+  color: var(--white);
+  border: none;
+}
+
+/* Step 3: Confirmation */
+.confirmation-card {
+  padding: var(--spacing-xl);
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-lg);
+  margin-bottom: var(--spacing-huge);
+}
+
+.confirm-row {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.apple-textarea {
+  width: 100%;
+  min-height: 100px;
+  padding: 16px;
+  border: 1px solid var(--outline-variant);
+  border-radius: var(--radius-md);
+  font-family: var(--font-body);
+  resize: vertical;
+  margin-top: var(--spacing-md);
+}
+
+/* Shared */
+.step-actions {
+  display: flex;
+  align-items: center;
+  margin-top: var(--spacing-huge);
+}
+
+.step-actions.centered {
+  justify-content: center;
+}
+
+.step-actions.space-between {
+  justify-content: space-between;
+}
+
+.laser-glow-btn {
+  box-shadow: var(--laser-glow);
+}
+
+.animation-fade-in {
+  animation: fadeIn 0.4s ease-out;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(10px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.error-banner {
+  background-color: rgba(255, 59, 48, 0.1);
+  color: #ff3b30;
+  padding: 16px;
+  border-radius: var(--radius-md);
+  margin-bottom: var(--spacing-xl);
+  text-align: center;
+}
+
+@media (max-width: 768px) {
+  .time-slots-grid {
+    grid-template-columns: repeat(2, 1fr);
   }
   
-  .section-right {
-    order: -1;
-    position: static;
-  }
-  
-  .form-grid {
-    grid-template-columns: 1fr;
+  .step-indicator {
+    flex-wrap: wrap;
   }
 }

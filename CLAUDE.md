@@ -9,9 +9,9 @@
 
 **Enlyten2 Laser Center** is a luxury bilingual (Arabic + English) web application for a premium laser and skincare clinic. The goal is to deliver a world-class digital experience that matches the clinic's high-end brand identity.
 
-- **Version**: 1.0.0
+- **Version**: 1.1.0
 - **Stack**: React 19 · Vite 8 · Vanilla CSS · Supabase · react-i18next
-- **Design System**: "Luminous Canvas" — gold, ivory, blush palette
+- **Design System**: "Laser Glow" — Apple-inspired logic with pink/orange/purple accents
 - **Languages**: Arabic (RTL, default for Arab clients) + English (LTR)
 - **Supabase Project**: `enlyten2lasercenter` (org: `samasoftcode`, region: ap-southeast-1)
 
@@ -77,29 +77,29 @@ src/
 ### Color Tokens (`src/styles/variables.css`)
 
 ```css
---primary: #735c00;                    /* Dark gold — primary actions */
---primary-container: #d4af37;          /* Signature gold — accents, highlights */
---on-primary-container: #241a00;
---secondary-container: #f2dde1;        /* Soft blush / skin tone */
---on-secondary-container: #706064;
---background: #faf9f6;                 /* Warm ivory — page background */
---surface: #faf9f6;
---surface-container-low: #f4f3f1;
---surface-container-lowest: #ffffff;
---surface-container-highest: #e3e2e0;
---on-surface: #1a1c1a;                 /* Near-black text */
---on-surface-variant: #4d4635;
---outline: #7f7663;
---outline-variant: #d0c5af;
+--black: #000000;                      /* Cinematic background */
+--light-gray: #f5f5f7;                /* Info section background */
+--near-black: #1d1d1f;                /* Primary text on light sections */
+--white: #ffffff;
+
+/* Identity - The Laser Glow */
+--logo-pink: #FF0057;
+--logo-orange: #FF7A00;
+--logo-purple: #6A00FF;
+
+/* Roles */
+--primary: var(--logo-pink);
+--background: var(--white);
+--background-dark: var(--black);
+--glass-bg: rgba(0, 0, 0, 0.82);
 ```
 
 ### Typography
 
 | Context | Font | Variable |
 |---|---|---|
-| Display headings (EN) | Noto Serif | `--font-display` |
-| Body text (EN) | Manrope | `--font-body` |
-| All text (AR) | Cairo | `--font-display` / `--font-body` override |
+| Display / Body (EN) | Inter | `--font-display` / `--font-body` |
+| All text (AR) | Cairo | `--font-display-ar` / `--font-body-ar` |
 
 **RTL override** in `global.css`:
 ```css
@@ -112,12 +112,12 @@ src/
 ### Typography Utility Classes
 
 ```css
-.display-large     /* Hero headings */
-.headline-medium   /* Section titles */
-.headline-small    /* Card titles */
-.body-large        /* Primary body copy */
-.body-medium       /* Secondary body copy */
-.label-medium      /* Eyebrow labels / tags */
+.hero-headline     /* 56px, weight 600, tight line-height */
+.section-headline  /* 40px, weight 600 */
+.card-title        /* 28px, weight 400 */
+.body-intro        /* 21px, primary body */
+.body-medium       /* 17px, standard body */
+.label-medium      /* 12px, navigational/labels */
 ```
 
 ### Spacing Scale

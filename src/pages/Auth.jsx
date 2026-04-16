@@ -1,12 +1,12 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import './Auth.css';
 import Input from '../components/UI/Input/Input';
 import Button from '../components/UI/Button/Button';
 import Card from '../components/UI/Card/Card';
-import authBg from '../assets/auth-bg.png';
 import { signUp, signIn } from '../lib/supabase';
 import { useAuth } from '../contexts/AuthContext';
+import { useTranslation } from 'react-i18next';
 
 const Auth = () => {
   const [isLogin, setIsLogin] = useState(true);
@@ -19,9 +19,9 @@ const Auth = () => {
   });
   const navigate = useNavigate();
   const { user } = useAuth();
+  const { t } = useTranslation();
 
-  // Redirect if already logged in
-  React.useEffect(() => {
+  useEffect(() => {
     if (user) {
       navigate('/dashboard');
     }
@@ -43,28 +43,25 @@ const Auth = () => {
       setLoading(true);
       
       if (isLogin) {
-        // Sign in
-        const { data, error: signInError } = await signIn(formData.email, formData.password);
+        const { error: signInError } = await signIn(formData.email, formData.password);
         if (signInError) throw signInError;
         navigate('/dashboard');
       } else {
-        // Sign up
         if (!formData.fullName.trim()) {
           throw new Error('Full name is required');
         }
-        const { data, error: signUpError } = await signUp(
+        const { error: signUpError } = await signUp(
           formData.email,
           formData.password,
           formData.fullName
         );
         if (signUpError) throw signUpError;
-        setFormData({ fullName: '', email: '', password: '' });
         setIsLogin(true);
-        setError(null);
+        setError('Success! Please check your email for verification.');
+        setFormData({ fullName: '', email: '', password: '' });
       }
     } catch (err) {
       setError(err.message || 'Authentication failed');
-      console.error('Auth error:', err);
     } finally {
       setLoading(false);
     }
@@ -72,81 +69,98 @@ const Auth = () => {
 
   return (
     <div className="auth-page">
-      <div className="auth-container">
-        <div className="auth-form-side">
-          <div className="auth-form-wrapper">
-            <h1 className="headline-medium">{isLogin ? 'Welcome Back' : 'Create Account'}</h1>
-            <p className="body-medium text-muted">Join the Enlyten2 community for personalized care.</p>
-            
-            {error && <div className="error-message">{error}</div>}
-            
-            <form className="auth-form" onSubmit={handleSubmit}>
-              {!isLogin && (
-                <Input 
-                  label="Full Name" 
-                  placeholder="Jane Doe"
-                  name="fullName"
-                  value={formData.fullName}
-                  onChange={handleInputChange}
-                  required
-                />
-              )}
-              <Input 
-                label="Email" 
-                type="email" 
-                placeholder="jane@example.com"
-                name="email"
-                value={formData.email}
-                onChange={handleInputChange}
-                required
-              />
-              <Input 
-                label="Password" 
-                type="password" 
-                placeholder="••••••••"
-                name="password"
-                value={formData.password}
-                onChange={handleInputChange}
-                required
-              />
-              
-              <div className="auth-actions">
-                <Button 
-                  variant="primary" 
-                  className="w-full"
-                  disabled={loading}
-                  type="submit"
-                >
-                  {loading ? 'Loading...' : (isLogin ? 'Sign In' : 'Sign Up')}
-                </Button>
-              </div>
-            </form>
+      <section className="viewport-section section-white auth-hero">
+        <div className="content-well max-width-tiny">
+          <div className="auth-card-container animation-fade-in">
+             <div className="text-center">
+                <span className="brand-accent">{isLogin ? 'Member Login' : 'Join Us'}</span>
+                <h1 className="hero-headline small-hero">
+                  {isLogin ? 'Welcome ' : 'Create '}
+                  <span className="laser-text">{isLogin ? 'Back' : 'Profile'}</span>
+                </h1>
+                <p className="body-medium text-muted auth-subtitle">
+                   {isLogin 
+                     ? 'Enter your credentials to access your clinical portal.' 
+                     : 'Begin your clinical journey with precision care.'}
+                </p>
+             </div>
 
-            <div className="auth-toggle">
-              <p className="body-medium">
-                {isLogin ? "Don't have an account?" : "Already have an account?"}
+             {error && (
+               <div className={`auth-banner ${error.includes('Success') ? 'success' : 'error'}`}>
+                 {error}
+               </div>
+             )}
+
+             <Card variant="white" className="apple-card auth-form-card">
+               <form className="auth-form-v2" onSubmit={handleSubmit}>
+                 {!isLogin && (
+                   <div className="form-item">
+                     <label className="label-medium">{t('profile.fullName')}</label>
+                     <input 
+                       className="apple-input"
+                       type="text"
+                       name="fullName"
+                       placeholder="Enter full name"
+                       value={formData.fullName}
+                       onChange={handleInputChange}
+                       required
+                     />
+                   </div>
+                 )}
+                 
+                 <div className="form-item">
+                   <label className="label-medium">{t('common.email')}</label>
+                   <input 
+                     className="apple-input"
+                     type="email"
+                     name="email"
+                     placeholder="example@mail.com"
+                     value={formData.email}
+                     onChange={handleInputChange}
+                     required
+                   />
+                 </div>
+
+                 <div className="form-item">
+                   <label className="label-medium">{t('common.password')}</label>
+                   <input 
+                     className="apple-input"
+                     type="password"
+                     name="password"
+                     placeholder="••••••••"
+                     value={formData.password}
+                     onChange={handleInputChange}
+                     required
+                   />
+                 </div>
+
+                 <div className="auth-footer-actions">
+                    <Button 
+                      variant="primary" 
+                      className="btn-pill btn-large laser-glow-btn w-full"
+                      disabled={loading}
+                      type="submit"
+                    >
+                      {loading ? 'Processing...' : (isLogin ? 'Sign In' : 'Get Started')}
+                    </Button>
+                 </div>
+               </form>
+             </Card>
+
+             <div className="auth-toggle-context text-center">
+                <p className="body-small text-muted">
+                  {isLogin ? "New to the clinic?" : "Already part of the community?"}
+                </p>
                 <button 
-                  onClick={() => {
-                    setIsLogin(!isLogin);
-                    setError(null);
-                  }} 
-                  className="toggle-btn"
+                  className="pill-link"
+                  onClick={() => setIsLogin(!isLogin)}
                 >
-                  {isLogin ? 'Sign Up' : 'Sign In'}
+                  {isLogin ? 'Register Now' : 'Sign In Instead'}
                 </button>
-              </p>
-            </div>
+             </div>
           </div>
         </div>
-        
-        <div className="auth-image-side">
-          <img src={authBg} alt="Luminous Aesthetic" className="auth-bg-image" />
-          <div className="auth-overlay">
-            <h2 className="display-large">The Luminous Gallery</h2>
-            <p className="body-large">Clinical Excellence. Artisan Care.</p>
-          </div>
-        </div>
-      </div>
+      </section>
     </div>
   );
 };
