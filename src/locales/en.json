@@ -20,14 +20,8 @@
       "label": "Our Philosophy",
       "title": "The Science of Luminous Beauty",
       "content": "At Enlyten2, we believe skin is the canvas of your confidence. Our philosophy merges state-of-the-art laser technology with a boutique approach to skincare. We don't just treat; we curate.",
-      "precision": {
-        "title": "Precision Tech",
-        "text": "Industry-leading laser systems for unmatched accuracy and safety."
-      },
-      "artisan": {
-        "title": "Artisan Care",
-        "text": "Personalized protocols designed for your unique skin blueprint."
-      }
+      "precision": { "title": "Precision Tech", "text": "Industry-leading laser systems for unmatched accuracy and safety." },
+      "artisan": { "title": "Artisan Care", "text": "Personalized protocols designed for your unique skin blueprint." }
     },
     "treatments": {
       "title": "Curated Treatments",
@@ -40,10 +34,7 @@
       "years": { "value": "5", "label": "Years of Excellence" },
       "satisfaction": { "value": "98%", "label": "Satisfaction Rate" }
     },
-    "cta": {
-      "title": "Experience the Transformation",
-      "button": "Book Your Consultation"
-    }
+    "cta": { "title": "Experience the Transformation", "button": "Book Your Consultation" }
   },
   "footer": {
     "tagline": "Live The Life Of Youth And Beauty",
@@ -56,6 +47,7 @@
   },
   "categories": {
     "all": "All",
+    "All": "All",
     "Laser": "Laser",
     "Injectables": "Injectables",
     "Skin Care": "Skin Care",
@@ -74,6 +66,125 @@
     "error": "Error loading gallery",
     "empty": "No results found in this category.",
     "awaiting": "Awaiting Documentation"
+  },
+  "auth": {
+    "loginAccent": "Member Login",
+    "registerAccent": "Join Us",
+    "loginTitle": "Welcome",
+    "loginTitleHighlight": "Back",
+    "registerTitle": "Create",
+    "registerTitleHighlight": "Profile",
+    "loginSubtitle": "Enter your credentials to access your clinical portal.",
+    "registerSubtitle": "Begin your clinical journey with precision care.",
+    "processing": "Processing...",
+    "signIn": "Sign In",
+    "getStarted": "Get Started",
+    "newToClinic": "New to the clinic?",
+    "alreadyMember": "Already part of the community?",
+    "registerNow": "Register Now",
+    "signInInstead": "Sign In Instead",
+    "successVerify": "Success! Please check your email for verification.",
+    "errorFailed": "Authentication failed",
+    "errorNameRequired": "Full name is required"
+  },
+  "booking": {
+    "title": "Book Your Transformation",
+    "step1": "1. Treatment",
+    "step2": "2. Schedule",
+    "step3": "3. Confirm",
+    "selectService": "Select Your Service",
+    "continueSchedule": "Continue to Schedule",
+    "chooseDateTime": "Choose Date & Time",
+    "selectDate": "Select Date",
+    "availableSlots": "Available Slots",
+    "back": "Back",
+    "reviewDetails": "Review Details",
+    "confirmVisit": "Confirm Your Visit",
+    "treatment": "Treatment",
+    "dateTime": "Date & Time",
+    "client": "Client",
+    "notesPlaceholder": "Special requests or skin concerns...",
+    "confirming": "Confirming...",
+    "confirm": "Confirm Booking",
+    "errorFailed": "Failed to create booking"
+  },
+  "profile": {
+    "title": "Your Profile",
+    "subtitle": "Manage your personal details and history.",
+    "fullName": "Full Name",
+    "email": "Email",
+    "phone": "Phone",
+    "bio": "Bio",
+    "fullNamePlaceholder": "Enter your full name",
+    "phonePlaceholder": "+962 7x xxx xxxx",
+    "bioPlaceholder": "Tell us about yourself",
+    "member": "Member",
+    "personalInfo": "Personal Information",
+    "accountInfo": "Account Information",
+    "accountStatus": "Account Status",
+    "active": "Active",
+    "inactive": "Inactive",
+    "memberSince": "Member Since",
+    "recentlyJoined": "Recently joined",
+    "lastUpdated": "Last Updated",
+    "notYet": "Not yet",
+    "saving": "Saving...",
+    "updateProfile": "Update Profile",
+    "successUpdate": "Profile updated successfully!",
+    "errorFailed": "Failed to update profile"
+  },
+  "experience": {
+    "accent": "Beyond The Surface",
+    "title": "The Enlyten2",
+    "titleHighlight": "Experience",
+    "subtitle": "We believe skin health is a clinical art. Our sanctuary combines world-leading laser technology with an editorial eye for natural, high-performance results.",
+    "startJourney": "Start Your Journey",
+    "viewCollection": "View the Collection",
+    "protocolAccent": "Our Protocol",
+    "protocolTitle": "Science. Luxury.",
+    "protocolTitleHighlight": "Radiance.",
+    "step1Num": "01",
+    "step1Title": "Consultation",
+    "step1Text": "A deep clinical analysis of your skin's unique blueprint using high-resolution skin mapping technology.",
+    "step2Num": "02",
+    "step2Title": "Curation",
+    "step2Text": "A bespoke protocol curated by our clinicians, selecting from the world's most advanced laser platforms.",
+    "step3Num": "03",
+    "step3Title": "Enlightenment",
+    "step3Text": "Revealing your most luminous skin yet through precise, high-trust clinical execution.",
+    "philosophyTitle": "Artisan Care,",
+    "philosophyTitleLine2": "Clinical Rigor.",
+    "philosophyText": "Every treatment at Enlyten2 is a signature experience. We don't just treat skin; we refine it with the precision of a laser and the soul of a gallery."
+  },
+  "notifications": {
+    "title": "Notifications",
+    "subtitle": "Stay updated on your treatments and exclusive offers.",
+    "markRead": "Mark as Read",
+    "viewDetails": "View Details",
+    "n1Title": "Appointment Reminder",
+    "n1Message": "Your Laser Genesis treatment is tomorrow at 10:00 AM.",
+    "n1Time": "2 hours ago",
+    "n2Title": "Exclusive Spring Offer",
+    "n2Message": "Enjoy 20% off all chemical peels this month. Book now to secure your glow.",
+    "n2Time": "1 day ago",
+    "n3Title": "Profile Updated",
+    "n3Message": "Your personal information has been successfully updated.",
+    "n3Time": "3 days ago"
+  },
+  "common": {
+    "email": "Email",
+    "password": "Password",
+    "facebook": "Facebook",
+    "back": "Back",
+    "loading": "Loading..."
+  },
+  "services": {
+    "title": "Treatments",
+    "subtitle": "Advanced aesthetic solutions — curated for your luminous goals.",
+    "all": "All",
+    "empty": "No treatments found in this category.",
+    "book": "Book Now",
+    "min": "min"
   },
   "contact": {
     "title": "Contact Us",
