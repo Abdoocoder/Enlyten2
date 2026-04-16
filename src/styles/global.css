@@ -2,7 +2,7 @@
 
 :root[dir="rtl"] {
   --font-display: var(--font-display-ar);
-  --font-body: var(--font-body-ar);
+  --font-body:    var(--font-body-ar);
 }
 
 * {
@@ -15,17 +15,17 @@ body {
   font-family: var(--font-body);
   background-color: var(--background);
   color: var(--on-surface);
+  font-size: 1rem;
   line-height: var(--lh-body);
-  letter-spacing: var(--ls-body);
+  letter-spacing: var(--ls-16);
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
 
 h1, h2, h3, h4, h5, h6 {
   font-family: var(--font-display);
-  font-weight: 600;
+  font-weight: 700;
   color: var(--on-surface);
-  letter-spacing: var(--ls-display);
   line-height: var(--lh-display);
 }
 
@@ -35,9 +35,7 @@ a {
   transition: var(--transition-fast);
 }
 
-a:hover {
-  text-decoration: underline;
-}
+a:hover { text-decoration: underline; }
 
 button {
   cursor: pointer;
@@ -47,18 +45,16 @@ button {
   transition: var(--transition-fast);
 }
 
-/* Apple Binary Sectioning */
+/* ─── Section System ─── */
 .section-dark {
   background-color: var(--background-dark);
   color: var(--white);
 }
 
-.section-dark h1, .section-dark h2, .section-dark h3 {
-  color: var(--white);
-}
+.section-dark h1, .section-dark h2, .section-dark h3 { color: var(--white); }
 
 .section-light {
-  background-color: var(--background-alt);
+  background-color: var(--background-alt);   /* warm-white #f6f5f4 */
   color: var(--near-black);
 }
 
@@ -67,7 +63,7 @@ button {
   color: var(--near-black);
 }
 
-/* Layout System - The 980px Standard */
+/* ─── Layout ─── */
 .viewport-section {
   width: 100%;
   display: flex;
@@ -84,81 +80,126 @@ button {
   padding: 0 var(--spacing-lg);
 }
 
-/* Grid System */
+/* ─── Grid ─── */
 .grid-2 { display: grid; grid-template-columns: repeat(2, 1fr); gap: var(--spacing-lg); }
 .grid-3 { display: grid; grid-template-columns: repeat(3, 1fr); gap: var(--spacing-lg); }
 .grid-4 { display: grid; grid-template-columns: repeat(4, 1fr); gap: var(--spacing-md); }
 
 @media (max-width: 768px) {
   .grid-2, .grid-3, .grid-4 { grid-template-columns: 1fr; }
-  .viewport-section { padding: var(--spacing-huge) 0; }
+  .viewport-section { padding: var(--spacing-section) 0; }
 }
 
-/* Cinematic Typography */
+/* ─── Typography Scale ─── */
+
+/* Display Hero — 64px */
 .hero-headline {
-  font-size: clamp(2.5rem, 6vw, 3.5rem); /* 40–56px responsive */
-  font-weight: 600;
-  letter-spacing: var(--ls-display);
+  font-size: clamp(2.5rem, 6vw, 4rem);
+  font-weight: 700;
+  letter-spacing: var(--ls-64);
   line-height: var(--lh-display);
+  font-feature-settings: "lnum", "locl";
   margin-bottom: var(--spacing-sm);
 }
 
+/* Section Heading — 48px */
 .section-headline {
-  font-size: clamp(2rem, 4vw, 2.5rem); /* 32–40px responsive */
-  font-weight: 600;
-  letter-spacing: var(--ls-display);
-  line-height: var(--lh-section);
+  font-size: clamp(1.75rem, 4vw, 3rem);
+  font-weight: 700;
+  letter-spacing: var(--ls-48);
+  line-height: var(--lh-display);
+  font-feature-settings: "lnum";
   margin-bottom: var(--spacing-md);
 }
 
-.card-title {
-  font-size: 1.75rem; /* 28px */
-  font-weight: 600;
-  letter-spacing: var(--ls-display);
+/* Sub-heading — 26px */
+.subhead {
+  font-size: 1.625rem;
+  font-weight: 700;
+  letter-spacing: var(--ls-26);
+  line-height: var(--lh-subhead);
   margin-bottom: var(--spacing-sm);
 }
 
-.body-intro {
-  font-size: 1.3125rem; /* 21px */
-  font-weight: 400;
+/* Card Title — 22px */
+.card-title {
+  font-size: 1.375rem;
+  font-weight: 700;
+  letter-spacing: var(--ls-22);
   line-height: var(--lh-card);
+  margin-bottom: var(--spacing-sm);
 }
 
-.body-medium {
-  font-size: 1rem; /* 16px */
-  line-height: var(--lh-body);
-}
-
-.body-small {
-  font-size: 0.875rem; /* 14px */
-  line-height: var(--lh-body);
-}
-
-.label-medium {
-  font-size: 0.75rem; /* 12px */
+/* Body Large — 20px */
+.body-intro {
+  font-size: 1.25rem;
   font-weight: 600;
-  letter-spacing: 0.06em;
+  letter-spacing: var(--ls-20);
+  line-height: 1.40;
+  color: var(--warm-500);
+}
+
+/* Body — 16px */
+.body-medium {
+  font-size: 1rem;
+  font-weight: 400;
+  letter-spacing: var(--ls-16);
+  line-height: var(--lh-body);
+}
+
+/* Nav / Button — 15px weight 600 */
+.nav-text {
+  font-size: 0.9375rem;
+  font-weight: 600;
+  line-height: 1.33;
+  letter-spacing: var(--ls-16);
+}
+
+/* Caption — 14px */
+.body-small {
+  font-size: 0.875rem;
+  font-weight: 400;
+  line-height: var(--lh-caption);
+  letter-spacing: var(--ls-16);
+}
+
+/* Badge / Micro label — 12px */
+.label-medium {
+  font-size: 0.75rem;
+  font-weight: 600;
+  letter-spacing: var(--ls-12);
   text-transform: uppercase;
   color: var(--on-surface-disabled);
   display: block;
 }
 
-.text-muted {
-  color: var(--on-surface-disabled);
+.text-muted   { color: var(--on-surface-variant); }
+.text-center  { text-align: center; }
+
+/* ─── Cards ─── */
+.apple-card {
+  background-color: var(--white);
+  border-radius: var(--radius-lg);
+  padding: var(--spacing-xl);
+  border: 1px solid var(--outline);
+  box-shadow: var(--shadow-card);
+  transition: var(--transition-smooth);
 }
 
-.text-center {
-  text-align: center;
+.apple-card:hover {
+  box-shadow: var(--shadow-deep);
+  transform: translateY(-2px);
 }
 
-/* Components - The Apple Chrome */
+/* ─── Buttons (global utility — use Button component instead) ─── */
 .button-primary {
   background: var(--laser-gradient);
   color: var(--white);
   padding: 8px 16px;
-  border-radius: var(--radius-md);
-  font-size: 1.0625rem;
-  font-weight: 400;
+  border-radius: var(--radius-micro);
+  font-size: 0.9375rem;
+  font-weight: 600;
+  line-height: 1.33;
   display: inline-flex;
   align-items: center;
   border: none;
@@ -170,6 +211,50 @@ button {
   box-shadow: var(--shadow-laser);
 }
 
+.btn-pill {
+  border-radius: var(--radius-pill) !important;
+  padding-inline: 24px !important;
+}
+
+.btn-large {
+  padding: 14px 28px !important;
+  font-size: 1rem !important;
+}
+
+/* ─── Pill badge ─── */
+.pill-badge {
+  display: inline-flex;
+  align-items: center;
+  padding: 4px 8px;
+  border-radius: var(--radius-pill);
+  font-size: 0.75rem;
+  font-weight: 600;
+  letter-spacing: var(--ls-12);
+  background-color: rgba(255, 0, 87, 0.08);
+  color: var(--logo-pink);
+}
+
+/* ─── Laser identity helpers ─── */
+.laser-text {
+  background: var(--laser-gradient);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  display: inline-block;
+  filter: drop-shadow(var(--laser-glow));
+}
+
+.brand-accent {
+  color: var(--logo-pink);
+  font-size: 0.75rem;
+  font-weight: 600;
+  letter-spacing: var(--ls-12);
+  text-transform: uppercase;
+  display: block;
+  margin-bottom: var(--spacing-sm);
+}
+
+/* ─── Pill link ─── */
 .pill-link {
   color: var(--link-color);
   font-size: 1rem;
@@ -184,34 +269,11 @@ button {
   transition: var(--transition-fast);
 }
 
-.pill-link:hover {
-  opacity: 0.7;
-  text-decoration: none;
-}
+.pill-link:hover { opacity: 0.7; text-decoration: none; }
+.pill-link::after { content: '›'; font-size: 1.25rem; line-height: 1; }
+.section-dark .pill-link { color: var(--link-color-dark); }
 
-.section-dark .pill-link {
-  color: var(--link-color-dark);
-}
-
-.pill-link::after {
-  content: '›';
-  font-size: 1.25rem;
-  line-height: 1;
-}
-
-/* Pill button modifier — applies on top of existing Button variant */
-.btn-pill {
-  border-radius: var(--radius-pill) !important;
-  padding-left: 24px !important;
-  padding-right: 24px !important;
-}
-
-.btn-large {
-  padding: 14px 28px !important;
-  font-size: 1.125rem !important;
-}
-
-/* Navigation - Translucent Glass */
+/* ─── Nav glass ─── */
 .nav-glass {
   position: sticky;
   top: 0;
@@ -225,39 +287,3 @@ button {
   align-items: center;
   border-bottom: 1px solid rgba(255, 255, 255, 0.1);
 }
-
-/* Depth & Elevation */
-.apple-card {
-  background-color: var(--white);
-  border-radius: var(--radius-lg);
-  padding: var(--spacing-xl);
-  border: 1px solid var(--outline-variant);
-  transition: var(--transition-apple);
-}
-
-.apple-card:hover {
-  box-shadow: var(--shadow-card);
-  transform: translateY(-2px);
-}
-
-/* Gradient text — Laser Glow identity */
-.laser-text {
-  background: var(--laser-gradient);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  background-clip: text;
-  display: inline-block;
-  filter: drop-shadow(var(--laser-glow));
-}
-
-/* Eyebrow / overline label */
-.brand-accent {
-  color: var(--logo-pink);
-  font-size: 0.75rem;
-  font-weight: 600;
-  letter-spacing: 0.1em;
-  text-transform: uppercase;
-  display: block;
-  margin-bottom: var(--spacing-sm);
-}
-

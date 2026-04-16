@@ -54,6 +54,17 @@
     "social": "Follow Us",
     "rights": "© 2025 Enlyten2 Laser Center. All Rights Reserved."
   },
+  "gallery": {
+    "accent": "Clinical Results",
+    "title": "Witness the",
+    "titleHighlight": "Transformation",
+    "subtitle": "Experience the power of clinical precision. Browse our gallery of real results achieved through bespoke laser protocols.",
+    "all": "All",
+    "loading": "Curating gallery...",
+    "error": "Error loading gallery",
+    "empty": "No results found in this category.",
+    "awaiting": "Awaiting Documentation"
+  },
   "contact": {
     "title": "Contact Us",
     "subtitle": "We're always here for you",

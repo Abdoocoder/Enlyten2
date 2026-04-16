@@ -8,7 +8,9 @@
       "Bash(task-master show *)",
       "Bash(npm run *)",
       "WebFetch(domain:www.facebook.com)",
-      "WebFetch(domain:web.facebook.com)"
+      "WebFetch(domain:web.facebook.com)",
+      "Bash(xargs cat *)",
+      "WebFetch(domain:masalaserclinic.com)"
     ]
   }
 }

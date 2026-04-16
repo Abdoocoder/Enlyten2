@@ -84,7 +84,10 @@ const Home = () => {
             {treatments.map(treatment => (
               <Card key={treatment.id} variant="white" className="treatment-card" padded={false}>
                 <div className="treatment-image-placeholder">
-                  <div className="image-overlay"></div>
+                  {treatment.image_url
+                    ? <img src={treatment.image_url} alt={treatment.name} className="treatment-card-img" />
+                    : <div className="image-overlay"></div>
+                  }
                 </div>
                 <div className="treatment-info-well">
                   <h3 className="card-title">{treatment.name}</h3>

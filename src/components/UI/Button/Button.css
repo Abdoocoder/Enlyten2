@@ -2,15 +2,20 @@
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  padding: 8px 16px;
-  border-radius: var(--radius-md);
+  padding: 7px 16px;
+  border-radius: var(--radius-micro);
   font-family: var(--font-body);
-  font-weight: 400;
-  font-size: 1.0625rem;
+  font-size: 0.9375rem;
+  font-weight: 600;
+  line-height: 1.33;
+  letter-spacing: var(--ls-16);
   transition: var(--transition-fast);
   cursor: pointer;
   border: 1px solid transparent;
+  white-space: nowrap;
 }
+
+.btn:active { transform: scale(0.96); }
 
 .btn-primary {
   background: var(--laser-gradient);
@@ -24,13 +29,27 @@
 }
 
 .btn-secondary {
-  background-color: var(--background-alt);
-  color: var(--on-surface);
-  border: 1px solid var(--outline-variant);
+  background-color: rgba(255, 255, 255, 0.08);
+  color: var(--white);
+  border: 1px solid rgba(255, 255, 255, 0.2);
 }
 
 .btn-secondary:hover {
-  background-color: var(--outline-variant);
+  background-color: rgba(255, 255, 255, 0.15);
+  border-color: rgba(255, 255, 255, 0.35);
+}
+
+/* Secondary on light backgrounds */
+.section-light .btn-secondary,
+.section-white .btn-secondary {
+  background-color: rgba(0, 0, 0, 0.05);
+  color: var(--near-black);
+  border: 1px solid var(--outline);
+}
+
+.section-light .btn-secondary:hover,
+.section-white .btn-secondary:hover {
+  background-color: rgba(0, 0, 0, 0.08);
 }
 
 .btn-outline {
@@ -39,9 +58,11 @@
   border: 1px solid var(--logo-pink);
 }
 
+.btn-outline:hover { background: rgba(255, 0, 87, 0.06); }
+
 .btn-pill {
   border-radius: var(--radius-pill);
-  padding: 8px 20px;
+  padding-inline: 20px;
 }
 
 .btn-link {
@@ -52,12 +73,5 @@
   font-weight: 400;
 }
 
-.section-dark .btn-link {
-  color: var(--link-color-dark);
-}
-
-.btn-link:hover {
-  text-decoration: underline;
-}
-
-
+.btn-link:hover { text-decoration: underline; }
+.section-dark .btn-link { color: var(--link-color-dark); }

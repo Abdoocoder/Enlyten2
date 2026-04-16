@@ -1,93 +1,123 @@
 @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Cairo:wght@300;400;500;600;700&display=swap');
 
 :root {
-  /* Colors - Stark & Binary */
+  /* ─── Brand Identity — Laser Glow ─── */
   --black: #000000;
-  --light-gray: #f5f5f7;
-  --near-black: #1d1d1f;
   --white: #ffffff;
-  
-  /* Identity - Logo Gradient (The Laser Glow) */
-  --logo-pink: #FF0057;
+  --near-black: rgba(0, 0, 0, 0.95);
+
+  --logo-pink:   #FF0057;
   --logo-orange: #FF7A00;
   --logo-purple: #6A00FF;
-  --laser-gradient: linear-gradient(135deg, var(--logo-pink) 0%, var(--logo-orange) 50%, var(--logo-purple) 100%);
+
+  --laser-gradient:     linear-gradient(135deg, var(--logo-pink) 0%, var(--logo-orange) 50%, var(--logo-purple) 100%);
   --laser-gradient-alt: linear-gradient(135deg, var(--logo-purple) 0%, var(--logo-pink) 100%);
-  
-  /* Primary Theme Roles - Driven by Identity */
-  --primary: var(--logo-pink);
-  --primary-hover: var(--logo-orange);
-  --on-primary: var(--white);
-  
-  --secondary: #1d1d1f;
-  --on-secondary: var(--white);
-  
-  --background: var(--white);
-  --background-alt: var(--light-gray);
-  --background-dark: var(--black);
-  
-  --surface: var(--white);
-  --surface-variant: var(--light-gray);
-  
-  --on-surface: var(--near-black);
-  --on-surface-variant: rgba(0, 0, 0, 0.8);
-  --on-surface-disabled: rgba(0, 0, 0, 0.48);
-  
-  --outline: #d2d2d7;
-  --outline-variant: #e5e5e7;
-  
-  /* Interactive Accents - Laser Tints */
-  --link-color: var(--logo-pink);
+
+  /* ─── Warm Neutral Scale (Notion-inspired) ─── */
+  --warm-white:   #f6f5f4;   /* section alt background — yellow-brown undertone */
+  --warm-dark:    #31302e;   /* dark surface, warmer than pure black */
+  --warm-500:     #615d59;   /* secondary text, descriptions */
+  --warm-300:     #a39e98;   /* placeholder, disabled, captions */
+
+  /* ─── Semantic Roles ─── */
+  --primary:           var(--logo-pink);
+  --primary-hover:     var(--logo-orange);
+  --on-primary:        var(--white);
+
+  --background:        var(--white);
+  --background-alt:    var(--warm-white);
+  --background-dark:   var(--black);
+
+  --surface:           var(--white);
+  --on-surface:        var(--near-black);
+  --on-surface-variant: var(--warm-500);
+  --on-surface-disabled: var(--warm-300);
+
+  --outline:         rgba(0, 0, 0, 0.1);   /* whisper border */
+  --outline-variant: rgba(0, 0, 0, 0.06);
+
+  --link-color:      var(--logo-pink);
   --link-color-dark: var(--logo-orange);
-  
-  /* Typography - SF Pro Logic */
-  --font-display-en: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
-  --font-body-en: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+
+  /* ─── Glass (dark header) ─── */
+  --glass-bg:   rgba(0, 0, 0, 0.82);
+  --glass-blur: blur(20px) saturate(180%);
+
+  /* ─── Typography ─── */
+  --font-display-en: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Helvetica, Arial, sans-serif;
+  --font-body-en:    'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Helvetica, Arial, sans-serif;
   --font-display-ar: 'Cairo', sans-serif;
-  --font-body-ar: 'Cairo', sans-serif;
+  --font-body-ar:    'Cairo', sans-serif;
 
   --font-display: var(--font-display-en);
-  --font-body: var(--font-body-en);
-  
-  /* Headline Rules - Machined Precision */
-  --lh-display: 1.07;
-  --lh-section: 1.10;
-  --lh-card: 1.19;
-  --lh-body: 1.47;
-  
-  --ls-display: -0.022em;
-  --ls-body: -0.011em;
-  
-  /* Spacing - Base Unit 8px */
-  --spacing-xs: 4px;
-  --spacing-sm: 8px;
-  --spacing-md: 16px;
-  --spacing-lg: 24px;
-  --spacing-xl: 32px;
-  --spacing-xxl: 48px;
-  --spacing-huge: 80px;
-  --spacing-cinematic: 120px;
-  
-  /* Transitions */
-  --transition-apple: all 0.3s cubic-bezier(0.25, 0.1, 0.25, 1);
-  --transition-fast: all 0.15s cubic-bezier(0, 0, 0.5, 1);
-  
-  /* Roundness - Apple Standard */
-  --radius-sm: 5px;
-  --radius-md: 8px;
-  --radius-lg: 12px;
-  --radius-xl: 18px;
-  --radius-pill: 980px;
-  --radius-circle: 50%;
-  
-  /* Layout */
-  --max-width: 980px;
-  
-  /* Effects - Subtle & Functional */
-  --glass-bg: rgba(0, 0, 0, 0.82);
-  --glass-blur: blur(20px) saturate(180%);
-  --shadow-card: 0 10px 30px rgba(0, 0, 0, 0.12);
-  --shadow-laser: 0 10px 32px rgba(255, 0, 87, 0.1);
-  --laser-glow: 0 0 20px rgba(255, 0, 87, 0.3);
-}
+  --font-body:    var(--font-body-en);
 
+  /* Letter-spacing — scales with font size (Notion rules) */
+  --ls-64: -2.125px;   /* Display Hero  64px */
+  --ls-54: -1.875px;   /* Display Secondary 54px */
+  --ls-48: -1.5px;     /* Section Heading 48px */
+  --ls-40: normal;     /* Sub-heading large 40px */
+  --ls-26: -0.625px;   /* Sub-heading 26px */
+  --ls-22: -0.25px;    /* Card Title 22px */
+  --ls-20: -0.125px;   /* Body Large 20px */
+  --ls-16: normal;     /* Body 16px */
+  --ls-12: 0.125px;    /* Badge / micro — positive tracking */
+
+  /* Line-heights */
+  --lh-display:  1.00;
+  --lh-tight:    1.04;
+  --lh-section:  1.10;
+  --lh-card:     1.27;
+  --lh-subhead:  1.23;
+  --lh-body:     1.50;
+  --lh-caption:  1.43;
+  --lh-badge:    1.33;
+
+  /* ─── Spacing — 8px base ─── */
+  --spacing-xs:       4px;
+  --spacing-sm:       8px;
+  --spacing-md:       16px;
+  --spacing-lg:       24px;
+  --spacing-xl:       32px;
+  --spacing-xxl:      48px;
+  --spacing-huge:     64px;
+  --spacing-section:  80px;
+  --spacing-cinematic: 120px;
+
+  /* ─── Border Radius (Notion scale) ─── */
+  --radius-micro:  4px;    /* buttons, inputs */
+  --radius-sm:     5px;    /* links, menu items */
+  --radius-md:     8px;    /* small cards, inline */
+  --radius-lg:     12px;   /* standard cards */
+  --radius-xl:     16px;   /* hero cards, featured */
+  --radius-pill:   9999px; /* badges, pills */
+  --radius-circle: 50%;
+
+  /* ─── Shadows (Notion multi-layer, sub-0.05 opacity) ─── */
+  --shadow-card:
+    rgba(0, 0, 0, 0.04)    0px 4px   18px,
+    rgba(0, 0, 0, 0.027)   0px 2px   7.85px,
+    rgba(0, 0, 0, 0.02)    0px 0.8px 2.93px,
+    rgba(0, 0, 0, 0.01)    0px 0.2px 1.04px;
+
+  --shadow-deep:
+    rgba(0, 0, 0, 0.01)    0px 1px   3px,
+    rgba(0, 0, 0, 0.02)    0px 3px   7px,
+    rgba(0, 0, 0, 0.02)    0px 7px   15px,
+    rgba(0, 0, 0, 0.04)    0px 14px  28px,
+    rgba(0, 0, 0, 0.05)    0px 23px  52px;
+
+  --shadow-laser: 0 8px 24px rgba(255, 0, 87, 0.18);
+  --laser-glow:   0 0 20px  rgba(255, 0, 87, 0.30);
+
+  /* ─── Transitions ─── */
+  --transition-fast:   all 0.15s cubic-bezier(0, 0, 0.5, 1);
+  --transition-smooth: all 0.30s cubic-bezier(0.25, 0.1, 0.25, 1);
+
+  /* ─── Layout ─── */
+  --max-width: 1100px;
+
+  /* ─── Surface containers (for light sections) ─── */
+  --surface-container-low:     rgba(0, 0, 0, 0.04);
+  --surface-container-highest: rgba(0, 0, 0, 0.08);
+}

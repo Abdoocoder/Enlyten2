@@ -37,7 +37,8 @@
       "description_ar": "إزالة الشعر بأحدث تقنيات الليزر بجهاز ENLYTEN DIODE وتقنية ALEX وجهاز EVO بفاعلية عالية وأقل ألم.",
       "duration": "30–60 Min",
       "price": 80,
-      "category": "Laser"
+      "category": "Laser",
+      "image_url": "/service-laser-hair.jpg"
     },
     {
       "id": "filler-botox",
@@ -47,7 +48,8 @@
       "description_ar": "حقن الفلير والبوتكس لإزالة خطوط التجاعيد، نفخ الخدود، الشفاه، ورفع الحاجب.",
       "duration": "30 Min",
       "price": 150,
-      "category": "Injectables"
+      "category": "Injectables",
+      "image_url": "/service-botox.jpg"
     },
     {
       "id": "plasma-mesotherapy",
@@ -57,7 +59,8 @@
       "description_ar": "أحدث التقنيات العلمية لإزالة التجاعيد وشد البشرة وإزالة الكلف والنمش وتصبغات الجلد دون آثار جانبية.",
       "duration": "45 Min",
       "price": 120,
-      "category": "Injectables"
+      "category": "Injectables",
+      "image_url": "/service-face.jpg"
     },
     {
       "id": "cryolipolysis",
@@ -67,7 +70,8 @@
       "description_ar": "تكسير الدهون ونحت وتشكيل جميع مناطق الجسم بأحدث جهاز Cryo Lipolysis.",
       "duration": "60 Min",
       "price": 200,
-      "category": "Body"
+      "category": "Body",
+      "image_url": "/service-body.jpg"
     },
     {
       "id": "hifu-ulthera",
@@ -77,7 +81,8 @@
       "description_ar": "شد البشرة وإزالة التجاعيد للوجه والجسم من خلال جهاز ULTHERA (HIFU) بجلسة واحدة فقط.",
       "duration": "60 Min",
       "price": 350,
-      "category": "Anti-Aging"
+      "category": "Anti-Aging",
+      "image_url": "/service-skin.jpg"
     },
     {
       "id": "skin-care",
@@ -87,7 +92,8 @@
       "description_ar": "تنظيف البشرة وإزالة الرؤوس السوداء والبيضاء، تبييض وتفتيح المناطق الداكنة، علاج آثار حب الشباب. Hydra · Peeling · Scrub · Aqua Glo.",
       "duration": "45 Min",
       "price": 90,
-      "category": "Skin Care"
+      "category": "Skin Care",
+      "image_url": "/service-face.jpg"
     },
     {
       "id": "prp-hair",
@@ -97,7 +103,8 @@
       "description_ar": "حقن البلازما لإعادة نمو الشعر ومنع تساقطه للرجال والنساء.",
       "duration": "45 Min",
       "price": 130,
-      "category": "Hair"
+      "category": "Hair",
+      "image_url": "/service-laser-hair.jpg"
     },
     {
       "id": "carbon-peeling",
@@ -107,21 +114,64 @@
       "description_ar": "التقشير الكربوني لتفتيح البشرة، تضييق المسام، وإعادة الإشراق والشباب للبشرة.",
       "duration": "30 Min",
       "price": 100,
-      "category": "Laser"
+      "category": "Laser",
+      "image_url": "/service-skin.jpg"
     }
   ],
   "gallery": [
     {
-      "treatment": "Laser Hair Removal",
-      "before": "/path/before-laser.jpg",
-      "after": "/path/after-laser.jpg",
-      "result": "Smooth, hair-free skin after 3 sessions using ENLYTEN DIODE technology."
+      "id": 1,
+      "title": "Laser Hair Removal",
+      "title_ar": "إزالة الشعر بالليزر",
+      "description": "Smooth, hair-free skin after 3 sessions.",
+      "description_ar": "بشرة ناعمة خالية من الشعر بعد 3 جلسات.",
+      "image_url": "/service-laser-hair.jpg",
+      "category": "Laser"
     },
     {
-      "treatment": "Carbon Peeling",
-      "before": "/path/before-carbon.jpg",
-      "after": "/path/after-carbon.jpg",
-      "result": "Visibly brighter and tighter skin after one session."
+      "id": 2,
+      "title": "Botox & Filler",
+      "title_ar": "البوتكس والفلير",
+      "description": "Natural lift and wrinkle smoothing.",
+      "description_ar": "رفع طبيعي وتنعيم التجاعيد.",
+      "image_url": "/service-botox.jpg",
+      "category": "Injectables"
+    },
+    {
+      "id": 3,
+      "title": "Advanced Skin Care",
+      "title_ar": "العناية المتقدمة بالبشرة",
+      "description": "Deep cleansing and radiant skin.",
+      "description_ar": "تنظيف عميق وبشرة مشرقة.",
+      "image_url": "/service-face.jpg",
+      "category": "Skin Care"
+    },
+    {
+      "id": 4,
+      "title": "Body Sculpting",
+      "title_ar": "نحت الجسم",
+      "description": "Non-surgical fat reduction results.",
+      "description_ar": "نتائج تكسير الدهون بدون جراحة.",
+      "image_url": "/service-body.jpg",
+      "category": "Body"
+    },
+    {
+      "id": 5,
+      "title": "Perfect Skin",
+      "title_ar": "بشرة مثالية",
+      "description": "Hydration and tone evening treatment.",
+      "description_ar": "علاج الترطيب وتوحيد لون البشرة.",
+      "image_url": "/service-skin.jpg",
+      "category": "Skin Care"
+    },
+    {
+      "id": 6,
+      "title": "Our Clinic",
+      "title_ar": "عيادتنا",
+      "description": "Professional care in a luxury setting.",
+      "description_ar": "رعاية احترافية في بيئة فاخرة.",
+      "image_url": "/clinic-doctor.jpg",
+      "category": "Clinic"
     }
   ],
   "clinics": [

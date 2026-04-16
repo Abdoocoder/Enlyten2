@@ -1,13 +1,20 @@
 import React, { useState, useMemo } from 'react';
+import { useTranslation } from 'react-i18next';
 import './Gallery.css';
 import Card from '../components/UI/Card/Card';
 import { useGallery } from '../hooks/useDatabase';
+import mockData from '../data/mockData.json';
 
 const Gallery = () => {
-  const { gallery, loading, error } = useGallery();
+  const { t, i18n } = useTranslation();
+  const { gallery: dbGallery, loading, error } = useGallery();
   const [selectedCategory, setSelectedCategory] = useState('all');
+  const isAr = i18n.language === 'ar';
 
-  // Unified categories
+  const gallery = useMemo(() =>
+    dbGallery.length > 0 ? dbGallery : mockData.gallery,
+  [dbGallery]);
+
   const categories = useMemo(() => {
     const rawCategories = gallery.map(item => item.category).filter(Boolean);
     return ['all', ...new Set(rawCategories)];
@@ -18,30 +25,34 @@ const Gallery = () => {
     return gallery.filter(item => item.category === selectedCategory);
   }, [gallery, selectedCategory]);
 
+  const categoryLabel = (cat) =>
+    cat === 'all' ? t('gallery.all') : cat;
+
   return (
     <div className="gallery-page">
-      {/* Gallery Hero */}
       <section className="viewport-section section-white gallery-hero-v2">
         <div className="content-well text-center">
-          <span className="brand-accent">Clinical Results</span>
-          <h1 className="hero-headline">Witness the <br/><span className="laser-text">Transformation</span></h1>
+          <span className="brand-accent">{t('gallery.accent')}</span>
+          <h1 className="hero-headline">
+            {t('gallery.title')} <br/>
+            <span className="laser-text">{t('gallery.titleHighlight')}</span>
+          </h1>
           <p className="body-intro max-width-small mx-auto">
-            Experience the power of clinical precision. Browse our gallery of real results achieved through bespoke laser protocols.
+            {t('gallery.subtitle')}
           </p>
         </div>
       </section>
 
-      {/* Category Selection */}
       <section className="category-strip-section section-white">
         <div className="content-well">
           <div className="category-strip">
             {categories.map(cat => (
-              <button 
+              <button
                 key={cat}
                 className={`category-pill ${selectedCategory === cat ? 'active' : ''}`}
                 onClick={() => setSelectedCategory(cat)}
               >
-                {cat.charAt(0).toUpperCase() + cat.slice(1)}
+                {categoryLabel(cat)}
               </button>
             ))}
           </div>
@@ -52,12 +63,12 @@ const Gallery = () => {
         <div className="content-well">
           {loading && (
             <div className="loading-well text-center">
-               <span className="laser-text body-medium">Curating gallery...</span>
+              <span className="laser-text body-medium">{t('gallery.loading')}</span>
             </div>
           )}
 
           {error && (
-            <p className="body-medium error-banner">Error loading clinical records: {error}</p>
+            <p className="body-medium error-banner">{t('gallery.error')}: {error}</p>
           )}
 
           {!loading && (
@@ -67,19 +78,27 @@ const Gallery = () => {
                   <div className="gallery-tile-image-side">
                     {item.image_url ? (
                       <>
-                        <img src={item.image_url} alt={item.title} className="gallery-tile-img" />
+                        <img
+                          src={item.image_url}
+                          alt={isAr ? (item.title_ar || item.title) : item.title}
+                          className="gallery-tile-img"
+                        />
                         <div className="tile-glow-overlay"></div>
                       </>
                     ) : (
                       <div className="gallery-placeholder">
-                        <span className="label-medium text-muted">Awaiting Documentation</span>
+                        <span className="label-medium text-muted">{t('gallery.awaiting')}</span>
                       </div>
                     )}
                     <span className="tile-category-tag">{item.category}</span>
                   </div>
                   <div className="gallery-tile-info">
-                    <h3 className="card-title">{item.title}</h3>
-                    <p className="body-small text-muted">{item.description}</p>
+                    <h3 className="card-title">
+                      {isAr ? (item.title_ar || item.title) : item.title}
+                    </h3>
+                    <p className="body-small text-muted">
+                      {isAr ? (item.description_ar || item.description) : item.description}
+                    </p>
                   </div>
                 </Card>
               ))}
@@ -88,7 +107,7 @@ const Gallery = () => {
 
           {!loading && filteredGallery.length === 0 && !error && (
             <div className="empty-well text-center">
-               <p className="body-medium text-muted">No results found in this category.</p>
+              <p className="body-medium text-muted">{t('gallery.empty')}</p>
             </div>
           )}
         </div>

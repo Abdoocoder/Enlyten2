@@ -1,32 +1,33 @@
 .lang-switcher {
-  background: var(--surface-container-low);
-  border: 1px solid var(--outline-variant);
-  color: var(--on-surface);
-  padding: var(--spacing-xs) var(--spacing-md);
+  background: rgba(255, 255, 255, 0.08);
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  color: var(--white);
+  padding: 5px 10px;
   border-radius: var(--radius-full);
   cursor: pointer;
   display: flex;
   align-items: center;
-  gap: var(--spacing-sm);
+  gap: 4px;
   font-family: var(--font-body);
   font-weight: 500;
   transition: var(--transition-smooth);
-  font-size: 0.875rem;
+  font-size: 0.75rem;
+  line-height: 1;
 }
 
 .lang-switcher:hover {
-  background: var(--surface-container-highest);
-  border-color: var(--primary);
+  background: rgba(255, 255, 255, 0.15);
+  border-color: rgba(255, 255, 255, 0.3);
 }
 
 .lang-text {
-  opacity: 0.7;
-  font-size: 0.75rem;
+  opacity: 0.65;
+  font-size: 0.6875rem;
 }
 
 .lang-code {
   font-weight: 700;
-  color: var(--primary);
+  color: var(--white);
 }
 
 [dir="rtl"] .lang-code {
