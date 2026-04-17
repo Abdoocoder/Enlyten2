@@ -1,5 +1,6 @@
 import React, { Suspense, lazy } from 'react';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import * as Sentry from '@sentry/react';
 import { AuthProvider } from './contexts/AuthContext';
 import Layout from './components/Layout/Layout';
 import Home from './pages/Home';
@@ -18,6 +19,7 @@ const Experience    = lazy(() => import('./pages/Experience'));
 
 function App() {
   return (
+    <Sentry.ErrorBoundary fallback={<div style={{padding:'2rem',textAlign:'center'}}>Something went wrong.</div>}>
     <Router>
       <AuthProvider>
         <Layout>
@@ -39,7 +41,8 @@ function App() {
         </Layout>
       </AuthProvider>
     </Router>
+    </Sentry.ErrorBoundary>
   );
 }
 
-export default App;
+export default Sentry.withProfiler(App);

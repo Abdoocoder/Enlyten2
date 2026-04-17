@@ -20,7 +20,6 @@ const Home = () => {
 
   return (
     <div className="home-page">
-
       {/* Hero — black, full-bleed, cinematic */}
       <section className="viewport-section section-dark hero">
         <div className="content-well hero-well">
