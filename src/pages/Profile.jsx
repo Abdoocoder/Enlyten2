@@ -10,7 +10,7 @@ import { useAuth } from '../contexts/AuthContext';
 import { updateProfile } from '../lib/supabase';
 
 const Profile = () => {
-  const { user, profile, isAuthenticated } = useAuth();
+  const { user, profile, isAuthenticated, loading: authLoading } = useAuth();
   const navigate = useNavigate();
   const { t } = useTranslation();
   const [loading, setLoading] = useState(false);
@@ -19,6 +19,7 @@ const Profile = () => {
   const [formData, setFormData] = useState({ full_name: '', phone: '', bio: '' });
 
   useEffect(() => {
+    if (authLoading) return;
     if (!isAuthenticated) { navigate('/login'); return; }
     if (profile) {
       setFormData({
@@ -27,7 +28,7 @@ const Profile = () => {
         bio: profile.bio || '',
       });
     }
-  }, [profile, isAuthenticated, navigate]);
+  }, [profile, isAuthenticated, authLoading, navigate]);
 
   const handleInputChange = (e) => {
     const { name, value } = e.target;

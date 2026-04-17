@@ -61,7 +61,7 @@ const MiniChart = ({ bookings }) => {
 };
 
 const Dashboard = () => {
-  const { user, profile, isAuthenticated } = useAuth();
+  const { user, profile, isAuthenticated, loading: authLoading } = useAuth();
   const { t } = useTranslation();
   const navigate = useNavigate();
   const [searchParams] = useSearchParams();
@@ -70,6 +70,7 @@ const Dashboard = () => {
   const [cancelLoading, setCancelLoading] = useState(null);
 
   useEffect(() => {
+    if (authLoading) return;
     if (!isAuthenticated) { navigate('/login'); return; }
     if (searchParams.get('booking') === 'success') {
       setSuccessMessage(t('dashboard.bookingSuccess', 'Appointment scheduled successfully!'));
