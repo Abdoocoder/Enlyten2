@@ -288,3 +288,14 @@ button {
   align-items: center;
   border-bottom: 1px solid rgba(255, 255, 255, 0.1);
 }
+
+/* ─── Shared message banners ─── */
+.error-banner {
+  background-color: rgba(255, 59, 48, 0.06);
+  border: 1px solid rgba(255, 59, 48, 0.2);
+  color: #d4001a;
+  padding: 14px 16px;
+  border-radius: var(--radius-md);
+  font-size: 0.875rem;
+  text-align: center;
+}

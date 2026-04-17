@@ -25,8 +25,6 @@ const Gallery = () => {
     return gallery.filter(item => item.category === selectedCategory);
   }, [gallery, selectedCategory]);
 
-  const categoryLabel = (cat) => t(`categories.${cat}`, cat);
-
   return (
     <div className="gallery-page">
       <section className="viewport-section section-dark gallery-hero-v2">
@@ -51,7 +49,7 @@ const Gallery = () => {
                 className={`category-pill ${selectedCategory === cat ? 'active' : ''}`}
                 onClick={() => setSelectedCategory(cat)}
               >
-                {categoryLabel(cat)}
+                {t(`categories.${cat}`, cat)}
               </button>
             ))}
           </div>

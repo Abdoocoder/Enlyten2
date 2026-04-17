@@ -39,10 +39,7 @@
   border: 1px solid var(--outline-variant);
   border-radius: var(--radius-lg);
   overflow: hidden;
-  box-shadow:
-    rgba(0, 0, 0, 0.04) 0px 4px 18px,
-    rgba(0, 0, 0, 0.027) 0px 2px 8px,
-    rgba(0, 0, 0, 0.02) 0px 1px 3px;
+  box-shadow: var(--shadow-card);
   transition: transform 0.3s ease, box-shadow 0.3s ease, border-color 0.3s ease;
 }
 
@@ -138,15 +135,6 @@
 
 .mx-auto { margin-inline: auto; }
 
-.error-banner {
-  background-color: rgba(255, 59, 48, 0.06);
-  border: 1px solid rgba(255, 59, 48, 0.2);
-  color: #d4001a;
-  padding: 14px 16px;
-  border-radius: var(--radius-md);
-  text-align: center;
-  font-size: 0.875rem;
-}
 
 /* ── Mobile ── */
 @media (max-width: 768px) {

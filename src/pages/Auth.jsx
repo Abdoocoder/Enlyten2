@@ -11,14 +11,15 @@ const Auth = () => {
   const [isLogin, setIsLogin] = useState(true);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
+  const [success, setSuccess] = useState(null);
   const [formData, setFormData] = useState({ fullName: '', email: '', password: '' });
   const navigate = useNavigate();
-  const { user } = useAuth();
+  const { isAuthenticated } = useAuth();
   const { t } = useTranslation();
 
   useEffect(() => {
-    if (user) navigate('/dashboard');
-  }, [user, navigate]);
+    if (isAuthenticated) navigate('/dashboard');
+  }, [isAuthenticated, navigate]);
 
   const handleInputChange = (e) => {
     const { name, value } = e.target;
@@ -28,6 +29,7 @@ const Auth = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     setError(null);
+    setSuccess(null);
     try {
       setLoading(true);
       if (isLogin) {
@@ -39,7 +41,7 @@ const Auth = () => {
         const { error: signUpError } = await signUp(formData.email, formData.password, formData.fullName);
         if (signUpError) throw signUpError;
         setIsLogin(true);
-        setError(t('auth.successVerify'));
+        setSuccess(t('auth.successVerify'));
         setFormData({ fullName: '', email: '', password: '' });
       }
     } catch (err) {
@@ -65,11 +67,8 @@ const Auth = () => {
               </p>
             </div>
 
-            {error && (
-              <div className={`auth-banner ${error.includes('Success') || error.includes('تم') ? 'success' : 'error'}`}>
-                {error}
-              </div>
-            )}
+            {success && <div className="auth-banner success">{success}</div>}
+            {error && <div className="auth-banner error">{error}</div>}
 
             <Card variant="white" className="apple-card auth-form-card">
               <form className="auth-form-v2" onSubmit={handleSubmit}>

@@ -10,8 +10,6 @@ const useAuthGuard = (redirectTo = '/login') => {
     if (loading) return;
     if (!isAuthenticated) navigate(redirectTo);
   }, [isAuthenticated, loading, navigate, redirectTo]);
-
-  return { isAuthenticated, loading };
 };
 
 export default useAuthGuard;

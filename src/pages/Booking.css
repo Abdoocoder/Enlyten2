@@ -57,9 +57,7 @@
   justify-content: space-between;
   align-items: center;
   cursor: pointer;
-  box-shadow:
-    rgba(0, 0, 0, 0.04) 0px 2px 8px,
-    rgba(0, 0, 0, 0.02) 0px 1px 2px;
+  box-shadow: var(--shadow-card);
   transition: transform 0.2s ease, border-color 0.2s ease, box-shadow 0.2s ease;
 }
 
@@ -251,16 +249,9 @@
 
 .laser-glow-btn { box-shadow: var(--laser-glow); }
 
-/* ── Error ── */
-.error-banner {
-  background-color: rgba(255, 59, 48, 0.06);
-  border: 1px solid rgba(255, 59, 48, 0.2);
-  color: #d4001a;
-  padding: 14px 16px;
-  border-radius: var(--radius-md);
+/* ── Error ── uses global .error-banner */
+.booking-page .error-banner {
   margin-bottom: var(--spacing-xl);
-  font-size: 0.875rem;
-  text-align: center;
 }
 
 /* ── Animation ── */
