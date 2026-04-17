@@ -118,7 +118,7 @@
   }
   
   .experience-hero-v2 {
-    min-height: auto;
+    min-height: 0;
   }
   
   .experience-text-well {
