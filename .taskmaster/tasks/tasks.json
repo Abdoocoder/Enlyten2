@@ -458,9 +458,73 @@
             "title": "Code-split large routes with dynamic import()",
             "status": "pending",
             "parentId": "undefined"
+          },
+          {
+            "id": 4,
+            "title": "Add meta tags to all pages",
+            "description": "Implement proper meta tags including description, keywords, and viewport settings for all pages",
+            "dependencies": [
+              9
+            ],
+            "details": "Create a meta tag component that can be reused across all pages, ensuring each page has unique meta descriptions and keywords based on content. Include standard meta tags like charset, viewport, and description.",
+            "status": "done",
+            "testStrategy": null,
+            "updatedAt": "2026-04-17T09:09:52.981Z",
+            "parentId": "undefined"
+          },
+          {
+            "id": 5,
+            "title": "Implement lazy-loading for below-fold images",
+            "description": "Configure lazy loading for images that appear below the fold to improve page load performance",
+            "dependencies": [
+              9
+            ],
+            "details": "Use Intersection Observer API or native loading='lazy' attribute for images below the fold. Implement proper placeholder handling and ensure images load correctly when they come into view.",
+            "status": "pending",
+            "testStrategy": null,
+            "parentId": "undefined"
+          },
+          {
+            "id": 6,
+            "title": "Fix build warnings and optimize chunk sizes",
+            "description": "Ensure build process produces zero warnings related to chunk size and missing keys",
+            "dependencies": [
+              9
+            ],
+            "details": "Analyze build output for warnings, resolve missing keys in components, optimize chunk splitting, and ensure all dependencies are properly handled to eliminate any build warnings.",
+            "status": "pending",
+            "testStrategy": null,
+            "parentId": "undefined"
+          },
+          {
+            "id": 7,
+            "title": "Add Open Graph tags to all pages",
+            "description": "Implement Open Graph meta tags for proper social media sharing across all pages",
+            "dependencies": [
+              9
+            ],
+            "details": "Create Open Graph meta tag component with title, description, image, URL, and type properties. Ensure each page has unique OG tags that reflect the specific content being shared.",
+            "status": "pending",
+            "testStrategy": null,
+            "parentId": "undefined"
+          },
+          {
+            "id": 8,
+            "title": "Validate SEO and performance improvements",
+            "description": "Test that all SEO and performance optimizations are working correctly across all pages",
+            "dependencies": [
+              4,
+              5,
+              6,
+              7
+            ],
+            "details": "Run SEO audits using tools like Lighthouse or PageSpeed Insights, verify meta tags appear correctly in source code, confirm lazy loading works properly, and ensure build warnings are eliminated.",
+            "status": "pending",
+            "testStrategy": null,
+            "parentId": "undefined"
           }
         ],
-        "updatedAt": "2026-04-17T09:06:02.707Z"
+        "updatedAt": "2026-04-17T09:09:52.981Z"
       },
       {
         "id": "10",
@@ -489,7 +553,7 @@
     ],
     "metadata": {
       "version": "1.0.0",
-      "lastModified": "2026-04-17T09:06:02.708Z",
+      "lastModified": "2026-04-17T09:09:52.981Z",
       "taskCount": 10,
       "completedCount": 8,
       "tags": [

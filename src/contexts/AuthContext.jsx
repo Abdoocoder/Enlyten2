@@ -51,6 +51,12 @@ export const AuthProvider = ({ children }) => {
     return () => subscription?.unsubscribe();
   }, []);
 
+  const logout = async () => {
+    await supabase.auth.signOut();
+    setUser(null);
+    setProfile(null);
+  };
+
   const value = {
     user,
     profile,
@@ -58,6 +64,7 @@ export const AuthProvider = ({ children }) => {
     error,
     isAuthenticated: !!user,
     isAdmin: profile?.role === 'admin',
+    logout,
   };
 
   return <AuthContext.Provider value={value}>{children}</AuthContext.Provider>;

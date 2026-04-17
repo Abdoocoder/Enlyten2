@@ -5,10 +5,9 @@ import Button from '../UI/Button/Button';
 import LanguageSwitcher from '../UI/LanguageSwitcher/LanguageSwitcher';
 import { useAuth } from '../../contexts/AuthContext';
 import { useTranslation } from 'react-i18next';
-import { signOut } from '../../lib/supabase';
 
 const Layout = ({ children }) => {
-  const { isAuthenticated, user, profile, isAdmin } = useAuth();
+  const { isAuthenticated, user, profile, isAdmin, logout } = useAuth();
   const { t } = useTranslation();
   const [showUserMenu, setShowUserMenu] = useState(false);
   const menuRef = useRef(null);
@@ -25,13 +24,9 @@ const Layout = ({ children }) => {
   }, []);
 
   const handleLogout = async () => {
-    try {
-      await signOut();
-      navigate('/');
-      setShowUserMenu(false);
-    } catch (error) {
-      console.error('Logout error:', error);
-    }
+    setShowUserMenu(false);
+    await logout();
+    navigate('/');
   };
 
   const initials = (profile?.full_name || 'U')
