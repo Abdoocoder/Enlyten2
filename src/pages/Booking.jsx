@@ -11,7 +11,7 @@ import { createBooking } from '../lib/supabase';
 const Booking = () => {
   const [searchParams] = useSearchParams();
   const { services } = useServices();
-  const { user, isAuthenticated } = useAuth();
+  const { user, isAuthenticated, loading: authLoading } = useAuth();
   const { t } = useTranslation();
   const navigate = useNavigate();
 
@@ -24,8 +24,9 @@ const Booking = () => {
   const [error, setError] = useState(null);
 
   useEffect(() => {
+    if (authLoading) return;
     if (!isAuthenticated) navigate('/login');
-  }, [isAuthenticated, navigate]);
+  }, [isAuthenticated, authLoading, navigate]);
 
   const handleSubmit = async (e) => {
     e.preventDefault();

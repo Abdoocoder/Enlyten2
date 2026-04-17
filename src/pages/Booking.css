@@ -1,5 +1,6 @@
+/* ── Hero ── */
 .booking-hero {
-  min-height: 30vh;
+  min-height: 28vh;
   justify-content: center;
   text-align: center;
   background-color: var(--black);
@@ -14,24 +15,24 @@
 }
 
 .step {
-  font-size: 0.75rem;
+  font-size: 0.8125rem;
   font-weight: 500;
-  color: rgba(255, 255, 255, 0.4);
-  transition: var(--transition-fast);
+  color: rgba(255, 255, 255, 0.35);
+  letter-spacing: 0.01em;
+  transition: color 0.2s ease;
 }
 
-.step.active {
-  color: var(--white);
-}
+.step.active { color: var(--white); }
 
 .step-line {
   width: 40px;
   height: 1px;
-  background-color: rgba(255, 255, 255, 0.1);
+  background-color: rgba(255, 255, 255, 0.12);
 }
 
+/* ── Layout ── */
 .max-width-small {
-  max-width: 600px;
+  max-width: 580px;
   margin: 0 auto;
 }
 
@@ -39,48 +40,61 @@
   padding-bottom: var(--spacing-huge);
 }
 
-.text-center {
-  text-align: center;
-  margin-bottom: var(--spacing-huge);
-}
-
-/* Step 1: Treatment Tiles */
+/* ── Step 1: Treatment Tiles ── */
 .treatment-tiles {
   display: flex;
   flex-direction: column;
-  gap: var(--spacing-md);
+  gap: var(--spacing-sm);
   margin-bottom: var(--spacing-huge);
 }
 
 .treatment-tile {
   background-color: var(--white);
-  border: 1px solid var(--outline-variant);
-  border-radius: var(--radius-lg);
+  border: 1px solid rgba(0, 0, 0, 0.08);
+  border-radius: 12px;
   padding: var(--spacing-lg);
   display: flex;
   justify-content: space-between;
   align-items: center;
   cursor: pointer;
-  transition: var(--transition-apple);
+  box-shadow:
+    rgba(0, 0, 0, 0.04) 0px 2px 8px,
+    rgba(0, 0, 0, 0.02) 0px 1px 2px;
+  transition: transform 0.2s ease, border-color 0.2s ease, box-shadow 0.2s ease;
 }
 
 .treatment-tile:hover {
   border-color: var(--logo-pink);
-  transform: translateY(-2px);
+  transform: translateY(-1px);
+  box-shadow:
+    rgba(0, 0, 0, 0.06) 0px 6px 20px,
+    rgba(0, 0, 0, 0.03) 0px 2px 6px;
 }
 
 .treatment-tile.selected {
   border-color: var(--logo-pink);
   background-color: rgba(255, 0, 87, 0.02);
-  box-shadow: var(--shadow-laser);
+  box-shadow:
+    rgba(255, 0, 87, 0.12) 0px 4px 16px,
+    rgba(0, 0, 0, 0.04) 0px 1px 3px;
+}
+
+.tile-info h4 {
+  font-size: 0.9375rem;
+  font-weight: 600;
+  color: var(--near-black);
+  letter-spacing: -0.1px;
+  margin-bottom: 2px;
 }
 
 .tile-check {
   width: 20px;
   height: 20px;
   border-radius: 50%;
-  border: 2px solid var(--outline-variant);
+  border: 1.5px solid rgba(0, 0, 0, 0.2);
+  flex-shrink: 0;
   position: relative;
+  transition: border-color 0.2s ease, background-color 0.2s ease;
 }
 
 .treatment-tile.selected .tile-check {
@@ -94,13 +108,13 @@
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
-  width: 8px;
-  height: 8px;
+  width: 7px;
+  height: 7px;
   border-radius: 50%;
   background-color: var(--white);
 }
 
-/* Step 2: Schedule */
+/* ── Step 2: Schedule ── */
 .schedule-grid {
   display: flex;
   flex-direction: column;
@@ -108,113 +122,159 @@
   margin-bottom: var(--spacing-huge);
 }
 
+.date-picker-well label,
+.time-picker-well label {
+  display: block;
+  font-size: 0.75rem;
+  font-weight: 600;
+  color: #615d59;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  margin-bottom: var(--spacing-sm);
+}
+
 .apple-date-input {
   width: 100%;
-  padding: 16px;
-  border: 1px solid var(--outline-variant);
-  border-radius: var(--radius-md);
+  padding: 14px 16px;
+  border: 1px solid rgba(0, 0, 0, 0.12);
+  border-radius: 8px;
   font-family: var(--font-body);
-  font-size: 1rem;
+  font-size: 0.9375rem;
+  font-weight: 400;
   background-color: var(--white);
-  margin-top: var(--spacing-sm);
+  color: var(--near-black);
+  transition: border-color 0.2s ease, box-shadow 0.2s ease;
+}
+
+.apple-date-input:focus {
+  outline: none;
+  border-color: var(--logo-pink);
+  box-shadow: 0 0 0 3px rgba(255, 0, 87, 0.1);
 }
 
 .time-slots-grid {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
-  gap: var(--spacing-md);
-  margin-top: var(--spacing-sm);
+  gap: var(--spacing-sm);
 }
 
 .time-pill {
   padding: 12px;
-  border: 1px solid var(--outline-variant);
-  border-radius: var(--radius-md);
+  border: 1px solid rgba(0, 0, 0, 0.1);
+  border-radius: 8px;
   background: var(--white);
   cursor: pointer;
-  transition: var(--transition-fast);
+  font-size: 0.875rem;
   font-weight: 500;
+  color: var(--near-black);
+  letter-spacing: 0.01em;
+  transition: border-color 0.2s ease, background 0.2s ease, color 0.2s ease;
 }
 
-.time-pill:hover {
-  border-color: var(--logo-pink);
-}
+.time-pill:hover { border-color: var(--logo-pink); }
 
 .time-pill.active {
   background: var(--laser-gradient);
   color: var(--white);
-  border: none;
+  border-color: transparent;
 }
 
-/* Step 3: Confirmation */
+/* ── Step 3: Confirmation ── */
 .confirmation-card {
+  background: var(--white);
+  border: 1px solid rgba(0, 0, 0, 0.08);
+  border-radius: 12px;
   padding: var(--spacing-xl);
   display: flex;
   flex-direction: column;
   gap: var(--spacing-lg);
   margin-bottom: var(--spacing-huge);
+  box-shadow:
+    rgba(0, 0, 0, 0.04) 0px 4px 18px,
+    rgba(0, 0, 0, 0.02) 0px 1px 4px;
 }
 
 .confirm-row {
   display: flex;
   flex-direction: column;
   gap: 4px;
+  padding-bottom: var(--spacing-md);
+  border-bottom: 1px solid rgba(0, 0, 0, 0.06);
+}
+
+.confirm-row:last-of-type { border-bottom: none; padding-bottom: 0; }
+
+.confirm-row .label-medium {
+  font-size: 0.6875rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  color: #a39e98;
+}
+
+.confirm-row .body-intro {
+  font-size: 1rem;
+  font-weight: 500;
+  color: var(--near-black);
 }
 
 .apple-textarea {
   width: 100%;
-  min-height: 100px;
-  padding: 16px;
-  border: 1px solid var(--outline-variant);
-  border-radius: var(--radius-md);
+  min-height: 96px;
+  padding: 14px 16px;
+  border: 1px solid rgba(0, 0, 0, 0.1);
+  border-radius: 8px;
   font-family: var(--font-body);
+  font-size: 0.9375rem;
+  color: var(--near-black);
   resize: vertical;
-  margin-top: var(--spacing-md);
+  transition: border-color 0.2s ease, box-shadow 0.2s ease;
 }
 
-/* Shared */
+.apple-textarea::placeholder { color: #a39e98; }
+
+.apple-textarea:focus {
+  outline: none;
+  border-color: var(--logo-pink);
+  box-shadow: 0 0 0 3px rgba(255, 0, 87, 0.1);
+}
+
+/* ── Shared Actions ── */
 .step-actions {
   display: flex;
   align-items: center;
-  margin-top: var(--spacing-huge);
+  margin-top: var(--spacing-xl);
 }
 
-.step-actions.centered {
-  justify-content: center;
-}
+.step-actions.centered { justify-content: center; }
+.step-actions.space-between { justify-content: space-between; }
 
-.step-actions.space-between {
-  justify-content: space-between;
-}
+.laser-glow-btn { box-shadow: var(--laser-glow); }
 
-.laser-glow-btn {
-  box-shadow: var(--laser-glow);
-}
-
-.animation-fade-in {
-  animation: fadeIn 0.4s ease-out;
-}
-
-@keyframes fadeIn {
-  from { opacity: 0; transform: translateY(10px); }
-  to { opacity: 1; transform: translateY(0); }
-}
-
+/* ── Error ── */
 .error-banner {
-  background-color: rgba(255, 59, 48, 0.1);
-  color: #ff3b30;
-  padding: 16px;
-  border-radius: var(--radius-md);
+  background-color: rgba(255, 59, 48, 0.06);
+  border: 1px solid rgba(255, 59, 48, 0.2);
+  color: #d4001a;
+  padding: 14px 16px;
+  border-radius: 8px;
   margin-bottom: var(--spacing-xl);
+  font-size: 0.875rem;
   text-align: center;
 }
 
-@media (max-width: 768px) {
-  .time-slots-grid {
-    grid-template-columns: repeat(2, 1fr);
-  }
-  
-  .step-indicator {
-    flex-wrap: wrap;
-  }
+/* ── Animation ── */
+.animation-fade-in {
+  animation: fadeIn 0.35s ease-out;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(8px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+/* ── Responsive ── */
+@media (max-width: 600px) {
+  .time-slots-grid { grid-template-columns: repeat(2, 1fr); }
+  .step-indicator { flex-wrap: wrap; gap: var(--spacing-sm); }
 }
