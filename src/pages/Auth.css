@@ -1,22 +1,48 @@
+/* ── Hero ── */
 .auth-hero {
-  min-height: 80vh;
+  min-height: 100vh;
   justify-content: center;
   padding: var(--spacing-huge) 0;
+  background-color: var(--black);
+  background-image:
+    radial-gradient(ellipse 80% 50% at 20% 40%, rgba(255, 0, 87, 0.07) 0%, transparent 60%),
+    radial-gradient(ellipse 60% 40% at 80% 60%, rgba(106, 0, 255, 0.05) 0%, transparent 60%);
 }
 
 .max-width-tiny {
   max-width: 440px;
 }
 
+/* ── Header Text ── */
+.auth-card-container .brand-accent {
+  color: var(--logo-pink);
+  opacity: 0.85;
+}
+
+.auth-card-container .hero-headline {
+  color: var(--white);
+}
+
 .auth-subtitle {
+  color: rgba(255, 255, 255, 0.55);
   margin-bottom: var(--spacing-xl);
 }
 
+/* ── Form Card — Glass ── */
 .auth-form-card {
+  background: rgba(255, 255, 255, 0.04) !important;
+  border: 1px solid rgba(255, 255, 255, 0.1) !important;
+  border-radius: var(--radius-lg) !important;
+  -webkit-backdrop-filter: blur(20px);
+  backdrop-filter: blur(20px);
   margin-bottom: var(--spacing-xl);
   padding: var(--spacing-xxl) !important;
+  box-shadow:
+    rgba(0, 0, 0, 0.3) 0px 8px 32px,
+    rgba(0, 0, 0, 0.2) 0px 2px 8px;
 }
 
+/* ── Form ── */
 .auth-form-v2 {
   display: flex;
   flex-direction: column;
@@ -26,33 +52,45 @@
 .form-item {
   display: flex;
   flex-direction: column;
-  gap: 8px;
+  gap: 6px;
+}
+
+.form-item .label-medium {
+  font-size: 0.75rem;
+  font-weight: 600;
+  color: rgba(255, 255, 255, 0.5);
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
 }
 
 .apple-input {
-  background: var(--background-alt);
-  border: 1px solid var(--outline-variant);
+  background: rgba(255, 255, 255, 0.07);
+  border: 1px solid rgba(255, 255, 255, 0.12);
   border-radius: var(--radius-md);
   padding: 12px 16px;
   font-family: var(--font-body);
-  font-size: 1rem;
-  transition: all var(--transition-fast);
-  color: var(--near-black);
+  font-size: 0.9375rem;
+  color: var(--white);
+  transition: border-color 0.2s ease, box-shadow 0.2s ease, background 0.2s ease;
 }
+
+.apple-input::placeholder { color: rgba(255, 255, 255, 0.25); }
 
 .apple-input:focus {
   outline: none;
   border-color: var(--logo-pink);
-  box-shadow: 0 0 0 4px rgba(255, 0, 87, 0.08);
-  background: var(--white);
+  box-shadow: 0 0 0 3px rgba(255, 0, 87, 0.15);
+  background: rgba(255, 255, 255, 0.1);
 }
 
+/* ── Submit Button ── */
 .auth-footer-actions {
-  margin-top: var(--spacing-md);
+  margin-top: var(--spacing-sm);
 }
 
+/* ── Banners ── */
 .auth-banner {
-  padding: 12px;
+  padding: 12px 16px;
   border-radius: var(--radius-md);
   margin-bottom: var(--spacing-lg);
   font-size: 0.875rem;
@@ -60,37 +98,48 @@
 }
 
 .auth-banner.error {
-  background-color: #fff1f0;
-  border: 1px solid #ffa39e;
-  color: #cf1322;
+  background-color: rgba(255, 59, 48, 0.1);
+  border: 1px solid rgba(255, 59, 48, 0.3);
+  color: #ff6b6b;
 }
 
 .auth-banner.success {
-  background-color: #f6ffed;
-  border: 1px solid #b7eb8f;
-  color: #389e0d;
+  background-color: rgba(52, 199, 89, 0.1);
+  border: 1px solid rgba(52, 199, 89, 0.3);
+  color: #34c759;
 }
 
+/* ── Toggle ── */
 .auth-toggle-context {
   margin-top: var(--spacing-lg);
 }
 
-.auth-toggle-context .pill-link {
-  margin-top: 4px;
+.auth-toggle-context p {
+  color: rgba(255, 255, 255, 0.4);
 }
 
-/* Entrance Animation */
+.auth-toggle-context .pill-link {
+  margin-top: 4px;
+  color: var(--white);
+  opacity: 0.8;
+}
+
+.auth-toggle-context .pill-link:hover {
+  opacity: 1;
+}
+
+/* ── Animation ── */
 .animation-fade-in {
-  animation: fadeIn 0.8s cubic-bezier(0.2, 0.8, 0.2, 1);
+  animation: fadeIn 0.6s cubic-bezier(0.2, 0.8, 0.2, 1);
 }
 
 @keyframes fadeIn {
-  from { opacity: 0; transform: translateY(20px); }
-  to { opacity: 1; transform: translateY(0); }
+  from { opacity: 0; transform: translateY(16px); }
+  to   { opacity: 1; transform: translateY(0); }
 }
 
+/* ── Mobile ── */
 @media (max-width: 480px) {
-  .auth-hero {
-    padding: var(--spacing-xl) var(--spacing-md);
-  }
+  .auth-hero { padding: var(--spacing-xl) var(--spacing-md); }
+  .auth-form-card { padding: var(--spacing-xl) !important; }
 }

@@ -51,7 +51,7 @@ const Auth = () => {
 
   return (
     <div className="auth-page">
-      <section className="viewport-section section-white auth-hero">
+      <section className="viewport-section section-dark auth-hero">
         <div className="content-well max-width-tiny">
           <div className="auth-card-container animation-fade-in">
             <div className="text-center">
