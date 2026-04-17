@@ -42,7 +42,7 @@ const ServiceTile = ({ service, onBook }) => {
         <div className="service-tile-footer">
           <div className="service-meta">
             {service.duration_minutes && (
-              <span className="meta-item">{service.duration_minutes}</span>
+              <span className="meta-item">{service.duration_minutes} {t('services.min')}</span>
             )}
             <span className="price-badge">{service.price} JD</span>
           </div>
