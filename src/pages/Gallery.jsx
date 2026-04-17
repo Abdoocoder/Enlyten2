@@ -29,7 +29,7 @@ const Gallery = () => {
 
   return (
     <div className="gallery-page">
-      <section className="viewport-section section-white gallery-hero-v2">
+      <section className="viewport-section section-dark gallery-hero-v2">
         <div className="content-well text-center">
           <span className="brand-accent">{t('gallery.accent')}</span>
           <h1 className="hero-headline">
