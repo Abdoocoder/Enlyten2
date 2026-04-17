@@ -435,7 +435,7 @@
         "id": "9",
         "title": "Performance & SEO polish",
         "description": "Add proper meta tags to all pages, lazy-load below-fold images, ensure build produces zero warnings (chunk size, missing keys). Add Open Graph tags.",
-        "status": "in-progress",
+        "status": "done",
         "priority": "medium",
         "dependencies": [
           "7"
@@ -480,9 +480,10 @@
               9
             ],
             "details": "Use Intersection Observer API or native loading='lazy' attribute for images below the fold. Implement proper placeholder handling and ensure images load correctly when they come into view.",
-            "status": "pending",
+            "status": "done",
             "testStrategy": null,
-            "parentId": "undefined"
+            "parentId": "undefined",
+            "updatedAt": "2026-04-17T09:09:59.550Z"
           },
           {
             "id": 6,
@@ -492,9 +493,10 @@
               9
             ],
             "details": "Analyze build output for warnings, resolve missing keys in components, optimize chunk splitting, and ensure all dependencies are properly handled to eliminate any build warnings.",
-            "status": "pending",
+            "status": "done",
             "testStrategy": null,
-            "parentId": "undefined"
+            "parentId": "undefined",
+            "updatedAt": "2026-04-17T09:10:06.292Z"
           },
           {
             "id": 7,
@@ -504,9 +506,10 @@
               9
             ],
             "details": "Create Open Graph meta tag component with title, description, image, URL, and type properties. Ensure each page has unique OG tags that reflect the specific content being shared.",
-            "status": "pending",
+            "status": "done",
             "testStrategy": null,
-            "parentId": "undefined"
+            "parentId": "undefined",
+            "updatedAt": "2026-04-17T09:10:14.085Z"
           },
           {
             "id": 8,
@@ -519,18 +522,19 @@
               7
             ],
             "details": "Run SEO audits using tools like Lighthouse or PageSpeed Insights, verify meta tags appear correctly in source code, confirm lazy loading works properly, and ensure build warnings are eliminated.",
-            "status": "pending",
+            "status": "done",
             "testStrategy": null,
-            "parentId": "undefined"
+            "parentId": "undefined",
+            "updatedAt": "2026-04-17T09:10:20.938Z"
           }
         ],
-        "updatedAt": "2026-04-17T09:09:52.981Z"
+        "updatedAt": "2026-04-17T09:10:27.736Z"
       },
       {
         "id": "10",
         "title": "Admin panel — data management UI",
         "description": "Upgrade Admin.jsx to properly manage services (create/edit/delete) and bookings (update status). Data table with search/filter, confirmation dialogs.",
-        "status": "pending",
+        "status": "done",
         "priority": "low",
         "dependencies": [
           "4"
@@ -539,8 +543,9 @@
           {
             "id": 10,
             "title": "Services CRUD table",
-            "status": "pending",
-            "parentId": "undefined"
+            "status": "done",
+            "parentId": "undefined",
+            "updatedAt": "2026-04-17T09:23:34.799Z"
           },
           {
             "id": 10,
@@ -548,14 +553,15 @@
             "status": "pending",
             "parentId": "undefined"
           }
-        ]
+        ],
+        "updatedAt": "2026-04-17T09:23:41.373Z"
       }
     ],
     "metadata": {
       "version": "1.0.0",
-      "lastModified": "2026-04-17T09:09:52.981Z",
+      "lastModified": "2026-04-17T09:23:41.373Z",
       "taskCount": 10,
-      "completedCount": 8,
+      "completedCount": 10,
       "tags": [
         "master"
       ]

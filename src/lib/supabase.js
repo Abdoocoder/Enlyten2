@@ -162,3 +162,45 @@ export const createExperience = async (experience) => {
     .select();
   return { data, error };
 };
+
+// Admin functions
+export const getAdminBookings = async () => {
+  const { data, error } = await supabase
+    .from('bookings')
+    .select('*, services(name, name_ar, price), profiles(full_name, email)')
+    .order('booking_date', { ascending: false });
+  return { data, error };
+};
+
+export const createService = async (service) => {
+  const { data, error } = await supabase
+    .from('services')
+    .insert(service)
+    .select();
+  return { data, error };
+};
+
+export const updateService = async (id, updates) => {
+  const { data, error } = await supabase
+    .from('services')
+    .update(updates)
+    .eq('id', id)
+    .select();
+  return { data, error };
+};
+
+export const deleteService = async (id) => {
+  const { error } = await supabase
+    .from('services')
+    .delete()
+    .eq('id', id);
+  return { error };
+};
+
+export const getAdminServices = async () => {
+  const { data, error } = await supabase
+    .from('services')
+    .select('*')
+    .order('created_at', { ascending: true });
+  return { data, error };
+};

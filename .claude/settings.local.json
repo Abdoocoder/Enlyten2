@@ -17,7 +17,10 @@
       "Bash(sed -n '43,60p' src/pages/Notifications.css)",
       "Bash(sed -n '100,115p' src/pages/Booking.css)",
       "Bash(npx task-master *)",
-      "Bash(node .taskmaster/tasks/tasks.json)"
+      "Bash(node .taskmaster/tasks/tasks.json)",
+      "Bash(task-master next *)",
+      "Bash(npx @supabase/mcp-server-supabase@latest --version)",
+      "Bash(task-master set-status *)"
     ]
   }
 }
