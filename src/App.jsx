@@ -1,25 +1,27 @@
-import React from 'react';
+import React, { Suspense, lazy } from 'react';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import { AuthProvider } from './contexts/AuthContext';
 import Layout from './components/Layout/Layout';
 import Home from './pages/Home';
-import Services from './pages/Services';
-import Booking from './pages/Booking';
-import Gallery from './pages/Gallery';
-import Auth from './pages/Auth';
-import Dashboard from './pages/Dashboard';
-import Admin from './pages/Admin';
-import Profile from './pages/Profile';
-import Notifications from './pages/Notifications';
-import Contact from './pages/Contact';
-import Experience from './pages/Experience';
 import './styles/global.css';
+
+const Services      = lazy(() => import('./pages/Services'));
+const Booking       = lazy(() => import('./pages/Booking'));
+const Gallery       = lazy(() => import('./pages/Gallery'));
+const Auth          = lazy(() => import('./pages/Auth'));
+const Dashboard     = lazy(() => import('./pages/Dashboard'));
+const Admin         = lazy(() => import('./pages/Admin'));
+const Profile       = lazy(() => import('./pages/Profile'));
+const Notifications = lazy(() => import('./pages/Notifications'));
+const Contact       = lazy(() => import('./pages/Contact'));
+const Experience    = lazy(() => import('./pages/Experience'));
 
 function App() {
   return (
     <Router>
       <AuthProvider>
         <Layout>
+          <Suspense fallback={null}>
           <Routes>
             <Route path="/" element={<Home />} />
             <Route path="/services" element={<Services />} />
@@ -33,6 +35,7 @@ function App() {
             <Route path="/contact" element={<Contact />} />
             <Route path="/experience" element={<Experience />} />
           </Routes>
+          </Suspense>
         </Layout>
       </AuthProvider>
     </Router>

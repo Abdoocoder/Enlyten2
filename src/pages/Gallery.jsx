@@ -79,6 +79,7 @@ const Gallery = () => {
                           src={item.image_url}
                           alt={isAr ? (item.title_ar || item.title) : item.title}
                           className="gallery-tile-img"
+                          loading="lazy"
                         />
                         <div className="tile-glow-overlay"></div>
                       </>

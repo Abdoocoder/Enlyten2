@@ -25,7 +25,7 @@ const ServiceTile = React.memo(({ service, onBook }) => {
     <article className="service-tile">
       <div className="service-image-well">
         {service.image_url
-          ? <img src={service.image_url} alt={name} className="service-image" />
+          ? <img src={service.image_url} alt={name} className="service-image" loading="lazy" />
           : (
             <div className="service-image-placeholder">
               <span className="service-icon">{categoryIcons[service.category] || '◆'}</span>

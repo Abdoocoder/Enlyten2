@@ -2,7 +2,7 @@
   "master": {
     "tasks": [
       {
-        "id": 1,
+        "id": "1",
         "title": "Sync CLAUDE.md with Laser Glow design system",
         "description": "Update CLAUDE.md to reflect the current 'Laser Glow + Apple-inspired' design system. Remove all Luminous Canvas (gold/ivory) references and document the correct CSS tokens, typography rules, and section rhythm (black ↔ light-gray alternation).",
         "status": "done",
@@ -30,7 +30,7 @@
         ]
       },
       {
-        "id": 2,
+        "id": "2",
         "title": "Cinematic Home Page overhaul",
         "description": "Redesign the Home page using the cinematic Apple-inspired section rhythm: alternating full-bleed black (section-dark) and light-gray (section-light) sections. Hero: black bg, 56px headline, laser-gradient glow on brand name, two pill CTAs. Philosophy: light-gray, stats grid. Treatments: black section, card grid. CTA strip: light-gray.",
         "status": "done",
@@ -67,10 +67,10 @@
         "updatedAt": "2026-04-16T19:26:40.059Z"
       },
       {
-        "id": 3,
+        "id": "3",
         "title": "Services page — Apple product-grid layout",
         "description": "Redesign the Services page as an Apple-style product catalogue. Each service is a tile: image on #f5f5f7, service name as card-title (28px, weight 400), description at 14px, price badge, and pill CTA. Two-up → three-up grid depending on viewport.",
-        "status": "in-progress",
+        "status": "done",
         "priority": "high",
         "dependencies": [
           "2"
@@ -79,9 +79,9 @@
           {
             "id": 3,
             "title": "Rewrite Services.jsx with tile-based layout",
-            "status": "in-progress",
+            "status": "done",
             "parentId": "undefined",
-            "updatedAt": "2026-04-16T21:58:07.127Z"
+            "updatedAt": "2026-04-17T09:01:07.471Z"
           },
           {
             "id": 3,
@@ -160,7 +160,8 @@
             "dependencies": [],
             "details": "Implement a React component with styled-components or CSS modules that creates a service tile with #f5f5f7 background, 28px title font weight 400, 14px description text, price badge styling, and pill-shaped CTA button. Include responsive design for different viewport sizes.",
             "status": "pending",
-            "testStrategy": null
+            "testStrategy": null,
+            "parentId": "undefined"
           },
           {
             "id": 10,
@@ -171,7 +172,8 @@
             ],
             "details": "Use CSS Grid or Flexbox to create a responsive layout that automatically adjusts the number of columns based on viewport width. Implement media queries for breakpoints at 768px and 1024px to achieve two-up and three-up layouts respectively.",
             "status": "pending",
-            "testStrategy": null
+            "testStrategy": null,
+            "parentId": "undefined"
           },
           {
             "id": 11,
@@ -183,7 +185,8 @@
             ],
             "details": "Create data fetching logic that retrieves service information (name, description, image, price) and maps it to the tile component. Implement loading states and error handling for data fetching operations.",
             "status": "pending",
-            "testStrategy": null
+            "testStrategy": null,
+            "parentId": "undefined"
           },
           {
             "id": 12,
@@ -196,7 +199,8 @@
             ],
             "details": "Implement exact styling requirements including 28px title font weight 400, 14px description text, proper spacing between elements, and #f5f5f7 background color. Add hover effects and transitions to match Apple's premium feel.",
             "status": "pending",
-            "testStrategy": null
+            "testStrategy": null,
+            "parentId": "undefined"
           },
           {
             "id": 13,
@@ -210,7 +214,8 @@
             ],
             "details": "Conduct cross-browser and cross-device testing to ensure the responsive grid layout functions correctly on mobile, tablet, and desktop screens. Validate that the two-up to three-up transition occurs at appropriate breakpoints and that all elements display correctly.",
             "status": "pending",
-            "testStrategy": null
+            "testStrategy": null,
+            "parentId": "undefined"
           },
           {
             "id": 14,
@@ -219,7 +224,8 @@
             "dependencies": [],
             "details": "Implement a React component with styled-components or CSS modules that follows Apple's design language with #f5f5f7 background, 28px title font weight 400, 14px description, price badge styling, and pill CTA button",
             "status": "pending",
-            "testStrategy": null
+            "testStrategy": null,
+            "parentId": "undefined"
           },
           {
             "id": 15,
@@ -230,7 +236,8 @@
             ],
             "details": "Use CSS Grid or Flexbox with media queries to create a responsive layout that adjusts from 2 columns on small screens to 3 columns on larger screens, ensuring proper spacing and alignment",
             "status": "pending",
-            "testStrategy": null
+            "testStrategy": null,
+            "parentId": "undefined"
           },
           {
             "id": 16,
@@ -242,7 +249,8 @@
             ],
             "details": "Create data fetching logic to retrieve service information from API or local data store, map data to tile component props, handle image loading, and ensure proper text formatting for titles, descriptions, and pricing",
             "status": "pending",
-            "testStrategy": null
+            "testStrategy": null,
+            "parentId": "undefined"
           },
           {
             "id": 17,
@@ -255,7 +263,8 @@
             ],
             "details": "Add hover states for visual feedback, implement click handlers for CTAs, ensure proper accessibility attributes, and create smooth transitions between states for a polished user experience",
             "status": "pending",
-            "testStrategy": null
+            "testStrategy": null,
+            "parentId": "undefined"
           },
           {
             "id": 18,
@@ -269,16 +278,17 @@
             ],
             "details": "Test layout behavior on various screen sizes, validate proper grid alignment, ensure no overlapping elements, check that all interactive elements work correctly, and verify that the design maintains Apple's aesthetic principles at all breakpoints",
             "status": "pending",
-            "testStrategy": null
+            "testStrategy": null,
+            "parentId": "undefined"
           }
         ],
-        "updatedAt": "2026-04-16T21:58:07.127Z"
+        "updatedAt": "2026-04-17T09:01:14.665Z"
       },
       {
-        "id": 4,
+        "id": "4",
         "title": "Booking flow — high-trust minimal UI",
         "description": "Polish the Booking page to feel premium and trustworthy. Form fields with laser-glow focus states, step indicator, confirmation animation. Ensure RLS-safe Supabase insert pattern.",
-        "status": "pending",
+        "status": "done",
         "priority": "high",
         "dependencies": [
           "3"
@@ -302,13 +312,14 @@
             "status": "pending",
             "parentId": "undefined"
           }
-        ]
+        ],
+        "updatedAt": "2026-04-17T09:01:34.453Z"
       },
       {
-        "id": 5,
+        "id": "5",
         "title": "Gallery — cinematic before/after showcase",
         "description": "Redesign the Gallery page with masonry or publication-style layout. Before/after slider on image pairs. Dark section backgrounds, no borders on cards.",
-        "status": "pending",
+        "status": "done",
         "priority": "medium",
         "dependencies": [
           "2"
@@ -326,13 +337,14 @@
             "status": "pending",
             "parentId": "undefined"
           }
-        ]
+        ],
+        "updatedAt": "2026-04-17T09:01:41.527Z"
       },
       {
-        "id": 6,
+        "id": "6",
         "title": "Auth page — glassmorphism treatment",
         "description": "Polish Auth (sign in / sign up) to use a full-bleed background image with a glassmorphism card overlay. Laser-glow accents on active input fields. Smooth tab transition animation.",
-        "status": "pending",
+        "status": "done",
         "priority": "medium",
         "dependencies": [
           "2"
@@ -356,13 +368,14 @@
             "status": "pending",
             "parentId": "undefined"
           }
-        ]
+        ],
+        "updatedAt": "2026-04-17T09:01:48.558Z"
       },
       {
-        "id": 7,
+        "id": "7",
         "title": "Mobile responsiveness audit",
         "description": "Audit all pages at 375px, 428px (mobile), 768px (tablet). Fix collapsing grid, nav hamburger menu, hero headline scaling (56px → 40px → 28px).",
-        "status": "pending",
+        "status": "done",
         "priority": "high",
         "dependencies": [
           "2",
@@ -390,13 +403,14 @@
             "status": "pending",
             "parentId": "undefined"
           }
-        ]
+        ],
+        "updatedAt": "2026-04-17T09:01:55.545Z"
       },
       {
-        "id": 8,
+        "id": "8",
         "title": "RTL Arabic layout verification",
         "description": "Switch to Arabic and verify all pages render correctly: text direction, icon mirroring, logical CSS properties (margin-inline-start vs margin-left), Cairo font loading.",
-        "status": "pending",
+        "status": "done",
         "priority": "high",
         "dependencies": [
           "7"
@@ -414,10 +428,11 @@
             "status": "pending",
             "parentId": "undefined"
           }
-        ]
+        ],
+        "updatedAt": "2026-04-17T09:02:02.460Z"
       },
       {
-        "id": 9,
+        "id": "9",
         "title": "Performance & SEO polish",
         "description": "Add proper meta tags to all pages, lazy-load below-fold images, ensure build produces zero warnings (chunk size, missing keys). Add Open Graph tags.",
         "status": "pending",
@@ -447,7 +462,7 @@
         ]
       },
       {
-        "id": 10,
+        "id": "10",
         "title": "Admin panel — data management UI",
         "description": "Upgrade Admin.jsx to properly manage services (create/edit/delete) and bookings (update status). Data table with search/filter, confirmation dialogs.",
         "status": "pending",
@@ -473,14 +488,12 @@
     ],
     "metadata": {
       "version": "1.0.0",
-      "lastModified": "2026-04-16T21:58:07.128Z",
+      "lastModified": "2026-04-17T09:02:02.461Z",
       "taskCount": 10,
-      "completedCount": 2,
+      "completedCount": 8,
       "tags": [
         "master"
-      ],
-      "created": "2026-04-16T22:07:58.332Z",
-      "description": "Tasks for master context"
+      ]
     }
   }
 }
