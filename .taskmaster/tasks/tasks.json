@@ -435,7 +435,7 @@
         "id": "9",
         "title": "Performance & SEO polish",
         "description": "Add proper meta tags to all pages, lazy-load below-fold images, ensure build produces zero warnings (chunk size, missing keys). Add Open Graph tags.",
-        "status": "pending",
+        "status": "in-progress",
         "priority": "medium",
         "dependencies": [
           "7"
@@ -459,7 +459,8 @@
             "status": "pending",
             "parentId": "undefined"
           }
-        ]
+        ],
+        "updatedAt": "2026-04-17T09:06:02.707Z"
       },
       {
         "id": "10",
@@ -488,7 +489,7 @@
     ],
     "metadata": {
       "version": "1.0.0",
-      "lastModified": "2026-04-17T09:02:02.461Z",
+      "lastModified": "2026-04-17T09:06:02.708Z",
       "taskCount": 10,
       "completedCount": 8,
       "tags": [
