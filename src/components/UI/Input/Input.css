@@ -10,7 +10,7 @@
   font-size: 0.875rem;
   font-weight: 600;
   color: var(--on-surface-variant);
-  margin-left: 4px;
+  margin-inline-start: 4px;
 }
 
 .input-field {
@@ -38,5 +38,5 @@
   font-family: var(--font-body);
   font-size: 0.75rem;
   color: var(--on-surface-variant);
-  margin-left: 4px;
+  margin-inline-start: 4px;
 }
