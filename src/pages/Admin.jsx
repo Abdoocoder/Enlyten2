@@ -48,6 +48,7 @@ const Admin = () => {
             <h2 className="headline-small">{t('admin.recentAppointments')}</h2>
             <Button variant="secondary">{t('admin.viewAll')}</Button>
           </div>
+          <div className="admin-table-wrapper">
           <table className="admin-table">
             <thead>
               <tr>
@@ -68,6 +69,7 @@ const Admin = () => {
               ))}
             </tbody>
           </table>
+          </div>
         </Card>
       </div>
     </div>

@@ -27,14 +27,19 @@
   color: #2e7d32;
 }
 
+.admin-table-wrapper {
+  overflow-x: auto;
+}
+
 .admin-table {
   width: 100%;
+  min-width: 500px;
   border-collapse: collapse;
   margin-top: var(--spacing-lg);
 }
 
 .admin-table th {
-  text-align: left;
+  text-align: start;
   padding: var(--spacing-md);
   border-bottom: 2px solid var(--surface-container-low);
   color: var(--outline);
