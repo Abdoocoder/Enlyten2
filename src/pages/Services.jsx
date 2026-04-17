@@ -15,7 +15,7 @@ const categoryIcons = {
   'Hair': '◐',
 };
 
-const ServiceTile = ({ service, onBook }) => {
+const ServiceTile = React.memo(({ service, onBook }) => {
   const { t, i18n } = useTranslation();
   const isAr = i18n.language === 'ar';
   const name = isAr ? (service.name_ar || service.name) : service.name;
@@ -53,7 +53,7 @@ const ServiceTile = ({ service, onBook }) => {
       </div>
     </article>
   );
-};
+});
 
 const Services = () => {
   const { services: dbServices, loading, error } = useServices();

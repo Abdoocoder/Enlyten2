@@ -15,7 +15,7 @@
 /* ── Category Strip ── */
 .category-strip-container {
   background-color: var(--white);
-  border-bottom: 1px solid rgba(0, 0, 0, 0.08);
+  border-bottom: 1px solid var(--outline-variant);
   position: sticky;
   top: 48px;
   z-index: 990;
@@ -63,11 +63,11 @@
 /* ── Service Tile ── */
 .service-tile {
   background-color: var(--white);
-  border-radius: 12px;
+  border-radius: var(--radius-lg);
   overflow: hidden;
   display: flex;
   flex-direction: column;
-  border: 1px solid rgba(0, 0, 0, 0.08);
+  border: 1px solid var(--outline-variant);
   box-shadow:
     rgba(0, 0, 0, 0.04) 0px 4px 18px,
     rgba(0, 0, 0, 0.027) 0px 2px 8px,
@@ -110,7 +110,7 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  background: linear-gradient(135deg, #f6f5f4 0%, #ebebed 100%);
+  background: linear-gradient(135deg, var(--warm-white) 0%, #ebebed 100%);
 }
 
 .service-icon {
@@ -128,7 +128,7 @@
   inset-inline-start: var(--spacing-md);
   background-color: rgba(255, 255, 255, 0.92);
   padding: 3px 10px;
-  border-radius: 9999px;
+  border-radius: var(--radius-pill);
   font-size: 0.6875rem;
   text-transform: uppercase;
   font-weight: 700;
@@ -156,7 +156,7 @@
 }
 
 .service-desc {
-  color: #615d59;
+  color: var(--on-surface-variant);
   font-size: 0.875rem;
   font-weight: 400;
   line-height: 1.55;
@@ -187,7 +187,7 @@
 .meta-item {
   font-size: 0.75rem;
   font-weight: 500;
-  color: #a39e98;
+  color: var(--on-surface-disabled);
   letter-spacing: 0.03em;
 }
 

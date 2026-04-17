@@ -50,8 +50,8 @@
 
 .treatment-tile {
   background-color: var(--white);
-  border: 1px solid rgba(0, 0, 0, 0.08);
-  border-radius: 12px;
+  border: 1px solid var(--outline-variant);
+  border-radius: var(--radius-lg);
   padding: var(--spacing-lg);
   display: flex;
   justify-content: space-between;
@@ -127,7 +127,7 @@
   display: block;
   font-size: 0.75rem;
   font-weight: 600;
-  color: #615d59;
+  color: var(--on-surface-variant);
   letter-spacing: 0.04em;
   text-transform: uppercase;
   margin-bottom: var(--spacing-sm);
@@ -137,7 +137,7 @@
   width: 100%;
   padding: 14px 16px;
   border: 1px solid rgba(0, 0, 0, 0.12);
-  border-radius: 8px;
+  border-radius: var(--radius-md);
   font-family: var(--font-body);
   font-size: 0.9375rem;
   font-weight: 400;
@@ -161,7 +161,7 @@
 .time-pill {
   padding: 12px;
   border: 1px solid rgba(0, 0, 0, 0.1);
-  border-radius: 8px;
+  border-radius: var(--radius-md);
   background: var(--white);
   cursor: pointer;
   font-size: 0.875rem;
@@ -182,8 +182,8 @@
 /* ── Step 3: Confirmation ── */
 .confirmation-card {
   background: var(--white);
-  border: 1px solid rgba(0, 0, 0, 0.08);
-  border-radius: 12px;
+  border: 1px solid var(--outline-variant);
+  border-radius: var(--radius-lg);
   padding: var(--spacing-xl);
   display: flex;
   flex-direction: column;
@@ -209,7 +209,7 @@
   font-weight: 600;
   text-transform: uppercase;
   letter-spacing: 0.06em;
-  color: #a39e98;
+  color: var(--on-surface-disabled);
 }
 
 .confirm-row .body-intro {
@@ -223,7 +223,7 @@
   min-height: 96px;
   padding: 14px 16px;
   border: 1px solid rgba(0, 0, 0, 0.1);
-  border-radius: 8px;
+  border-radius: var(--radius-md);
   font-family: var(--font-body);
   font-size: 0.9375rem;
   color: var(--near-black);
@@ -231,7 +231,7 @@
   transition: border-color 0.2s ease, box-shadow 0.2s ease;
 }
 
-.apple-textarea::placeholder { color: #a39e98; }
+.apple-textarea::placeholder { color: var(--on-surface-disabled); }
 
 .apple-textarea:focus {
   outline: none;
@@ -257,7 +257,7 @@
   border: 1px solid rgba(255, 59, 48, 0.2);
   color: #d4001a;
   padding: 14px 16px;
-  border-radius: 8px;
+  border-radius: var(--radius-md);
   margin-bottom: var(--spacing-xl);
   font-size: 0.875rem;
   text-align: center;

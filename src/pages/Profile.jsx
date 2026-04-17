@@ -1,5 +1,4 @@
 import React, { useState, useEffect } from 'react';
-import { useNavigate } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
 import './Profile.css';
 import Card from '../components/UI/Card/Card';
@@ -8,10 +7,11 @@ import Button from '../components/UI/Button/Button';
 import profileBg from '../assets/profile-bg.png';
 import { useAuth } from '../contexts/AuthContext';
 import { updateProfile } from '../lib/supabase';
+import useAuthGuard from '../hooks/useAuthGuard';
 
 const Profile = () => {
-  const { user, profile, isAuthenticated, loading: authLoading } = useAuth();
-  const navigate = useNavigate();
+  const { user, profile } = useAuth();
+  useAuthGuard();
   const { t } = useTranslation();
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
@@ -19,8 +19,6 @@ const Profile = () => {
   const [formData, setFormData] = useState({ full_name: '', phone: '', bio: '' });
 
   useEffect(() => {
-    if (authLoading) return;
-    if (!isAuthenticated) { navigate('/login'); return; }
     if (profile) {
       setFormData({
         full_name: profile.full_name || '',
@@ -28,7 +26,7 @@ const Profile = () => {
         bio: profile.bio || '',
       });
     }
-  }, [profile, isAuthenticated, authLoading, navigate]);
+  }, [profile]);
 
   const handleInputChange = (e) => {
     const { name, value } = e.target;

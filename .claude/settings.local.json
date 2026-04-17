@@ -10,7 +10,9 @@
       "WebFetch(domain:www.facebook.com)",
       "WebFetch(domain:web.facebook.com)",
       "Bash(xargs cat *)",
-      "WebFetch(domain:masalaserclinic.com)"
+      "WebFetch(domain:masalaserclinic.com)",
+      "Bash(python3 -c \"import json,sys; tasks=json.load\\(sys.stdin\\)['master']['tasks']; [print\\(f\\\\\"[{t['status'].upper\\(\\)}] #{t['id']}: {t['title']}\\\\\"\\) for t in tasks]\")",
+      "Bash(node -e \"const t=require\\('./.taskmaster/tasks/tasks.json'\\).master.tasks; t.forEach\\(x=>console.log\\('['+x.status.toUpperCase\\(\\)+'] #'+x.id+': '+x.title\\)\\)\")"
     ]
   }
 }

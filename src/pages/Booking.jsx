@@ -1,5 +1,5 @@
-import React, { useState, useEffect } from 'react';
-import { useNavigate, useSearchParams } from 'react-router-dom';
+import React, { useState, useMemo } from 'react';
+import { useSearchParams } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
 import './Booking.css';
 import Button from '../components/UI/Button/Button';
@@ -7,13 +7,14 @@ import Card from '../components/UI/Card/Card';
 import { useServices } from '../hooks/useDatabase';
 import { useAuth } from '../contexts/AuthContext';
 import { createBooking } from '../lib/supabase';
+import useAuthGuard from '../hooks/useAuthGuard';
 
 const Booking = () => {
   const [searchParams] = useSearchParams();
   const { services } = useServices();
-  const { user, isAuthenticated, loading: authLoading } = useAuth();
+  const { user } = useAuth();
+  useAuthGuard();
   const { t } = useTranslation();
-  const navigate = useNavigate();
 
   const [currentStep, setCurrentStep] = useState(1);
   const [selectedService, setSelectedService] = useState(searchParams.get('serviceId') || null);
@@ -22,11 +23,6 @@ const Booking = () => {
   const [notes, setNotes] = useState('');
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
-
-  useEffect(() => {
-    if (authLoading) return;
-    if (!isAuthenticated) navigate('/login');
-  }, [isAuthenticated, authLoading, navigate]);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -53,7 +49,10 @@ const Booking = () => {
 
   const timeSlots = ['09:00', '10:00', '11:00', '14:00', '15:00', '16:00'];
   const today = new Date().toISOString().split('T')[0];
-  const selectedServiceData = services.find(s => s.id === selectedService);
+  const selectedServiceData = useMemo(
+    () => services.find(s => s.id === selectedService),
+    [services, selectedService]
+  );
 
   return (
     <div className="booking-page">
