@@ -80,7 +80,7 @@
 .user-menu {
   position: absolute;
   top: 100%;
-  right: 0;
+  inset-inline-end: 0;
   background-color: var(--glass-bg);
   -webkit-backdrop-filter: var(--glass-blur);
   backdrop-filter: var(--glass-blur);
@@ -89,7 +89,7 @@
   box-shadow: var(--shadow-card);
   min-width: 200px;
   margin-top: var(--spacing-sm);
-  z-index: 1000;
+  z-index: 2000;
   overflow: hidden;
 }
 
@@ -97,7 +97,7 @@
   display: block;
   width: 100%;
   padding: 12px 16px;
-  text-align: left;
+  text-align: start;
   background: none;
   border: none;
   color: var(--white);
