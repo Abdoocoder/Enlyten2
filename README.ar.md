@@ -2,7 +2,7 @@
 
 # Enlyten2 Laser Center — تطبيق الويب
 
-[![الإصدار](https://img.shields.io/badge/الإصدار-1.2.0-gold?style=flat-square)](package.json)
+[![الإصدار](https://img.shields.io/badge/الإصدار-1.3.0-gold?style=flat-square)](package.json)
 [![React](https://img.shields.io/badge/React-19-61DAFB?style=flat-square&logo=react)](https://react.dev)
 [![Vite](https://img.shields.io/badge/Vite-8-646CFF?style=flat-square&logo=vite)](https://vitejs.dev)
 [![Supabase](https://img.shields.io/badge/Supabase-backend-3ECF8E?style=flat-square&logo=supabase)](https://supabase.com)
@@ -150,6 +150,12 @@ npm run preview   # معاينة نسخة الإنتاج محلياً
 ---
 
 ## 📋 سجل التغييرات
+
+### v1.3.0 — 2026-04-20
+
+- **تحديثات فورية للوحة الإدارة**: تكامل Supabase Realtime لتحديث الحجوزات لحظياً
+- **شارة التنبيه**: شارة ديناميكية في تبويب الحجوزات تعرض عدد المواعيد قيد الانتظار
+- **تحسينات الواجهة**: إضافة حركات (Animations) للتنبيهات وتحسين انتقالات لوحة الإدارة
 
 ### v1.2.0 — 2026-04-20
 

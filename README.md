@@ -1,6 +1,6 @@
 # Enlyten2 Laser Center — Web Application
 
-[![Version](https://img.shields.io/badge/version-1.2.0-gold?style=flat-square)](package.json)
+[![Version](https://img.shields.io/badge/version-1.3.0-gold?style=flat-square)](package.json)
 [![React](https://img.shields.io/badge/React-19-61DAFB?style=flat-square&logo=react)](https://react.dev)
 [![Vite](https://img.shields.io/badge/Vite-8-646CFF?style=flat-square&logo=vite)](https://vitejs.dev)
 [![Supabase](https://img.shields.io/badge/Supabase-backend-3ECF8E?style=flat-square&logo=supabase)](https://supabase.com)
@@ -211,6 +211,12 @@ npm run preview   # Preview production build locally
 ---
 
 ## 📋 Changelog
+
+### v1.3.0 — 2026-04-20
+
+- **Admin Panel Real-time**: Integrated Supabase Realtime for instant booking updates
+- **Notification Badge**: Dynamic badge on the Bookings tab showing the count of unreviewed pending appointments
+- **UI/UX**: Added pop animations for notifications and polished admin transitions
 
 ### v1.2.0 — 2026-04-20
 

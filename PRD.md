@@ -127,11 +127,11 @@
 - [x] useAuthGuard hook with returnTo redirect
 - [x] Responsive design (mobile, tablet, desktop)
 - [x] Performance: useMemo, React.memo on ServiceTile
+- [x] Real-time pending badge in Admin panel header (v1.3)
 
-### Pending (v1.3)
+### Pending (v1.4)
 - [ ] Email notification on booking created/confirmed (Resend API)
 - [ ] WhatsApp notification to admin on new booking
-- [ ] Real-time pending badge in Admin panel header
 
 ---
 

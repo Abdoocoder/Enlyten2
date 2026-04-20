@@ -79,6 +79,28 @@
   font-weight: 600;
 }
 
+.tab-badge {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  background-color: #c62828;
+  color: white;
+  font-size: 10px;
+  font-weight: 700;
+  min-width: 18px;
+  height: 18px;
+  border-radius: 50%;
+  margin-inline-start: 8px;
+  vertical-align: middle;
+  box-shadow: 0 2px 4px rgba(198, 40, 40, 0.3);
+  animation: badgePop 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+@keyframes badgePop {
+  from { transform: scale(0); opacity: 0; }
+  to { transform: scale(1); opacity: 1; }
+}
+
 .admin-tab:hover:not(.active) { color: var(--near-black); }
 
 /* Toolbar */

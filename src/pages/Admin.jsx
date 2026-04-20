@@ -91,6 +91,26 @@ const Admin = () => {
     }
   }, [isAdmin]);
 
+  useEffect(() => {
+    // Real-time listener for new bookings
+    const channel = supabase
+      .channel('admin-bookings-realtime')
+      .on(
+        'postgres_changes',
+        { event: 'INSERT', schema: 'public', table: 'bookings' },
+        (payload) => {
+          // Toast or simple notification logic can go here
+          console.log('New booking received!', payload);
+          loadData(); // Refresh data to update stats and table
+        }
+      )
+      .subscribe();
+
+    return () => {
+      supabase.removeChannel(channel);
+    };
+  }, [loadData]);
+
   useEffect(() => { loadData(); }, [loadData]);
 
   // Derived Data
@@ -210,6 +230,9 @@ const Admin = () => {
               onClick={() => { setTab(tKey); setSearch(''); setFilter('all'); }}
             >
               {t(`admin.tab${tKey.charAt(0).toUpperCase() + tKey.slice(1)}`)}
+              {tKey === 'bookings' && stats.pending > 0 && (
+                <span className="tab-badge">{stats.pending}</span>
+              )}
             </button>
           ))}
         </div>
