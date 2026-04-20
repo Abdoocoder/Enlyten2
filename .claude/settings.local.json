@@ -21,7 +21,8 @@
       "Bash(task-master next *)",
       "Bash(npx @supabase/mcp-server-supabase@latest --version)",
       "Bash(task-master set-status *)",
-      "Bash(npm install *)"
+      "Bash(npm install *)",
+      "Bash(npx skills *)"
     ]
   }
 }
