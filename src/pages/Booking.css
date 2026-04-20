@@ -1,10 +1,18 @@
 /* ── Hero ── */
 .booking-hero {
-  min-height: 28vh;
+  width: 100%;
+  min-height: 26vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
   justify-content: center;
+  padding: var(--spacing-xxl) var(--spacing-lg);
   text-align: center;
   background-color: var(--black);
+  color: var(--white);
 }
+
+.booking-hero h1 { color: var(--white); }
 
 .step-indicator {
   display: flex;
@@ -338,7 +346,8 @@
 
 /* ── Animation ── */
 .animation-fade-in {
-  animation: fadeIn 0.35s ease-out;
+  will-change: opacity, transform;
+  animation: fadeIn 0.35s ease-out forwards;
 }
 
 @keyframes fadeIn {

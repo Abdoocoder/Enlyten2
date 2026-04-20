@@ -7,12 +7,27 @@ import { useServices } from '../hooks/useDatabase';
 import { useAuth } from '../contexts/AuthContext';
 import { createBooking, getBookedSlots } from '../lib/supabase';
 import useAuthGuard from '../hooks/useAuthGuard';
+import mockData from '../data/mockData.json';
+
+const MOCK_SERVICES = mockData.treatments.map((t, i) => ({
+  id: t.id,
+  name: t.name,
+  name_ar: t.name_ar,
+  description: t.description,
+  description_ar: t.description_ar,
+  duration_minutes: parseInt(t.duration) || 45,
+  price: t.price,
+  category: t.category,
+  is_active: true,
+  _isMock: true,
+}));
 
 const TIME_SLOTS = ['09:00', '10:00', '11:00', '14:00', '15:00', '16:00'];
 
 const Booking = () => {
   const [searchParams] = useSearchParams();
-  const { services, loading: servicesLoading } = useServices();
+  const { services: dbServices, loading: servicesLoading } = useServices();
+  const services = dbServices.length > 0 ? dbServices : (servicesLoading ? [] : MOCK_SERVICES);
   const { user } = useAuth();
   useAuthGuard();
   const { t, i18n } = useTranslation();
@@ -88,7 +103,7 @@ const Booking = () => {
 
   return (
     <div className="booking-page">
-      <section className="viewport-section section-dark booking-hero">
+      <section className="booking-hero">
         <div className="content-well text-center">
           <h1 className="hero-headline">{t('booking.title')}</h1>
           <div className="step-indicator">
