@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, useSearchParams } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
 import './Auth.css';
 import Button from '../components/UI/Button/Button';
@@ -14,12 +14,14 @@ const Auth = () => {
   const [success, setSuccess] = useState(null);
   const [formData, setFormData] = useState({ fullName: '', email: '', password: '' });
   const navigate = useNavigate();
+  const [searchParams] = useSearchParams();
+  const returnTo = searchParams.get('returnTo') || '/dashboard';
   const { isAuthenticated } = useAuth();
   const { t } = useTranslation();
 
   useEffect(() => {
-    if (isAuthenticated) navigate('/dashboard');
-  }, [isAuthenticated, navigate]);
+    if (isAuthenticated) navigate(returnTo);
+  }, [isAuthenticated, navigate, returnTo]);
 
   const handleInputChange = (e) => {
     const { name, value } = e.target;
@@ -35,7 +37,7 @@ const Auth = () => {
       if (isLogin) {
         const { error: signInError } = await signIn(formData.email, formData.password);
         if (signInError) throw signInError;
-        navigate('/dashboard');
+        navigate(returnTo);
       } else {
         if (!formData.fullName.trim()) throw new Error(t('auth.errorNameRequired'));
         const { error: signUpError } = await signUp(formData.email, formData.password, formData.fullName);
