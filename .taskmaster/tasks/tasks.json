@@ -2,7 +2,7 @@
   "master": {
     "tasks": [
       {
-        "id": 1,
+        "id": "1",
         "title": "Sync CLAUDE.md with Laser Glow design system",
         "description": "Update CLAUDE.md to reflect the current 'Laser Glow + Apple-inspired' design system. Remove all Luminous Canvas (gold/ivory) references and document the correct CSS tokens, typography rules, and section rhythm (black ↔ light-gray alternation).",
         "status": "done",
@@ -30,7 +30,7 @@
         ]
       },
       {
-        "id": 2,
+        "id": "2",
         "title": "Cinematic Home Page overhaul",
         "description": "Redesign the Home page using the cinematic Apple-inspired section rhythm: alternating full-bleed black (section-dark) and light-gray (section-light) sections. Hero: black bg, 56px headline, laser-gradient glow on brand name, two pill CTAs. Philosophy: light-gray, stats grid. Treatments: black section, card grid. CTA strip: light-gray.",
         "status": "done",
@@ -67,7 +67,7 @@
         "updatedAt": "2026-04-16T19:26:40.059Z"
       },
       {
-        "id": 3,
+        "id": "3",
         "title": "Services page — Apple product-grid layout",
         "description": "Redesign the Services page as an Apple-style product catalogue. Each service is a tile: image on #f5f5f7, service name as card-title (28px, weight 400), description at 14px, price badge, and pill CTA. Two-up → three-up grid depending on viewport.",
         "status": "done",
@@ -285,7 +285,7 @@
         "updatedAt": "2026-04-17T09:01:14.665Z"
       },
       {
-        "id": 4,
+        "id": "4",
         "title": "Booking flow — high-trust minimal UI",
         "description": "Polish the Booking page to feel premium and trustworthy. Form fields with laser-glow focus states, step indicator, confirmation animation. Ensure RLS-safe Supabase insert pattern.",
         "status": "done",
@@ -316,7 +316,7 @@
         "updatedAt": "2026-04-17T09:01:34.453Z"
       },
       {
-        "id": 5,
+        "id": "5",
         "title": "Gallery — cinematic before/after showcase",
         "description": "Redesign the Gallery page with masonry or publication-style layout. Before/after slider on image pairs. Dark section backgrounds, no borders on cards.",
         "status": "done",
@@ -341,7 +341,7 @@
         "updatedAt": "2026-04-17T09:01:41.527Z"
       },
       {
-        "id": 6,
+        "id": "6",
         "title": "Auth page — glassmorphism treatment",
         "description": "Polish Auth (sign in / sign up) to use a full-bleed background image with a glassmorphism card overlay. Laser-glow accents on active input fields. Smooth tab transition animation.",
         "status": "done",
@@ -372,7 +372,7 @@
         "updatedAt": "2026-04-17T09:01:48.558Z"
       },
       {
-        "id": 7,
+        "id": "7",
         "title": "Mobile responsiveness audit",
         "description": "Audit all pages at 375px, 428px (mobile), 768px (tablet). Fix collapsing grid, nav hamburger menu, hero headline scaling (56px → 40px → 28px).",
         "status": "done",
@@ -407,7 +407,7 @@
         "updatedAt": "2026-04-17T09:01:55.545Z"
       },
       {
-        "id": 8,
+        "id": "8",
         "title": "RTL Arabic layout verification",
         "description": "Switch to Arabic and verify all pages render correctly: text direction, icon mirroring, logical CSS properties (margin-inline-start vs margin-left), Cairo font loading.",
         "status": "done",
@@ -432,7 +432,7 @@
         "updatedAt": "2026-04-17T09:02:02.460Z"
       },
       {
-        "id": 9,
+        "id": "9",
         "title": "Performance & SEO polish",
         "description": "Add proper meta tags to all pages, lazy-load below-fold images, ensure build produces zero warnings (chunk size, missing keys). Add Open Graph tags.",
         "status": "done",
@@ -531,7 +531,7 @@
         "updatedAt": "2026-04-17T09:10:27.736Z"
       },
       {
-        "id": 10,
+        "id": "10",
         "title": "Admin panel — data management UI",
         "description": "Upgrade Admin.jsx to properly manage services (create/edit/delete) and bookings (update status). Data table with search/filter, confirmation dialogs.",
         "status": "done",
@@ -560,7 +560,8 @@
             "dependencies": [],
             "details": "Implement the main Admin component with service and booking management sections, create separate containers for each data type, establish state management for data loading and display",
             "status": "pending",
-            "testStrategy": null
+            "testStrategy": null,
+            "parentId": "undefined"
           },
           {
             "id": 4,
@@ -571,7 +572,8 @@
             ],
             "details": "Create service forms with validation, implement API calls for CRUD operations, add service data table with proper column definitions and action buttons, ensure proper error handling",
             "status": "pending",
-            "testStrategy": null
+            "testStrategy": null,
+            "parentId": "undefined"
           },
           {
             "id": 5,
@@ -582,7 +584,8 @@
             ],
             "details": "Create booking status update interface with dropdown or button controls, implement API integration for status changes, add proper confirmation dialogs, ensure status history tracking",
             "status": "pending",
-            "testStrategy": null
+            "testStrategy": null,
+            "parentId": "undefined"
           },
           {
             "id": 6,
@@ -595,7 +598,8 @@
             ],
             "details": "Add search input fields for each table, implement client-side filtering logic, create filter dropdowns for status and date ranges, ensure responsive design for different viewport sizes",
             "status": "pending",
-            "testStrategy": null
+            "testStrategy": null,
+            "parentId": "undefined"
           },
           {
             "id": 7,
@@ -608,22 +612,57 @@
             ],
             "details": "Create reusable confirmation dialog component, implement modal triggers for delete operations, add status update confirmation, ensure proper user feedback and undo capabilities, style dialogs according to design system",
             "status": "pending",
-            "testStrategy": null
+            "testStrategy": null,
+            "parentId": "undefined"
           }
         ],
         "updatedAt": "2026-04-17T09:23:41.373Z"
+      },
+      {
+        "id": "11",
+        "title": "Sentry error monitoring integration",
+        "description": "Add @sentry/react with ErrorBoundary, session replay, browser tracing. DSN via VITE_SENTRY_DSN env var. sendDefaultPii disabled.",
+        "details": "",
+        "testStrategy": "",
+        "status": "done",
+        "dependencies": [],
+        "priority": "high",
+        "subtasks": [],
+        "updatedAt": "2026-04-20T07:53:52.822Z"
+      },
+      {
+        "id": "12",
+        "title": "Security hardening",
+        "description": "Sentry DSN to env var, PII disabled, profile whitelist, token removed from git history.",
+        "details": "",
+        "testStrategy": "",
+        "status": "done",
+        "dependencies": [],
+        "priority": "high",
+        "subtasks": [],
+        "updatedAt": "2026-04-20T07:54:05.545Z"
+      },
+      {
+        "id": "13",
+        "title": "Documentation update v1.2.0",
+        "description": "Updated CLAUDE.md, README.md, README.ar.md to v1.2.0.",
+        "details": "",
+        "testStrategy": "",
+        "status": "done",
+        "dependencies": [],
+        "priority": "low",
+        "subtasks": [],
+        "updatedAt": "2026-04-20T07:54:18.285Z"
       }
     ],
     "metadata": {
       "version": "1.0.0",
-      "lastModified": "2026-04-17T09:23:41.373Z",
-      "taskCount": 10,
-      "completedCount": 10,
+      "lastModified": "2026-04-20T07:54:18.286Z",
+      "taskCount": 13,
+      "completedCount": 13,
       "tags": [
         "master"
-      ],
-      "created": "2026-04-17T09:23:48.245Z",
-      "description": "Tasks for master context"
+      ]
     }
   }
 }
