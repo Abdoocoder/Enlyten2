@@ -354,7 +354,7 @@ const Admin = () => {
                 <div className="admin-gallery-grid">
                   {data.gallery.map(g => (
                     <div key={g.id} className="admin-gallery-item">
-                      <img src={g.image_url} alt="" />
+                      <img src={g.image_url} alt={g.title || ''} loading="lazy" />
                       <button className="gallery-delete" onClick={() => setConfirmDelete({ id: g.id, type: 'gallery', name: 'Photo' })}>×</button>
                     </div>
                   ))}
@@ -398,7 +398,7 @@ const Admin = () => {
                     <tbody>
                       {data.doctors.map(d => (
                         <tr key={d.id}>
-                          <td><img src={d.image_url} className="admin-avatar" alt="" /></td>
+                          <td><img src={d.image_url} className="admin-avatar" alt={isAr ? d.name_ar : d.name} loading="lazy" /></td>
                           <td>{isAr ? d.name_ar : d.name}<br/><small>{isAr ? d.specialty_ar : d.specialty}</small></td>
                           <td className="action-cell">
                             <button className="action-btn edit" onClick={() => setModal({ open: true, mode: 'edit', type: 'doctor', data: d })}>{t('admin.edit')}</button>

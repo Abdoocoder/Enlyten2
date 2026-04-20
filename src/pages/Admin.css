@@ -51,9 +51,9 @@
   letter-spacing: 0.04em;
 }
 
-.kpi-pending .kpi-val   { color: #b45309; }
-.kpi-confirmed .kpi-val { color: #2e7d32; }
-.kpi-completed .kpi-val { color: #3949ab; }
+.kpi-pending .kpi-val   { color: var(--color-amber); }
+.kpi-confirmed .kpi-val { color: var(--color-success); }
+.kpi-completed .kpi-val { color: var(--color-blue); }
 
 /* Tabs */
 .admin-tabs {
@@ -83,7 +83,7 @@
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  background-color: #c62828;
+  background-color: var(--color-danger);
   color: white;
   font-size: 10px;
   font-weight: 700;
@@ -181,7 +181,7 @@
   text-align: start;
   padding: var(--spacing-md) var(--spacing-lg);
   border-bottom: 2px solid var(--outline-variant);
-  font-size: 0.6875rem;
+  font-size: var(--fs-tag);
   font-weight: 700;
   text-transform: uppercase;
   letter-spacing: 0.06em;
@@ -241,7 +241,7 @@
   background: rgba(255, 0, 87, 0.08);
   color: var(--logo-pink);
   border-radius: var(--radius-pill);
-  font-size: 0.6875rem;
+  font-size: var(--fs-tag);
   font-weight: 700;
   text-transform: uppercase;
   letter-spacing: 0.06em;
@@ -254,8 +254,8 @@
   height: 10px;
   border-radius: 50%;
 }
-.active-dot.on  { background: #2e7d32; }
-.active-dot.off { background: #ccc; }
+.active-dot.on  { background: var(--color-success); }
+.active-dot.off { background: var(--on-surface-disabled); }
 
 /* Action Buttons */
 .action-cell { display: flex; gap: var(--spacing-sm); align-items: center; }
@@ -277,10 +277,10 @@
 
 .action-btn.delete {
   border: 1px solid rgba(198, 40, 40, 0.2);
-  color: #c62828;
+  color: var(--color-danger);
   background: var(--white);
 }
-.action-btn.delete:hover { background: #fce4ec; }
+.action-btn.delete:hover { background: var(--color-error-subtle); }
 
 /* Empty */
 .admin-empty {
@@ -451,14 +451,14 @@
 }
 
 .btn-danger {
-  background: #c62828;
+  background: var(--color-danger);
   color: var(--white);
   border-radius: var(--radius-md);
   padding: 10px 20px;
   font-weight: 600;
   transition: var(--transition-fast);
 }
-.btn-danger:hover { background: #b71c1c; }
+.btn-danger:hover { background: color-mix(in srgb, var(--color-danger) 85%, black); }
 
 /* Expanded Tabs with Scroll */
 .admin-tabs.scroll-x {
@@ -504,7 +504,7 @@
   position: absolute;
   top: 8px;
   right: 8px;
-  background: #c62828;
+  background: var(--color-danger);
   color: var(--white);
   width: 28px;
   height: 28px;

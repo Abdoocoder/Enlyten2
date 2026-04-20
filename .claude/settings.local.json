@@ -30,7 +30,14 @@
       "Bash(task-master add-task *)",
       "Bash(git clone *)",
       "Bash(cp -r design-motion-principles/skills/design-motion-principles ~/.claude/skills/)",
-      "Bash(cp *)"
+      "Bash(cp *)",
+      "Bash(node ~/.claude/skills/impeccable/scripts/cleanup-deprecated.mjs)",
+      "Bash(grep -rn \"#[0-9a-fA-F]\\\\{3,6\\\\}\" --include=\"*.css\" \"C:\\\\Users\\\\user\\\\Projects\\\\Enlyten2 laser center\\\\src\")",
+      "Bash(grep -v \"variables.css\\\\|//\")",
+      "Bash(node \"C:\\\\Users\\\\user\\\\.claude\\\\skills\\\\impeccable\\\\scripts\\\\cleanup-deprecated.mjs\")",
+      "Bash(grep -rn \"#[0-9a-fA-F]\\\\{3,6\\\\}\" src/pages/ src/components/ --include=\"*.css\")",
+      "Bash(node -e \"const en=require\\('./src/locales/en.json'\\); console.log\\(Object.keys\\(en.gallery||{}\\).join\\(', '\\)\\)\")",
+      "Bash(grep -n \"#[0-9a-fA-F]\\\\{3,6\\\\}\" src/pages/Admin.css)"
     ]
   }
 }

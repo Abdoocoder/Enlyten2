@@ -131,12 +131,13 @@
   color: var(--on-surface);
   background-color: var(--background-alt);
   transition: var(--transition-fast);
-  outline: none;
 }
 
 .form-input:focus {
+  outline: none;
   border-color: var(--logo-pink);
   background-color: var(--white);
+  box-shadow: var(--laser-focus-ring);
 }
 
 .form-textarea {

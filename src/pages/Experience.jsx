@@ -14,7 +14,7 @@ const Experience = () => {
       <section className="viewport-section section-dark experience-hero-v2">
         <div className="experience-hero-grid">
           <div className="experience-image-well animation-fade-in">
-            <img src={heroImg} alt="Luxury Enlyten2 Clinic Interior" className="full-bleed-img" />
+            <img src={heroImg} alt="Luxury Enlyten2 Clinic Interior" className="full-bleed-img" loading="lazy" />
             <div className="img-gloss"></div>
           </div>
           <div className="experience-text-well">

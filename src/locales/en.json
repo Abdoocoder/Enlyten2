@@ -71,7 +71,11 @@
     "loading": "Curating gallery...",
     "error": "Error loading gallery",
     "empty": "No results found in this category.",
-    "awaiting": "Awaiting Documentation"
+    "awaiting": "Awaiting Documentation",
+    "before": "Before",
+    "after": "After",
+    "beforeAfterLabel": "Before and after",
+    "filterLabel": "Filter by category"
   },
   "auth": {
     "loginAccent": "Member Login",
@@ -289,7 +293,8 @@
     "all": "All",
     "empty": "No treatments found in this category.",
     "book": "Book Now",
-    "min": "min"
+    "min": "min",
+    "filterLabel": "Filter by category"
   },
   "contact": {
     "title": "Contact Us",

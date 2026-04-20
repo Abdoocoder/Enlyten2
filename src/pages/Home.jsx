@@ -85,7 +85,7 @@ const Home = () => {
               <Card key={treatment.id} variant="white" className="treatment-card" padded={false}>
                 <div className="treatment-image-placeholder">
                   {treatment.image_url
-                    ? <img src={treatment.image_url} alt={treatment.name} className="treatment-card-img" />
+                    ? <img src={treatment.image_url} alt={isAr ? (treatment.name_ar || treatment.name) : treatment.name} className="treatment-card-img" loading="lazy" />
                     : <div className="image-overlay"></div>
                   }
                 </div>

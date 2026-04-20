@@ -34,6 +34,13 @@ const Booking = () => {
   const navigate = useNavigate();
 
   const [currentStep, setCurrentStep] = useState(1);
+  const [exitingStep, setExitingStep] = useState(null);
+
+  const goToStep = (step) => {
+    setExitingStep(currentStep);
+    setCurrentStep(step);
+    setTimeout(() => setExitingStep(null), 200);
+  };
   const [selectedService, setSelectedService] = useState(searchParams.get('serviceId') || null);
   const [bookingDate, setBookingDate] = useState('');
   const [bookingTime, setBookingTime] = useState('');
@@ -66,7 +73,7 @@ const Booking = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    if (currentStep < 3) { setCurrentStep(currentStep + 1); return; }
+    if (currentStep < 3) { goToStep(currentStep + 1); return; }
     setError(null);
     const isUUID = (str) => /^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$/i.test(str);
 
@@ -87,7 +94,7 @@ const Booking = () => {
       });
       if (bookingError) {
         if (bookingError.message === 'slot_taken') {
-          setCurrentStep(2);
+          goToStep(2);
           setBookingTime('');
           throw new Error(t('booking.slotTaken'));
         }
@@ -140,8 +147,8 @@ const Booking = () => {
 
           <form className="booking-form-v2" onSubmit={handleSubmit}>
 
-            {currentStep === 1 && (
-              <div className="booking-step-content animation-fade-in">
+            {(currentStep === 1 || exitingStep === 1) && (
+              <div className={`booking-step-content ${exitingStep === 1 ? 'step-exiting' : 'animation-fade-in'}`}>
                 <h2 className="section-headline text-center">{t('booking.selectService')}</h2>
 
                 {servicesLoading ? (
@@ -176,15 +183,15 @@ const Booking = () => {
                 )}
 
                 <div className="step-actions centered">
-                  <Button variant="primary" className="btn-pill btn-large" disabled={!selectedService} onClick={() => setCurrentStep(2)}>
+                  <Button variant="primary" className="btn-pill btn-large" disabled={!selectedService} onClick={() => goToStep(2)}>
                     {t('booking.continueSchedule')}
                   </Button>
                 </div>
               </div>
             )}
 
-            {currentStep === 2 && (
-              <div className="booking-step-content animation-fade-in">
+            {(currentStep === 2 || exitingStep === 2) && (
+              <div className={`booking-step-content ${exitingStep === 2 ? 'step-exiting' : 'animation-fade-in'}`}>
                 <h2 className="section-headline text-center">{t('booking.chooseDateTime')}</h2>
                 <div className="schedule-grid">
                   <div className="date-picker-well">
@@ -226,16 +233,16 @@ const Booking = () => {
                   </div>
                 </div>
                 <div className="step-actions space-between">
-                  <button type="button" className="pill-link" onClick={() => setCurrentStep(1)}>{t('booking.back')}</button>
-                  <Button variant="primary" className="btn-pill" disabled={!bookingDate || !bookingTime} onClick={() => setCurrentStep(3)}>
+                  <button type="button" className="pill-link" onClick={() => goToStep(1)}>{t('booking.back')}</button>
+                  <Button variant="primary" className="btn-pill" disabled={!bookingDate || !bookingTime} onClick={() => goToStep(3)}>
                     {t('booking.reviewDetails')}
                   </Button>
                 </div>
               </div>
             )}
 
-            {currentStep === 3 && (
-              <div className="booking-step-content animation-fade-in">
+            {(currentStep === 3 || exitingStep === 3) && (
+              <div className={`booking-step-content ${exitingStep === 3 ? 'step-exiting' : 'animation-fade-in'}`}>
                 <h2 className="section-headline text-center">{t('booking.confirmVisit')}</h2>
                 <div className="apple-card confirmation-card">
                   <div className="confirm-row">
@@ -262,7 +269,7 @@ const Booking = () => {
                   />
                 </div>
                 <div className="step-actions space-between">
-                  <button type="button" className="pill-link" onClick={() => setCurrentStep(2)}>{t('booking.back')}</button>
+                  <button type="button" className="pill-link" onClick={() => goToStep(2)}>{t('booking.back')}</button>
                   <Button variant="primary" type="submit" className="btn-pill laser-glow-btn" disabled={loading}>
                     {loading ? t('booking.confirming') : t('booking.confirm')}
                   </Button>

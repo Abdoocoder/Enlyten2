@@ -102,12 +102,13 @@ const Services = () => {
 
       <div className="category-strip-container">
         <div className="content-well">
-          <div className="category-strip">
+          <div className="category-strip" role="group" aria-label={t('services.filterLabel', 'Filter by category')}>
             {categories.map(cat => (
               <button
                 key={cat}
                 className={`category-pill ${selectedCategory === cat ? 'active' : ''}`}
                 onClick={() => setSelectedCategory(cat)}
+                aria-pressed={selectedCategory === cat}
               >
                 {t(`categories.${cat}`, cat)}
               </button>

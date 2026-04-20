@@ -26,8 +26,8 @@
 
 .input-field:focus {
   outline: none;
-  background-color: var(--surface-container-lowest);
-  box-shadow: 0 0 0 1px var(--primary-container);
+  background-color: var(--surface-container-low);
+  box-shadow: var(--laser-focus-ring);
 }
 
 .input-field::placeholder {
