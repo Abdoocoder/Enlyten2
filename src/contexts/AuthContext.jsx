@@ -57,12 +57,18 @@ export const AuthProvider = ({ children }) => {
 
   const logout = async () => {
     try {
-      // Clear state immediately to provide instant UI feedback
-      setUser(null);
-      setProfile(null);
-      await supabase.auth.signOut();
+      // Sign out from Supabase (local scope ensures local storage is cleared)
+      await supabase.auth.signOut({ scope: 'local' });
     } catch (err) {
       console.warn('Supabase signOut warning:', err);
+    } finally {
+      // Guaranteed cleanup: remove all Supabase session keys from localStorage
+      Object.keys(localStorage)
+        .filter(key => key.startsWith('sb-'))
+        .forEach(key => localStorage.removeItem(key));
+      // Clear React state
+      setUser(null);
+      setProfile(null);
     }
   };
 

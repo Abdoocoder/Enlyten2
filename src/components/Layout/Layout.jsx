@@ -29,10 +29,11 @@ const Layout = ({ children }) => {
       setShowUserMenu(false);
       await logout();
       console.log('Logout: Success');
-      navigate('/');
     } catch (err) {
       console.error('Logout error:', err);
-      // Ensure we always return to home if something fails
+    } finally {
+      // Force a full page reload to guarantee complete session cleanup
+      // This clears all in-memory Supabase client state as well
       window.location.href = '/';
     }
   };
