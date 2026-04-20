@@ -109,7 +109,10 @@
     "confirm": "Confirm Booking",
     "errorFailed": "Failed to create booking",
     "slotTaken": "This time slot is no longer available. Please choose another.",
-    "slotUnavailable": "Taken"
+    "slotUnavailable": "Taken",
+    "selectDateFirst": "Please select a date first.",
+    "noServices": "No services available at the moment.",
+    "price": "Price"
   },
   "profile": {
     "title": "Your Profile",

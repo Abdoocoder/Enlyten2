@@ -109,7 +109,10 @@
     "confirm": "تأكيد الحجز",
     "errorFailed": "فشل إنشاء الحجز",
     "slotTaken": "هذا الوقت لم يعد متاحاً. يرجى اختيار وقت آخر.",
-    "slotUnavailable": "محجوز"
+    "slotUnavailable": "محجوز",
+    "selectDateFirst": "يرجى اختيار التاريخ أولاً.",
+    "noServices": "لا توجد خدمات متاحة حالياً.",
+    "price": "السعر"
   },
   "profile": {
     "title": "ملفك الشخصي",

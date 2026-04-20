@@ -3,18 +3,19 @@ import { useSearchParams, useNavigate } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
 import './Booking.css';
 import Button from '../components/UI/Button/Button';
-import Card from '../components/UI/Card/Card';
 import { useServices } from '../hooks/useDatabase';
 import { useAuth } from '../contexts/AuthContext';
 import { createBooking, getBookedSlots } from '../lib/supabase';
 import useAuthGuard from '../hooks/useAuthGuard';
 
+const TIME_SLOTS = ['09:00', '10:00', '11:00', '14:00', '15:00', '16:00'];
+
 const Booking = () => {
   const [searchParams] = useSearchParams();
-  const { services } = useServices();
+  const { services, loading: servicesLoading } = useServices();
   const { user } = useAuth();
   useAuthGuard();
-  const { t } = useTranslation();
+  const { t, i18n } = useTranslation();
   const navigate = useNavigate();
 
   const [currentStep, setCurrentStep] = useState(1);
@@ -25,10 +26,16 @@ const Booking = () => {
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
   const [bookedSlots, setBookedSlots] = useState([]);
+  const [slotsLoading, setSlotsLoading] = useState(false);
+
+  const isAr = i18n.language === 'ar';
 
   useEffect(() => {
     if (!bookingDate) { setBookedSlots([]); return; }
-    getBookedSlots(bookingDate).then(({ data }) => setBookedSlots(data));
+    setSlotsLoading(true);
+    getBookedSlots(bookingDate)
+      .then(({ data }) => setBookedSlots(data))
+      .finally(() => setSlotsLoading(false));
   }, [bookingDate]);
 
   const handleSubmit = async (e) => {
@@ -61,12 +68,23 @@ const Booking = () => {
     }
   };
 
-  const timeSlots = ['09:00', '10:00', '11:00', '14:00', '15:00', '16:00'];
   const today = new Date().toISOString().split('T')[0];
+
   const selectedServiceData = useMemo(
     () => services.find(s => s.id === selectedService),
     [services, selectedService]
   );
+
+  const formattedDate = useMemo(() => {
+    if (!bookingDate) return '';
+    return new Date(bookingDate + 'T00:00:00').toLocaleDateString(
+      isAr ? 'ar' : 'en-US',
+      { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' }
+    );
+  }, [bookingDate, isAr]);
+
+  const serviceName = (s) => isAr && s?.name_ar ? s.name_ar : s?.name;
+  const serviceDesc = (s) => isAr && s?.description_ar ? s.description_ar : s?.description;
 
   return (
     <div className="booking-page">
@@ -92,21 +110,38 @@ const Booking = () => {
             {currentStep === 1 && (
               <div className="booking-step-content animation-fade-in">
                 <h2 className="section-headline text-center">{t('booking.selectService')}</h2>
-                <div className="treatment-tiles">
-                  {services.map(service => (
-                    <div
-                      key={service.id}
-                      className={`treatment-tile ${selectedService === service.id ? 'selected' : ''}`}
-                      onClick={() => setSelectedService(service.id)}
-                    >
-                      <div className="tile-info">
-                        <h4 className="card-title">{service.name}</h4>
-                        <p className="body-medium text-muted">{service.duration_minutes} {t('services.min')} • {service.price} JD</p>
+
+                {servicesLoading ? (
+                  <div className="services-skeleton">
+                    {[1, 2, 3].map(i => <div key={i} className="tile-skeleton" />)}
+                  </div>
+                ) : services.length === 0 ? (
+                  <p className="body-medium text-muted text-center">{t('booking.noServices', 'No services available.')}</p>
+                ) : (
+                  <div className="treatment-tiles">
+                    {services.map(service => (
+                      <div
+                        key={service.id}
+                        className={`treatment-tile ${selectedService === service.id ? 'selected' : ''}`}
+                        onClick={() => setSelectedService(service.id)}
+                      >
+                        <div className="tile-info">
+                          <h4 className="card-title">{serviceName(service)}</h4>
+                          {serviceDesc(service) && (
+                            <p className="tile-desc body-medium text-muted">{serviceDesc(service)}</p>
+                          )}
+                          <p className="tile-meta label-medium">
+                            {service.duration_minutes} {t('services.min')}
+                            <span className="tile-dot">·</span>
+                            {service.price} JD
+                          </p>
+                        </div>
+                        <div className="tile-check"></div>
                       </div>
-                      <div className="tile-check"></div>
-                    </div>
-                  ))}
-                </div>
+                    ))}
+                  </div>
+                )}
+
                 <div className="step-actions centered">
                   <Button variant="primary" className="btn-pill btn-large" disabled={!selectedService} onClick={() => setCurrentStep(2)}>
                     {t('booking.continueSchedule')}
@@ -126,29 +161,35 @@ const Booking = () => {
                       className="apple-date-input"
                       min={today}
                       value={bookingDate}
-                      onChange={(e) => setBookingDate(e.target.value)}
+                      onChange={(e) => { setBookingDate(e.target.value); setBookingTime(''); }}
                     />
                   </div>
                   <div className="time-picker-well">
                     <label className="label-medium">{t('booking.availableSlots')}</label>
-                    <div className="time-slots-grid">
-                      {timeSlots.map(time => {
-                        const taken = bookedSlots.includes(time);
-                        return (
-                          <button
-                            key={time}
-                            type="button"
-                            className={`time-pill ${bookingTime === time ? 'active' : ''} ${taken ? 'taken' : ''}`}
-                            onClick={() => !taken && setBookingTime(time)}
-                            disabled={taken}
-                            title={taken ? t('booking.slotUnavailable') : undefined}
-                          >
-                            {time}
-                            {taken && <span className="slot-taken-label">{t('booking.slotUnavailable')}</span>}
-                          </button>
-                        );
-                      })}
-                    </div>
+                    {!bookingDate ? (
+                      <p className="slots-hint body-medium text-muted">{t('booking.selectDateFirst', 'Please select a date first.')}</p>
+                    ) : slotsLoading ? (
+                      <p className="slots-hint body-medium text-muted">...</p>
+                    ) : (
+                      <div className="time-slots-grid">
+                        {TIME_SLOTS.map(time => {
+                          const taken = bookedSlots.includes(time);
+                          return (
+                            <button
+                              key={time}
+                              type="button"
+                              className={`time-pill ${bookingTime === time ? 'active' : ''} ${taken ? 'taken' : ''}`}
+                              onClick={() => !taken && setBookingTime(time)}
+                              disabled={taken}
+                              title={taken ? t('booking.slotUnavailable') : undefined}
+                            >
+                              {time}
+                              {taken && <span className="slot-taken-label">{t('booking.slotUnavailable')}</span>}
+                            </button>
+                          );
+                        })}
+                      </div>
+                    )}
                   </div>
                 </div>
                 <div className="step-actions space-between">
@@ -166,11 +207,15 @@ const Booking = () => {
                 <div className="apple-card confirmation-card">
                   <div className="confirm-row">
                     <span className="label-medium">{t('booking.treatment')}</span>
-                    <span className="body-intro">{selectedServiceData?.name}</span>
+                    <span className="body-intro">{serviceName(selectedServiceData)}</span>
                   </div>
                   <div className="confirm-row">
                     <span className="label-medium">{t('booking.dateTime')}</span>
-                    <span className="body-intro">{bookingDate} — {bookingTime}</span>
+                    <span className="body-intro">{formattedDate} — {bookingTime}</span>
+                  </div>
+                  <div className="confirm-row">
+                    <span className="label-medium">{t('booking.price', 'Price')}</span>
+                    <span className="body-intro confirm-price">{selectedServiceData?.price} JD</span>
                   </div>
                   <div className="confirm-row">
                     <span className="label-medium">{t('booking.client')}</span>
