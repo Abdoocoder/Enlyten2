@@ -5,6 +5,45 @@ import Card from '../components/UI/Card/Card';
 import { useGallery } from '../hooks/useDatabase';
 import mockData from '../data/mockData.json';
 
+const BeforeAfterSlider = ({ before, after, alt }) => {
+  const [sliderPos, setSliderPos] = useState(50);
+
+  const handleMove = (e) => {
+    const rect = e.currentTarget.getBoundingClientRect();
+    const x = e.type === 'touchmove' ? e.touches[0].clientX : e.clientX;
+    const isRtl = document.dir === 'rtl';
+    const pos = isRtl 
+      ? ((rect.right - x) / rect.width) * 100
+      : ((x - rect.left) / rect.width) * 100;
+    setSliderPos(Math.max(0, Math.min(100, pos)));
+  };
+
+  return (
+    <div 
+      className="ba-slider" 
+      onMouseMove={handleMove}
+      onTouchMove={handleMove}
+    >
+      <div className="ba-after-img" style={{ backgroundImage: `url(${after})` }} />
+      <div 
+        className="ba-before-img" 
+        style={{ 
+          backgroundImage: `url(${before})`,
+          width: `${sliderPos}%`
+        }} 
+      />
+      <div className="ba-handle" style={{ left: `${sliderPos}%` }}>
+        <div className="ba-handle-line"></div>
+        <div className="ba-handle-circle"></div>
+      </div>
+      <div className="ba-labels">
+        <span className="ba-label before">Before</span>
+        <span className="ba-label after">After</span>
+      </div>
+    </div>
+  );
+};
+
 const Gallery = () => {
   const { t, i18n } = useTranslation();
   const { gallery: dbGallery, loading, error } = useGallery();
@@ -73,7 +112,13 @@ const Gallery = () => {
               {filteredGallery.map(item => (
                 <Card key={item.id} variant="white" className="apple-card gallery-tile" padded={false}>
                   <div className="gallery-tile-image-side">
-                    {item.image_url ? (
+                    {item.before_url && item.after_url ? (
+                      <BeforeAfterSlider 
+                        before={item.before_url} 
+                        after={item.after_url} 
+                        alt={isAr ? (item.title_ar || item.title) : item.title}
+                      />
+                    ) : item.image_url ? (
                       <>
                         <img
                           src={item.image_url}

@@ -218,7 +218,7 @@
 .apple-date-input:focus {
   outline: none;
   border-color: var(--logo-pink);
-  box-shadow: 0 0 0 3px rgba(255, 0, 87, 0.1);
+  box-shadow: var(--laser-focus-ring);
 }
 
 .time-slots-grid {
@@ -324,7 +324,7 @@
 .apple-textarea:focus {
   outline: none;
   border-color: var(--logo-pink);
-  box-shadow: 0 0 0 3px rgba(255, 0, 87, 0.1);
+  box-shadow: var(--laser-focus-ring);
 }
 
 /* ── Shared Actions ── */

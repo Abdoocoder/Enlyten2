@@ -126,6 +126,8 @@
       "description": "Smooth, hair-free skin after 3 sessions.",
       "description_ar": "بشرة ناعمة خالية من الشعر بعد 3 جلسات.",
       "image_url": "/service-laser-hair.jpg",
+      "before_url": "/service-laser-hair.jpg",
+      "after_url": "/service-skin.jpg",
       "category": "Laser"
     },
     {

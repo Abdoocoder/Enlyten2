@@ -27,15 +27,16 @@
 
 /* ── Gallery Grid ── */
 .gallery-grid-v2 {
-  display: grid;
-  grid-template-columns: repeat(2, 1fr);
-  gap: var(--spacing-xl);
+  column-count: 2;
+  column-gap: var(--spacing-xl);
 }
 
 /* ── Gallery Tile ── */
 .gallery-tile {
-  display: flex;
-  flex-direction: column;
+  display: inline-block;
+  width: 100%;
+  margin-bottom: var(--spacing-xl);
+  break-inside: avoid;
   border: 1px solid var(--outline-variant);
   border-radius: var(--radius-lg);
   overflow: hidden;
@@ -117,15 +118,101 @@
   line-height: 1.5;
 }
 
-/* ── Placeholder ── */
-.gallery-placeholder {
+/* ── Before/After Slider ── */
+.ba-slider {
+  position: relative;
   width: 100%;
   height: 100%;
+  cursor: ew-resize;
+  user-select: none;
+  overflow: hidden;
+}
+
+.ba-before-img,
+.ba-after-img {
+  position: absolute;
+  top: 0;
+  inset-inline-start: 0;
+  width: 100%;
+  height: 100%;
+  background-size: cover;
+  background-position: center;
+}
+
+.ba-before-img {
+  z-index: 2;
+  border-inline-end: 1px solid rgba(255, 255, 255, 0.5);
+}
+
+.ba-after-img {
+  z-index: 1;
+}
+
+.ba-handle {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  z-index: 3;
+  width: 2px;
+  background: var(--white);
+  pointer-events: none;
+  inset-inline-start: 0;
+  transform: translateX(-50%);
+}
+
+.ba-handle-circle {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 36px;
+  height: 36px;
+  background: var(--white);
+  border-radius: 50%;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.3);
   display: flex;
   align-items: center;
   justify-content: center;
-  background: linear-gradient(135deg, var(--warm-white) 0%, #ebebed 100%);
 }
+
+.ba-handle-circle::before,
+.ba-handle-circle::after {
+  content: '‹';
+  font-size: 18px;
+  font-weight: 700;
+  color: var(--logo-pink);
+  margin: 0 1px;
+}
+
+.ba-handle-circle::after {
+  content: '›';
+}
+
+.ba-labels {
+  position: absolute;
+  bottom: 12px;
+  left: 0;
+  right: 0;
+  display: flex;
+  justify-content: space-between;
+  padding: 0 16px;
+  z-index: 4;
+  pointer-events: none;
+}
+
+.ba-label {
+  background: rgba(0, 0, 0, 0.5);
+  color: var(--white);
+  font-size: 10px;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  padding: 2px 8px;
+  border-radius: 4px;
+  backdrop-filter: blur(4px);
+}
+
+/* ── Placeholder ── */
 
 /* ── States ── */
 .loading-well,

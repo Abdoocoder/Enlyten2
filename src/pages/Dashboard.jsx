@@ -123,7 +123,13 @@ const Dashboard = () => {
         <div className="content-well">
 
           {successMessage && (
-            <div className="success-banner">{successMessage}</div>
+            <div className="premium-toast success-toast animation-slide-down">
+              <div className="toast-content">
+                <span className="toast-icon">✓</span>
+                <p>{successMessage}</p>
+              </div>
+              <div className="toast-progress"></div>
+            </div>
           )}
 
           {/* KPI Row */}

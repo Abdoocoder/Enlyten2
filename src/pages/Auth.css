@@ -3,10 +3,11 @@
   min-height: 100vh;
   justify-content: center;
   padding: var(--spacing-huge) 0;
-  background-color: var(--black);
-  background-image:
-    radial-gradient(ellipse 80% 50% at 20% 40%, rgba(255, 0, 87, 0.07) 0%, transparent 60%),
-    radial-gradient(ellipse 60% 40% at 80% 60%, rgba(106, 0, 255, 0.05) 0%, transparent 60%);
+  background: 
+    linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)),
+    url('/images/auth-bg.png') no-repeat center center;
+  background-size: cover;
+  background-attachment: fixed;
 }
 
 .max-width-tiny {
@@ -79,7 +80,7 @@
 .apple-input:focus {
   outline: none;
   border-color: var(--logo-pink);
-  box-shadow: 0 0 0 3px rgba(255, 0, 87, 0.15);
+  box-shadow: var(--laser-focus-ring);
   background: rgba(255, 255, 255, 0.1);
 }
 

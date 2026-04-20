@@ -237,12 +237,19 @@ button {
 
 /* ─── Laser identity helpers ─── */
 .laser-text {
-  background: var(--laser-gradient);
+  background: var(--laser-text-gradient);
+  background-size: 300% 100%;
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;
   display: inline-block;
   filter: drop-shadow(var(--laser-glow));
+  animation: laser-move 8s linear infinite;
+}
+
+@keyframes laser-move {
+  0% { background-position: 0% 50%; }
+  100% { background-position: 100% 50%; }
 }
 
 .brand-accent {
