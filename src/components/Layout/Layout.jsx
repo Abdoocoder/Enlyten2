@@ -51,6 +51,10 @@ const Layout = ({ children }) => {
           <div className="header-actions">
             <LanguageSwitcher />
             {isAuthenticated ? (
+              <>
+              <Link to="/book">
+                <Button variant="primary" className="btn-pill">{t('nav.book')}</Button>
+              </Link>
               <div className="user-menu-container" ref={menuRef}>
                 <button 
                   className="user-avatar"
@@ -81,6 +85,7 @@ const Layout = ({ children }) => {
                   </div>
                 )}
               </div>
+              </>
             ) : (
               <>
                 <Link to="/book">
