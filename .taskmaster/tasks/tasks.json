@@ -2,7 +2,7 @@
   "master": {
     "tasks": [
       {
-        "id": "1",
+        "id": 1,
         "title": "Sync CLAUDE.md with Laser Glow design system",
         "description": "Update CLAUDE.md to reflect the current 'Laser Glow + Apple-inspired' design system. Remove all Luminous Canvas (gold/ivory) references and document the correct CSS tokens, typography rules, and section rhythm (black ↔ light-gray alternation).",
         "status": "done",
@@ -30,7 +30,7 @@
         ]
       },
       {
-        "id": "2",
+        "id": 2,
         "title": "Cinematic Home Page overhaul",
         "description": "Redesign the Home page using the cinematic Apple-inspired section rhythm: alternating full-bleed black (section-dark) and light-gray (section-light) sections. Hero: black bg, 56px headline, laser-gradient glow on brand name, two pill CTAs. Philosophy: light-gray, stats grid. Treatments: black section, card grid. CTA strip: light-gray.",
         "status": "done",
@@ -67,7 +67,7 @@
         "updatedAt": "2026-04-16T19:26:40.059Z"
       },
       {
-        "id": "3",
+        "id": 3,
         "title": "Services page — Apple product-grid layout",
         "description": "Redesign the Services page as an Apple-style product catalogue. Each service is a tile: image on #f5f5f7, service name as card-title (28px, weight 400), description at 14px, price badge, and pill CTA. Two-up → three-up grid depending on viewport.",
         "status": "done",
@@ -285,7 +285,7 @@
         "updatedAt": "2026-04-17T09:01:14.665Z"
       },
       {
-        "id": "4",
+        "id": 4,
         "title": "Booking flow — high-trust minimal UI",
         "description": "Polish the Booking page to feel premium and trustworthy. Form fields with laser-glow focus states, step indicator, confirmation animation. Ensure RLS-safe Supabase insert pattern.",
         "status": "done",
@@ -316,7 +316,7 @@
         "updatedAt": "2026-04-17T09:01:34.453Z"
       },
       {
-        "id": "5",
+        "id": 5,
         "title": "Gallery — cinematic before/after showcase",
         "description": "Redesign the Gallery page with masonry or publication-style layout. Before/after slider on image pairs. Dark section backgrounds, no borders on cards.",
         "status": "done",
@@ -341,7 +341,7 @@
         "updatedAt": "2026-04-17T09:01:41.527Z"
       },
       {
-        "id": "6",
+        "id": 6,
         "title": "Auth page — glassmorphism treatment",
         "description": "Polish Auth (sign in / sign up) to use a full-bleed background image with a glassmorphism card overlay. Laser-glow accents on active input fields. Smooth tab transition animation.",
         "status": "done",
@@ -372,7 +372,7 @@
         "updatedAt": "2026-04-17T09:01:48.558Z"
       },
       {
-        "id": "7",
+        "id": 7,
         "title": "Mobile responsiveness audit",
         "description": "Audit all pages at 375px, 428px (mobile), 768px (tablet). Fix collapsing grid, nav hamburger menu, hero headline scaling (56px → 40px → 28px).",
         "status": "done",
@@ -407,7 +407,7 @@
         "updatedAt": "2026-04-17T09:01:55.545Z"
       },
       {
-        "id": "8",
+        "id": 8,
         "title": "RTL Arabic layout verification",
         "description": "Switch to Arabic and verify all pages render correctly: text direction, icon mirroring, logical CSS properties (margin-inline-start vs margin-left), Cairo font loading.",
         "status": "done",
@@ -432,7 +432,7 @@
         "updatedAt": "2026-04-17T09:02:02.460Z"
       },
       {
-        "id": "9",
+        "id": 9,
         "title": "Performance & SEO polish",
         "description": "Add proper meta tags to all pages, lazy-load below-fold images, ensure build produces zero warnings (chunk size, missing keys). Add Open Graph tags.",
         "status": "done",
@@ -531,7 +531,7 @@
         "updatedAt": "2026-04-17T09:10:27.736Z"
       },
       {
-        "id": "10",
+        "id": 10,
         "title": "Admin panel — data management UI",
         "description": "Upgrade Admin.jsx to properly manage services (create/edit/delete) and bookings (update status). Data table with search/filter, confirmation dialogs.",
         "status": "done",
@@ -619,7 +619,7 @@
         "updatedAt": "2026-04-17T09:23:41.373Z"
       },
       {
-        "id": "11",
+        "id": 11,
         "title": "Sentry error monitoring integration",
         "description": "Add @sentry/react with ErrorBoundary, session replay, browser tracing. DSN via VITE_SENTRY_DSN env var. sendDefaultPii disabled.",
         "details": "",
@@ -631,7 +631,7 @@
         "updatedAt": "2026-04-20T07:53:52.822Z"
       },
       {
-        "id": "12",
+        "id": 12,
         "title": "Security hardening",
         "description": "Sentry DSN to env var, PII disabled, profile whitelist, token removed from git history.",
         "details": "",
@@ -643,7 +643,7 @@
         "updatedAt": "2026-04-20T07:54:05.545Z"
       },
       {
-        "id": "13",
+        "id": 13,
         "title": "Documentation update v1.2.0",
         "description": "Updated CLAUDE.md, README.md, README.ar.md to v1.2.0.",
         "details": "",
@@ -655,7 +655,7 @@
         "updatedAt": "2026-04-20T07:54:18.285Z"
       },
       {
-        "id": "14",
+        "id": 14,
         "title": "Booking Confirmation: Email Notifications",
         "description": "Implement automated email notifications for the booking workflow using Supabase Edge Functions and Resend API. When a new booking is created (status: pending), automatically send: 1) A confirmation email to the patient with booking details (service, date, time). 2) An alert email to the admin notifying them of the new booking. When the admin changes status to 'confirmed' in the Admin Panel, send a confirmation email to the patient. Tech stack: Supabase Edge Function (Deno), Resend API for email delivery.",
         "details": "",
@@ -663,11 +663,65 @@
         "status": "in-progress",
         "dependencies": [],
         "priority": "high",
-        "subtasks": [],
+        "subtasks": [
+          {
+            "id": 1,
+            "title": "Set up Supabase Edge Function for Email Notifications",
+            "description": "Create and configure a Supabase Edge Function using Deno to handle booking-related email notifications",
+            "dependencies": [],
+            "details": "Initialize a new Supabase Edge Function project with Deno runtime, configure environment variables for Resend API key, set up function triggers for booking insert and update events, and implement basic function structure with proper error handling",
+            "status": "pending",
+            "testStrategy": null
+          },
+          {
+            "id": 2,
+            "title": "Implement Resend API Integration for Email Delivery",
+            "description": "Integrate Resend API to send automated emails for booking confirmations and admin alerts",
+            "dependencies": [
+              1
+            ],
+            "details": "Create Resend API client configuration in the Edge Function, implement email template rendering for patient confirmations and admin alerts, set up email sending functions with proper error handling, and test API connectivity with Resend service",
+            "status": "pending",
+            "testStrategy": null
+          },
+          {
+            "id": 3,
+            "title": "Create Email Templates for Booking Confirmations",
+            "description": "Design and implement email templates for patient confirmations and admin notifications",
+            "dependencies": [
+              2
+            ],
+            "details": "Develop HTML email templates for patient confirmation emails with booking details (service, date, time), create admin alert email templates with new booking notifications, implement template rendering logic with dynamic data injection, and ensure responsive design for email clients",
+            "status": "pending",
+            "testStrategy": null
+          },
+          {
+            "id": 4,
+            "title": "Implement Booking Status Change Trigger Logic",
+            "description": "Set up logic to send confirmation emails when admin changes booking status to confirmed",
+            "dependencies": [
+              3
+            ],
+            "details": "Add logic to detect when booking status changes from pending to confirmed, implement function to send patient confirmation email upon status update, create proper database query logic to fetch booking details for email content, and ensure trigger fires only on specific status changes",
+            "status": "pending",
+            "testStrategy": null
+          },
+          {
+            "id": 5,
+            "title": "Test and Deploy Email Notification System",
+            "description": "Conduct comprehensive testing of the email notification system and deploy to production",
+            "dependencies": [
+              4
+            ],
+            "details": "Perform end-to-end testing of all email scenarios (new booking creation, status update), test email delivery to various recipients, validate email content and formatting, conduct performance testing of Edge Function, and deploy final implementation to Supabase with proper monitoring setup",
+            "status": "pending",
+            "testStrategy": null
+          }
+        ],
         "updatedAt": "2026-04-20T11:12:07.792Z"
       },
       {
-        "id": "15",
+        "id": 15,
         "title": "Booking Confirmation: WhatsApp Notification to Admin",
         "description": "When a new booking is submitted (status: pending), automatically send a WhatsApp message to the clinic admin number (077 030 0173) with the booking details: patient name, service, date, and time. Use WhatsApp Business Cloud API or Twilio WhatsApp API via a Supabase Edge Function trigger. This gives the admin an instant mobile alert for every new appointment without needing to check the dashboard.",
         "details": "",
@@ -678,7 +732,7 @@
         "subtasks": []
       },
       {
-        "id": "16",
+        "id": 16,
         "title": "Admin Panel: New Booking Badge and Real-time Notifications",
         "description": "Add a real-time notification badge to the Admin Panel to alert admins of new pending bookings without refreshing the page. Features: 1) A red badge counter on the Bookings tab showing the number of unreviewed pending bookings. 2) Use Supabase Realtime (postgres_changes) to subscribe to new inserts in the bookings table and update the counter live. 3) Optional: Add a toast notification popup in the bottom corner of the admin panel whenever a new booking comes in.",
         "details": "",
@@ -696,7 +750,9 @@
       "completedCount": 13,
       "tags": [
         "master"
-      ]
+      ],
+      "created": "2026-04-20T11:13:59.157Z",
+      "description": "Tasks for master context"
     }
   }
 }
