@@ -107,7 +107,9 @@
     "notesPlaceholder": "طلبات خاصة أو مخاوف تتعلق بالبشرة...",
     "confirming": "جاري التأكيد...",
     "confirm": "تأكيد الحجز",
-    "errorFailed": "فشل إنشاء الحجز"
+    "errorFailed": "فشل إنشاء الحجز",
+    "slotTaken": "هذا الوقت لم يعد متاحاً. يرجى اختيار وقت آخر.",
+    "slotUnavailable": "محجوز"
   },
   "profile": {
     "title": "ملفك الشخصي",

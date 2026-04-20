@@ -177,6 +177,25 @@
   border-color: transparent;
 }
 
+.time-pill.taken {
+  opacity: 0.45;
+  cursor: not-allowed;
+  text-decoration: line-through;
+  background: var(--light-gray);
+  border-color: transparent;
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.slot-taken-label {
+  font-size: 0.65rem;
+  font-weight: 400;
+  opacity: 0.7;
+  letter-spacing: 0;
+  text-decoration: none;
+}
+
 /* ── Step 3: Confirmation ── */
 .confirmation-card {
   background: var(--white);

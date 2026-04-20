@@ -107,7 +107,9 @@
     "notesPlaceholder": "Special requests or skin concerns...",
     "confirming": "Confirming...",
     "confirm": "Confirm Booking",
-    "errorFailed": "Failed to create booking"
+    "errorFailed": "Failed to create booking",
+    "slotTaken": "This time slot is no longer available. Please choose another.",
+    "slotUnavailable": "Taken"
   },
   "profile": {
     "title": "Your Profile",

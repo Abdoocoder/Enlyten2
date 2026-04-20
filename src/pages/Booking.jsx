@@ -1,12 +1,12 @@
-import React, { useState, useMemo } from 'react';
-import { useSearchParams } from 'react-router-dom';
+import React, { useState, useEffect, useMemo } from 'react';
+import { useSearchParams, useNavigate } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
 import './Booking.css';
 import Button from '../components/UI/Button/Button';
 import Card from '../components/UI/Card/Card';
 import { useServices } from '../hooks/useDatabase';
 import { useAuth } from '../contexts/AuthContext';
-import { createBooking } from '../lib/supabase';
+import { createBooking, getBookedSlots } from '../lib/supabase';
 import useAuthGuard from '../hooks/useAuthGuard';
 
 const Booking = () => {
@@ -15,6 +15,7 @@ const Booking = () => {
   const { user } = useAuth();
   useAuthGuard();
   const { t } = useTranslation();
+  const navigate = useNavigate();
 
   const [currentStep, setCurrentStep] = useState(1);
   const [selectedService, setSelectedService] = useState(searchParams.get('serviceId') || null);
@@ -23,6 +24,12 @@ const Booking = () => {
   const [notes, setNotes] = useState('');
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
+  const [bookedSlots, setBookedSlots] = useState([]);
+
+  useEffect(() => {
+    if (!bookingDate) { setBookedSlots([]); return; }
+    getBookedSlots(bookingDate).then(({ data }) => setBookedSlots(data));
+  }, [bookingDate]);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -38,7 +45,14 @@ const Booking = () => {
         notes: notes || null,
         status: 'pending',
       });
-      if (bookingError) throw bookingError;
+      if (bookingError) {
+        if (bookingError.message === 'slot_taken') {
+          setCurrentStep(2);
+          setBookingTime('');
+          throw new Error(t('booking.slotTaken'));
+        }
+        throw bookingError;
+      }
       navigate('/dashboard?booking=success');
     } catch (err) {
       setError(err.message || t('booking.errorFailed'));
@@ -118,16 +132,22 @@ const Booking = () => {
                   <div className="time-picker-well">
                     <label className="label-medium">{t('booking.availableSlots')}</label>
                     <div className="time-slots-grid">
-                      {timeSlots.map(time => (
-                        <button
-                          key={time}
-                          type="button"
-                          className={`time-pill ${bookingTime === time ? 'active' : ''}`}
-                          onClick={() => setBookingTime(time)}
-                        >
-                          {time}
-                        </button>
-                      ))}
+                      {timeSlots.map(time => {
+                        const taken = bookedSlots.includes(time);
+                        return (
+                          <button
+                            key={time}
+                            type="button"
+                            className={`time-pill ${bookingTime === time ? 'active' : ''} ${taken ? 'taken' : ''}`}
+                            onClick={() => !taken && setBookingTime(time)}
+                            disabled={taken}
+                            title={taken ? t('booking.slotUnavailable') : undefined}
+                          >
+                            {time}
+                            {taken && <span className="slot-taken-label">{t('booking.slotUnavailable')}</span>}
+                          </button>
+                        );
+                      })}
                     </div>
                   </div>
                 </div>

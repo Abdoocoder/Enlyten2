@@ -91,7 +91,28 @@ export const getBookings = async (userId) => {
   return { data, error };
 };
 
+export const getBookedSlots = async (date) => {
+  const { data, error } = await supabase
+    .from('bookings')
+    .select('booking_time')
+    .eq('booking_date', date)
+    .in('status', ['pending', 'confirmed']);
+  return { data: data?.map(b => b.booking_time) ?? [], error };
+};
+
 export const createBooking = async (booking) => {
+  const { data: existing } = await supabase
+    .from('bookings')
+    .select('id')
+    .eq('booking_date', booking.booking_date)
+    .eq('booking_time', booking.booking_time)
+    .in('status', ['pending', 'confirmed'])
+    .limit(1);
+
+  if (existing?.length > 0) {
+    return { data: null, error: { message: 'slot_taken' } };
+  }
+
   const { data, error } = await supabase
     .from('bookings')
     .insert(booking)
