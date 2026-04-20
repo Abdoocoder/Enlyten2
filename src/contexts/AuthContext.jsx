@@ -39,11 +39,15 @@ export const AuthProvider = ({ children }) => {
       async (event, session) => {
         if (session?.user) {
           setUser(session.user);
+          // Set loading to true while fetching the profile for the new session
+          setLoading(true);
           const { data: profileData } = await getProfile(session.user.id);
           setProfile(profileData);
+          setLoading(false);
         } else {
           setUser(null);
           setProfile(null);
+          setLoading(false);
         }
       }
     );

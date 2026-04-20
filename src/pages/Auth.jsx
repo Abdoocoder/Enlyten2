@@ -20,8 +20,15 @@ const Auth = () => {
   const { t } = useTranslation();
 
   useEffect(() => {
-    if (isAuthenticated) navigate(returnTo);
-  }, [isAuthenticated, navigate, returnTo]);
+    // Redirect only once auth state is fully loaded (including profile)
+    if (!loading && isAuthenticated) {
+      if (isAdmin && returnTo === '/dashboard') {
+        navigate('/admin');
+      } else {
+        navigate(returnTo);
+      }
+    }
+  }, [isAuthenticated, isAdmin, loading, navigate, returnTo]);
 
   const handleInputChange = (e) => {
     const { name, value } = e.target;
