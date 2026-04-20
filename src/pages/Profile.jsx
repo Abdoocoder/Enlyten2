@@ -10,7 +10,7 @@ import { updateProfile } from '../lib/supabase';
 import useAuthGuard from '../hooks/useAuthGuard';
 
 const Profile = () => {
-  const { user, profile } = useAuth();
+  const { user, profile, isAuthenticated } = useAuth();
   useAuthGuard();
   const { t } = useTranslation();
   const [loading, setLoading] = useState(false);
