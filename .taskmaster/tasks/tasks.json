@@ -655,72 +655,6 @@
         "updatedAt": "2026-04-20T07:54:18.285Z"
       },
       {
-        "id": 14,
-        "title": "Booking Confirmation: Email Notifications",
-        "description": "Implement automated email notifications for the booking workflow using Supabase Edge Functions and Resend API. When a new booking is created (status: pending), automatically send: 1) A confirmation email to the patient with booking details (service, date, time). 2) An alert email to the admin notifying them of the new booking. When the admin changes status to 'confirmed' in the Admin Panel, send a confirmation email to the patient. Tech stack: Supabase Edge Function (Deno), Resend API for email delivery.",
-        "details": "",
-        "testStrategy": "",
-        "status": "in-progress",
-        "dependencies": [],
-        "priority": "high",
-        "subtasks": [
-          {
-            "id": 1,
-            "title": "Set up Supabase Edge Function for Email Notifications",
-            "description": "Create and configure a Supabase Edge Function using Deno to handle booking-related email notifications",
-            "dependencies": [],
-            "details": "Initialize a new Supabase Edge Function project with Deno runtime, configure environment variables for Resend API key, set up function triggers for booking insert and update events, and implement basic function structure with proper error handling",
-            "status": "pending",
-            "testStrategy": null
-          },
-          {
-            "id": 2,
-            "title": "Implement Resend API Integration for Email Delivery",
-            "description": "Integrate Resend API to send automated emails for booking confirmations and admin alerts",
-            "dependencies": [
-              1
-            ],
-            "details": "Create Resend API client configuration in the Edge Function, implement email template rendering for patient confirmations and admin alerts, set up email sending functions with proper error handling, and test API connectivity with Resend service",
-            "status": "pending",
-            "testStrategy": null
-          },
-          {
-            "id": 3,
-            "title": "Create Email Templates for Booking Confirmations",
-            "description": "Design and implement email templates for patient confirmations and admin notifications",
-            "dependencies": [
-              2
-            ],
-            "details": "Develop HTML email templates for patient confirmation emails with booking details (service, date, time), create admin alert email templates with new booking notifications, implement template rendering logic with dynamic data injection, and ensure responsive design for email clients",
-            "status": "pending",
-            "testStrategy": null
-          },
-          {
-            "id": 4,
-            "title": "Implement Booking Status Change Trigger Logic",
-            "description": "Set up logic to send confirmation emails when admin changes booking status to confirmed",
-            "dependencies": [
-              3
-            ],
-            "details": "Add logic to detect when booking status changes from pending to confirmed, implement function to send patient confirmation email upon status update, create proper database query logic to fetch booking details for email content, and ensure trigger fires only on specific status changes",
-            "status": "pending",
-            "testStrategy": null
-          },
-          {
-            "id": 5,
-            "title": "Test and Deploy Email Notification System",
-            "description": "Conduct comprehensive testing of the email notification system and deploy to production",
-            "dependencies": [
-              4
-            ],
-            "details": "Perform end-to-end testing of all email scenarios (new booking creation, status update), test email delivery to various recipients, validate email content and formatting, conduct performance testing of Edge Function, and deploy final implementation to Supabase with proper monitoring setup",
-            "status": "pending",
-            "testStrategy": null
-          }
-        ],
-        "updatedAt": "2026-04-20T11:12:07.792Z"
-      },
-      {
         "id": 15,
         "title": "Booking Confirmation: WhatsApp Notification to Admin",
         "description": "When a new booking is submitted (status: pending), automatically send a WhatsApp message to the clinic admin number (077 030 0173) with the booking details: patient name, service, date, and time. Use WhatsApp Business Cloud API or Twilio WhatsApp API via a Supabase Edge Function trigger. This gives the admin an instant mobile alert for every new appointment without needing to check the dashboard.",
@@ -745,8 +679,8 @@
     ],
     "metadata": {
       "version": "1.0.0",
-      "lastModified": "2026-04-20T11:12:07.792Z",
-      "taskCount": 16,
+      "lastModified": "2026-04-20T11:13:00.000Z",
+      "taskCount": 15,
       "completedCount": 13,
       "tags": [
         "master"
