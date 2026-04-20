@@ -225,3 +225,128 @@ export const getAdminServices = async () => {
     .order('created_at', { ascending: true });
   return { data, error };
 };
+
+// --- NEW ADMIN FUNCTIONS ---
+
+// 1. Storage Upload
+export const uploadImage = async (file, bucket = 'clinic-assets') => {
+  const fileExt = file.name.split('.').pop();
+  const fileName = `${Math.random().toString(36).substring(2)}_${Date.now()}.${fileExt}`;
+  const filePath = `${fileName}`;
+
+  const { data, error } = await supabase.storage
+    .from(bucket)
+    .upload(filePath, file);
+
+  if (error) return { data: null, error };
+
+  // Get public URL
+  const { data: { publicUrl } } = supabase.storage
+    .from(bucket)
+    .getPublicUrl(filePath);
+
+  return { data: { publicUrl, path: filePath }, error: null };
+};
+
+// 2. Patient Directory
+export const getAdminProfiles = async () => {
+  const { data, error } = await supabase
+    .from('profiles')
+    .select('*, bookings(count)')
+    .order('created_at', { ascending: false });
+  return { data, error };
+};
+
+// 3. Gallery Management
+export const createGalleryItem = async (item) => {
+  const { data, error } = await supabase
+    .from('gallery')
+    .insert(item)
+    .select();
+  return { data, error };
+};
+
+export const deleteGalleryItem = async (id) => {
+  const { error } = await supabase
+    .from('gallery')
+    .delete()
+    .eq('id', id);
+  return { error };
+};
+
+// 4. Staff/Doctors Management
+export const getDoctors = async () => {
+  const { data, error } = await supabase
+    .from('doctors')
+    .select('*')
+    .order('name', { ascending: true });
+  return { data, error };
+};
+
+export const createDoctor = async (doctor) => {
+  const { data, error } = await supabase
+    .from('doctors')
+    .insert(doctor)
+    .select();
+  return { data, error };
+};
+
+export const updateDoctor = async (id, updates) => {
+  const { data, error } = await supabase
+    .from('doctors')
+    .update(updates)
+    .eq('id', id)
+    .select();
+  return { data, error };
+};
+
+export const deleteDoctor = async (id) => {
+  const { error } = await supabase
+    .from('doctors')
+    .delete()
+    .eq('id', id);
+  return { error };
+};
+
+// 5. Holidays & Blocking
+export const getHolidays = async () => {
+  const { data, error } = await supabase
+    .from('holidays')
+    .select('*')
+    .order('holiday_date', { ascending: true });
+  return { data, error };
+};
+
+export const addHoliday = async (holiday) => {
+  const { data, error } = await supabase
+    .from('holidays')
+    .insert(holiday)
+    .select();
+  return { data, error };
+};
+
+export const deleteHoliday = async (id) => {
+  const { error } = await supabase
+    .from('holidays')
+    .delete()
+    .eq('id', id);
+  return { error };
+};
+
+// 6. Experience Moderation
+export const getAdminExperiences = async () => {
+  const { data, error } = await supabase
+    .from('experiences')
+    .select('*, profiles(full_name)')
+    .order('created_at', { ascending: false });
+  return { data, error };
+};
+
+export const updateExperienceStatus = async (id, status) => {
+  const { data, error } = await supabase
+    .from('experiences')
+    .update({ status })
+    .eq('id', id)
+    .select();
+  return { data, error };
+};

@@ -19,22 +19,20 @@ const Layout = ({ children }) => {
         setShowUserMenu(false);
       }
     };
-    document.addEventListener('pointerdown', handleClickOutside);
-    return () => document.removeEventListener('pointerdown', handleClickOutside);
+    document.addEventListener('mousedown', handleClickOutside);
+    return () => document.removeEventListener('mousedown', handleClickOutside);
   }, []);
 
   const handleLogout = async () => {
     try {
       console.log('Logout: Initiating...');
-      // Perform logout first, then close menu/navigate
+      setShowUserMenu(false);
       await logout();
       console.log('Logout: Success');
-      setShowUserMenu(false);
       navigate('/');
-      // Force a full location change if SPA navigation lags
-      window.location.href = '/';
     } catch (err) {
       console.error('Logout error:', err);
+      // Ensure we always return to home if something fails
       window.location.href = '/';
     }
   };

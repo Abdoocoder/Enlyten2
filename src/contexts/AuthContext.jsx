@@ -52,9 +52,14 @@ export const AuthProvider = ({ children }) => {
   }, []);
 
   const logout = async () => {
-    await supabase.auth.signOut();
-    setUser(null);
-    setProfile(null);
+    try {
+      // Clear state immediately to provide instant UI feedback
+      setUser(null);
+      setProfile(null);
+      await supabase.auth.signOut();
+    } catch (err) {
+      console.warn('Supabase signOut warning:', err);
+    }
   };
 
   const value = {

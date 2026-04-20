@@ -5,7 +5,7 @@ import './Booking.css';
 import Button from '../components/UI/Button/Button';
 import { useServices } from '../hooks/useDatabase';
 import { useAuth } from '../contexts/AuthContext';
-import { createBooking, getBookedSlots } from '../lib/supabase';
+import { createBooking, getBookedSlots, getHolidays } from '../lib/supabase';
 import useAuthGuard from '../hooks/useAuthGuard';
 import mockData from '../data/mockData.json';
 
@@ -41,17 +41,28 @@ const Booking = () => {
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
   const [bookedSlots, setBookedSlots] = useState([]);
+  const [holidays, setHolidays] = useState([]);
   const [slotsLoading, setSlotsLoading] = useState(false);
 
   const isAr = i18n.language === 'ar';
 
   useEffect(() => {
+    getHolidays().then(({ data }) => {
+      if (data) setHolidays(data.map(h => h.holiday_date));
+    });
+  }, []);
+
+  useEffect(() => {
     if (!bookingDate) { setBookedSlots([]); return; }
+    if (holidays.includes(bookingDate)) {
+      setBookedSlots(TIME_SLOTS); // Block all slots
+      return;
+    }
     setSlotsLoading(true);
     getBookedSlots(bookingDate)
       .then(({ data }) => setBookedSlots(data))
       .finally(() => setSlotsLoading(false));
-  }, [bookingDate]);
+  }, [bookingDate, holidays]);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
