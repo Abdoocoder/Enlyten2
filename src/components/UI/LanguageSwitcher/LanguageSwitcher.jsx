@@ -15,11 +15,11 @@ const LanguageSwitcher = () => {
       onClick={toggleLanguage}
       aria-label="Toggle Language"
     >
-      <span className="lang-text">
-        {i18n.language === 'en' ? 'Arabic' : 'English'}
-      </span>
       <span className="lang-code">
-        {i18n.language === 'en' ? 'العربية' : 'EN'}
+        {i18n.language === 'ar' ? 'EN' : 'ع'}
+      </span>
+      <span className="lang-text">
+        {i18n.language === 'ar' ? 'English' : 'العربية'}
       </span>
     </button>
   );
