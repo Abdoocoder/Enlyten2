@@ -55,21 +55,27 @@ export const AuthProvider = ({ children }) => {
     return () => subscription?.unsubscribe();
   }, []);
 
-  const logout = async () => {
+  const logout = () => {
+    // Immediately clear all Supabase session tokens from localStorage
+    // This is the critical step — the rest is best-effort
     try {
-      // Sign out from Supabase (local scope ensures local storage is cleared)
-      await supabase.auth.signOut({ scope: 'local' });
-    } catch (err) {
-      console.warn('Supabase signOut warning:', err);
-    } finally {
-      // Guaranteed cleanup: remove all Supabase session keys from localStorage
       Object.keys(localStorage)
         .filter(key => key.startsWith('sb-'))
         .forEach(key => localStorage.removeItem(key));
-      // Clear React state
-      setUser(null);
-      setProfile(null);
+    } catch (e) {
+      // localStorage might be restricted in some browser environments
     }
+
+    // Fire-and-forget the Supabase network signOut — we don't await it
+    // Use 1s timeout so a hanging promise never blocks the UI
+    Promise.race([
+      supabase.auth.signOut({ scope: 'local' }),
+      new Promise(resolve => setTimeout(resolve, 1000))
+    ]).catch(() => {});
+
+    // Clear React state immediately
+    setUser(null);
+    setProfile(null);
   };
 
   const value = {

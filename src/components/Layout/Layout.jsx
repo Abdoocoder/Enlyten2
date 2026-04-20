@@ -23,19 +23,13 @@ const Layout = ({ children }) => {
     return () => document.removeEventListener('mousedown', handleClickOutside);
   }, []);
 
-  const handleLogout = async () => {
-    try {
-      console.log('Logout: Initiating...');
-      setShowUserMenu(false);
-      await logout();
-      console.log('Logout: Success');
-    } catch (err) {
-      console.error('Logout error:', err);
-    } finally {
-      // Force a full page reload to guarantee complete session cleanup
-      // This clears all in-memory Supabase client state as well
-      window.location.href = '/';
-    }
+  const handleLogout = () => {
+    console.log('Logout: Initiating...');
+    setShowUserMenu(false);
+    logout();
+    console.log('Logout: Success');
+    // Force full page reload to clear all in-memory state
+    window.location.href = '/';
   };
 
   const initials = (profile?.full_name || 'U')
