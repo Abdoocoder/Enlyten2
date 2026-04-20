@@ -5,15 +5,18 @@ import App from './App.jsx'
 import './i18n'
 
 Sentry.init({
-  dsn: 'https://fa410cee006ef8a7de136230f13dcb50@o4511234645753856.ingest.us.sentry.io/4511235607232512',
+  dsn: import.meta.env.VITE_SENTRY_DSN,
   integrations: [
     Sentry.browserTracingIntegration(),
-    Sentry.replayIntegration(),
+    Sentry.replayIntegration({
+      maskAllInputs: true,
+      blockAllMedia: false,
+    }),
   ],
-  tracesSampleRate: 1.0,
-  replaysSessionSampleRate: 0.1,
+  tracesSampleRate: import.meta.env.PROD ? 0.2 : 1.0,
+  replaysSessionSampleRate: 0.05,
   replaysOnErrorSampleRate: 1.0,
-  sendDefaultPii: true,
+  sendDefaultPii: false,
   environment: import.meta.env.MODE,
 });
 

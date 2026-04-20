@@ -39,7 +39,8 @@ const Profile = () => {
     setSuccess(false);
     try {
       setLoading(true);
-      const { error: updateError } = await updateProfile(user.id, formData);
+      const { full_name, phone, bio } = formData;
+      const { error: updateError } = await updateProfile(user.id, { full_name, phone, bio });
       if (updateError) throw updateError;
       setSuccess(true);
       setTimeout(() => setSuccess(false), 3000);
