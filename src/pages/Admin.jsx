@@ -105,21 +105,18 @@ const Admin = () => {
   }, [isAdmin]);
 
   useEffect(() => {
-    // Real-time listener for new bookings
+    let active = true;
     const channel = supabase
       .channel('admin-bookings-realtime')
       .on(
         'postgres_changes',
         { event: 'INSERT', schema: 'public', table: 'bookings' },
-        (payload) => {
-          // Toast or simple notification logic can go here
-          console.log('New booking received!', payload);
-          loadData(); // Refresh data to update stats and table
-        }
+        () => { if (active) loadData(); }
       )
       .subscribe();
 
     return () => {
+      active = false;
       supabase.removeChannel(channel);
     };
   }, [loadData]);
@@ -163,6 +160,11 @@ const Admin = () => {
     if (!file) return;
     setSaving(true);
     const { data: upload, error } = await uploadImage(file);
+    if (error) {
+      setError('Image upload failed. Check that the "clinic-assets" storage bucket exists and allows uploads in your Supabase dashboard.');
+      setSaving(false);
+      return;
+    }
     if (!error) {
       if (type === 'gallery') {
         await createGalleryItem({ image_url: upload.publicUrl, category: 'Clinic', title: 'New Photo' });
