@@ -113,6 +113,7 @@
     "confirming": "Confirming...",
     "confirm": "Confirm Booking",
     "errorFailed": "Failed to create booking",
+    "errorInvalidService": "Selected service is in demo mode. Please seed the database to enable real bookings.",
     "slotTaken": "This time slot is no longer available. Please choose another.",
     "slotUnavailable": "Taken",
     "selectDateFirst": "Please select a date first.",

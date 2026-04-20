@@ -146,6 +146,9 @@ const MyComponent = () => {
 ---
 
 ## Next Steps
+1.  **Seed the database**: Run the `seed_services.sql` script in your Supabase SQL Editor.
+2.  **Verify services**: Open the `/services` page to see real database entries.
+3.  **Test booking**: Create an appointment; it should now work with real UUIDs.
 
 ### 1. Add Sample Data (Optional)
 Insert test services and gallery items into your Supabase database via the dashboard.

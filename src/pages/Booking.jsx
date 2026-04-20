@@ -57,8 +57,15 @@ const Booking = () => {
     e.preventDefault();
     if (currentStep < 3) { setCurrentStep(currentStep + 1); return; }
     setError(null);
+    const isUUID = (str) => /^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$/i.test(str);
+
     try {
       setLoading(true);
+      
+      if (!isUUID(selectedService)) {
+        throw new Error(t('booking.errorInvalidService', 'Selected service is in demo mode. Please seed the database to enable real bookings.'));
+      }
+
       const { error: bookingError } = await createBooking({
         user_id: user.id,
         service_id: selectedService,
