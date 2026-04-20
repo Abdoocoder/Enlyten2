@@ -1,0 +1,32 @@
+<svg viewBox="0 0 120 60" xmlns="http://www.w3.org/2000/svg" fill="none">
+  <defs>
+    <radialGradient id="sphere" cx="38%" cy="32%" r="68%">
+      <stop offset="0%"   stop-color="#FF6688"/>
+      <stop offset="55%"  stop-color="#FF0057"/>
+      <stop offset="100%" stop-color="#CC0044"/>
+    </radialGradient>
+    <!-- clip left rings to left half -->
+    <clipPath id="CL">
+      <rect x="0" y="0" width="60" height="60"/>
+    </clipPath>
+    <!-- clip right rings to right half -->
+    <clipPath id="CR">
+      <rect x="60" y="0" width="60" height="60"/>
+    </clipPath>
+  </defs>
+
+  <!-- Left far ring — deep purple -->
+  <circle cx="36" cy="30" r="30" stroke="#3D00CC" stroke-width="7" opacity="0.75" clip-path="url(#CL)"/>
+  <!-- Left near ring — brand purple -->
+  <circle cx="47" cy="30" r="22" stroke="#6A00FF" stroke-width="7" opacity="0.90" clip-path="url(#CL)"/>
+
+  <!-- Right near ring — red-orange -->
+  <circle cx="73" cy="30" r="22" stroke="#FF3300" stroke-width="7" opacity="0.90" clip-path="url(#CR)"/>
+  <!-- Right far ring — brand orange -->
+  <circle cx="84" cy="30" r="30" stroke="#FF7A00" stroke-width="7" opacity="0.75" clip-path="url(#CR)"/>
+
+  <!-- Center sphere — on top -->
+  <circle cx="60" cy="30" r="22" fill="url(#sphere)"/>
+  <!-- Specular highlight -->
+  <ellipse cx="53" cy="22" rx="7" ry="5" fill="rgba(255,255,255,0.18)"/>
+</svg>

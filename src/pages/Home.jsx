@@ -29,11 +29,11 @@ const Home = () => {
             </h1>
             <p className="body-intro hero-subtitle">{t('home.hero.subtitle')}</p>
             <div className="hero-actions">
-              <Button variant="primary" className="btn-pill">
-                <Link to="/services">{t('home.hero.cta')}</Link>
+              <Button to="/services" variant="primary" className="btn-pill">
+                {t('home.hero.cta')}
               </Button>
-              <Button variant="outline" className="btn-pill">
-                <Link to="/experience">{t('home.hero.secondaryCta')}</Link>
+              <Button to="/experience" variant="outline" className="btn-pill">
+                {t('home.hero.secondaryCta')}
               </Button>
             </div>
           </div>
@@ -107,9 +107,9 @@ const Home = () => {
       <section className="viewport-section section-light cta-strip">
         <div className="content-well text-center">
           <h2 className="section-headline">{t('home.cta.title')}</h2>
-          <Link to="/book">
-            <Button variant="primary" className="btn-pill btn-large">{t('home.cta.button')}</Button>
-          </Link>
+          <Button to="/book" variant="primary" className="btn-pill btn-large">
+            {t('home.cta.button')}
+          </Button>
         </div>
       </section>
 

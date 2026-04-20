@@ -24,9 +24,15 @@ const Layout = ({ children }) => {
   }, []);
 
   const handleLogout = async () => {
-    setShowUserMenu(false);
-    await logout();
-    navigate('/');
+    try {
+      setShowUserMenu(false);
+      await logout();
+      navigate('/');
+    } catch (err) {
+      console.error('Logout error:', err);
+      // Fallback: forcefully navigate even if signout fails
+      navigate('/');
+    }
   };
 
   const initials = (profile?.full_name || 'U')
@@ -52,9 +58,9 @@ const Layout = ({ children }) => {
             <LanguageSwitcher />
             {isAuthenticated ? (
               <>
-              <Link to="/book">
-                <Button variant="primary" className="btn-pill btn-header-book">{t('nav.book')}</Button>
-              </Link>
+              <Button to="/book" variant="primary" className="btn-pill btn-header-book">
+                {t('nav.book')}
+              </Button>
               <div className="user-menu-container" ref={menuRef}>
                 <button 
                   className="user-avatar"
@@ -88,12 +94,12 @@ const Layout = ({ children }) => {
               </>
             ) : (
               <>
-                <Link to="/book">
-                  <Button variant="primary">{t('nav.book')}</Button>
-                </Link>
-                <Link to="/login">
-                  <Button variant="secondary">{t('nav.signIn')}</Button>
-                </Link>
+                <Button to="/book" variant="primary">
+                  {t('nav.book')}
+                </Button>
+                <Button to="/login" variant="secondary">
+                  {t('nav.signIn')}
+                </Button>
               </>
             )}
           </div>

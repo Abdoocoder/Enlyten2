@@ -26,12 +26,12 @@ const Experience = () => {
               </h1>
               <p className="body-intro text-dim">{t('experience.subtitle')}</p>
               <div className="experience-cta-group">
-                <Button variant="primary" className="btn-pill btn-large" onClick={() => navigate('/book')}>
+                <Button to="/book" variant="primary" className="btn-pill btn-large">
                   {t('experience.startJourney')}
                 </Button>
-                <button className="pill-link" onClick={() => navigate('/services')}>
+                <Button to="/services" variant="outline" className="pill-link">
                   {t('experience.viewCollection')}
-                </button>
+                </Button>
               </div>
             </div>
           </div>

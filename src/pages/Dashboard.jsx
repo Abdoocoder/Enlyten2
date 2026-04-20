@@ -113,9 +113,9 @@ const Dashboard = () => {
             </h1>
             <p className="body-intro hero-muted">{t('dashboard.subtitle', 'Welcome back. Manage your treatments here.')}</p>
           </div>
-          <Link to="/book">
-            <Button variant="primary" className="btn-pill btn-large">{t('dashboard.newBooking', '+ New Booking')}</Button>
-          </Link>
+          <Button to="/book" variant="primary" className="btn-pill btn-large">
+            {t('dashboard.newBooking', '+ New Booking')}
+          </Button>
         </div>
       </section>
 
@@ -192,7 +192,7 @@ const Dashboard = () => {
                         >
                           {cancelLoading === nextAppt.id ? '...' : t('dashboard.cancel', 'Cancel')}
                         </Button>
-                        <Button variant="primary" className="btn-pill" onClick={() => navigate('/services')}>
+                        <Button to="/services" variant="primary" className="btn-pill">
                           {t('dashboard.bookNew', 'Book New')}
                         </Button>
                       </div>
@@ -202,7 +202,7 @@ const Dashboard = () => {
                   <div className="apple-card empty-appt">
                     <p className="card-title">{t('dashboard.noUpcoming', 'No upcoming visits')}</p>
                     <p className="body-medium text-muted">{t('dashboard.startJourney', 'Start your next transformation today.')}</p>
-                    <Button variant="primary" className="btn-pill" onClick={() => navigate('/services')}>
+                    <Button to="/services" variant="primary" className="btn-pill">
                       {t('dashboard.browse', 'Browse Treatments')}
                     </Button>
                   </div>
