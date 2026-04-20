@@ -1,18 +1,22 @@
 # Enlyten2 Laser Center — Web Application
 
-[![Version](https://img.shields.io/badge/version-1.0.0-gold?style=flat-square)](package.json)
+[![Version](https://img.shields.io/badge/version-1.2.0-gold?style=flat-square)](package.json)
 [![React](https://img.shields.io/badge/React-19-61DAFB?style=flat-square&logo=react)](https://react.dev)
 [![Vite](https://img.shields.io/badge/Vite-8-646CFF?style=flat-square&logo=vite)](https://vitejs.dev)
 [![Supabase](https://img.shields.io/badge/Supabase-backend-3ECF8E?style=flat-square&logo=supabase)](https://supabase.com)
+[![Sentry](https://img.shields.io/badge/Sentry-monitoring-362D59?style=flat-square&logo=sentry)](https://sentry.io)
 [![i18n](https://img.shields.io/badge/i18n-AR%20%2F%20EN-orange?style=flat-square)](src/locales)
+[![Live](https://img.shields.io/badge/Live-enlyten2.vercel.app-black?style=flat-square&logo=vercel)](https://enlyten2.vercel.app)
 
-> **Premier Laser & Skincare Clinic** — A luxury bilingual (Arabic / English) web application for Enlyten2 Laser Center. Built with React, Vite, Vanilla CSS, and Supabase.
+> **Premier Laser & Skincare Clinic** — A luxury bilingual (Arabic / English) web application for Enlyten2 Laser Center. Built with React 19, Vite 8, Vanilla CSS, Supabase, and Sentry.
 
 ---
 
 ## 📸 Overview
 
-Enlyten2 Laser Center is a full-stack web application designed to deliver a premium digital experience for a high-end skincare clinic. The platform supports both **Arabic (RTL)** and **English (LTR)** seamlessly, with a luxury "Luminous Canvas" design system and a real-time Supabase backend.
+Enlyten2 Laser Center is a full-stack web application designed to deliver a premium digital experience for a high-end skincare clinic. The platform supports both **Arabic (RTL)** and **English (LTR)** seamlessly, with a luxury "Luminous Canvas" design system, a real-time Supabase backend, and production-grade error monitoring via Sentry.
+
+**Live**: [https://enlyten2.vercel.app](https://enlyten2.vercel.app)
 
 ---
 
@@ -21,15 +25,17 @@ Enlyten2 Laser Center is a full-stack web application designed to deliver a prem
 | Feature | Description |
 |---|---|
 | 🌍 **Bilingual (AR / EN)** | Full RTL Arabic & LTR English support via `react-i18next` |
-| 🎨 **Luminous Canvas Design** | Premium design system with gold, ivory, and blush palette |
+| 🎨 **Luminous Canvas Design** | Premium "Laser Glow" design system — pink, orange, purple accents |
 | 🔐 **Authentication** | Supabase Auth — Sign up, Sign in, Sign out |
-| 📅 **Booking System** | Clients can book appointments for any service |
+| 📅 **Booking System** | 3-step appointment booking for any service |
 | 🖼️ **Gallery** | Before/After gallery fetched from Supabase |
-| 👤 **User Profile** | Editable user profile with avatar support |
-| 📊 **Dashboard** | Client booking history and appointment management |
+| 👤 **User Profile** | Editable user profile (name, phone, bio) |
+| 📊 **Dashboard** | Client booking history, KPI summary, appointment management |
 | 🔔 **Notifications** | Real-time notification center |
-| 🛡️ **Admin Panel** | Service and booking management for clinic staff |
-| 📱 **Responsive Design** | Fully optimized for mobile, tablet, and desktop |
+| 🛡️ **Admin Panel** | Full CRUD for services + booking status management with search & filter |
+| ⚡ **Performance** | Code splitting (React.lazy), lazy images, memoization |
+| 🐛 **Error Monitoring** | Sentry — error tracking, session replay, ErrorBoundary |
+| 📱 **Responsive** | Fully optimized for mobile, tablet, and desktop |
 
 ---
 
@@ -40,7 +46,9 @@ Enlyten2 Laser Center is a full-stack web application designed to deliver a prem
 - **Routing**: React Router DOM v7
 - **Backend & Auth**: Supabase (PostgreSQL + Auth + RLS)
 - **i18n**: i18next + react-i18next
-- **Fonts**: Manrope, Noto Serif (EN) · Cairo (AR) via Google Fonts
+- **Monitoring**: Sentry (`@sentry/react`)
+- **Deploy**: Vercel
+- **Fonts**: Inter (EN) · Cairo (AR) via Google Fonts
 
 ---
 
@@ -50,13 +58,13 @@ Enlyten2 Laser Center is a full-stack web application designed to deliver a prem
 
 - Node.js `v18+`
 - npm `v9+`
-- A Supabase project (see [SUPABASE_SETUP.md](SUPABASE_SETUP.md))
+- A Supabase project
 
 ### 1. Clone the repository
 
 ```bash
-git clone https://github.com/your-org/enlyten2-laser-center.git
-cd enlyten2-laser-center
+git clone https://github.com/Abdoocoder/Enlyten2.git
+cd Enlyten2
 ```
 
 ### 2. Install dependencies
@@ -72,9 +80,8 @@ Create a `.env.local` file in the root directory:
 ```env
 VITE_SUPABASE_URL=your_supabase_project_url
 VITE_SUPABASE_ANON_KEY=your_supabase_anon_key
+VITE_SENTRY_DSN=your_sentry_dsn
 ```
-
-> See [SUPABASE_SETUP.md](SUPABASE_SETUP.md) for full Supabase configuration.
 
 ### 4. Start the development server
 
@@ -90,25 +97,26 @@ Open [http://localhost:5173](http://localhost:5173) in your browser.
 
 ```
 enlyten2-laser-center/
-├── public/                     # Static assets
+├── public/                     # Static assets (logo, favicon)
 ├── src/
 │   ├── assets/                 # Images and static media
 │   ├── components/
-│   │   ├── Layout/             # Header, Footer, Navigation
+│   │   ├── Layout/             # Header, Footer, Navigation, UserMenu
 │   │   └── UI/                 # Button, Card, Input, LanguageSwitcher
 │   ├── contexts/
-│   │   └── AuthContext.jsx     # Global authentication state
+│   │   └── AuthContext.jsx     # Global auth state + logout()
 │   ├── data/
 │   │   └── mockData.json       # Fallback / seed data
 │   ├── hooks/
-│   │   └── useDatabase.js      # Custom Supabase query hooks
+│   │   ├── useDatabase.js      # Custom Supabase query hooks
+│   │   └── useAuthGuard.js     # Shared auth redirect hook
 │   ├── lib/
-│   │   └── supabase.js         # Supabase client + utility functions
+│   │   └── supabase.js         # Supabase client + all DB functions
 │   ├── locales/
 │   │   ├── en.json             # English translations
 │   │   └── ar.json             # Arabic translations
-│   ├── pages/                  # Route-level page components
-│   │   ├── Home.jsx
+│   ├── pages/                  # Route-level page components (all lazy-loaded)
+│   │   ├── Home.jsx            # Landing — eager loaded
 │   │   ├── Services.jsx
 │   │   ├── Booking.jsx
 │   │   ├── Gallery.jsx
@@ -120,14 +128,14 @@ enlyten2-laser-center/
 │   │   ├── Experience.jsx
 │   │   └── Admin.jsx
 │   ├── styles/
-│   │   ├── variables.css       # Design tokens (colors, fonts, spacing)
-│   │   └── global.css          # Global resets and RTL overrides
-│   ├── App.jsx                 # Application root & routing
+│   │   ├── variables.css       # Design tokens (colors, fonts, spacing, shadows)
+│   │   └── global.css          # Global resets, RTL overrides, utility classes
+│   ├── App.jsx                 # Root: Sentry.ErrorBoundary + routing
 │   ├── i18n.js                 # i18next configuration
-│   └── main.jsx                # React entry point
+│   └── main.jsx                # Entry: Sentry.init() + React mount
 ├── .env.local                  # Environment variables (not committed)
+├── .env.local.exaple           # Template for env vars
 ├── .gitignore
-├── SUPABASE_SETUP.md           # Full Supabase backend documentation
 ├── CLAUDE.md                   # AI assistant guidelines
 ├── README.md                   # This file
 ├── README.ar.md                # Arabic README
@@ -145,13 +153,13 @@ enlyten2-laser-center/
 | `/services` | Treatments & Services | No |
 | `/gallery` | Before/After Gallery | No |
 | `/contact` | Contact Us | No |
+| `/experience` | Client Journey & Protocol | No |
 | `/book` | Book an Appointment | No* |
 | `/login` | Sign In / Sign Up | No |
 | `/dashboard` | Client Dashboard | ✅ Yes |
 | `/profile` | User Profile | ✅ Yes |
 | `/notifications` | Notifications | ✅ Yes |
-| `/experience` | Reviews & Testimonials | No |
-| `/admin` | Admin Panel | ✅ Admin |
+| `/admin` | Admin Panel | ✅ Admin only |
 
 ---
 
@@ -159,14 +167,10 @@ enlyten2-laser-center/
 
 The application supports full bilingual operation:
 
-- **English (LTR)**: Default language — Manrope / Noto Serif fonts
-- **Arabic (RTL)**: Full layout mirroring — Cairo font
+- **English (LTR)**: Inter font — language button shows "العربية"
+- **Arabic (RTL)**: Cairo font, full layout mirror — language button shows "English"
 
-Language preference is **persisted in `localStorage`**. The language switcher is available in the header on every page.
-
-To add a new language:
-1. Create `src/locales/{lang}.json`
-2. Register it in `src/i18n.js`
+Language preference is **persisted in `localStorage`**. The switcher is in the header on every page.
 
 ---
 
@@ -174,14 +178,14 @@ To add a new language:
 
 | Table | Purpose |
 |---|---|
-| `profiles` | User profile data |
-| `services` | Clinic treatment catalogue |
+| `profiles` | User profile data (name, phone, bio, role) |
+| `services` | Clinic treatment catalogue (EN + AR) |
 | `bookings` | Client appointment records |
-| `gallery` | Before/after media |
+| `gallery` | Before/after media (EN + AR) |
 | `notifications` | User notification records |
 | `experiences` | Client reviews & testimonials |
 
-> See [SUPABASE_SETUP.md](SUPABASE_SETUP.md) for full schema and setup instructions.
+All tables have **Row-Level Security (RLS)** enabled.
 
 ---
 
@@ -198,22 +202,32 @@ npm run preview   # Preview production build locally
 ## 🔐 Security
 
 - ✅ Row-Level Security (RLS) enabled on all Supabase tables
-- ✅ Environment variables kept out of source control
+- ✅ All secrets in environment variables — never hardcoded
 - ✅ JWT-based session management via Supabase Auth
-- ✅ User data isolation enforced at the database level
+- ✅ Profile updates field-whitelisted (cannot modify `role`)
+- ✅ Sentry with `sendDefaultPii: false` and masked inputs
+- ✅ `.env.local` and `.claude/settings.json` excluded from git
 
 ---
 
 ## 📋 Changelog
 
+### v1.2.0 — 2026-04-20
+
+- Admin panel: full CRUD for services + booking status management
+- Sentry: error tracking, session replay, ErrorBoundary
+- Security: env vars for all secrets, PII disabled, profile whitelist
+- Performance: React.lazy() code splitting, lazy image loading
+- SEO: Open Graph, Twitter Card, meta tags
+- Fixes: logout, language switcher, auth race condition, Firefox min-height
+
 ### v1.0.0 — 2026-04-13
-- 🎉 Initial production release
-- 🌍 Bilingual (Arabic + English) support with RTL layout
-- 🎨 Luminous Canvas design system
-- 🔐 Supabase authentication integration
-- 📅 Booking system (client-facing)
-- 🖼️ Gallery, Profile, Dashboard, Notifications pages
-- 🛡️ Admin panel for clinic management
+
+- Initial production release
+- Bilingual (Arabic + English) with full RTL/LTR support
+- Supabase auth + database integration
+- All 11 pages implemented
+- Luminous Canvas design system
 
 ---
 
@@ -223,4 +237,4 @@ This project is **proprietary** and owned by **Enlyten2 Laser Center**. All righ
 
 ---
 
-*Built with ❤️ for Enlyten2 Laser Center — Experience the Art of Radiance.*
+*Built for Enlyten2 Laser Center — Experience the Art of Radiance.*
