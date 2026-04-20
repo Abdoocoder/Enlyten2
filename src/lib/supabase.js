@@ -9,7 +9,19 @@ if (!supabaseUrl || !supabaseAnonKey) {
   );
 }
 
-export const supabase = createClient(supabaseUrl, supabaseAnonKey);
+export const supabase = createClient(supabaseUrl, supabaseAnonKey, {
+  auth: {
+    autoRefreshToken: true,
+    persistSession: true,
+    detectSessionInUrl: true,
+    // Fix: Disable navigator lock to prevent "Lock was released because another request stole it" error
+    // which happens during HMR or multiple rapid reloads in modern browsers.
+    storageKey: `sb-${new URL(supabaseUrl).hostname.split('.')[0]}-auth-token`,
+    lockType: 'custom',
+    async acquireLock() { return true; },
+    async releaseLock() { return true; }
+  }
+});
 
 // Auth functions
 export const signUp = async (email, password, fullName) => {
