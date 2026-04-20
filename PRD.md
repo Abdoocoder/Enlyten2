@@ -16,7 +16,6 @@
 ### 2. Backend Services
 - **Supabase** (PostgreSQL + Auth + RLS)
 - **Supabase Edge Functions** (Deno runtime) — planned for v1.3
-- **Resend API** for transactional email — planned for v1.3
 
 ### 3. External Integrations
 - **Sentry** (`@sentry/react`) for error monitoring + session replay
@@ -130,7 +129,6 @@
 - [x] Real-time pending badge in Admin panel header (v1.3)
 
 ### Pending (v1.4)
-- [ ] Email notification on booking created/confirmed (Resend API)
 - [ ] WhatsApp notification to admin on new booking
 
 ---
@@ -156,11 +154,6 @@ const supabase = createClient(
 - Experiences: `getExperiences`, `createExperience`
 - Admin: `getAdminBookings`, `getAdminServices`, `createService`, `updateService`, `deleteService`
 
-### Resend API (v1.3)
-- Transactional booking emails
-- Free tier: 3,000 emails/month
-- Edge Function: `send-booking-confirmation`
-
 ### WhatsApp API (v1.3)
 - Admin number: 077 030 0173
 - Triggered on new booking insert via Supabase webhook
@@ -174,7 +167,6 @@ const supabase = createClient(
 VITE_SUPABASE_URL=https://duxppbunumxjxtatpvyu.supabase.co
 VITE_SUPABASE_ANON_KEY=
 VITE_SENTRY_DSN=
-RESEND_API_KEY=          # v1.3
 ADMIN_WHATSAPP=0770300173  # v1.3
 ```
 
@@ -193,13 +185,6 @@ ADMIN_WHATSAPP=0770300173  # v1.3
 
 ## Phase 2: Notifications & Real-time (v1.3)
 
-### Task 14: Email Notifications (Resend)
-1. Create Supabase Edge Function `send-booking-confirmation`
-2. Add `RESEND_API_KEY` to Supabase secrets
-3. Build AR/EN email templates (new booking + status change)
-4. Set up database webhook on `bookings` INSERT and UPDATE
-5. Deploy and test
-
 ### Task 15: WhatsApp Admin Alert
 1. Configure WhatsApp Business Cloud API
 2. Create Edge Function triggered on new booking
@@ -214,9 +199,6 @@ ADMIN_WHATSAPP=0770300173  # v1.3
 ---
 
 # Logical Dependency Chain
-
-## Email (Task 14)
-`Edge Function setup` → `Resend SDK + API key` → `Email templates (AR/EN)` → `DB webhooks (INSERT + UPDATE)` → `Deploy + test`
 
 ## WhatsApp (Task 15)
 `WhatsApp Business API setup` → `Edge Function trigger` → `Message template` → `Test delivery`
@@ -239,38 +221,6 @@ ADMIN_WHATSAPP=0770300173  # v1.3
 ---
 
 # Appendix
-
-## Email Template — Client (New Booking)
-```
-Subject: تم استلام حجزك — {service_name}
-
-عزيزي {patient_name}،
-
-تم استلام طلب حجزك بنجاح!
-
-الخدمة: {service_name}
-التاريخ: {date}
-الوقت: {time}
-
-سنتواصل معك قريباً لتأكيد الموعد.
-
-مركز Enlyten2 للليزر
-077 030 0173
-```
-
-## Email Template — Admin (New Booking)
-```
-New Booking Alert
-
-Patient: {patient_name}
-Phone: {phone}
-Service: {service_name}
-Date: {date}
-Time: {time}
-Notes: {notes}
-
-Admin Panel: https://enlyten2.vercel.app/admin
-```
 
 ## WhatsApp Message Format
 ```

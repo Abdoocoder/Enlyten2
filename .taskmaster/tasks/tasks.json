@@ -665,12 +665,39 @@
         "priority": "medium",
         "subtasks": [],
         "updatedAt": "2026-04-20T11:20:00.000Z"
+      },
+      {
+        "id": 18,
+        "title": "Telegram Bot: Free Instant Admin Alerts",
+        "description": "Create a Telegram Bot integration via Supabase Edge Functions to send free, instant booking notifications to the clinic manager's phone.",
+        "status": "pending",
+        "priority": "medium",
+        "dependencies": [],
+        "subtasks": []
+      },
+      {
+        "id": 19,
+        "title": "Admin Panel: Visual Analytics Dashboard",
+        "description": "Add charts and graphs to the Admin Analytics tab to visualize booking trends, revenue growth, and service popularity.",
+        "status": "pending",
+        "priority": "medium",
+        "dependencies": [],
+        "subtasks": []
+      },
+      {
+        "id": 20,
+        "title": "Admin Panel: Dynamic Schedule & Holiday Manager",
+        "description": "Build a UI for admins to manage clinic working hours and set public holidays or off-days that automatically block the booking calendar.",
+        "status": "pending",
+        "priority": "high",
+        "dependencies": [],
+        "subtasks": []
       }
     ],
     "metadata": {
       "version": "1.0.0",
-      "lastModified": "2026-04-20T11:20:00.000Z",
-      "taskCount": 14,
+      "lastModified": "2026-04-20T12:00:00.000Z",
+      "taskCount": 17,
       "completedCount": 14,
       "tags": [
         "master"
