@@ -52,4 +52,5 @@ lerna-debug.log*
 .Spotlight-V100
 .Trashes
 ehthumbs.db
-Thumbs.db.claude/settings.json
+Thumbs.db
+.claude/settings.json
