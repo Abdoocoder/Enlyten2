@@ -653,12 +653,46 @@
         "priority": "low",
         "subtasks": [],
         "updatedAt": "2026-04-20T07:54:18.285Z"
+      },
+      {
+        "id": "14",
+        "title": "Booking Confirmation: Email Notifications",
+        "description": "Implement automated email notifications for the booking workflow using Supabase Edge Functions and Resend API. When a new booking is created (status: pending), automatically send: 1) A confirmation email to the patient with booking details (service, date, time). 2) An alert email to the admin notifying them of the new booking. When the admin changes status to 'confirmed' in the Admin Panel, send a confirmation email to the patient. Tech stack: Supabase Edge Function (Deno), Resend API for email delivery.",
+        "details": "",
+        "testStrategy": "",
+        "status": "in-progress",
+        "dependencies": [],
+        "priority": "high",
+        "subtasks": [],
+        "updatedAt": "2026-04-20T11:12:07.792Z"
+      },
+      {
+        "id": "15",
+        "title": "Booking Confirmation: WhatsApp Notification to Admin",
+        "description": "When a new booking is submitted (status: pending), automatically send a WhatsApp message to the clinic admin number (077 030 0173) with the booking details: patient name, service, date, and time. Use WhatsApp Business Cloud API or Twilio WhatsApp API via a Supabase Edge Function trigger. This gives the admin an instant mobile alert for every new appointment without needing to check the dashboard.",
+        "details": "",
+        "testStrategy": "",
+        "status": "pending",
+        "dependencies": [],
+        "priority": "high",
+        "subtasks": []
+      },
+      {
+        "id": "16",
+        "title": "Admin Panel: New Booking Badge and Real-time Notifications",
+        "description": "Add a real-time notification badge to the Admin Panel to alert admins of new pending bookings without refreshing the page. Features: 1) A red badge counter on the Bookings tab showing the number of unreviewed pending bookings. 2) Use Supabase Realtime (postgres_changes) to subscribe to new inserts in the bookings table and update the counter live. 3) Optional: Add a toast notification popup in the bottom corner of the admin panel whenever a new booking comes in.",
+        "details": "",
+        "testStrategy": "",
+        "status": "pending",
+        "dependencies": [],
+        "priority": "medium",
+        "subtasks": []
       }
     ],
     "metadata": {
       "version": "1.0.0",
-      "lastModified": "2026-04-20T07:54:18.286Z",
-      "taskCount": 13,
+      "lastModified": "2026-04-20T11:12:07.792Z",
+      "taskCount": 16,
       "completedCount": 13,
       "tags": [
         "master"
