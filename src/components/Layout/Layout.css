@@ -58,6 +58,16 @@
   gap: var(--spacing-md);
 }
 
+.btn-header-book {
+  background: var(--logo-pink);
+  box-shadow: 0 0 16px rgba(255, 0, 87, 0.45);
+}
+
+.btn-header-book:hover {
+  background: var(--laser-gradient);
+  box-shadow: 0 0 24px rgba(255, 0, 87, 0.6);
+}
+
 .user-menu-container {
   position: relative;
 }

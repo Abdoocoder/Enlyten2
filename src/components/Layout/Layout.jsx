@@ -53,7 +53,7 @@ const Layout = ({ children }) => {
             {isAuthenticated ? (
               <>
               <Link to="/book">
-                <Button variant="primary" className="btn-pill">{t('nav.book')}</Button>
+                <Button variant="primary" className="btn-pill btn-header-book">{t('nav.book')}</Button>
               </Link>
               <div className="user-menu-container" ref={menuRef}>
                 <button 
