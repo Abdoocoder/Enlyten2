@@ -16,7 +16,7 @@ const Auth = () => {
   const navigate = useNavigate();
   const [searchParams] = useSearchParams();
   const returnTo = searchParams.get('returnTo') || '/dashboard';
-  const { isAuthenticated } = useAuth();
+  const { isAuthenticated, isAdmin, loading } = useAuth();
   const { t } = useTranslation();
 
   useEffect(() => {
