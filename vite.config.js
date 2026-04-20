@@ -7,4 +7,10 @@ export default defineConfig({
   build: {
     chunkSizeWarningLimit: 600,
   },
+  // Suppress specific deprecated warnings from plugins
+  logLevel: 'info',
+  onWarn(warning, warn) {
+    if (warning.code === 'DEPRECATED_ESBUILD') return;
+    warn(warning);
+  }
 })
