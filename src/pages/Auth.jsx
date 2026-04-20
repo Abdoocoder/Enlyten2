@@ -16,19 +16,19 @@ const Auth = () => {
   const navigate = useNavigate();
   const [searchParams] = useSearchParams();
   const returnTo = searchParams.get('returnTo') || '/dashboard';
-  const { isAuthenticated, isAdmin, loading } = useAuth();
+  const { isAuthenticated, isAdmin, loading: authLoading } = useAuth();
   const { t } = useTranslation();
 
   useEffect(() => {
     // Redirect only once auth state is fully loaded (including profile)
-    if (!loading && isAuthenticated) {
+    if (!authLoading && isAuthenticated) {
       if (isAdmin && returnTo === '/dashboard') {
         navigate('/admin');
       } else {
         navigate(returnTo);
       }
     }
-  }, [isAuthenticated, isAdmin, loading, navigate, returnTo]);
+  }, [isAuthenticated, isAdmin, authLoading, navigate, returnTo]);
 
   const handleInputChange = (e) => {
     const { name, value } = e.target;
