@@ -244,7 +244,10 @@ button {
   background-clip: text;
   display: inline-block;
   filter: drop-shadow(var(--laser-glow));
-  animation: laser-move 8s linear infinite;
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .laser-text { animation: laser-move 8s linear infinite; }
 }
 
 @keyframes laser-move {
@@ -305,4 +308,16 @@ button {
   border-radius: var(--radius-md);
   font-size: 0.875rem;
   text-align: center;
+}
+
+/* ─── Reduced Motion ─── */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
 }

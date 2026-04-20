@@ -10,18 +10,24 @@ const Layout = ({ children }) => {
   const { isAuthenticated, user, profile, isAdmin, logout } = useAuth();
   const { t } = useTranslation();
   const [showUserMenu, setShowUserMenu] = useState(false);
+  const [menuClosing, setMenuClosing] = useState(false);
   const menuRef = useRef(null);
   const navigate = useNavigate();
+
+  const closeMenu = () => {
+    setMenuClosing(true);
+    setTimeout(() => { setShowUserMenu(false); setMenuClosing(false); }, 180);
+  };
 
   useEffect(() => {
     const handleClickOutside = (e) => {
       if (menuRef.current && !menuRef.current.contains(e.target)) {
-        setShowUserMenu(false);
+        if (showUserMenu) closeMenu();
       }
     };
     document.addEventListener('mousedown', handleClickOutside);
     return () => document.removeEventListener('mousedown', handleClickOutside);
-  }, []);
+  }, [showUserMenu]);
 
   const handleLogout = () => {
     console.log('Logout: Initiating...');
@@ -59,15 +65,15 @@ const Layout = ({ children }) => {
                 {t('nav.book')}
               </Button>
               <div className="user-menu-container" ref={menuRef}>
-                <button 
+                <button
                   className="user-avatar"
-                  onClick={() => setShowUserMenu(!showUserMenu)}
+                  onClick={() => showUserMenu ? closeMenu() : setShowUserMenu(true)}
                   title={user?.email}
                 >
                   {initials}
                 </button>
                 {showUserMenu && (
-                  <div className="user-menu">
+                  <div className={`user-menu${menuClosing ? ' user-menu--closing' : ''}`}>
                     <Link to="/dashboard" className="user-menu-item" onClick={() => setShowUserMenu(false)}>
                       {t('nav.dashboard')}
                     </Link>

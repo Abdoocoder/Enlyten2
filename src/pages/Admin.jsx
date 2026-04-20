@@ -4,6 +4,7 @@ import { useTranslation } from 'react-i18next';
 import './Admin.css';
 import { useAuth } from '../contexts/AuthContext';
 import {
+  supabase,
   getAdminBookings, getAdminServices, getAdminProfiles,
   getAdminExperiences, getDoctors, getHolidays, getGallery,
   updateBooking, createService, updateService, deleteService,
@@ -61,8 +62,20 @@ const Admin = () => {
 
   // Modals & Actions
   const [modal, setModal] = useState({ open: false, mode: 'create', type: 'service', data: null });
+  const [modalClosing, setModalClosing] = useState(false);
   const [saving, setSaving] = useState(false);
   const [confirmDelete, setConfirmDelete] = useState(null);
+  const [confirmClosing, setConfirmClosing] = useState(false);
+
+  const closeModal = () => {
+    setModalClosing(true);
+    setTimeout(() => { setModal(m => ({ ...m, open: false })); setModalClosing(false); }, 180);
+  };
+
+  const closeConfirm = () => {
+    setConfirmClosing(true);
+    setTimeout(() => { setConfirmDelete(null); setConfirmClosing(false); }, 180);
+  };
 
   useEffect(() => {
     if (authLoading) return;
@@ -175,7 +188,7 @@ const Admin = () => {
     
     if (!res.error) {
       loadData();
-      setModal({ ...modal, open: false });
+      closeModal();
     }
     setSaving(false);
   };
@@ -189,7 +202,7 @@ const Admin = () => {
     else if (confirmDelete.type === 'gallery') err = (await deleteGalleryItem(confirmDelete.id)).error;
     
     if (!err) loadData();
-    setConfirmDelete(null);
+    closeConfirm();
   };
 
   const handleModalChange = (field, value) => {
@@ -464,11 +477,11 @@ const Admin = () => {
       </div>
 
       {modal.open && (
-        <div className="admin-modal-overlay" onClick={() => setModal({ ...modal, open: false })}>
+        <div className={`admin-modal-overlay${modalClosing ? ' admin-modal-overlay--closing' : ''}`} onClick={closeModal}>
           <div className="admin-modal" onClick={e => e.stopPropagation()}>
             <div className="modal-header">
               <h2 className="card-title">{modal.type.toUpperCase()}</h2>
-              <button className="modal-close" onClick={() => setModal({ ...modal, open: false })}>×</button>
+              <button className="modal-close" onClick={closeModal}>×</button>
             </div>
             <div className="modal-body">
               {modal.type === 'service' && (
@@ -507,12 +520,12 @@ const Admin = () => {
       )}
 
       {confirmDelete && (
-        <div className="admin-modal-overlay" onClick={() => setConfirmDelete(null)}>
+        <div className={`admin-modal-overlay${confirmClosing ? ' admin-modal-overlay--closing' : ''}`} onClick={closeConfirm}>
           <div className="admin-modal admin-modal-sm">
             <div className="modal-header"><h3 className="card-title">Confirm Delete</h3></div>
             <div className="modal-body"><p>Delete {confirmDelete.name}?</p></div>
             <div className="modal-footer">
-              <button className="btn btn-danger" onClick={handleDelete}>Delete</button>
+              <button className="btn btn-danger" onClick={() => { handleDelete(); }}>Delete</button>
             </div>
           </div>
         </div>

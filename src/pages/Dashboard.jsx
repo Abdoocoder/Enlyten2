@@ -67,6 +67,7 @@ const Dashboard = () => {
   const [searchParams] = useSearchParams();
   const { bookings, loading } = useUserBookings(user?.id);
   const [successMessage, setSuccessMessage] = useState('');
+  const [toastClosing, setToastClosing] = useState(false);
   const [cancelLoading, setCancelLoading] = useState(null);
 
   useEffect(() => {
@@ -74,7 +75,10 @@ const Dashboard = () => {
     if (!isAuthenticated) { navigate('/login'); return; }
     if (searchParams.get('booking') === 'success') {
       setSuccessMessage(t('dashboard.bookingSuccess', 'Appointment scheduled successfully!'));
-      setTimeout(() => setSuccessMessage(''), 5000);
+      setTimeout(() => {
+        setToastClosing(true);
+        setTimeout(() => { setSuccessMessage(''); setToastClosing(false); }, 300);
+      }, 4700);
     }
   }, [isAuthenticated, navigate, searchParams, t]);
 
@@ -123,7 +127,7 @@ const Dashboard = () => {
         <div className="content-well">
 
           {successMessage && (
-            <div className="premium-toast success-toast animation-slide-down">
+            <div className={`premium-toast success-toast${toastClosing ? ' animation-slide-out' : ' animation-slide-down'}`}>
               <div className="toast-content">
                 <span className="toast-icon">✓</span>
                 <p>{successMessage}</p>

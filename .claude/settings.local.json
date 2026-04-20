@@ -27,7 +27,10 @@
       "Bash(git commit *)",
       "Bash(git push *)",
       "Bash(task-master list *)",
-      "Bash(task-master add-task *)"
+      "Bash(task-master add-task *)",
+      "Bash(git clone *)",
+      "Bash(cp -r design-motion-principles/skills/design-motion-principles ~/.claude/skills/)",
+      "Bash(cp *)"
     ]
   }
 }

@@ -101,6 +101,22 @@
   margin-top: var(--spacing-sm);
   z-index: 2000;
   overflow: hidden;
+  transform-origin: top right;
+  animation: menuEnter 0.18s cubic-bezier(0.25, 0.1, 0.25, 1) forwards;
+}
+
+.user-menu--closing {
+  animation: menuExit 0.18s cubic-bezier(0.25, 0.1, 0.25, 1) forwards;
+}
+
+@keyframes menuEnter {
+  from { opacity: 0; transform: translateY(-6px); filter: blur(4px); }
+  to   { opacity: 1; transform: translateY(0);    filter: blur(0px); }
+}
+
+@keyframes menuExit {
+  from { opacity: 1; transform: translateY(0);    filter: blur(0px); }
+  to   { opacity: 0; transform: translateY(-6px); filter: blur(4px); }
 }
 
 .user-menu-item {
