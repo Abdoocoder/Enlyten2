@@ -1,4 +1,4 @@
-import React, { createContext, useContext, useEffect, useState } from 'react';
+import React, { createContext, useContext, useEffect, useState, useCallback, useMemo } from 'react';
 import { supabase, getCurrentUser, getProfile } from '../lib/supabase';
 
 const AuthContext = createContext();
@@ -55,7 +55,7 @@ export const AuthProvider = ({ children }) => {
     return () => subscription?.unsubscribe();
   }, []);
 
-  const logout = () => {
+  const logout = useCallback(() => {
     // Immediately clear all Supabase session tokens from localStorage
     // This is the critical step — the rest is best-effort
     try {
@@ -76,9 +76,11 @@ export const AuthProvider = ({ children }) => {
     // Clear React state immediately
     setUser(null);
     setProfile(null);
-  };
+  }, []);
 
-  const value = {
+  // Optimization: Memoize the context value to prevent unnecessary re-renders of all consumers
+  // when AuthProvider re-renders (e.g. during initialization or on internal state updates).
+  const value = useMemo(() => ({
     user,
     profile,
     loading,
@@ -86,7 +88,7 @@ export const AuthProvider = ({ children }) => {
     isAuthenticated: !!user,
     isAdmin: profile?.role === 'admin',
     logout,
-  };
+  }), [user, profile, loading, error, logout]);
 
   return <AuthContext.Provider value={value}>{children}</AuthContext.Provider>;
 };
