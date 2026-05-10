@@ -667,6 +667,56 @@
         "updatedAt": "2026-04-20T11:20:00.000Z"
       },
       {
+        "id": 21,
+        "title": "Animation & Motion System",
+        "description": "Added CSS easing tokens (--ease-out-expo, --ease-out-quart, --ease-out-quint, --ease-in-out) and transition tokens to variables.css. Replaced all transition: all with specific property lists. Added scroll-reveal (useReveal hook + .reveal-up/.reveal-stagger). Home page animate pass: glowPulse breathing, hero blur-in, treatment card hovers. Layout: header entrance, nav underline scaleX, hamburger morphing animation, full mobile nav panel with stagger + backdrop + body scroll lock.",
+        "status": "done",
+        "priority": "high",
+        "dependencies": [],
+        "subtasks": [],
+        "updatedAt": "2026-05-10T00:00:00.000Z"
+      },
+      {
+        "id": 22,
+        "title": "Touch guard audit — all hover transforms",
+        "description": "Wrapped every transform/scale hover effect in @media (hover: hover) and (pointer: fine) across Button.css, global.css (pill-link, apple-card), Home.css, Services.css, Gallery.css, Booking.css, Dashboard.css, Contact.css. Prevents unintended transform flash on mobile tap.",
+        "status": "done",
+        "priority": "medium",
+        "dependencies": ["21"],
+        "subtasks": [],
+        "updatedAt": "2026-05-10T00:00:00.000Z"
+      },
+      {
+        "id": 23,
+        "title": "Sentry: suppress Supabase GoTrue lock error",
+        "description": "Added ignoreErrors regex patterns to Sentry.init() in main.jsx to suppress the GoTrue lock unhandled rejection (Issue 7426566850). Root cause: React Strict Mode double-invokes auth effects causing two simultaneous lock acquisitions. Not app code — suppressed at Sentry level.",
+        "status": "done",
+        "priority": "medium",
+        "dependencies": [],
+        "subtasks": [],
+        "updatedAt": "2026-05-10T00:00:00.000Z"
+      },
+      {
+        "id": 24,
+        "title": "UI polish pass — all pages",
+        "description": "Page-by-page CSS polish: Booking (touch guards, token transitions, blur gated behind prefers-reduced-motion), Dashboard (toast progress width→scaleX, slide-in easing fixed, KPI stagger animation), Services (touch guards, --transition-smooth token, --ease-out-expo on card enter), Auth (input token transitions, glass card staggered entrance), Gallery (touch guards, tileReveal uses --ease-out-expo, blur isolated to prefers-reduced-motion), Profile (fixed 4 undefined tokens: --surface-container-lowest/--primary-container/--ambient-shadow/--radius-full, page entry animation), Contact (touch guards on phone links, transition tokens).",
+        "status": "done",
+        "priority": "high",
+        "dependencies": ["21", "22"],
+        "subtasks": [],
+        "updatedAt": "2026-05-10T00:00:00.000Z"
+      },
+      {
+        "id": 25,
+        "title": "Dashboard chart bars: height → scaleY compositor fix",
+        "description": "Changed MiniChart in Dashboard.jsx from inline style={{ height }} to style={{ transform: scaleY(...) }}. Updated Dashboard.css .chart-bar to use height: 100% + transform-origin: bottom + transition: transform. Bars now animate on the GPU compositor with no layout thrash.",
+        "status": "done",
+        "priority": "medium",
+        "dependencies": ["24"],
+        "subtasks": [],
+        "updatedAt": "2026-05-10T00:00:00.000Z"
+      },
+      {
         "id": 18,
         "title": "Telegram Bot: Free Instant Admin Alerts",
         "description": "Create a Telegram Bot integration via Supabase Edge Functions to send free, instant booking notifications to the clinic manager's phone.",
@@ -696,9 +746,9 @@
     ],
     "metadata": {
       "version": "1.0.0",
-      "lastModified": "2026-04-20T12:00:00.000Z",
-      "taskCount": 17,
-      "completedCount": 14,
+      "lastModified": "2026-05-10T00:00:00.000Z",
+      "taskCount": 22,
+      "completedCount": 19,
       "tags": [
         "master"
       ],
