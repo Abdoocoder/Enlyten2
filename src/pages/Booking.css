@@ -27,7 +27,7 @@
   font-weight: 500;
   color: rgba(255, 255, 255, 0.35);
   letter-spacing: 0.01em;
-  transition: color 0.2s ease;
+  transition: color 0.2s var(--ease-out-quart), opacity 0.2s var(--ease-out-quart);
 }
 
 .step.active { color: var(--white); }
@@ -100,15 +100,17 @@
   align-items: center;
   cursor: pointer;
   box-shadow: var(--shadow-card);
-  transition: transform 0.2s ease, border-color 0.2s ease, box-shadow 0.2s ease;
+  transition: var(--transition-smooth);
 }
 
-.treatment-tile:hover {
-  border-color: var(--logo-pink);
-  transform: translateY(-1px);
-  box-shadow:
-    rgba(0, 0, 0, 0.06) 0px 6px 20px,
-    rgba(0, 0, 0, 0.03) 0px 2px 6px;
+@media (hover: hover) and (pointer: fine) {
+  .treatment-tile:hover {
+    border-color: var(--logo-pink);
+    transform: translateY(-1px);
+    box-shadow:
+      rgba(0, 0, 0, 0.06) 0px 6px 20px,
+      rgba(0, 0, 0, 0.03) 0px 2px 6px;
+  }
 }
 
 .treatment-tile.selected {
@@ -167,7 +169,7 @@
   border: 1.5px solid rgba(0, 0, 0, 0.2);
   flex-shrink: 0;
   position: relative;
-  transition: border-color 0.2s ease, background-color 0.2s ease;
+  transition: border-color 0.2s var(--ease-out-quart), background-color 0.2s var(--ease-out-quart);
 }
 
 .treatment-tile.selected .tile-check {
@@ -216,7 +218,7 @@
   font-weight: 400;
   background-color: var(--white);
   color: var(--near-black);
-  transition: border-color 0.2s ease, box-shadow 0.2s ease;
+  transition: border-color 0.2s var(--ease-out-quart), box-shadow 0.2s var(--ease-out-quart);
 }
 
 .apple-date-input:focus {
@@ -241,10 +243,15 @@
   font-weight: 500;
   color: var(--near-black);
   letter-spacing: 0.01em;
-  transition: border-color 0.2s ease, background 0.2s ease, color 0.2s ease;
+  transition:
+    border-color     0.15s var(--ease-out-quart),
+    background-color 0.15s var(--ease-out-quart),
+    color            0.15s var(--ease-out-quart);
 }
 
-.time-pill:hover { border-color: var(--logo-pink); }
+@media (hover: hover) and (pointer: fine) {
+  .time-pill:hover { border-color: var(--logo-pink); }
+}
 
 .time-pill.active {
   background: var(--laser-gradient);
@@ -320,7 +327,7 @@
   font-size: 0.9375rem;
   color: var(--near-black);
   resize: vertical;
-  transition: border-color 0.2s ease, box-shadow 0.2s ease;
+  transition: border-color 0.2s var(--ease-out-quart), box-shadow 0.2s var(--ease-out-quart);
 }
 
 .apple-textarea::placeholder { color: var(--on-surface-disabled); }
@@ -351,24 +358,38 @@
 /* ── Animation ── */
 .animation-fade-in {
   will-change: opacity, transform;
-  animation: fadeIn 0.35s ease-out forwards;
+  animation: fadeIn 0.35s var(--ease-out-expo) forwards;
 }
 
 @keyframes fadeIn {
-  from { opacity: 0; transform: translateY(8px); filter: blur(4px); }
-  to   { opacity: 1; transform: translateY(0);   filter: blur(0px); }
+  from { opacity: 0; transform: translateY(8px); }
+  to   { opacity: 1; transform: translateY(0);   }
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  @keyframes fadeIn {
+    from { opacity: 0; transform: translateY(8px); filter: blur(3px); }
+    to   { opacity: 1; transform: translateY(0);   filter: blur(0px); }
+  }
 }
 
 .step-exiting {
-  animation: stepExit 0.2s ease-in forwards;
+  animation: stepExit 0.2s var(--ease-out-quart) forwards;
   pointer-events: none;
   position: absolute;
   width: 100%;
 }
 
 @keyframes stepExit {
-  from { opacity: 1; transform: translateY(0);    filter: blur(0px); }
-  to   { opacity: 0; transform: translateY(-8px); filter: blur(4px); }
+  from { opacity: 1; transform: translateY(0);    }
+  to   { opacity: 0; transform: translateY(-8px); }
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  @keyframes stepExit {
+    from { opacity: 1; transform: translateY(0);    filter: blur(0px); }
+    to   { opacity: 0; transform: translateY(-8px); filter: blur(3px); }
+  }
 }
 
 /* ── Responsive ── */
