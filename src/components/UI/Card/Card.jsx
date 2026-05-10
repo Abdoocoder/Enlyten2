@@ -1,6 +1,7 @@
+import { memo } from 'react';
 import './Card.css';
 
-const Card = ({ children, variant = 'white', padded = true, className = '', ...props }) => {
+const Card = memo(({ children, variant = 'white', padded = true, className = '', ...props }) => {
   return (
     <div 
       className={`card card-${variant} ${padded ? 'card-padded' : ''} ${className}`} 
@@ -9,6 +10,8 @@ const Card = ({ children, variant = 'white', padded = true, className = '', ...p
       {children}
     </div>
   );
-};
+});
+
+Card.displayName = 'Card';
 
 export default Card;

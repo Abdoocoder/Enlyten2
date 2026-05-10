@@ -1,3 +1,4 @@
+import { useMemo } from 'react';
 import './Home.css';
 import Button from '../components/UI/Button/Button';
 import Card from '../components/UI/Card/Card';
@@ -5,6 +6,10 @@ import { useTranslation } from 'react-i18next';
 import { Link } from 'react-router-dom';
 import mockData from '../data/mockData.json';
 import { useReveal } from '../hooks/useReveal';
+
+// Static style objects to prevent unnecessary re-renders of memoized components
+const REVEAL_DELAY_0 = { '--reveal-delay': '0ms' };
+const REVEAL_DELAY_100 = { '--reveal-delay': '100ms' };
 
 const Home = () => {
   const { t, i18n } = useTranslation();
@@ -18,12 +23,45 @@ const Home = () => {
   const [treatmentsGridRef, treatmentsGridVisible] = useReveal();
   const [ctaRef, ctaVisible] = useReveal();
 
-  const stats = [
+  const stats = useMemo(() => [
     { value: t('home.stats.clients.value'), label: t('home.stats.clients.label') },
     { value: t('home.stats.treatments.value'), label: t('home.stats.treatments.label') },
     { value: t('home.stats.years.value'), label: t('home.stats.years.label') },
     { value: t('home.stats.satisfaction.value'), label: t('home.stats.satisfaction.label') },
-  ];
+  ], [t]);
+
+  // Memoize the treatments grid to prevent re-rendering cards with dynamic styles on every scroll/reveal update
+  const memoizedTreatments = useMemo(() => (
+    treatments.map((treatment, i) => (
+      <Card
+        key={treatment.id}
+        variant="white"
+        className="treatment-card"
+        padded={false}
+        style={{ '--reveal-delay': `${i * 80}ms` }}
+      >
+        <div className="treatment-image-placeholder">
+          {treatment.image_url
+            ? <img
+                src={treatment.image_url}
+                alt={isAr ? (treatment.name_ar || treatment.name) : treatment.name}
+                className="treatment-card-img"
+                loading="lazy"
+              />
+            : <div className="image-overlay"></div>
+          }
+        </div>
+        <div className="treatment-info-well">
+          <h3 className="card-title">{isAr ? (treatment.name_ar || treatment.name) : treatment.name}</h3>
+          <p className="body-medium treatment-description">{isAr ? (treatment.description_ar || treatment.description) : treatment.description}</p>
+          <div className="treatment-footer">
+            <span className="treatment-price">{treatment.price} JD</span>
+            <Link to="/book" className="pill-link">{t('home.treatments.bookNow')}</Link>
+          </div>
+        </div>
+      </Card>
+    ))
+  ), [treatments, isAr, t]);
 
   return (
     <div className="home-page">
@@ -76,14 +114,14 @@ const Home = () => {
             ref={cardsPhiloRef}
             className={`grid-2 philosophy-grid reveal-stagger${cardsPhiloVisible ? ' is-visible' : ''}`}
           >
-            <div className="apple-card philosophy-item" style={{ '--reveal-delay': '0ms' }}>
+            <Card variant="white" className="philosophy-item" style={REVEAL_DELAY_0}>
               <h3 className="card-title">{t('home.philosophy.precision.title')}</h3>
               <p className="body-medium">{t('home.philosophy.precision.text')}</p>
-            </div>
-            <div className="apple-card philosophy-item" style={{ '--reveal-delay': '100ms' }}>
+            </Card>
+            <Card variant="white" className="philosophy-item" style={REVEAL_DELAY_100}>
               <h3 className="card-title">{t('home.philosophy.artisan.title')}</h3>
               <p className="body-medium">{t('home.philosophy.artisan.text')}</p>
-            </div>
+            </Card>
           </div>
         </div>
       </section>
@@ -103,24 +141,7 @@ const Home = () => {
             ref={treatmentsGridRef}
             className={`grid-3 treatments-grid reveal-stagger${treatmentsGridVisible ? ' is-visible' : ''}`}
           >
-            {treatments.map((treatment, i) => (
-              <Card key={treatment.id} variant="white" className="treatment-card" padded={false} style={{ '--reveal-delay': `${i * 80}ms` }}>
-                <div className="treatment-image-placeholder">
-                  {treatment.image_url
-                    ? <img src={treatment.image_url} alt={isAr ? (treatment.name_ar || treatment.name) : treatment.name} className="treatment-card-img" loading="lazy" />
-                    : <div className="image-overlay"></div>
-                  }
-                </div>
-                <div className="treatment-info-well">
-                  <h3 className="card-title">{isAr ? (treatment.name_ar || treatment.name) : treatment.name}</h3>
-                  <p className="body-medium treatment-description">{isAr ? (treatment.description_ar || treatment.description) : treatment.description}</p>
-                  <div className="treatment-footer">
-                    <span className="treatment-price">{treatment.price} JD</span>
-                    <Link to="/book" className="pill-link">{t('home.treatments.bookNow')}</Link>
-                  </div>
-                </div>
-              </Card>
-            ))}
+            {memoizedTreatments}
           </div>
         </div>
       </section>

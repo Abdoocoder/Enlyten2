@@ -1,7 +1,8 @@
+import { memo } from 'react';
 import { Link } from 'react-router-dom';
 import './Button.css';
 
-const Button = ({ children, variant = 'primary', to, className = '', ...props }) => {
+const Button = memo(({ children, variant = 'primary', to, className = '', ...props }) => {
   const classes = `btn btn-${variant} ${className}`;
 
   if (to) {
@@ -17,6 +18,8 @@ const Button = ({ children, variant = 'primary', to, className = '', ...props })
       {children}
     </button>
   );
-};
+});
+
+Button.displayName = 'Button';
 
 export default Button;
