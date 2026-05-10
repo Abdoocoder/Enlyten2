@@ -17,6 +17,18 @@ const Layout = ({ children }) => {
     setTimeout(() => { setShowUserMenu(false); setMenuClosing(false); }, 180);
   };
 
+  const [mobileOpen, setMobileOpen] = useState(false);
+  const [mobileClosing, setMobileClosing] = useState(false);
+  const closeMobileMenu = () => {
+    setMobileClosing(true);
+    setTimeout(() => { setMobileOpen(false); setMobileClosing(false); }, 260);
+  };
+
+  useEffect(() => {
+    document.body.style.overflow = mobileOpen ? 'hidden' : '';
+    return () => { document.body.style.overflow = ''; };
+  }, [mobileOpen]);
+
   useEffect(() => {
     const handleClickOutside = (e) => {
       if (menuRef.current && !menuRef.current.contains(e.target)) {
@@ -56,6 +68,16 @@ const Layout = ({ children }) => {
             <Link to="/contact" className="nav-link">{t('nav.contact')}</Link>
           </nav>
           <div className="header-actions">
+            <button
+              className={`hamburger${mobileOpen ? ' hamburger--open' : ''}`}
+              onClick={() => mobileOpen ? closeMobileMenu() : setMobileOpen(true)}
+              aria-expanded={mobileOpen}
+              aria-label={mobileOpen ? t('nav.close') : t('nav.menu')}
+            >
+              <span className="hamburger-line" />
+              <span className="hamburger-line" />
+              <span className="hamburger-line" />
+            </button>
             <LanguageSwitcher />
             {isAuthenticated ? (
               <>
@@ -106,6 +128,44 @@ const Layout = ({ children }) => {
           </div>
         </div>
       </header>
+
+      {mobileOpen && (
+        <>
+          <div
+            className={`mobile-backdrop${mobileClosing ? ' mobile-backdrop--closing' : ''}`}
+            onClick={closeMobileMenu}
+            aria-hidden="true"
+          />
+          <nav
+            className={`mobile-nav${mobileClosing ? ' mobile-nav--closing' : ''}`}
+            aria-label={t('nav.menu')}
+          >
+            <div className="mobile-nav-links">
+              <Link to="/" className="mobile-nav-link" onClick={closeMobileMenu} style={{'--i': 0}}>{t('nav.home')}</Link>
+              <Link to="/services" className="mobile-nav-link" onClick={closeMobileMenu} style={{'--i': 1}}>{t('nav.treatments')}</Link>
+              <Link to="/gallery" className="mobile-nav-link" onClick={closeMobileMenu} style={{'--i': 2}}>{t('nav.gallery')}</Link>
+              <Link to="/experience" className="mobile-nav-link" onClick={closeMobileMenu} style={{'--i': 3}}>{t('nav.experience')}</Link>
+              <Link to="/contact" className="mobile-nav-link" onClick={closeMobileMenu} style={{'--i': 4}}>{t('nav.contact')}</Link>
+            </div>
+
+            <div className="mobile-nav-footer" style={{'--i': 5}}>
+              <Button to="/book" variant="primary" className="btn-pill mobile-nav-cta" onClick={closeMobileMenu}>
+                {t('nav.book')}
+              </Button>
+              {isAuthenticated ? (
+                <div className="mobile-nav-auth">
+                  <Link to="/dashboard" className="mobile-nav-sub-link" onClick={closeMobileMenu}>{t('nav.dashboard')}</Link>
+                  <Link to="/profile" className="mobile-nav-sub-link" onClick={closeMobileMenu}>{t('nav.profile')}</Link>
+                  {isAdmin && <Link to="/admin" className="mobile-nav-sub-link" onClick={closeMobileMenu}>{t('nav.admin')}</Link>}
+                  <button className="mobile-nav-sub-link mobile-nav-logout" onClick={() => { closeMobileMenu(); logout(); window.location.href = '/'; }}>{t('nav.logout')}</button>
+                </div>
+              ) : (
+                <Link to="/login" className="mobile-nav-sub-link" onClick={closeMobileMenu}>{t('nav.signIn')}</Link>
+              )}
+            </div>
+          </nav>
+        </>
+      )}
 
       <main className="main-content">
         {children}

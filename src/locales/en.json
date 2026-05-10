@@ -1,14 +1,18 @@
 {
   "nav": {
+    "home": "Home",
     "treatments": "Treatments",
     "gallery": "Gallery",
     "contact": "Contact",
+    "experience": "Experience",
     "book": "Book an Appointment",
     "signIn": "Sign In",
     "dashboard": "Dashboard",
     "profile": "Profile",
     "logout": "Logout",
-    "admin": "Admin Panel"
+    "admin": "Admin Panel",
+    "menu": "Open menu",
+    "close": "Close menu"
   },
   "home": {
     "hero": {
