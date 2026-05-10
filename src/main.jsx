@@ -18,6 +18,13 @@ Sentry.init({
   replaysOnErrorSampleRate: 1.0,
   sendDefaultPii: false,
   environment: import.meta.env.MODE,
+  ignoreErrors: [
+    // React Strict Mode double-invokes effects, causing two simultaneous Supabase
+    // auth lock acquisitions. The second request steals the lock from the first,
+    // throwing an unhandled rejection inside the GoTrue library — not app code.
+    /Lock .* was released because another request stole it/,
+    /Lock .* was not released within/,
+  ],
 });
 
 ReactDOM.createRoot(document.getElementById('root')).render(
