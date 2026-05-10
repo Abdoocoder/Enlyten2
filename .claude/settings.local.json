@@ -50,7 +50,9 @@
       "Bash(grep -v \"\\\\.claude\\\\\\\\\\\\\\\\skills\")",
       "Bash(grep -E \"^C:\\\\\\\\\")",
       "Bash(node *)",
-      "Skill(impeccable)"
+      "Skill(impeccable)",
+      "Bash(python \".claude\\\\skills\\\\ui-ux-pro-max\\\\scripts\\\\search.py\" \"luxury laser clinic beauty bilingual dark premium\" --design-system -p \"Enlyten2 Laser Center\" -f markdown)",
+      "Bash(python \".claude\\\\skills\\\\ui-ux-pro-max\\\\scripts\\\\search.py\" \"accessibility animation booking form\" --domain ux -n 8)"
     ]
   }
 }
