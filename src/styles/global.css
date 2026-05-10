@@ -187,9 +187,11 @@ button {
   transition: var(--transition-smooth);
 }
 
-.apple-card:hover {
-  box-shadow: var(--shadow-deep);
-  transform: translateY(-2px);
+@media (hover: hover) and (pointer: fine) {
+  .apple-card:hover {
+    box-shadow: var(--shadow-deep);
+    transform: translateY(-2px);
+  }
 }
 
 /* ─── Buttons (global utility — use Button component instead) ─── */

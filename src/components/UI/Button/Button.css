@@ -28,10 +28,12 @@
   border: none;
 }
 
-.btn-primary:hover {
-  background: var(--laser-gradient-alt);
-  box-shadow: var(--shadow-laser);
-  transform: translateY(-1px);
+@media (hover: hover) and (pointer: fine) {
+  .btn-primary:hover {
+    background: var(--laser-gradient-alt);
+    box-shadow: var(--shadow-laser);
+    transform: translateY(-1px);
+  }
 }
 
 .btn-secondary {
@@ -64,10 +66,12 @@
   border: 1px solid var(--logo-pink);
 }
 
-.btn-outline:hover {
-  background: rgba(255, 0, 87, 0.06);
-  box-shadow: 0 0 0 1px var(--logo-pink), 0 4px 16px rgba(255, 0, 87, 0.12);
-  transform: translateY(-1px);
+@media (hover: hover) and (pointer: fine) {
+  .btn-outline:hover {
+    background: rgba(255, 0, 87, 0.06);
+    box-shadow: 0 0 0 1px var(--logo-pink), 0 4px 16px rgba(255, 0, 87, 0.12);
+    transform: translateY(-1px);
+  }
 }
 
 .btn-pill {

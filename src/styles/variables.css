@@ -121,9 +121,23 @@
   --ease-in-out:    cubic-bezier(0.65, 0, 0.35, 1);
 
   /* ─── Transitions ─── */
-  --transition-fast:   all 0.15s cubic-bezier(0, 0, 0.5, 1);
-  --transition-smooth: all 0.30s cubic-bezier(0.25, 0.1, 0.25, 1);
-  --transition-apple:  all 0.35s cubic-bezier(0.25, 0.1, 0.25, 1);
+  /* Specify exact properties — never use `all` (forces full repaint on every hover) */
+  --transition-fast:
+    color            0.15s var(--ease-out-quart),
+    opacity          0.15s var(--ease-out-quart),
+    background-color 0.15s var(--ease-out-quart),
+    border-color     0.15s var(--ease-out-quart);
+
+  --transition-smooth:
+    transform        0.25s var(--ease-out-expo),
+    box-shadow       0.25s var(--ease-out-expo),
+    background-color 0.25s var(--ease-out-expo),
+    border-color     0.25s var(--ease-out-expo);
+
+  --transition-apple:
+    transform        0.30s var(--ease-out-expo),
+    box-shadow       0.30s var(--ease-out-expo);
+
   --animation-premium: cubic-bezier(0.65, 0, 0.35, 1);
 
   /* ─── Layout ─── */

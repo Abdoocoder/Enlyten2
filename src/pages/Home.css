@@ -184,9 +184,15 @@
   height: 100%;
 }
 
-.treatment-card:hover {
-  transform: scale(1.02);
-  box-shadow: var(--shadow-deep);
+@media (hover: hover) and (pointer: fine) {
+  .treatment-card:hover {
+    transform: scale(1.02);
+    box-shadow: var(--shadow-deep);
+  }
+
+  .treatment-card:hover .treatment-card-img {
+    transform: scale(1.05);
+  }
 }
 
 .treatment-image-placeholder {
@@ -202,10 +208,6 @@
   object-fit: cover;
   display: block;
   transition: transform 0.4s var(--ease-out-expo);
-}
-
-.treatment-card:hover .treatment-card-img {
-  transform: scale(1.05);
 }
 
 .image-overlay {
