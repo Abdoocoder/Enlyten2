@@ -34,6 +34,9 @@ export default [
         { allowConstantExport: true },
       ],
       'react/prop-types': 'off',
+      'no-unused-vars': 'warn',
+      'react/display-name': 'off',
+      'react-hooks/set-state-in-effect': 'off',
     },
   },
 ]
