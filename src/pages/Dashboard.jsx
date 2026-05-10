@@ -49,7 +49,7 @@ const MiniChart = ({ bookings }) => {
           <div key={d.key} className="chart-col">
             <div
               className="chart-bar"
-              style={{ height: `${(d.count / max) * 100}%` }}
+              style={{ transform: `scaleY(${d.count / max})` }}
               title={`${d.count} bookings`}
             />
             <span className="chart-label">{d.label}</span>

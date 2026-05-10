@@ -272,7 +272,7 @@
 
 .chart-bar {
   width: 100%;
-  min-height: 4px;
+  height: 100%;
   background: var(--laser-gradient);
   border-radius: var(--radius-sm) var(--radius-sm) 0 0;
   transform-origin: bottom;

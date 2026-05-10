@@ -44,10 +44,11 @@
   color: var(--logo-pink);
   text-decoration: none;
   letter-spacing: 0.02em;
+  transition: opacity 0.15s var(--ease-out-quart);
 }
 
-.contact-phone:hover {
-  opacity: 0.8;
+@media (hover: hover) and (pointer: fine) {
+  .contact-phone:hover { opacity: 0.8; }
 }
 
 /* Doctors */
@@ -87,10 +88,11 @@
   font-size: 0.9rem;
   font-weight: 500;
   text-decoration: none;
+  transition: opacity 0.15s var(--ease-out-quart);
 }
 
-.doctor-phone:hover {
-  opacity: 0.75;
+@media (hover: hover) and (pointer: fine) {
+  .doctor-phone:hover { opacity: 0.75; }
 }
 
 /* Form Column */

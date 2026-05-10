@@ -2,6 +2,17 @@
   padding-top: var(--spacing-xxl);
 }
 
+@media (prefers-reduced-motion: no-preference) {
+  .profile-grid {
+    animation: profileEnter 0.5s var(--ease-out-expo) both;
+  }
+
+  @keyframes profileEnter {
+    from { opacity: 0; transform: translateY(12px); }
+    to   { opacity: 1; transform: translateY(0); }
+  }
+}
+
 .profile-header {
   margin-bottom: var(--spacing-xl);
 }
@@ -58,7 +69,7 @@
   width: 80px;
   height: 80px;
   background-color: var(--primary);
-  color: #ffffff;
+  color: var(--white);
   border-radius: 50%;
   display: flex;
   align-items: center;
@@ -66,8 +77,8 @@
   font-family: var(--font-display);
   font-size: 2rem;
   font-weight: 600;
-  border: 4px solid var(--surface-container-lowest);
-  box-shadow: var(--ambient-shadow);
+  border: 4px solid var(--white);
+  box-shadow: var(--shadow-card);
 }
 
 .profile-summary {
@@ -82,10 +93,13 @@
 .loyalty-badge {
   display: inline-block;
   margin-top: var(--spacing-sm);
-  background-color: var(--primary-container);
-  color: var(--on-primary-container);
+  background-color: var(--color-error-subtle);
+  color: var(--logo-pink);
   padding: 4px 12px;
-  border-radius: var(--radius-full);
+  border-radius: var(--radius-pill);
+  font-size: 0.75rem;
+  font-weight: 600;
+  letter-spacing: 0.03em;
 }
 
 .profile-main {
@@ -97,7 +111,7 @@
 .section-title {
   margin-bottom: var(--spacing-lg);
   color: var(--primary);
-  border-bottom: 1px solid rgba(208, 197, 175, 0.2);
+  border-bottom: 1px solid var(--outline-variant);
   padding-bottom: var(--spacing-sm);
 }
 
