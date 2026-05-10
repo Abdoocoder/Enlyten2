@@ -113,6 +113,9 @@ export const getBookedSlots = async (date) => {
 };
 
 export const createBooking = async (booking) => {
+  if (!booking.booking_date || !booking.booking_time) {
+    return { data: null, error: { message: 'missing_datetime' } };
+  }
   const { data: existing } = await supabase
     .from('bookings')
     .select('id')

@@ -124,6 +124,7 @@
     "errorInvalidService": "Selected service is in demo mode. Please seed the database to enable real bookings.",
     "slotTaken": "This time slot is no longer available. Please choose another.",
     "slotUnavailable": "Taken",
+    "errorMissingDateTime": "Please select a date and time.",
     "selectDateFirst": "Please select a date first.",
     "noServices": "No services available at the moment.",
     "price": "Price"

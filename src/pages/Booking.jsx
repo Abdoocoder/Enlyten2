@@ -82,7 +82,11 @@ const Booking = () => {
 
     try {
       setLoading(true);
-      
+
+      if (!bookingDate || !bookingTime) {
+        throw new Error(t('booking.errorMissingDateTime', 'Please select a date and time.'));
+      }
+
       if (!isUUID(selectedService)) {
         throw new Error(t('booking.errorInvalidService', 'Selected service is in demo mode. Please seed the database to enable real bookings.'));
       }
