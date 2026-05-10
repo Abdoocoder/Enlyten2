@@ -717,6 +717,96 @@
         "updatedAt": "2026-05-10T00:00:00.000Z"
       },
       {
+        "id": 26,
+        "title": "نقل الاستضافة من Vercel لـ Cloudflare Pages",
+        "description": "Migrate hosting from Vercel to Cloudflare Pages. Configure build settings, environment variables (VITE_SUPABASE_URL, VITE_SUPABASE_ANON_KEY, VITE_SENTRY_DSN), and verify deployment pipeline.",
+        "status": "pending",
+        "priority": "high",
+        "dependencies": [],
+        "subtasks": []
+      },
+      {
+        "id": 27,
+        "title": "ضبط cron-job.org لمنع نوم Supabase كل 3 أيام",
+        "description": "Set up a cron job on cron-job.org to ping the Supabase project every 3 days to prevent the free tier from pausing due to inactivity.",
+        "status": "pending",
+        "priority": "high",
+        "dependencies": [],
+        "subtasks": []
+      },
+      {
+        "id": 28,
+        "title": "إضافة زر WhatsApp عائم في جميع الصفحات",
+        "description": "Add a floating WhatsApp button visible on all pages. Fixed position bottom-right (or bottom-left for RTL), links to the clinic WhatsApp number. Should be touch-friendly (min 44x44px), animate in on page load, and respect prefers-reduced-motion.",
+        "status": "pending",
+        "priority": "high",
+        "dependencies": [],
+        "subtasks": []
+      },
+      {
+        "id": 29,
+        "title": "تسجيل المركز على Google Business Profile",
+        "description": "Register Enlyten2 Laser Center on Google Business Profile. Add clinic name, address (Western Road, Al-Muhafaza Street, Madaba), phone, hours, category, photos, and website URL.",
+        "status": "pending",
+        "priority": "high",
+        "dependencies": [],
+        "subtasks": []
+      },
+      {
+        "id": 30,
+        "title": "شراء وربط الدومين المدفوع",
+        "description": "Purchase a custom domain (e.g. enlyten2.com or enlyten2.jo) and connect it to the hosting (Vercel or Cloudflare Pages). Update any hardcoded URLs and Sentry allowed origins.",
+        "status": "pending",
+        "priority": "medium",
+        "dependencies": ["26"],
+        "subtasks": []
+      },
+      {
+        "id": 31,
+        "title": "تحديث بيانات المركز: الصور والأسعار والخدمات",
+        "description": "Update the clinic's real content: upload actual treatment photos to Supabase storage, set correct prices and durations for all services, add real gallery before/after images.",
+        "status": "pending",
+        "priority": "medium",
+        "dependencies": [],
+        "subtasks": []
+      },
+      {
+        "id": 32,
+        "title": "تحسين SEO: keywords خاصة بمادبا والأردن",
+        "description": "Add location-specific SEO: update meta descriptions and Open Graph tags with Madaba/Jordan keywords (Arabic + English). Add structured data (LocalBusiness schema). Target: 'ليزر مادبا', 'عيادة تجميل مادبا', 'laser clinic Madaba Jordan'.",
+        "status": "pending",
+        "priority": "medium",
+        "dependencies": ["30"],
+        "subtasks": []
+      },
+      {
+        "id": 33,
+        "title": "إضافة صفحة عروض وخصومات للزبائن الحاليين",
+        "description": "Add a promotions/offers page for existing clients. Show active discounts, seasonal offers, loyalty rewards. Admin can create/edit/toggle offers. Linked from dashboard and home page.",
+        "status": "pending",
+        "priority": "low",
+        "dependencies": [],
+        "subtasks": []
+      },
+      {
+        "id": 34,
+        "title": "ربط Google Analytics لمتابعة الزيارات",
+        "description": "Integrate Google Analytics 4 (GA4) via VITE_GA_MEASUREMENT_ID env var. Track page views, booking funnel drop-offs, and language preference. No PII collected.",
+        "status": "pending",
+        "priority": "low",
+        "dependencies": ["30"],
+        "subtasks": []
+      },
+      {
+        "id": 35,
+        "title": "نظام تذكير تلقائي بالمواعيد عبر WhatsApp",
+        "description": "Build automated appointment reminders via WhatsApp. Trigger 24h before booking_date using a Supabase Edge Function + cron. Message includes treatment name, date, time, and clinic address. Uses WhatsApp Business API or Twilio.",
+        "status": "pending",
+        "priority": "low",
+        "dependencies": ["18"],
+        "subtasks": []
+      },
+      {
         "id": 18,
         "title": "Telegram Bot: Free Instant Admin Alerts",
         "description": "Create a Telegram Bot integration via Supabase Edge Functions to send free, instant booking notifications to the clinic manager's phone.",
@@ -747,7 +837,7 @@
     "metadata": {
       "version": "1.0.0",
       "lastModified": "2026-05-10T00:00:00.000Z",
-      "taskCount": 22,
+      "taskCount": 32,
       "completedCount": 19,
       "tags": [
         "master"
