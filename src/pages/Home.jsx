@@ -1,15 +1,22 @@
-import React from 'react';
 import './Home.css';
 import Button from '../components/UI/Button/Button';
 import Card from '../components/UI/Card/Card';
 import { useTranslation } from 'react-i18next';
 import { Link } from 'react-router-dom';
 import mockData from '../data/mockData.json';
+import { useReveal } from '../hooks/useReveal';
 
 const Home = () => {
   const { t, i18n } = useTranslation();
   const { treatments } = mockData;
   const isAr = i18n.language === 'ar';
+
+  const [philosophyRef, philosophyVisible] = useReveal();
+  const [statsRef, statsVisible] = useReveal();
+  const [cardsPhiloRef, cardsPhiloVisible] = useReveal();
+  const [treatmentsHeaderRef, treatmentsHeaderVisible] = useReveal();
+  const [treatmentsGridRef, treatmentsGridVisible] = useReveal();
+  const [ctaRef, ctaVisible] = useReveal();
 
   const stats = [
     { value: t('home.stats.clients.value'), label: t('home.stats.clients.label') },
@@ -44,27 +51,36 @@ const Home = () => {
       {/* Philosophy — light-gray, stats grid */}
       <section className="viewport-section section-light philosophy">
         <div className="content-well">
-          <div className="philosophy-header">
+          <div
+            ref={philosophyRef}
+            className={`philosophy-header reveal-up${philosophyVisible ? ' is-visible' : ''}`}
+          >
             <span className="label-medium brand-accent">{t('home.philosophy.label')}</span>
             <h2 className="section-headline">{t('home.philosophy.title')}</h2>
             <p className="body-intro philosophy-text">{t('home.philosophy.content')}</p>
           </div>
 
-          <div className="stats-grid">
-            {stats.map((stat) => (
-              <div key={stat.label} className="stat-item">
+          <div
+            ref={statsRef}
+            className={`stats-grid reveal-stagger${statsVisible ? ' is-visible' : ''}`}
+          >
+            {stats.map((stat, i) => (
+              <div key={stat.label} className="stat-item" style={{ '--reveal-delay': `${i * 80}ms` }}>
                 <span className="stat-value laser-text">{stat.value}</span>
                 <span className="stat-label body-small">{stat.label}</span>
               </div>
             ))}
           </div>
 
-          <div className="grid-2 philosophy-grid">
-            <div className="apple-card philosophy-item">
+          <div
+            ref={cardsPhiloRef}
+            className={`grid-2 philosophy-grid reveal-stagger${cardsPhiloVisible ? ' is-visible' : ''}`}
+          >
+            <div className="apple-card philosophy-item" style={{ '--reveal-delay': '0ms' }}>
               <h3 className="card-title">{t('home.philosophy.precision.title')}</h3>
               <p className="body-medium">{t('home.philosophy.precision.text')}</p>
             </div>
-            <div className="apple-card philosophy-item">
+            <div className="apple-card philosophy-item" style={{ '--reveal-delay': '100ms' }}>
               <h3 className="card-title">{t('home.philosophy.artisan.title')}</h3>
               <p className="body-medium">{t('home.philosophy.artisan.text')}</p>
             </div>
@@ -75,14 +91,20 @@ const Home = () => {
       {/* Treatments — black, card grid */}
       <section className="viewport-section section-dark treatments-preview">
         <div className="content-well">
-          <div className="section-header-centered">
+          <div
+            ref={treatmentsHeaderRef}
+            className={`section-header-centered reveal-up${treatmentsHeaderVisible ? ' is-visible' : ''}`}
+          >
             <h2 className="section-headline">{t('home.treatments.title')}</h2>
             <p className="body-intro section-subtitle-muted">{t('home.treatments.subtitle')}</p>
           </div>
 
-          <div className="grid-3 treatments-grid">
-            {treatments.map(treatment => (
-              <Card key={treatment.id} variant="white" className="treatment-card" padded={false}>
+          <div
+            ref={treatmentsGridRef}
+            className={`grid-3 treatments-grid reveal-stagger${treatmentsGridVisible ? ' is-visible' : ''}`}
+          >
+            {treatments.map((treatment, i) => (
+              <Card key={treatment.id} variant="white" className="treatment-card" padded={false} style={{ '--reveal-delay': `${i * 80}ms` }}>
                 <div className="treatment-image-placeholder">
                   {treatment.image_url
                     ? <img src={treatment.image_url} alt={isAr ? (treatment.name_ar || treatment.name) : treatment.name} className="treatment-card-img" loading="lazy" />
@@ -105,7 +127,10 @@ const Home = () => {
 
       {/* CTA Strip — light-gray */}
       <section className="viewport-section section-light cta-strip">
-        <div className="content-well text-center">
+        <div
+          ref={ctaRef}
+          className={`content-well text-center reveal-up${ctaVisible ? ' is-visible' : ''}`}
+        >
           <h2 className="section-headline">{t('home.cta.title')}</h2>
           <Button to="/book" variant="primary" className="btn-pill btn-large">
             {t('home.cta.button')}

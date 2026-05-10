@@ -1,6 +1,4 @@
-import React from 'react';
 import './Contact.css';
-import Card from '../components/UI/Card/Card';
 import Button from '../components/UI/Button/Button';
 import { useTranslation } from 'react-i18next';
 import mockData from '../data/mockData.json';

@@ -1,4 +1,4 @@
-import { Link, useNavigate } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import { useState, useEffect, useRef } from 'react';
 import './Layout.css';
 import Button from '../UI/Button/Button';
@@ -12,8 +12,6 @@ const Layout = ({ children }) => {
   const [showUserMenu, setShowUserMenu] = useState(false);
   const [menuClosing, setMenuClosing] = useState(false);
   const menuRef = useRef(null);
-  const navigate = useNavigate();
-
   const closeMenu = () => {
     setMenuClosing(true);
     setTimeout(() => { setShowUserMenu(false); setMenuClosing(false); }, 180);

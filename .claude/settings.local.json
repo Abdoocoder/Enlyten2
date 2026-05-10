@@ -46,7 +46,10 @@
       "Bash(cp /tmp/impeccable_ref_*.md .claude/skills/impeccable/reference/)",
       "Bash(cp /tmp/impeccable_script_*.mjs .claude/skills/impeccable/scripts/)",
       "Bash(cp /tmp/impeccable_script_*.json .claude/skills/impeccable/scripts/)",
-      "Bash(cp /tmp/impeccable_script_*.js .claude/skills/impeccable/scripts/)"
+      "Bash(cp /tmp/impeccable_script_*.js .claude/skills/impeccable/scripts/)",
+      "Bash(grep -v \"\\\\.claude\\\\\\\\\\\\\\\\skills\")",
+      "Bash(grep -E \"^C:\\\\\\\\\")",
+      "Bash(node *)"
     ]
   }
 }

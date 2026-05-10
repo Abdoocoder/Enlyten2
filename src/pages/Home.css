@@ -71,6 +71,32 @@
   .hero-glow {
     animation: glowPulse 10s ease-in-out infinite alternate;
   }
+
+  /* Hero entrance — staggered fade-up-blur sequence */
+  .hero-headline {
+    animation: heroFadeUp 0.9s var(--ease-out-expo) 80ms both;
+  }
+
+  .hero-subtitle {
+    animation: heroFadeUp 0.85s var(--ease-out-expo) 240ms both;
+  }
+
+  .hero-actions {
+    animation: heroFadeUp 0.75s var(--ease-out-expo) 400ms both;
+  }
+}
+
+@keyframes heroFadeUp {
+  from {
+    opacity: 0;
+    transform: translateY(22px);
+    filter: blur(4px);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+    filter: blur(0);
+  }
 }
 
 @keyframes glowPulse {
@@ -217,6 +243,16 @@
 .treatment-price {
   font-weight: 700;
   color: var(--near-black);
+}
+
+/* Treatment cards — scroll stagger */
+@media (prefers-reduced-motion: no-preference) {
+  .treatments-grid.is-visible .treatment-card:nth-child(1) { --reveal-delay:   0ms; }
+  .treatments-grid.is-visible .treatment-card:nth-child(2) { --reveal-delay:  80ms; }
+  .treatments-grid.is-visible .treatment-card:nth-child(3) { --reveal-delay: 160ms; }
+  .treatments-grid.is-visible .treatment-card:nth-child(4) { --reveal-delay: 240ms; }
+  .treatments-grid.is-visible .treatment-card:nth-child(5) { --reveal-delay: 320ms; }
+  .treatments-grid.is-visible .treatment-card:nth-child(6) { --reveal-delay: 400ms; }
 }
 
 /* CTA Strip */

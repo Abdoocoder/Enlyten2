@@ -9,13 +9,18 @@
   font-weight: 600;
   line-height: 1.33;
   letter-spacing: var(--ls-16);
-  transition: var(--transition-fast);
+  transition:
+    transform    0.14s var(--ease-out-quart),
+    opacity      0.14s var(--ease-out-quart),
+    background   0.18s var(--ease-out-quart),
+    border-color 0.18s var(--ease-out-quart),
+    box-shadow   0.18s var(--ease-out-quart);
   cursor: pointer;
   border: 1px solid transparent;
   white-space: nowrap;
 }
 
-.btn:active { transform: scale(0.96); }
+.btn:active { transform: scale(0.96); filter: brightness(0.92); }
 
 .btn-primary {
   background: var(--laser-gradient);

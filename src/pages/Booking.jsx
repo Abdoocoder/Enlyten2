@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useMemo } from 'react';
+import { useState, useEffect, useMemo } from 'react';
 import { useSearchParams, useNavigate } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
 import './Booking.css';
@@ -9,7 +9,7 @@ import { createBooking, getBookedSlots, getHolidays } from '../lib/supabase';
 import useAuthGuard from '../hooks/useAuthGuard';
 import mockData from '../data/mockData.json';
 
-const MOCK_SERVICES = mockData.treatments.map((t, i) => ({
+const MOCK_SERVICES = mockData.treatments.map((t) => ({
   id: t.id,
   name: t.name,
   name_ar: t.name_ar,
@@ -27,7 +27,10 @@ const TIME_SLOTS = ['09:00', '10:00', '11:00', '14:00', '15:00', '16:00'];
 const Booking = () => {
   const [searchParams] = useSearchParams();
   const { services: dbServices, loading: servicesLoading } = useServices();
-  const services = dbServices.length > 0 ? dbServices : (servicesLoading ? [] : MOCK_SERVICES);
+  const services = useMemo(
+    () => dbServices.length > 0 ? dbServices : (servicesLoading ? [] : MOCK_SERVICES),
+    [dbServices, servicesLoading]
+  );
   const { user } = useAuth();
   useAuthGuard();
   const { t, i18n } = useTranslation();

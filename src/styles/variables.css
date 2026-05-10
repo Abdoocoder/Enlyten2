@@ -113,6 +113,12 @@
   --laser-glow:   0 0 20px  rgba(255, 0, 87, 0.30);
   --laser-focus-ring: 0 0 0 4px rgba(255, 0, 87, 0.15);
 
+  /* ─── Easing Curves ─── */
+  --ease-out-expo:  cubic-bezier(0.16, 1, 0.3, 1);
+  --ease-out-quint: cubic-bezier(0.22, 1, 0.36, 1);
+  --ease-out-quart: cubic-bezier(0.25, 1, 0.5, 1);
+  --ease-in-out:    cubic-bezier(0.65, 0, 0.35, 1);
+
   /* ─── Transitions ─── */
   --transition-fast:   all 0.15s cubic-bezier(0, 0, 0.5, 1);
   --transition-smooth: all 0.30s cubic-bezier(0.25, 0.1, 0.25, 1);

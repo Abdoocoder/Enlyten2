@@ -1,4 +1,3 @@
-import React from 'react';
 import { useTranslation } from 'react-i18next';
 import './Notifications.css';
 import Card from '../components/UI/Card/Card';

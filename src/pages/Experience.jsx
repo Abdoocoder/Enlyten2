@@ -1,13 +1,10 @@
-import React from 'react';
 import { useTranslation } from 'react-i18next';
-import { useNavigate } from 'react-router-dom';
 import './Experience.css';
 import Button from '../components/UI/Button/Button';
 import heroImg from '../assets/hero-clinic.png';
 
 const Experience = () => {
   const { t } = useTranslation();
-  const navigate = useNavigate();
 
   return (
     <div className="experience-page">

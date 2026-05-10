@@ -1,4 +1,4 @@
-import React, { useState, useMemo, useCallback } from 'react';
+import { memo, useState, useMemo, useCallback } from 'react';
 import { useNavigate } from 'react-router-dom';
 import './Services.css';
 import { useServices } from '../hooks/useDatabase';
@@ -15,7 +15,7 @@ const categoryIcons = {
   'Hair': '◐',
 };
 
-const ServiceTile = React.memo(({ service, onBook }) => {
+const ServiceTile = memo(({ service, onBook }) => {
   const { t, i18n } = useTranslation();
   const isAr = i18n.language === 'ar';
   const name = isAr ? (service.name_ar || service.name) : service.name;
@@ -56,7 +56,7 @@ const ServiceTile = React.memo(({ service, onBook }) => {
 });
 
 const Services = () => {
-  const { services: dbServices, loading, error } = useServices();
+  const { services: dbServices, loading } = useServices();
   const { isAuthenticated } = useAuth();
   const { t } = useTranslation();
   const navigate = useNavigate();

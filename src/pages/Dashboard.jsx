@@ -1,5 +1,5 @@
-import React, { useEffect, useState, useCallback, useMemo } from 'react';
-import { useNavigate, useSearchParams, Link } from 'react-router-dom';
+import { useEffect, useState, useCallback, useMemo } from 'react';
+import { useNavigate, useSearchParams } from 'react-router-dom';
 import './Dashboard.css';
 import Button from '../components/UI/Button/Button';
 import { useAuth } from '../contexts/AuthContext';
@@ -38,7 +38,7 @@ const MiniChart = ({ bookings }) => {
       if (day) day.count++;
     });
     return out;
-  }, [bookings]);
+  }, [bookings, i18n.language]);
 
   const max = Math.max(...days.map(d => d.count), 1);
 
@@ -80,7 +80,7 @@ const Dashboard = () => {
         setTimeout(() => { setSuccessMessage(''); setToastClosing(false); }, 300);
       }, 4700);
     }
-  }, [isAuthenticated, navigate, searchParams, t]);
+  }, [authLoading, isAuthenticated, navigate, searchParams, t]);
 
   const handleCancel = useCallback(async (bookingId) => {
     if (!window.confirm(t('dashboard.cancelConfirm', 'Cancel this booking?'))) return;

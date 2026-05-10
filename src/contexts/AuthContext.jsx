@@ -1,4 +1,4 @@
-import React, { createContext, useContext, useEffect, useState, useCallback, useMemo } from 'react';
+import { createContext, useContext, useEffect, useState, useCallback, useMemo } from 'react';
 import { supabase, getCurrentUser, getProfile } from '../lib/supabase';
 
 const AuthContext = createContext();
@@ -62,7 +62,7 @@ export const AuthProvider = ({ children }) => {
       Object.keys(localStorage)
         .filter(key => key.startsWith('sb-'))
         .forEach(key => localStorage.removeItem(key));
-    } catch (e) {
+    } catch {
       // localStorage might be restricted in some browser environments
     }
 
