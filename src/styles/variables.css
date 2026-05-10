@@ -57,6 +57,7 @@
   --ls-64: -2.125px;   /* Display Hero  64px */
   --ls-54: -1.875px;   /* Display Secondary 54px */
   --ls-48: -1.5px;     /* Section Heading 48px */
+  --ls-display: var(--ls-48); /* Alias for display-size numbers (stat values, KPIs) */
   --ls-40: normal;     /* Sub-heading large 40px */
   --ls-26: -0.625px;   /* Sub-heading 26px */
   --ls-22: -0.25px;    /* Card Title 22px */

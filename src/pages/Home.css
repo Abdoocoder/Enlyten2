@@ -29,7 +29,7 @@
 .hero-subtitle {
   margin-top: var(--spacing-lg);
   margin-bottom: var(--spacing-xl);
-  color: #ffffff;
+  color: var(--white);
   font-weight: 500;
   text-shadow: 0 2px 8px rgba(0, 0, 0, 0.8);
   max-width: 600px;
@@ -100,9 +100,9 @@
 }
 
 @keyframes glowPulse {
-  0%   { --glow-hue: 335deg; }
-  50%  { --glow-hue: 28deg;  }
-  100% { --glow-hue: 265deg; }
+  0%   { --glow-hue: 335deg; transform: translate(-50%, -50%) scale(1);    }
+  50%  { --glow-hue: 28deg;  transform: translate(-50%, -50%) scale(1.12); }
+  100% { --glow-hue: 265deg; transform: translate(-50%, -50%) scale(0.95); }
 }
 
 /* Philosophy Section */
@@ -201,7 +201,7 @@
   height: 100%;
   object-fit: cover;
   display: block;
-  transition: transform 0.4s cubic-bezier(0.25, 0.1, 0.25, 1);
+  transition: transform 0.4s var(--ease-out-expo);
 }
 
 .treatment-card:hover .treatment-card-img {
