@@ -5,6 +5,7 @@ import { useTranslation } from 'react-i18next';
 import { Link } from 'react-router-dom';
 import mockData from '../data/mockData.json';
 import { useReveal } from '../hooks/useReveal';
+import { useMemo } from 'react';
 
 const Home = () => {
   const { t, i18n } = useTranslation();
@@ -18,12 +19,37 @@ const Home = () => {
   const [treatmentsGridRef, treatmentsGridVisible] = useReveal();
   const [ctaRef, ctaVisible] = useReveal();
 
-  const stats = [
+  const stats = useMemo(() => [
     { value: t('home.stats.clients.value'), label: t('home.stats.clients.label') },
     { value: t('home.stats.treatments.value'), label: t('home.stats.treatments.label') },
     { value: t('home.stats.years.value'), label: t('home.stats.years.label') },
     { value: t('home.stats.satisfaction.value'), label: t('home.stats.satisfaction.label') },
-  ];
+  ], [t]);
+
+  const memoizedTreatments = useMemo(() => treatments.map((treatment, i) => (
+    <Card
+      key={treatment.id}
+      variant="white"
+      className="treatment-card"
+      padded={false}
+      style={{ '--reveal-delay': `${i * 80}ms` }}
+    >
+      <div className="treatment-image-placeholder">
+        {treatment.image_url
+          ? <img src={treatment.image_url} alt={isAr ? (treatment.name_ar || treatment.name) : treatment.name} className="treatment-card-img" loading="lazy" />
+          : <div className="image-overlay"></div>
+        }
+      </div>
+      <div className="treatment-info-well">
+        <h3 className="card-title">{isAr ? (treatment.name_ar || treatment.name) : treatment.name}</h3>
+        <p className="body-medium treatment-description">{isAr ? (treatment.description_ar || treatment.description) : treatment.description}</p>
+        <div className="treatment-footer">
+          <span className="treatment-price">{treatment.price} JD</span>
+          <Link to="/book" className="pill-link">{t('home.treatments.bookNow')}</Link>
+        </div>
+      </div>
+    </Card>
+  )), [treatments, isAr, t]);
 
   return (
     <div className="home-page">
@@ -103,24 +129,7 @@ const Home = () => {
             ref={treatmentsGridRef}
             className={`grid-3 treatments-grid reveal-stagger${treatmentsGridVisible ? ' is-visible' : ''}`}
           >
-            {treatments.map((treatment, i) => (
-              <Card key={treatment.id} variant="white" className="treatment-card" padded={false} style={{ '--reveal-delay': `${i * 80}ms` }}>
-                <div className="treatment-image-placeholder">
-                  {treatment.image_url
-                    ? <img src={treatment.image_url} alt={isAr ? (treatment.name_ar || treatment.name) : treatment.name} className="treatment-card-img" loading="lazy" />
-                    : <div className="image-overlay"></div>
-                  }
-                </div>
-                <div className="treatment-info-well">
-                  <h3 className="card-title">{isAr ? (treatment.name_ar || treatment.name) : treatment.name}</h3>
-                  <p className="body-medium treatment-description">{isAr ? (treatment.description_ar || treatment.description) : treatment.description}</p>
-                  <div className="treatment-footer">
-                    <span className="treatment-price">{treatment.price} JD</span>
-                    <Link to="/book" className="pill-link">{t('home.treatments.bookNow')}</Link>
-                  </div>
-                </div>
-              </Card>
-            ))}
+            {memoizedTreatments}
           </div>
         </div>
       </section>
