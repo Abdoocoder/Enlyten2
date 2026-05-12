@@ -1,5 +1,5 @@
 import { Link } from 'react-router-dom';
-import { useState, useEffect, useRef } from 'react';
+import { useState, useEffect, useRef, useMemo } from 'react';
 import './Layout.css';
 import Button from '../UI/Button/Button';
 import LanguageSwitcher from '../UI/LanguageSwitcher/LanguageSwitcher';
@@ -48,12 +48,12 @@ const Layout = ({ children }) => {
     window.location.href = '/';
   };
 
-  const initials = (profile?.full_name || 'U')
+  const initials = useMemo(() => (profile?.full_name || 'U')
     .split(' ')
     .map(n => n[0])
     .join('')
     .toUpperCase()
-    .slice(0, 2);
+    .slice(0, 2), [profile?.full_name]);
 
   return (
     <div className="layout">

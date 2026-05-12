@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useCallback, useMemo } from 'react';
 import { useTranslation } from 'react-i18next';
 import './Profile.css';
 import Card from '../components/UI/Card/Card';
@@ -28,10 +28,10 @@ const Profile = () => {
     }
   }, [profile]);
 
-  const handleInputChange = (e) => {
+  const handleInputChange = useCallback((e) => {
     const { name, value } = e.target;
     setFormData(prev => ({ ...prev, [name]: value }));
-  };
+  }, []);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -51,8 +51,8 @@ const Profile = () => {
     }
   };
 
-  const initials = (formData.full_name || 'U')
-    .split(' ').map(n => n[0]).join('').toUpperCase().slice(0, 2);
+  const initials = useMemo(() => (formData.full_name || 'U')
+    .split(' ').map(n => n[0]).join('').toUpperCase().slice(0, 2), [formData.full_name]);
 
   return (
     <div className="profile-page page-container">
