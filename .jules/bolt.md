@@ -5,3 +5,7 @@
 ## 2025-05-15 - Memoize UI components used with scroll-reveal hooks
 **Learning:** The 'useReveal' hook, used extensively for scroll animations, triggers frequent state updates and re-renders as elements enter the viewport. Without React.memo on base components like Button and Card, and useMemo for data arrays, these scroll events cause significant main-thread activity and potential jank.
 **Action:** Always wrap shared UI components in 'React.memo' and memoize mapped lists or data objects in pages that utilize intersection-observer based animation hooks.
+
+## 2026-05-13 - Stabilize form inputs to eliminate keystroke lag
+**Learning:** In forms with multiple inputs (Profile, Auth), every keystroke triggers a state update in the parent component. Without `React.memo` on the `Input` component and `useCallback` on the change handler, *every* input field re-renders on *every* character typed. This increases main-thread work linearly with the number of fields.
+**Action:** Memoize generic `Input` components and ensure `onChange` handlers use `useCallback` to prevent breaking memoization.
