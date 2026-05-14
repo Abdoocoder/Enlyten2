@@ -1,4 +1,4 @@
-import { useEffect, useState, useCallback, useMemo } from 'react';
+import { useEffect, useState, useCallback, useMemo, memo } from 'react';
 import { useNavigate, useSearchParams } from 'react-router-dom';
 import './Dashboard.css';
 import Button from '../components/UI/Button/Button';
@@ -14,15 +14,17 @@ const STATUS_COLORS = {
   cancelled: '#ff3b30',
 };
 
-const KpiCard = ({ label, value, sub, accent }) => (
+// Optimization: Memoize KPI card to prevent re-renders when other dashboard state changes (like success toast)
+const KpiCard = memo(({ label, value, sub, accent }) => (
   <div className="kpi-card apple-card">
     <span className="label-medium kpi-label">{label}</span>
     <p className="kpi-value" style={accent ? { color: accent } : {}}>{value}</p>
     {sub && <span className="body-small text-muted">{sub}</span>}
   </div>
-);
+));
 
-const MiniChart = ({ bookings }) => {
+// Optimization: Memoize chart to prevent expensive re-calculation and re-renders
+const MiniChart = memo(({ bookings }) => {
   const { i18n } = useTranslation();
   const days = useMemo(() => {
     const locale = i18n.language === 'ar' ? 'ar' : undefined;
@@ -58,7 +60,7 @@ const MiniChart = ({ bookings }) => {
       </div>
     </div>
   );
-};
+});
 
 const Dashboard = () => {
   const { user, profile, isAuthenticated, loading: authLoading } = useAuth();
@@ -102,7 +104,11 @@ const Dashboard = () => {
   );
   const completed = useMemo(() => bookings.filter(b => b.status === 'completed'), [bookings]);
   const nextAppt = upcoming[0] ?? null;
-  const firstName = profile?.full_name?.split(' ')[0] || t('dashboard.member', 'Member');
+
+  // Optimization: Memoize firstName to prevent split() on every render
+  const firstName = useMemo(() =>
+    profile?.full_name?.split(' ')[0] || t('dashboard.member', 'Member'),
+  [profile?.full_name, t]);
 
   return (
     <div className="dashboard-page">

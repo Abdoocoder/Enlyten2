@@ -9,3 +9,7 @@
 ## 2026-05-13 - Stabilize form inputs to eliminate keystroke lag
 **Learning:** In forms with multiple inputs (Profile, Auth), every keystroke triggers a state update in the parent component. Without `React.memo` on the `Input` component and `useCallback` on the change handler, *every* input field re-renders on *every* character typed. This increases main-thread work linearly with the number of fields.
 **Action:** Memoize generic `Input` components and ensure `onChange` handlers use `useCallback` to prevent breaking memoization.
+
+## 2025-05-16 - Memoize derived stats and sub-components in Admin & Dashboard
+**Learning:** In dashboards with search/filter state, high-level stats calculations using .filter() and .reduce() on large arrays trigger on every keystroke if not memoized. Moving these hooks to the top level (above auth guards) requires defensive programming (optional chaining, default values) to prevent crashes during initial data load.
+**Action:** Use 'useMemo' for all derived data transformations and 'React.memo' for leaf components like StatusBadge or KpiCard that receive stable props. Always provide default values for data dependencies in useMemo to handle loading states safely.

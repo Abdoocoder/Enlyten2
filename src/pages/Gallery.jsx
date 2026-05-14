@@ -1,11 +1,11 @@
-import { useState, useMemo, useRef, useEffect } from 'react';
+import { useState, useMemo, useRef, useEffect, memo } from 'react';
 import { useTranslation } from 'react-i18next';
 import './Gallery.css';
 import Card from '../components/UI/Card/Card';
 import { useGallery } from '../hooks/useDatabase';
 import mockData from '../data/mockData.json';
 
-const BeforeAfterSlider = ({ before, after, alt }) => {
+const BeforeAfterSlider = memo(({ before, after, alt }) => {
   const { t } = useTranslation();
   const [sliderPos, setSliderPos] = useState(50);
 
@@ -45,7 +45,7 @@ const BeforeAfterSlider = ({ before, after, alt }) => {
       </div>
     </div>
   );
-};
+});
 
 const Gallery = () => {
   const { t, i18n } = useTranslation();

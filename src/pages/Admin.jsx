@@ -1,4 +1,4 @@
-import { useState, useEffect, useMemo, useCallback } from 'react';
+import { useState, useEffect, useMemo, useCallback, memo } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
 import './Admin.css';
@@ -32,7 +32,7 @@ const EMPTY_DOCTOR = {
   bio: '', bio_ar: '', image_url: '',
 };
 
-const StatusBadge = ({ status }) => {
+const StatusBadge = memo(({ status }) => {
   const { t } = useTranslation();
   const style = STATUS_COLORS[status] || STATUS_COLORS.pending;
   return (
@@ -40,7 +40,7 @@ const StatusBadge = ({ status }) => {
       {t(`dashboard.status${status.charAt(0).toUpperCase() + status.slice(1)}`, status)}
     </span>
   );
-};
+});
 
 const Admin = () => {
   const { t, i18n } = useTranslation();
@@ -211,14 +211,19 @@ const Admin = () => {
     setModal(m => ({ ...m, data: { ...m.data, [field]: value } }));
   };
 
-  if (authLoading || !isAdmin) return null;
+  // Optimization: Memoize stats calculation to prevent re-filtering/reducing on every render (e.g. while typing in search)
+  const stats = useMemo(() => {
+    const bookings = data?.bookings || [];
+    const profiles = data?.profiles || [];
+    return {
+      revenue: bookings.filter(b => b.status === 'completed').reduce((acc, b) => acc + (b.services?.price || 0), 0),
+      appointments: bookings.length,
+      patients: profiles.length,
+      pending: bookings.filter(b => b.status === 'pending').length
+    };
+  }, [data?.bookings, data?.profiles]);
 
-  const stats = {
-    revenue: data.bookings.filter(b => b.status === 'completed').reduce((acc, b) => acc + (b.services?.price || 0), 0),
-    appointments: data.bookings.length,
-    patients: data.profiles.length,
-    pending: data.bookings.filter(b => b.status === 'pending').length
-  };
+  if (authLoading || !isAdmin) return null;
 
   return (
     <div className="admin-page">
