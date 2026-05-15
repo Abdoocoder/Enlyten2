@@ -42,6 +42,30 @@ const StatusBadge = memo(({ status }) => {
   );
 });
 
+const BookingRow = memo(({ booking, isAr, onStatusChange }) => {
+  return (
+    <tr>
+      <td>
+        {booking.profiles?.full_name}
+        <br />
+        <small>{booking.profiles?.email}</small>
+      </td>
+      <td>{isAr ? booking.services?.name_ar : booking.services?.name}</td>
+      <td>{booking.booking_date} {booking.booking_time}</td>
+      <td><StatusBadge status={booking.status} /></td>
+      <td>
+        <select
+          className="status-select"
+          value={booking.status}
+          onChange={e => onStatusChange(booking.id, e.target.value)}
+        >
+          {STATUSES.map(s => <option key={s} value={s}>{s}</option>)}
+        </select>
+      </td>
+    </tr>
+  );
+});
+
 const Admin = () => {
   const { t, i18n } = useTranslation();
   const { isAuthenticated, isAdmin, loading: authLoading } = useAuth();
@@ -145,15 +169,15 @@ const Admin = () => {
   }, [tab, data, search, filter]);
 
   // Action Handlers
-  const handleStatusChange = async (id, status) => {
+  const handleStatusChange = useCallback(async (id, status) => {
     const { error } = await updateBooking(id, { status });
     if (!error) loadData();
-  };
+  }, [loadData]);
 
-  const handleModeration = async (id, status) => {
+  const handleModeration = useCallback(async (id, status) => {
     const { error } = await updateExperienceStatus(id, status);
     if (!error) loadData();
-  };
+  }, [loadData]);
 
   const handleFileUpload = async (e, type) => {
     const file = e.target.files[0];
@@ -280,17 +304,12 @@ const Admin = () => {
                     <thead><tr><th>{t('admin.colPatient')}</th><th>{t('admin.colTreatment')}</th><th>{t('admin.colDate')}</th><th>{t('admin.colStatus')}</th><th>{t('admin.colAction')}</th></tr></thead>
                     <tbody>
                       {filteredData.map(b => (
-                        <tr key={b.id}>
-                          <td>{b.profiles?.full_name}<br/><small>{b.profiles?.email}</small></td>
-                          <td>{isAr ? b.services?.name_ar : b.services?.name}</td>
-                          <td>{b.booking_date} {b.booking_time}</td>
-                          <td><StatusBadge status={b.status} /></td>
-                          <td>
-                            <select className="status-select" value={b.status} onChange={e => handleStatusChange(b.id, e.target.value)}>
-                              {STATUSES.map(s => <option key={s} value={s}>{s}</option>)}
-                            </select>
-                          </td>
-                        </tr>
+                        <BookingRow
+                          key={b.id}
+                          booking={b}
+                          isAr={isAr}
+                          onStatusChange={handleStatusChange}
+                        />
                       ))}
                     </tbody>
                   </table>

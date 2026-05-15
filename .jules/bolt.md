@@ -13,3 +13,7 @@
 ## 2025-05-16 - Memoize derived stats and sub-components in Admin & Dashboard
 **Learning:** In dashboards with search/filter state, high-level stats calculations using .filter() and .reduce() on large arrays trigger on every keystroke if not memoized. Moving these hooks to the top level (above auth guards) requires defensive programming (optional chaining, default values) to prevent crashes during initial data load.
 **Action:** Use 'useMemo' for all derived data transformations and 'React.memo' for leaf components like StatusBadge or KpiCard that receive stable props. Always provide default values for data dependencies in useMemo to handle loading states safely.
+
+## 2026-05-18 - Extract and memoize table rows in Admin dashboard
+**Learning:** In administrative dashboards with search and filtering, rendering a large table of bookings directly within the parent component causes the entire table to re-render on every keystroke. This happens even if the filter doesn't change which rows are visible, leading to significant input lag and high main-thread usage.
+**Action:** Extract table rows into a separate 'React.memo' component and ensure that all action handlers passed to the rows are wrapped in 'useCallback' to maintain stable prop references.
