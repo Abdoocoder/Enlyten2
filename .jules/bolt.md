@@ -17,3 +17,7 @@
 ## 2026-05-16 - Extract table rows into memoized components for large lists
 **Learning:** In dashboards like Admin with search/filter functionality, mapping over large data arrays and rendering JSX inline causes all rows to re-render on every keystroke, even if the data for most rows hasn't changed. This O(N) re-render behavior causes noticeable lag in the UI thread during filtering.
 **Action:** Extract individual table rows into separate 'React.memo' components. Pass stable callbacks (using 'useCallback') to these components to ensure that only the rows affected by data changes or filter visibility actually re-render, reducing the overhead of search/filter operations to near-constant time for the visual update.
+
+## 2026-05-17 - Optimize complex multi-step forms with memoized list items
+**Learning:** In multi-step forms like Booking, rendering lists of options (treatments, time slots) with inline .map() calls causes every item in the list to re-render on every state change (selection, step navigation). This leads to O(N) work on every interaction.
+**Action:** Extract list items into separate 'React.memo' components and use 'useCallback' for their selection handlers. This reduces re-rendering overhead to O(1) during selection and improves overall form responsiveness. Ensure dependency arrays for 'useCallback' match React Compiler's expectations (e.g., using the full 'user' object instead of 'user.id' if inferred) to prevent ESLint errors.

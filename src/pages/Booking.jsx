@@ -1,4 +1,4 @@
-import { useState, useEffect, useMemo, useCallback } from 'react';
+import { useState, useEffect, useMemo, useCallback, memo } from 'react';
 import { useSearchParams, useNavigate } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
 import './Booking.css';
@@ -24,6 +24,44 @@ const MOCK_SERVICES = mockData.treatments.map((t) => ({
 
 const TIME_SLOTS = ['09:00', '10:00', '11:00', '14:00', '15:00', '16:00'];
 
+const serviceName = (s, isAr) => isAr && s?.name_ar ? s.name_ar : s?.name;
+const serviceDesc = (s, isAr) => isAr && s?.description_ar ? s.description_ar : s?.description;
+
+// Optimization: Memoize TreatmentTile to prevent re-rendering all tiles when one is selected
+const TreatmentTile = memo(({ service, isAr, selected, onSelect, t }) => (
+  <div
+    className={`treatment-tile ${selected ? 'selected' : ''}`}
+    onClick={() => onSelect(service.id)}
+  >
+    <div className="tile-info">
+      <h4 className="card-title">{serviceName(service, isAr)}</h4>
+      {serviceDesc(service, isAr) && (
+        <p className="tile-desc body-medium text-muted">{serviceDesc(service, isAr)}</p>
+      )}
+      <p className="tile-meta label-medium">
+        {service.duration_minutes} {t('services.min')}
+        <span className="tile-dot">·</span>
+        {service.price} JD
+      </p>
+    </div>
+    <div className="tile-check"></div>
+  </div>
+));
+
+// Optimization: Memoize TimeSlot to prevent re-rendering all slots when one is selected
+const TimeSlot = memo(({ time, selected, taken, onSelect, t }) => (
+  <button
+    type="button"
+    className={`time-pill ${selected ? 'active' : ''} ${taken ? 'taken' : ''}`}
+    onClick={() => !taken && onSelect(time)}
+    disabled={taken}
+    title={taken ? t('booking.slotUnavailable') : undefined}
+  >
+    {time}
+    {taken && <span className="slot-taken-label">{t('booking.slotUnavailable')}</span>}
+  </button>
+));
+
 const Booking = () => {
   const [searchParams] = useSearchParams();
   const { services: dbServices, loading: servicesLoading } = useServices();
@@ -39,11 +77,15 @@ const Booking = () => {
   const [currentStep, setCurrentStep] = useState(1);
   const [exitingStep, setExitingStep] = useState(null);
 
-  const goToStep = (step) => {
-    setExitingStep(currentStep);
-    setCurrentStep(step);
-    setTimeout(() => setExitingStep(null), 200);
-  };
+  const goToStep = useCallback((step) => {
+    setExitingStep(prev => {
+      // Small optimization: only trigger transition if step is actually changing
+      setCurrentStep(step);
+      setTimeout(() => setExitingStep(null), 200);
+      return prev === null ? currentStep : prev;
+    });
+  }, [currentStep]);
+
   const [selectedService, setSelectedService] = useState(searchParams.get('serviceId') || null);
   const [bookingDate, setBookingDate] = useState('');
   const [bookingTime, setBookingTime] = useState('');
@@ -75,7 +117,10 @@ const Booking = () => {
       .finally(() => setSlotsLoading(false));
   }, [bookingDate, holidays]);
 
-  const handleSubmit = async (e) => {
+  const handleServiceSelect = useCallback((id) => setSelectedService(id), []);
+  const handleTimeSelect = useCallback((time) => setBookingTime(time), []);
+
+  const handleSubmit = useCallback(async (e) => {
     e.preventDefault();
     if (currentStep < 3) { goToStep(currentStep + 1); return; }
     setError(null);
@@ -114,7 +159,7 @@ const Booking = () => {
     } finally {
       setLoading(false);
     }
-  };
+  }, [currentStep, goToStep, bookingDate, bookingTime, selectedService, user, notes, t, navigate]);
 
   const today = new Date().toISOString().split('T')[0];
 
@@ -130,9 +175,6 @@ const Booking = () => {
       { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' }
     );
   }, [bookingDate, isAr]);
-
-  const serviceName = (s) => isAr && s?.name_ar ? s.name_ar : s?.name;
-  const serviceDesc = (s) => isAr && s?.description_ar ? s.description_ar : s?.description;
 
   return (
     <div className="booking-page">
@@ -168,24 +210,14 @@ const Booking = () => {
                 ) : (
                   <div className="treatment-tiles">
                     {services.map(service => (
-                      <div
+                      <TreatmentTile
                         key={service.id}
-                        className={`treatment-tile ${selectedService === service.id ? 'selected' : ''}`}
-                        onClick={() => setSelectedService(service.id)}
-                      >
-                        <div className="tile-info">
-                          <h4 className="card-title">{serviceName(service)}</h4>
-                          {serviceDesc(service) && (
-                            <p className="tile-desc body-medium text-muted">{serviceDesc(service)}</p>
-                          )}
-                          <p className="tile-meta label-medium">
-                            {service.duration_minutes} {t('services.min')}
-                            <span className="tile-dot">·</span>
-                            {service.price} JD
-                          </p>
-                        </div>
-                        <div className="tile-check"></div>
-                      </div>
+                        service={service}
+                        isAr={isAr}
+                        selected={selectedService === service.id}
+                        onSelect={handleServiceSelect}
+                        t={t}
+                      />
                     ))}
                   </div>
                 )}
@@ -220,22 +252,16 @@ const Booking = () => {
                       <p className="slots-hint body-medium text-muted">...</p>
                     ) : (
                       <div className="time-slots-grid">
-                        {TIME_SLOTS.map(time => {
-                          const taken = bookedSlots.includes(time);
-                          return (
-                            <button
-                              key={time}
-                              type="button"
-                              className={`time-pill ${bookingTime === time ? 'active' : ''} ${taken ? 'taken' : ''}`}
-                              onClick={() => !taken && setBookingTime(time)}
-                              disabled={taken}
-                              title={taken ? t('booking.slotUnavailable') : undefined}
-                            >
-                              {time}
-                              {taken && <span className="slot-taken-label">{t('booking.slotUnavailable')}</span>}
-                            </button>
-                          );
-                        })}
+                        {TIME_SLOTS.map(time => (
+                          <TimeSlot
+                            key={time}
+                            time={time}
+                            selected={bookingTime === time}
+                            taken={bookedSlots.includes(time)}
+                            onSelect={handleTimeSelect}
+                            t={t}
+                          />
+                        ))}
                       </div>
                     )}
                   </div>
@@ -255,7 +281,7 @@ const Booking = () => {
                 <div className="apple-card confirmation-card">
                   <div className="confirm-row">
                     <span className="label-medium">{t('booking.treatment')}</span>
-                    <span className="body-intro">{serviceName(selectedServiceData)}</span>
+                    <span className="body-intro">{serviceName(selectedServiceData, isAr)}</span>
                   </div>
                   <div className="confirm-row">
                     <span className="label-medium">{t('booking.dateTime')}</span>
