@@ -42,7 +42,8 @@ const StatusBadge = memo(({ status }) => {
   );
 });
 
-const BookingRow = memo(({ booking: b, isAr, onStatusChange }) => {
+const BookingRow = memo(({ booking, isAr, onStatusChange }) => {
+  const b = booking;
   return (
     <tr>
       <td>{b.profiles?.full_name}<br/><small>{b.profiles?.email}</small></td>
@@ -58,7 +59,8 @@ const BookingRow = memo(({ booking: b, isAr, onStatusChange }) => {
   );
 });
 
-const ServiceRow = memo(({ service: s, isAr, onEdit, onDelete, t }) => {
+const ServiceRow = memo(({ service, isAr, onEdit, onDelete, t }) => {
+  const s = service;
   return (
     <tr>
       <td>{isAr ? s.name_ar : s.name}</td>
@@ -72,7 +74,8 @@ const ServiceRow = memo(({ service: s, isAr, onEdit, onDelete, t }) => {
   );
 });
 
-const PatientRow = memo(({ patient: p }) => {
+const PatientRow = memo(({ patient }) => {
+  const p = patient;
   return (
     <tr>
       <td>{p.full_name}<br/><small>{p.email}</small></td>
@@ -83,7 +86,8 @@ const PatientRow = memo(({ patient: p }) => {
   );
 });
 
-const GalleryItem = memo(({ item: g, onDelete }) => {
+const GalleryItem = memo(({ item, onDelete }) => {
+  const g = item;
   return (
     <div className="admin-gallery-item">
       <img src={g.image_url} alt={g.title || ''} loading="lazy" />
@@ -92,7 +96,8 @@ const GalleryItem = memo(({ item: g, onDelete }) => {
   );
 });
 
-const ExperienceRow = memo(({ experience: ex, onModeration, t }) => {
+const ExperienceRow = memo(({ experience, onModeration, t }) => {
+  const ex = experience;
   return (
     <tr>
       <td>{ex.profiles?.full_name}</td>
@@ -106,7 +111,8 @@ const ExperienceRow = memo(({ experience: ex, onModeration, t }) => {
   );
 });
 
-const DoctorRow = memo(({ doctor: d, isAr, onEdit, onDelete, t }) => {
+const DoctorRow = memo(({ doctor, isAr, onEdit, onDelete, t }) => {
+  const d = doctor;
   return (
     <tr>
       <td><img src={d.image_url} className="admin-avatar" alt={isAr ? d.name_ar : d.name} loading="lazy" /></td>
@@ -119,7 +125,8 @@ const DoctorRow = memo(({ doctor: d, isAr, onEdit, onDelete, t }) => {
   );
 });
 
-const HolidayRow = memo(({ holiday: h, onDelete }) => {
+const HolidayRow = memo(({ holiday, onDelete }) => {
+  const h = holiday;
   return (
     <tr>
       <td>{h.holiday_date}</td>
