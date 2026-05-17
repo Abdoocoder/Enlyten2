@@ -1,5 +1,5 @@
 import { Link } from 'react-router-dom';
-import { useState, useEffect, useRef, useMemo } from 'react';
+import { useState, useEffect, useRef, useMemo, useCallback } from 'react';
 import './Layout.css';
 import Button from '../UI/Button/Button';
 import LanguageSwitcher from '../UI/LanguageSwitcher/LanguageSwitcher';
@@ -12,17 +12,19 @@ const Layout = ({ children }) => {
   const [showUserMenu, setShowUserMenu] = useState(false);
   const [menuClosing, setMenuClosing] = useState(false);
   const menuRef = useRef(null);
-  const closeMenu = () => {
+
+  const closeMenu = useCallback(() => {
     setMenuClosing(true);
     setTimeout(() => { setShowUserMenu(false); setMenuClosing(false); }, 180);
-  };
+  }, []);
 
   const [mobileOpen, setMobileOpen] = useState(false);
   const [mobileClosing, setMobileClosing] = useState(false);
-  const closeMobileMenu = () => {
+
+  const closeMobileMenu = useCallback(() => {
     setMobileClosing(true);
     setTimeout(() => { setMobileOpen(false); setMobileClosing(false); }, 260);
-  };
+  }, []);
 
   useEffect(() => {
     document.body.style.overflow = mobileOpen ? 'hidden' : '';
@@ -37,16 +39,16 @@ const Layout = ({ children }) => {
     };
     document.addEventListener('mousedown', handleClickOutside);
     return () => document.removeEventListener('mousedown', handleClickOutside);
-  }, [showUserMenu]);
+  }, [showUserMenu, closeMenu]);
 
-  const handleLogout = () => {
+  const handleLogout = useCallback(() => {
     console.log('Logout: Initiating...');
     setShowUserMenu(false);
     logout();
     console.log('Logout: Success');
     // Force full page reload to clear all in-memory state
     window.location.href = '/';
-  };
+  }, [logout]);
 
   const initials = useMemo(() => (profile?.full_name || 'U')
     .split(' ')

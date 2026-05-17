@@ -4,6 +4,7 @@ import { useTranslation } from 'react-i18next';
 import './Auth.css';
 import Button from '../components/UI/Button/Button';
 import Card from '../components/UI/Card/Card';
+import Input from '../components/UI/Input/Input';
 import { signUp, signIn } from '../lib/supabase';
 import { useAuth } from '../contexts/AuthContext';
 
@@ -82,43 +83,34 @@ const Auth = () => {
             <Card variant="white" className="apple-card auth-form-card">
               <form className="auth-form-v2" onSubmit={handleSubmit}>
                 {!isLogin && (
-                  <div className="form-item">
-                    <label className="label-medium">{t('profile.fullName')}</label>
-                    <input
-                      className="apple-input"
-                      type="text"
-                      name="fullName"
-                      placeholder={t('profile.fullNamePlaceholder')}
-                      value={formData.fullName}
-                      onChange={handleInputChange}
-                      required
-                    />
-                  </div>
+                  <Input
+                    label={t('profile.fullName')}
+                    type="text"
+                    name="fullName"
+                    placeholder={t('profile.fullNamePlaceholder')}
+                    value={formData.fullName}
+                    onChange={handleInputChange}
+                    required
+                  />
                 )}
-                <div className="form-item">
-                  <label className="label-medium">{t('common.email')}</label>
-                  <input
-                    className="apple-input"
-                    type="email"
-                    name="email"
-                    placeholder="example@mail.com"
-                    value={formData.email}
-                    onChange={handleInputChange}
-                    required
-                  />
-                </div>
-                <div className="form-item">
-                  <label className="label-medium">{t('common.password')}</label>
-                  <input
-                    className="apple-input"
-                    type="password"
-                    name="password"
-                    placeholder="••••••••"
-                    value={formData.password}
-                    onChange={handleInputChange}
-                    required
-                  />
-                </div>
+                <Input
+                  label={t('common.email')}
+                  type="email"
+                  name="email"
+                  placeholder="example@mail.com"
+                  value={formData.email}
+                  onChange={handleInputChange}
+                  required
+                />
+                <Input
+                  label={t('common.password')}
+                  type="password"
+                  name="password"
+                  placeholder="••••••••"
+                  value={formData.password}
+                  onChange={handleInputChange}
+                  required
+                />
                 <div className="auth-footer-actions">
                   <Button
                     variant="primary"

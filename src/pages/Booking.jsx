@@ -1,4 +1,4 @@
-import { useState, useEffect, useMemo } from 'react';
+import { useState, useEffect, useMemo, useCallback } from 'react';
 import { useSearchParams, useNavigate } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
 import './Booking.css';
@@ -48,6 +48,7 @@ const Booking = () => {
   const [bookingDate, setBookingDate] = useState('');
   const [bookingTime, setBookingTime] = useState('');
   const [notes, setNotes] = useState('');
+  const handleNotesChange = useCallback((e) => setNotes(e.target.value), []);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
   const [bookedSlots, setBookedSlots] = useState([]);
@@ -272,7 +273,7 @@ const Booking = () => {
                     className="apple-textarea"
                     placeholder={t('booking.notesPlaceholder')}
                     value={notes}
-                    onChange={(e) => setNotes(e.target.value)}
+                    onChange={handleNotesChange}
                   />
                 </div>
                 <div className="step-actions space-between">
