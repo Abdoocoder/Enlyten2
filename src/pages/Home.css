@@ -294,6 +294,9 @@
   .treatment-image-placeholder {
     height: 200px;
   }
+  .treatment-info-well {
+    padding: var(--spacing-md);
+  }
 }
 
 @media (max-width: 480px) {

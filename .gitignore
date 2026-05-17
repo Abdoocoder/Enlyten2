@@ -58,6 +58,11 @@ Thumbs.db
 dev-debug.log
 # Dependency directories
 node_modules/
+test-results/
+playwright-report/
+blob-report/
+screenshots/
+videos/
 # Environment variables
 .env
 .vscode

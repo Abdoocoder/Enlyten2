@@ -251,6 +251,11 @@
   .services-grid {
     grid-template-columns: 1fr;
     padding: var(--spacing-xl) 0;
+    gap: var(--spacing-md);
   }
-  .category-strip { padding-inline: var(--spacing-lg); }
+  .service-image-well { height: 180px; }
+  .category-strip { padding-inline: var(--spacing-lg); gap: var(--spacing-lg); }
+  .service-tile-content { padding: var(--spacing-md); }
+  .service-name { font-size: 1rem; }
+  .service-desc { font-size: 0.8125rem; -webkit-line-clamp: 2; }
 }
