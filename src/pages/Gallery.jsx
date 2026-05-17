@@ -47,6 +47,48 @@ const BeforeAfterSlider = memo(({ before, after, alt }) => {
   );
 });
 
+const GalleryTile = memo(({ item, index, isAr }) => {
+  const { t } = useTranslation();
+  const tileStyle = useMemo(() => ({ '--tile-index': index }), [index]);
+
+  return (
+    <Card variant="white" className="apple-card gallery-tile" padded={false} style={tileStyle}>
+      <div className="gallery-tile-image-side">
+        {item.before_url && item.after_url ? (
+          <BeforeAfterSlider
+            before={item.before_url}
+            after={item.after_url}
+            alt={isAr ? (item.title_ar || item.title) : item.title}
+          />
+        ) : item.image_url ? (
+          <>
+            <img
+              src={item.image_url}
+              alt={isAr ? (item.title_ar || item.title) : item.title}
+              className="gallery-tile-img"
+              loading="lazy"
+            />
+            <div className="tile-glow-overlay"></div>
+          </>
+        ) : (
+          <div className="gallery-placeholder">
+            <span className="label-medium text-muted">{t('gallery.awaiting')}</span>
+          </div>
+        )}
+        <span className="tile-category-tag">{t(`categories.${item.category}`, item.category)}</span>
+      </div>
+      <div className="gallery-tile-info">
+        <h3 className="card-title">
+          {isAr ? (item.title_ar || item.title) : item.title}
+        </h3>
+        <p className="body-small text-muted">
+          {isAr ? (item.description_ar || item.description) : item.description}
+        </p>
+      </div>
+    </Card>
+  );
+});
+
 const Gallery = () => {
   const { t, i18n } = useTranslation();
   const { gallery: dbGallery, loading, error } = useGallery();
@@ -126,40 +168,12 @@ const Gallery = () => {
           {!loading && (
             <div className="gallery-grid-v2" ref={gridRef}>
               {filteredGallery.map((item, index) => (
-                <Card key={item.id} variant="white" className="apple-card gallery-tile" padded={false} style={{ '--tile-index': index }}>
-                  <div className="gallery-tile-image-side">
-                    {item.before_url && item.after_url ? (
-                      <BeforeAfterSlider 
-                        before={item.before_url} 
-                        after={item.after_url} 
-                        alt={isAr ? (item.title_ar || item.title) : item.title}
-                      />
-                    ) : item.image_url ? (
-                      <>
-                        <img
-                          src={item.image_url}
-                          alt={isAr ? (item.title_ar || item.title) : item.title}
-                          className="gallery-tile-img"
-                          loading="lazy"
-                        />
-                        <div className="tile-glow-overlay"></div>
-                      </>
-                    ) : (
-                      <div className="gallery-placeholder">
-                        <span className="label-medium text-muted">{t('gallery.awaiting')}</span>
-                      </div>
-                    )}
-                    <span className="tile-category-tag">{t(`categories.${item.category}`, item.category)}</span>
-                  </div>
-                  <div className="gallery-tile-info">
-                    <h3 className="card-title">
-                      {isAr ? (item.title_ar || item.title) : item.title}
-                    </h3>
-                    <p className="body-small text-muted">
-                      {isAr ? (item.description_ar || item.description) : item.description}
-                    </p>
-                  </div>
-                </Card>
+                <GalleryTile
+                  key={item.id}
+                  item={item}
+                  index={index}
+                  isAr={isAr}
+                />
               ))}
             </div>
           )}
