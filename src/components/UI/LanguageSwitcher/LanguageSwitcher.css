@@ -2,17 +2,24 @@
   background: rgba(255, 255, 255, 0.08);
   border: 1px solid rgba(255, 255, 255, 0.15);
   color: var(--white);
-  padding: 5px 10px;
-  border-radius: var(--radius-full);
+  padding: 6px 12px;
+  border-radius: var(--radius-pill);
   cursor: pointer;
   display: flex;
   align-items: center;
-  gap: 4px;
+  gap: 6px;
   font-family: var(--font-body);
   font-weight: 500;
   transition: var(--transition-smooth);
   font-size: 0.75rem;
   line-height: 1;
+}
+
+@media (max-width: 768px) {
+  .lang-switcher {
+    padding: 8px 14px;
+    font-size: 0.8125rem;
+  }
 }
 
 .lang-switcher:hover {

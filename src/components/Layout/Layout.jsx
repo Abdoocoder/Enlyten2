@@ -119,10 +119,10 @@ const Layout = ({ children }) => {
               </>
             ) : (
               <>
-                <Button to="/book" variant="primary">
+                <Button to="/book" variant="primary" className="btn-header-book">
                   {t('nav.book')}
                 </Button>
-                <Button to="/login" variant="secondary">
+                <Button to="/login" variant="secondary" className="btn-header-login">
                   {t('nav.signIn')}
                 </Button>
               </>

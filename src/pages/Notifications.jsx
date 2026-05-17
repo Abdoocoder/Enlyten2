@@ -30,14 +30,14 @@ const NotificationItem = memo(({ n, onMarkRead, onViewDetails }) => {
   );
 });
 
+const STATIC_NOTIFICATIONS = [
+  { id: 1, type: 'appointment', titleKey: 'n1Title', messageKey: 'n1Message', timeKey: 'n1Time', unread: true },
+  { id: 2, type: 'offer',       titleKey: 'n2Title', messageKey: 'n2Message', timeKey: 'n2Time', unread: false },
+  { id: 3, type: 'system',      titleKey: 'n3Title', messageKey: 'n3Message', timeKey: 'n3Time', unread: false },
+];
+
 const Notifications = () => {
   const { t } = useTranslation();
-
-  const notifications = useMemo(() => [
-    { id: 1, type: 'appointment', titleKey: 'n1Title', messageKey: 'n1Message', timeKey: 'n1Time', unread: true },
-    { id: 2, type: 'offer',       titleKey: 'n2Title', messageKey: 'n2Message', timeKey: 'n2Time', unread: false },
-    { id: 3, type: 'system',      titleKey: 'n3Title', messageKey: 'n3Message', timeKey: 'n3Time', unread: false },
-  ], []);
 
   const handleMarkRead = useCallback((id) => {
     // Logic for marking as read would go here
@@ -57,7 +57,7 @@ const Notifications = () => {
       </header>
 
       <div className="notifications-list section">
-        {notifications.map(n => (
+        {STATIC_NOTIFICATIONS.map(n => (
           <NotificationItem
             key={n.id}
             n={n}

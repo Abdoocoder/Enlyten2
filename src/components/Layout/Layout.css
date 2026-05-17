@@ -101,8 +101,8 @@
 }
 
 .user-avatar {
-  width: 28px;
-  height: 28px;
+  width: 32px;
+  height: 32px;
   border-radius: 50%;
   background-color: rgba(255, 255, 255, 0.1);
   color: var(--white);
@@ -113,6 +113,15 @@
   display: flex;
   align-items: center;
   justify-content: center;
+  transition: background-color 0.2s var(--ease-out-quart);
+}
+
+@media (max-width: 768px) {
+  .user-avatar {
+    width: 36px;
+    height: 36px;
+    font-size: 0.8125rem;
+  }
 }
 
 .user-menu {
@@ -501,13 +510,13 @@
 
 .mobile-nav-link {
   font-family: var(--font-display);
-  font-size: clamp(1.75rem, 7vw, 2.25rem);
+  font-size: clamp(1.5rem, 6vw, 2rem);
   font-weight: 700;
-  letter-spacing: var(--ls-48);
-  line-height: 1.1;
-  color: rgba(255, 255, 255, 0.55);
+  letter-spacing: -0.02em;
+  line-height: 1.2;
+  color: rgba(255, 255, 255, 0.65);
   text-decoration: none;
-  padding: var(--spacing-sm) 0;
+  padding: var(--spacing-md) 0;
   display: block;
   transition: color 0.15s var(--ease-out-quart);
   animation: mobileLinkIn 0.4s var(--ease-out-expo) calc(var(--i) * 55ms) both;
@@ -596,8 +605,8 @@
   }
 
   /* Hide desktop-only buttons on mobile */
-  .header-actions > .btn-header-book { display: none; }
-  .header-actions > a.btn-secondary  { display: none; }
+  .header-actions > .btn-header-book,
+  .header-actions > .btn-header-login { display: none; }
 
   /* Footer stacked */
   .footer {
