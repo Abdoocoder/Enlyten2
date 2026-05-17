@@ -59,8 +59,89 @@ const BookingRow = memo(({ booking, isAr, onStatusChange }) => {
           value={booking.status}
           onChange={e => onStatusChange(booking.id, e.target.value)}
         >
+const BookingRow = memo(({ booking: b, isAr, onStatusChange }) => {
+  return (
+    <tr>
+      <td>{b.profiles?.full_name}<br/><small>{b.profiles?.email}</small></td>
+      <td>{isAr ? b.services?.name_ar : b.services?.name}</td>
+      <td>{b.booking_date} {b.booking_time}</td>
+      <td><StatusBadge status={b.status} /></td>
+      <td>
+        <select className="status-select" value={b.status} onChange={e => onStatusChange(b.id, e.target.value)}>
           {STATUSES.map(s => <option key={s} value={s}>{s}</option>)}
         </select>
+      </td>
+    </tr>
+  );
+});
+
+const ServiceRow = memo(({ service: s, isAr, onEdit, onDelete, t }) => {
+  return (
+    <tr>
+      <td>{isAr ? s.name_ar : s.name}</td>
+      <td>{s.category}</td>
+      <td>{s.price} JD</td>
+      <td className="action-cell">
+        <button className="action-btn edit" onClick={() => onEdit(s)}>{t('admin.edit')}</button>
+        <button className="action-btn delete" onClick={() => onDelete(s)}>{t('admin.delete')}</button>
+      </td>
+    </tr>
+  );
+});
+
+const PatientRow = memo(({ patient: p }) => {
+  return (
+    <tr>
+      <td>{p.full_name}<br/><small>{p.email}</small></td>
+      <td>{new Date(p.created_at).toLocaleDateString()}</td>
+      <td>{p.bookings?.[0]?.count || 0}</td>
+      <td><span className={`active-dot ${p.role === 'admin' ? 'on' : 'off'}`}></span> {p.role}</td>
+    </tr>
+  );
+});
+
+const GalleryItem = memo(({ item: g, onDelete }) => {
+  return (
+    <div className="admin-gallery-item">
+      <img src={g.image_url} alt={g.title || ''} loading="lazy" />
+      <button className="gallery-delete" onClick={() => onDelete(g)}>×</button>
+    </div>
+  );
+});
+
+const ExperienceRow = memo(({ experience: ex, onModeration, t }) => {
+  return (
+    <tr>
+      <td>{ex.profiles?.full_name}</td>
+      <td><div className="cell-review">{ex.comment}</div></td>
+      <td>{ex.status || 'pending'}</td>
+      <td className="action-cell">
+        <button className="action-btn edit" onClick={() => onModeration(ex.id, 'approved')}>{t('admin.actionApprove')}</button>
+        <button className="action-btn delete" onClick={() => onModeration(ex.id, 'hidden')}>{t('admin.actionHide')}</button>
+      </td>
+    </tr>
+  );
+});
+
+const DoctorRow = memo(({ doctor: d, isAr, onEdit, onDelete, t }) => {
+  return (
+    <tr>
+      <td><img src={d.image_url} className="admin-avatar" alt={isAr ? d.name_ar : d.name} loading="lazy" /></td>
+      <td>{isAr ? d.name_ar : d.name}<br/><small>{isAr ? d.specialty_ar : d.specialty}</small></td>
+      <td className="action-cell">
+        <button className="action-btn edit" onClick={() => onEdit(d)}>{t('admin.edit')}</button>
+        <button className="action-btn delete" onClick={() => onDelete(d)}>{t('admin.delete')}</button>
+      </td>
+    </tr>
+  );
+});
+
+const HolidayRow = memo(({ holiday: h, onDelete }) => {
+  return (
+    <tr>
+      <td>{h.holiday_date}</td>
+      <td className="action-cell">
+        <button className="action-btn delete" onClick={() => onDelete(h)}>×</button>
       </td>
     </tr>
   );
@@ -179,6 +260,30 @@ const Admin = () => {
     if (!error) loadData();
   }, [loadData]);
 
+  const onEditService = useCallback((service) => {
+    setModal({ open: true, mode: 'edit', type: 'service', data: service });
+  }, []);
+
+  const onDeleteService = useCallback((service) => {
+    setConfirmDelete({ id: service.id, type: 'service', name: service.name });
+  }, []);
+
+  const onEditDoctor = useCallback((doctor) => {
+    setModal({ open: true, mode: 'edit', type: 'doctor', data: doctor });
+  }, []);
+
+  const onDeleteDoctor = useCallback((doctor) => {
+    setConfirmDelete({ id: doctor.id, type: 'doctor', name: doctor.name });
+  }, []);
+
+  const onDeleteHoliday = useCallback((holiday) => {
+    setConfirmDelete({ id: holiday.id, type: 'holiday', name: holiday.holiday_date });
+  }, []);
+
+  const onDeleteGallery = useCallback((item) => {
+    setConfirmDelete({ id: item.id, type: 'gallery', name: 'Photo' });
+  }, []);
+
   const handleFileUpload = async (e, type) => {
     const file = e.target.files[0];
     if (!file) return;
@@ -231,9 +336,9 @@ const Admin = () => {
     closeConfirm();
   };
 
-  const handleModalChange = (field, value) => {
+  const handleModalChange = useCallback((field, value) => {
     setModal(m => ({ ...m, data: { ...m.data, [field]: value } }));
-  };
+  }, []);
 
   // Optimization: Memoize stats calculation to prevent re-filtering/reducing on every render (e.g. while typing in search)
   const stats = useMemo(() => {
@@ -310,6 +415,7 @@ const Admin = () => {
                           isAr={isAr}
                           onStatusChange={handleStatusChange}
                         />
+                        <BookingRow key={b.id} booking={b} isAr={isAr} onStatusChange={handleStatusChange} />
                       ))}
                     </tbody>
                   </table>
@@ -329,15 +435,7 @@ const Admin = () => {
                     <thead><tr><th>{t('admin.colName')}</th><th>{t('admin.colCategory')}</th><th>{t('admin.colPrice')}</th><th>{t('admin.colActions')}</th></tr></thead>
                     <tbody>
                       {filteredData.map(s => (
-                        <tr key={s.id}>
-                          <td>{isAr ? s.name_ar : s.name}</td>
-                          <td>{s.category}</td>
-                          <td>{s.price} JD</td>
-                          <td className="action-cell">
-                            <button className="action-btn edit" onClick={() => setModal({ open: true, mode: 'edit', type: 'service', data: s })}>{t('admin.edit')}</button>
-                            <button className="action-btn delete" onClick={() => setConfirmDelete({ id: s.id, type: 'service', name: s.name })}>{t('admin.delete')}</button>
-                          </td>
-                        </tr>
+                        <ServiceRow key={s.id} service={s} isAr={isAr} onEdit={onEditService} onDelete={onDeleteService} t={t} />
                       ))}
                     </tbody>
                   </table>
@@ -353,12 +451,7 @@ const Admin = () => {
                     <thead><tr><th>{t('admin.colPatient')}</th><th>{t('admin.colJoined')}</th><th>{t('admin.colVisits')}</th><th>{t('admin.colStatus')}</th></tr></thead>
                     <tbody>
                       {data.profiles.map(p => (
-                        <tr key={p.id}>
-                          <td>{p.full_name}<br/><small>{p.email}</small></td>
-                          <td>{new Date(p.created_at).toLocaleDateString()}</td>
-                          <td>{p.bookings?.[0]?.count || 0}</td>
-                          <td><span className={`active-dot ${p.role === 'admin' ? 'on' : 'off'}`}></span> {p.role}</td>
-                        </tr>
+                        <PatientRow key={p.id} patient={p} />
                       ))}
                     </tbody>
                   </table>
@@ -377,10 +470,7 @@ const Admin = () => {
                 </div>
                 <div className="admin-gallery-grid">
                   {data.gallery.map(g => (
-                    <div key={g.id} className="admin-gallery-item">
-                      <img src={g.image_url} alt={g.title || ''} loading="lazy" />
-                      <button className="gallery-delete" onClick={() => setConfirmDelete({ id: g.id, type: 'gallery', name: 'Photo' })}>×</button>
-                    </div>
+                    <GalleryItem key={g.id} item={g} onDelete={onDeleteGallery} />
                   ))}
                 </div>
               </div>
@@ -394,15 +484,7 @@ const Admin = () => {
                     <thead><tr><th>{t('admin.colPatient')}</th><th>{t('admin.colReview')}</th><th>{t('admin.colStatus')}</th><th>{t('admin.colAction')}</th></tr></thead>
                     <tbody>
                       {data.experiences.map(ex => (
-                        <tr key={ex.id}>
-                          <td>{ex.profiles?.full_name}</td>
-                          <td><div className="cell-review">{ex.comment}</div></td>
-                          <td>{ex.status || 'pending'}</td>
-                          <td className="action-cell">
-                            <button className="action-btn edit" onClick={() => handleModeration(ex.id, 'approved')}>{t('admin.actionApprove')}</button>
-                            <button className="action-btn delete" onClick={() => handleModeration(ex.id, 'hidden')}>{t('admin.actionHide')}</button>
-                          </td>
-                        </tr>
+                        <ExperienceRow key={ex.id} experience={ex} onModeration={handleModeration} t={t} />
                       ))}
                     </tbody>
                   </table>
@@ -421,14 +503,7 @@ const Admin = () => {
                     <thead><tr><th>{t('admin.colImage')}</th><th>{t('admin.colName')}</th><th>{t('admin.colActions')}</th></tr></thead>
                     <tbody>
                       {data.doctors.map(d => (
-                        <tr key={d.id}>
-                          <td><img src={d.image_url} className="admin-avatar" alt={isAr ? d.name_ar : d.name} loading="lazy" /></td>
-                          <td>{isAr ? d.name_ar : d.name}<br/><small>{isAr ? d.specialty_ar : d.specialty}</small></td>
-                          <td className="action-cell">
-                            <button className="action-btn edit" onClick={() => setModal({ open: true, mode: 'edit', type: 'doctor', data: d })}>{t('admin.edit')}</button>
-                            <button className="action-btn delete" onClick={() => setConfirmDelete({ id: d.id, type: 'doctor', name: d.name })}>{t('admin.delete')}</button>
-                          </td>
-                        </tr>
+                        <DoctorRow key={d.id} doctor={d} isAr={isAr} onEdit={onEditDoctor} onDelete={onDeleteDoctor} t={t} />
                       ))}
                     </tbody>
                   </table>
@@ -447,12 +522,7 @@ const Admin = () => {
                     <thead><tr><th>{t('admin.colDate')}</th><th>{t('admin.colActions')}</th></tr></thead>
                     <tbody>
                       {data.holidays.map(h => (
-                        <tr key={h.id}>
-                          <td>{h.holiday_date}</td>
-                          <td className="action-cell">
-                            <button className="action-btn delete" onClick={() => setConfirmDelete({ id: h.id, type: 'holiday', name: h.holiday_date })}>{t('admin.delete')}</button>
-                          </td>
-                        </tr>
+                        <HolidayRow key={h.id} holiday={h} onDelete={onDeleteHoliday} />
                       ))}
                     </tbody>
                   </table>

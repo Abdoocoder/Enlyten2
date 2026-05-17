@@ -17,3 +17,6 @@
 ## 2026-05-18 - Extract and memoize table rows in Admin dashboard
 **Learning:** In administrative dashboards with search and filtering, rendering a large table of bookings directly within the parent component causes the entire table to re-render on every keystroke. This happens even if the filter doesn't change which rows are visible, leading to significant input lag and high main-thread usage.
 **Action:** Extract table rows into a separate 'React.memo' component and ensure that all action handlers passed to the rows are wrapped in 'useCallback' to maintain stable prop references.
+## 2026-05-16 - Extract table rows into memoized components for large lists
+**Learning:** In dashboards like Admin with search/filter functionality, mapping over large data arrays and rendering JSX inline causes all rows to re-render on every keystroke, even if the data for most rows hasn't changed. This O(N) re-render behavior causes noticeable lag in the UI thread during filtering.
+**Action:** Extract individual table rows into separate 'React.memo' components. Pass stable callbacks (using 'useCallback') to these components to ensure that only the rows affected by data changes or filter visibility actually re-render, reducing the overhead of search/filter operations to near-constant time for the visual update.
